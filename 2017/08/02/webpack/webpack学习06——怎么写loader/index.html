@@ -11,7 +11,7 @@
 <meta property="og:url" content="http://liaoyongfu.com/2017/08/02/webpack/webpack学习06——怎么写loader/index.html">
 <meta property="og:site_name" content="liaoyf的博客">
 <meta property="og:description" content="webpack学习06——怎么写loader一个loader是一个node模块，导出一个函数。这个函数当资源被转换时会执行，这个loader有一个入参：待转换资源名称。可以在loader中通过this访问上下文。 一个同步的loader可以仅仅返回一个值。在其他情况下，loader可以通过this.callback(err, values)返回多个值。 一个loader被期望返回一个或两个值，第一">
-<meta property="og:locale" content="zh-Hans">
+<meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2016-12-05T11:57:04.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="liaoyf的博客">
@@ -53,9 +53,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://liaoyongfu.com"></form>
@@ -145,7 +145,7 @@ return &quot;var runtime = require(&quot; +
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://liaoyongfu.com/2017/08/02/webpack/webpack学习06——怎么写loader/" data-id="cj5uo5qvp000up8qorzb9pd7c" class="article-share-link">Partager</a>
+      <a data-url="http://liaoyongfu.com/2017/08/02/webpack/webpack学习06——怎么写loader/" data-id="cj5uo5qvp000up8qorzb9pd7c" class="article-share-link">Share</a>
       
       
     </footer>
@@ -155,7 +155,7 @@ return &quot;var runtime = require(&quot; +
 <nav id="article-nav">
   
     <a href="/2017/08/02/webpack/webpack遇到的坑/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Récent</strong>
+      <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
           (no title)
@@ -165,7 +165,7 @@ return &quot;var runtime = require(&quot; +
   
   
     <a href="/2017/08/02/webpack/webpack学习05——长期缓存/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ancien</strong>
+      <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title"></div>
     </a>
   
@@ -183,7 +183,7 @@ return &quot;var runtime = require(&quot; +
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Mot-clés</h3>
+    <h3 class="widget-title">标签</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flexbox/">flexbox</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li></ul>
     </div>
@@ -193,7 +193,7 @@ return &quot;var runtime = require(&quot; +
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
       <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/flexbox/" style="font-size: 10px;">flexbox</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/react/" style="font-size: 20px;">react</a>
     </div>
@@ -202,9 +202,9 @@ return &quot;var runtime = require(&quot; +
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li></ul>
     </div>
   </div>
 
@@ -212,7 +212,7 @@ return &quot;var runtime = require(&quot; +
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
         
@@ -249,7 +249,7 @@ return &quot;var runtime = require(&quot; +
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 liaoyf<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
