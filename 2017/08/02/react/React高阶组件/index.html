@@ -3,19 +3,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>liaoyf的博客</title>
+  <title>React高阶组件 | liaoyf的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="javaScript的变量类型（1）基本类型： 5种基本数据类型Undefined、Null、Boolean、Number 和 String，变量是直接按值存放的，存放在栈内存中的简单数据段，可以直接访问。 （2）引用类型： 存放在堆内存中的对象，变量保存的是一个指针，这个指针指向另一个位置。当需要访问引用类型（如对象，数组等）的值时，首先从栈中获得该对象的地址指针，然后再从堆内存中取得所需的数据">
 <meta name="keywords" content="react">
 <meta property="og:type" content="article">
-<meta property="og:title" content="liaoyf的博客">
+<meta property="og:title" content="React高阶组件">
 <meta property="og:url" content="http://liaoyongfu.com/2017/08/02/react/React高阶组件/index.html">
 <meta property="og:site_name" content="liaoyf的博客">
 <meta property="og:description" content="javaScript的变量类型（1）基本类型： 5种基本数据类型Undefined、Null、Boolean、Number 和 String，变量是直接按值存放的，存放在栈内存中的简单数据段，可以直接访问。 （2）引用类型： 存放在堆内存中的对象，变量保存的是一个指针，这个指针指向另一个位置。当需要访问引用类型（如对象，数组等）的值时，首先从栈中获得该对象的地址指针，然后再从堆内存中取得所需的数据">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-08-02T07:39:41.952Z">
+<meta property="og:updated_time" content="2017-08-02T07:42:15.936Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="liaoyf的博客">
+<meta name="twitter:title" content="React高阶组件">
 <meta name="twitter:description" content="javaScript的变量类型（1）基本类型： 5种基本数据类型Undefined、Null、Boolean、Number 和 String，变量是直接按值存放的，存放在栈内存中的简单数据段，可以直接访问。 （2）引用类型： 存放在堆内存中的对象，变量保存的是一个指针，这个指针指向另一个位置。当需要访问引用类型（如对象，数组等）的值时，首先从栈中获得该对象的地址指针，然后再从堆内存中取得所需的数据">
   
     <link rel="alternate" href="/atom.xml" title="liaoyf的博客" type="application/atom+xml">
@@ -75,6 +75,16 @@
   <div class="article-inner">
     
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      React高阶组件
+    </h1>
+  
+
+      </header>
+    
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="javaScript的变量类型"><a href="#javaScript的变量类型" class="headerlink" title="javaScript的变量类型"></a>javaScript的变量类型</h2><p>（1）基本类型：</p>
@@ -86,7 +96,8 @@
 </blockquote>
 <p>例如：数组拷贝</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//浅拷贝，双向改变,指向同一片内存空间</div><div class="line">var arr1 = [1, 2, 3];</div><div class="line">var arr2 = arr1;</div><div class="line">arr1[0] = &apos;change&apos;;</div><div class="line">console.log(&apos;shallow copy: &apos; + arr1 + &quot; );   //shallow copy: change,2,3</div><div class="line">console.log(&apos;shallow copy: &apos; + arr2 + &quot; );   //shallow copy: change,2,3</div></pre></td></tr></table></figure>
-<h2 id="浅拷贝的实现"><a href="#浅拷贝的实现" class="headerlink" title="浅拷贝的实现"></a>浅拷贝的实现</h2><h3 id="简单的引用复制"><a href="#简单的引用复制" class="headerlink" title="简单的引用复制"></a>简单的引用复制</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">function shallowClone(copyObj) &#123;</div><div class="line">  var obj = &#123;&#125;;</div><div class="line">  for ( var i in copyObj) &#123;</div><div class="line">    obj[i] = copyObj[i];</div><div class="line">  &#125;</div><div class="line">  return obj;</div><div class="line">&#125;</div><div class="line">var x = &#123;</div><div class="line">  a: 1,</div><div class="line">  b: &#123; f: &#123; g: 1 &#125; &#125;,</div><div class="line">  c: [ 1, 2, 3 ]</div><div class="line">&#125;;</div><div class="line">var y = shallowClone(x);</div><div class="line">console.log(y.b.f === x.b.f);     // true</div></pre></td></tr></table></figure>
+<h2 id="浅拷贝的实现"><a href="#浅拷贝的实现" class="headerlink" title="浅拷贝的实现"></a>浅拷贝的实现</h2><a id="more"></a>
+<h3 id="简单的引用复制"><a href="#简单的引用复制" class="headerlink" title="简单的引用复制"></a>简单的引用复制</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">function shallowClone(copyObj) &#123;</div><div class="line">  var obj = &#123;&#125;;</div><div class="line">  for ( var i in copyObj) &#123;</div><div class="line">    obj[i] = copyObj[i];</div><div class="line">  &#125;</div><div class="line">  return obj;</div><div class="line">&#125;</div><div class="line">var x = &#123;</div><div class="line">  a: 1,</div><div class="line">  b: &#123; f: &#123; g: 1 &#125; &#125;,</div><div class="line">  c: [ 1, 2, 3 ]</div><div class="line">&#125;;</div><div class="line">var y = shallowClone(x);</div><div class="line">console.log(y.b.f === x.b.f);     // true</div></pre></td></tr></table></figure>
 <h3 id="Object-assign"><a href="#Object-assign" class="headerlink" title="Object.assign()"></a>Object.assign()</h3><p>Object.assign() 方法可以把任意多个的源对象自身的可枚举属性拷贝给目标对象，然后返回目标对象。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">var x = &#123;</div><div class="line">  a: 1,</div><div class="line">  b: &#123; f: &#123; g: 1 &#125; &#125;,</div><div class="line">  c: [ 1, 2, 3 ]</div><div class="line">&#125;;</div><div class="line">var y = Object.assign(&#123;&#125;, x);</div><div class="line">console.log(y.b.f === x.b.f);     // true</div></pre></td></tr></table></figure>
 <h2 id="深拷贝的实现"><a href="#深拷贝的实现" class="headerlink" title="深拷贝的实现"></a>深拷贝的实现</h2><h3 id="Array的slice和concat方法"><a href="#Array的slice和concat方法" class="headerlink" title="Array的slice和concat方法"></a>Array的slice和concat方法</h3><p>Array的slice和concat方法不修改原数组，只会返回一个浅复制了原数组中的元素的一个新数组。之所以把它放在深拷贝里，是因为它看起来像是深拷贝。而实际上它是浅拷贝。原数组的元素会按照下述规则拷贝：</p>
@@ -175,7 +186,7 @@
       <ul>
         
           <li>
-            <a href="/2017/08/02/react/React高阶组件/">(no title)</a>
+            <a href="/2017/08/02/react/React高阶组件/">React高阶组件</a>
           </li>
         
           <li>
