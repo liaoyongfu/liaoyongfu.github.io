@@ -5,17 +5,17 @@
   
   <title>react文档-css动画 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="TransitionGroup和CSSTransitionGroup已移动到react-transition-group有社区维护。它的1.x分支与现有插件的API是完全兼容的。 TransitionGroup是一个具有低级API的动画组件，而CSSTransitionGroup是一个基于css的animation和transition更容易被使用的组件。 高级API：CSSTransitionG">
+  <meta name="description" content="TransitionGroup和CSSTransitionGroup已移动到react-transition-group有社区维护。它的1.x分支与现有插件的API是完全兼容的。 TransitionGroup是一个具有低级API的动画组件，而CSSTransitionGroup是一个基于css的animation和transition更容易被使用的组件。">
 <meta name="keywords" content="react">
 <meta property="og:type" content="article">
 <meta property="og:title" content="react文档-css动画">
 <meta property="og:url" content="http://yoursite.com/2017/08/02/react/react文档-css动画/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="TransitionGroup和CSSTransitionGroup已移动到react-transition-group有社区维护。它的1.x分支与现有插件的API是完全兼容的。 TransitionGroup是一个具有低级API的动画组件，而CSSTransitionGroup是一个基于css的animation和transition更容易被使用的组件。 高级API：CSSTransitionG">
-<meta property="og:updated_time" content="2017-08-02T06:46:28.729Z">
+<meta property="og:description" content="TransitionGroup和CSSTransitionGroup已移动到react-transition-group有社区维护。它的1.x分支与现有插件的API是完全兼容的。 TransitionGroup是一个具有低级API的动画组件，而CSSTransitionGroup是一个基于css的animation和transition更容易被使用的组件。">
+<meta property="og:updated_time" content="2017-08-02T07:06:24.519Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="react文档-css动画">
-<meta name="twitter:description" content="TransitionGroup和CSSTransitionGroup已移动到react-transition-group有社区维护。它的1.x分支与现有插件的API是完全兼容的。 TransitionGroup是一个具有低级API的动画组件，而CSSTransitionGroup是一个基于css的animation和transition更容易被使用的组件。 高级API：CSSTransitionG">
+<meta name="twitter:description" content="TransitionGroup和CSSTransitionGroup已移动到react-transition-group有社区维护。它的1.x分支与现有插件的API是完全兼容的。 TransitionGroup是一个具有低级API的动画组件，而CSSTransitionGroup是一个基于css的animation和transition更容易被使用的组件。">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -88,6 +88,7 @@
       
         <p>TransitionGroup和CSSTransitionGroup已移动到react-transition-group有社区维护。它的1.x分支与现有插件的API是完全兼容的。</p>
 <p>TransitionGroup是一个具有低级API的动画组件，而CSSTransitionGroup是一个基于css的animation和transition更容易被使用的组件。</p>
+<a id="more"></a>
 <h2 id="高级API：CSSTransitionGroup"><a href="#高级API：CSSTransitionGroup" class="headerlink" title="高级API：CSSTransitionGroup"></a>高级API：CSSTransitionGroup</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line">import &#123; CSSTransitionGroup &#125; from &apos;react-transition-group&apos; // ES6</div><div class="line">var CSSTransitionGroup = require(&apos;react-transition-group/CSSTransitionGroup&apos;) // ES5 with npm</div><div class="line"></div><div class="line">class TodoList extends React.Component&#123;</div><div class="line">    constructor()&#123;</div><div class="line">        super();</div><div class="line">        </div><div class="line">        this.state = &#123;</div><div class="line">            items: [</div><div class="line">                &apos;hello&apos;,</div><div class="line">                &apos;world&apos;,</div><div class="line">                &apos;click&apos;,</div><div class="line">                &apos;me&apos;</div><div class="line">            ]</div><div class="line">        &#125;;</div><div class="line">        this.handleAdd = this.handleAdd.bind(this);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    handleAdd() &#123;</div><div class="line">        const newItems = this.state.items.concat([</div><div class="line">          prompt(&apos;Enter some text&apos;)</div><div class="line">        ]);</div><div class="line">        this.setState(&#123;items: newItems&#125;);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    handleRemove(i) &#123;</div><div class="line">        let newItems = this.state.items.slice();</div><div class="line">        newItems.splice(i, 1);</div><div class="line">        this.setState(&#123;items: newItems&#125;);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    render()&#123;</div><div class="line">        const items = this.state.items.map((item, i) =&gt; (</div><div class="line">          &lt;div key=&#123;i&#125; onClick=&#123;() =&gt; this.handleRemove(i)&#125;&gt;</div><div class="line">            &#123;item&#125;</div><div class="line">          &lt;/div&gt;</div><div class="line">        ));</div><div class="line">        return (</div><div class="line">            &lt;div&gt;</div><div class="line">                &lt;button type=&quot;button&quot; onClick=&#123;this.handleAdd&#125;&gt;Add Item&lt;/button&gt;</div><div class="line">                &lt;CSSTransitionGroup</div><div class="line">                    transitionName=&quot;example&quot;</div><div class="line">                    transitionEnterTimeout=&#123;500&#125;</div><div class="line">                    transitionLeaveTimeout=&#123;300&#125;</div><div class="line">                &gt;</div><div class="line">                    &#123;items&#125;</div><div class="line">                &lt;/CSSTransitionGroup&gt;</div><div class="line">            &lt;/div&gt;</div><div class="line">        );</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <script src="https://jsfiddle.net/liaoyf/f4dxmnbr/2/embedded/js,html,css,result/dark/"></script>
 
@@ -154,7 +155,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/08/02/react/react文档-css动画/" data-id="cj5unypuv000cngqoetntgsik" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/08/02/react/react文档-css动画/" data-id="cj5uo5qva000jp8qobok58pgn" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
@@ -231,11 +232,11 @@
           </li>
         
           <li>
-            <a href="/2017/08/02/react/react获取父组件或子组件属性/">React获取父组件或子组件属性</a>
+            <a href="/2017/08/02/react/React要手动绑定方法的原因/">React要手动绑定方法的原因</a>
           </li>
         
           <li>
-            <a href="/2017/08/02/react/React要手动绑定方法的原因/">React要手动绑定方法的原因</a>
+            <a href="/2017/08/02/react/react获取父组件或子组件属性/">React获取父组件或子组件属性</a>
           </li>
         
       </ul>

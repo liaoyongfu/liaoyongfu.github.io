@@ -85,73 +85,15 @@
       
         <p>TransitionGroup和CSSTransitionGroup已移动到react-transition-group有社区维护。它的1.x分支与现有插件的API是完全兼容的。</p>
 <p>TransitionGroup是一个具有低级API的动画组件，而CSSTransitionGroup是一个基于css的animation和transition更容易被使用的组件。</p>
-<h2 id="高级API：CSSTransitionGroup"><a href="#高级API：CSSTransitionGroup" class="headerlink" title="高级API：CSSTransitionGroup"></a>高级API：CSSTransitionGroup</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line">import &#123; CSSTransitionGroup &#125; from &apos;react-transition-group&apos; // ES6</div><div class="line">var CSSTransitionGroup = require(&apos;react-transition-group/CSSTransitionGroup&apos;) // ES5 with npm</div><div class="line"></div><div class="line">class TodoList extends React.Component&#123;</div><div class="line">    constructor()&#123;</div><div class="line">        super();</div><div class="line">        </div><div class="line">        this.state = &#123;</div><div class="line">            items: [</div><div class="line">                &apos;hello&apos;,</div><div class="line">                &apos;world&apos;,</div><div class="line">                &apos;click&apos;,</div><div class="line">                &apos;me&apos;</div><div class="line">            ]</div><div class="line">        &#125;;</div><div class="line">        this.handleAdd = this.handleAdd.bind(this);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    handleAdd() &#123;</div><div class="line">        const newItems = this.state.items.concat([</div><div class="line">          prompt(&apos;Enter some text&apos;)</div><div class="line">        ]);</div><div class="line">        this.setState(&#123;items: newItems&#125;);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    handleRemove(i) &#123;</div><div class="line">        let newItems = this.state.items.slice();</div><div class="line">        newItems.splice(i, 1);</div><div class="line">        this.setState(&#123;items: newItems&#125;);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    render()&#123;</div><div class="line">        const items = this.state.items.map((item, i) =&gt; (</div><div class="line">          &lt;div key=&#123;i&#125; onClick=&#123;() =&gt; this.handleRemove(i)&#125;&gt;</div><div class="line">            &#123;item&#125;</div><div class="line">          &lt;/div&gt;</div><div class="line">        ));</div><div class="line">        return (</div><div class="line">            &lt;div&gt;</div><div class="line">                &lt;button type=&quot;button&quot; onClick=&#123;this.handleAdd&#125;&gt;Add Item&lt;/button&gt;</div><div class="line">                &lt;CSSTransitionGroup</div><div class="line">                    transitionName=&quot;example&quot;</div><div class="line">                    transitionEnterTimeout=&#123;500&#125;</div><div class="line">                    transitionLeaveTimeout=&#123;300&#125;</div><div class="line">                &gt;</div><div class="line">                    &#123;items&#125;</div><div class="line">                &lt;/CSSTransitionGroup&gt;</div><div class="line">            &lt;/div&gt;</div><div class="line">        );</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<script src="https://jsfiddle.net/liaoyf/f4dxmnbr/2/embedded/js,html,css,result/dark/"></script>
-
-<p>在这个组件中，当一个新的Item被添加时，ReactCSSTransitionGroup将获得一个example-enter的类和example-enter-active的类，这些类名是基于trnasitionName的值。</p>
-<p>您可以使用这些类来触发css动画或转换。例如：尝试添加如下样式：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">.example-enter&#123;</div><div class="line">    opacity: 0.01;</div><div class="line">&#125;</div><div class="line">.example-enter.example-enter-active&#123;</div><div class="line">    opacity: 1;</div><div class="line">    transition: opacity 500ms ease-in;</div><div class="line">&#125;</div><div class="line">.example-leave&#123;</div><div class="line">    opacity: 1;</div><div class="line">&#125;</div><div class="line">.example-leavel.example-leavel-active&#123;</div><div class="line">    opacity: 0.01;</div><div class="line">    transition: opacity 300ms ease-in;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="初始化加载动画"><a href="#初始化加载动画" class="headerlink" title="初始化加载动画"></a>初始化加载动画</h3><p>ReactCSSTransitionGroup提供一个可选的属性transitionAppear，以在组件的初始渲染时添加额外的过渡阶段。默认为false：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">render() &#123;</div><div class="line">  return (</div><div class="line">    &lt;CSSTransitionGroup</div><div class="line">      transitionName=&quot;example&quot;</div><div class="line">      transitionAppear=&#123;true&#125;</div><div class="line">      transitionAppearTimeout=&#123;500&#125;</div><div class="line">      transitionEnter=&#123;false&#125;</div><div class="line">      transitionLeave=&#123;false&#125;&gt;</div><div class="line">      &lt;h1&gt;Fading at Initial Mount&lt;/h1&gt;</div><div class="line">    &lt;/CSSTransitionGroup&gt;</div><div class="line">  );</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>在初始化渲染ReactCSSTransitionGroup过程中，example-appear类和example-appear-active类将被添加。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">.example-appear &#123;</div><div class="line">  opacity: 0.01;</div><div class="line">&#125;</div><div class="line">.example-appear.example-appear-active &#123;</div><div class="line">  opacity: 1;</div><div class="line">  transition: opacity .5s ease-in;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>在初始化渲染阶段，所有ReactCSSTransitionGroup的孩子节点将会appear而不是enter，然而，所有孩子稍后被渲染后将会触发enter而不是appear。</p>
-<p>注意：</p>
-<p>属性transitionAppear在0.13版本中才被添加进入ReactCSSTransitionGroup中，为了向后兼容，默认值为false。</p>
-<p>然而，transitionEnter和transtionLeave默认为true，所以你默认只要指定transitionEnterTimeout和transitionLeaveTimeout。</p>
-<h3 id="自定义类名"><a href="#自定义类名" class="headerlink" title="自定义类名"></a>自定义类名</h3><p>当然，我们也可以使用自定义类名代替每一步默认的类名。你可以通过传递一个包含enter或leave或appear等等的对象给transitionName而不是字符串。</p>
-<p>如果未提供active时，默认会为添加-active后的类名：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">&lt;CSSTransitionGroup</div><div class="line">    transitionName=&#123;</div><div class="line">        &#123;</div><div class="line">            enter: &apos;enter&apos;,</div><div class="line">            enterActive: &apos;enterActive&apos;,</div><div class="line">            leave: &apos;leave&apos;,</div><div class="line">            leaveActive: &apos;leaveActive&apos;,</div><div class="line">            appear: &apos;appear&apos;,</div><div class="line">            appearActive: &apos;appearActive&apos;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&gt;</div><div class="line">&#123;item&#125;</div><div class="line">&lt;/CSSTransitionGroup&gt;</div><div class="line">&lt;CSSTransitionGroup</div><div class="line">  transitionName=&#123; &#123;</div><div class="line">    enter: &apos;enter&apos;,</div><div class="line">    leave: &apos;leave&apos;,</div><div class="line">    appear: &apos;appear&apos;</div><div class="line">  &#125; &#125;&gt;</div><div class="line">  &#123;item2&#125;</div><div class="line">&lt;/CSSTransitionGroup&gt;</div></pre></td></tr></table></figure>
-<h3 id="动画组必须已经被渲染到DOM"><a href="#动画组必须已经被渲染到DOM" class="headerlink" title="动画组必须已经被渲染到DOM"></a>动画组必须已经被渲染到DOM</h3><p>为了时其子节点的动画能够生效，ReactCSSTransitionGroup必须已经被加载进DOM中，或者transitionAppear必须为true。</p>
-<p>下面的例子将不会正常运行，因为ReactCSSTransitionGroup被和新的item一起渲染，而不是新的item渲染进其子节点：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">render() &#123;</div><div class="line">  const items = this.state.items.map((item, i) =&gt; (</div><div class="line">    &lt;div key=&#123;item&#125; onClick=&#123;() =&gt; this.handleRemove(i)&#125;&gt;</div><div class="line">      &lt;CSSTransitionGroup transitionName=&quot;example&quot;&gt;</div><div class="line">        &#123;item&#125;</div><div class="line">      &lt;/CSSTransitionGroup&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">  ));</div><div class="line">  return (</div><div class="line">    &lt;div&gt;</div><div class="line">      &lt;button onClick=&#123;this.handleAdd&#125;&gt;Add Item&lt;/button&gt;</div><div class="line">      &#123;items&#125;</div><div class="line">    &lt;/div&gt;</div><div class="line">  );</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="渲染一个或零个子节点"><a href="#渲染一个或零个子节点" class="headerlink" title="渲染一个或零个子节点"></a>渲染一个或零个子节点</h3><p>在上面的例子中，我们渲染了一个列表节点，当然，ReactCSSTransitionGroup也可以渲染一个或零个节点：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">import ReactCSSTransitionGroup from &apos;react-addons-css-transition-group&apos;;</div><div class="line">function ImageCarousel(props) &#123;</div><div class="line">  return (</div><div class="line">    &lt;div&gt;</div><div class="line">      &lt;CSSTransitionGroup</div><div class="line">        transitionName=&quot;carousel&quot;</div><div class="line">        transitionEnterTimeout=&#123;300&#125;</div><div class="line">        transitionLeaveTimeout=&#123;300&#125;&gt;</div><div class="line">        &lt;img src=&#123;props.imageSrc&#125; key=&#123;props.imageSrc&#125; /&gt;</div><div class="line">      &lt;/CSSTransitionGroup&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">  );</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="禁用动画"><a href="#禁用动画" class="headerlink" title="禁用动画"></a>禁用动画</h3><p>可以通过设置false来禁用指定阶段，如：transitionEnter为false禁用进入后的动画效果。</p>
-<p>注意：使用ReactCSSTransitionGroup你没办法知道一个transition已经结束或其他更详细的细节，如果你需要，则得使用低级APIReactTransitionGroup，它提供更多的钩子让你能够监听。</p>
-<h2 id="低级API：TransitionGroup"><a href="#低级API：TransitionGroup" class="headerlink" title="低级API：TransitionGroup"></a>低级API：TransitionGroup</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">import TransitionGroup from &apos;react-transition-group/TransitionGroup&apos; // ES6</div><div class="line">var TransitionGroup = require(&apos;react-transition-group/TransitionGroup&apos;) // ES5 with npm</div></pre></td></tr></table></figure>
-<p>ReactTransitionGroup是动画的基础。当子节点添加或删除，下面这些钩子函数将会被调用：</p>
-<ul>
-<li>componentWillAppear(callback)</li>
-</ul>
-<p>这个方法将在渲染到节点时调用，它将阻塞其他当前正在发生的动画，知道callback被调用。这个方法仅仅在初始化渲染TransitionGroup时被调用。</p>
-<ul>
-<li>componentDidAppear()</li>
-</ul>
-<p>这个方法将在componentWillAppear的callback被调用后被调用。</p>
-<ul>
-<li>componentWillEnter(callback)</li>
-</ul>
-<p>当有新元素被添加到TransitionGroup时调用，它将会阻塞其他动画知道callback调用。</p>
-<ul>
-<li>componentDidEnter()</li>
-</ul>
-<p>在componentWillEnter的callback调用后触发。</p>
-<ul>
-<li>componentWillLeave(callback)</li>
-</ul>
-<p>当有元素被移除时触发，尽管元素已经被删除，但它还是还将保留在DOM中，直到callback被调用。</p>
-<ul>
-<li>componentDidLeave()</li>
-</ul>
-<p>在componentWillLeave的callback被调用时触发（和componentWillUnmount()同时触发）。</p>
-<h3 id="渲染其他组件"><a href="#渲染其他组件" class="headerlink" title="渲染其他组件"></a>渲染其他组件</h3><p>TransitionGroup默认渲染为一个span，你通过增加一个compoennt属性改变默认行为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;TransitionGroup component=&quot;ul&quot;&gt;</div><div class="line">    &#123;/*...*/&#125;</div><div class="line">&lt;/TranstionGroup&gt;</div></pre></td></tr></table></figure>
-<p>另外，用户自定义的属性也会对应增加到组件的属性，如下例子，ul也将会得到className属性：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;TransitionGroup component=&quot;ul&quot; className=&quot;animated-list&quot;&gt;</div><div class="line">  &#123;/* ... */&#125;</div><div class="line">&lt;/TransitionGroup&gt;</div></pre></td></tr></table></figure>
-<p>所有react可以渲染的组件都可以成为component，它不是必须为一个DOM节点，如：component={CustomList}，那么，TransitionGroup的子节点传递给CustomList组件的属性this.props.children。</p>
-<h3 id="渲染单独的子节点"><a href="#渲染单独的子节点" class="headerlink" title="渲染单独的子节点"></a>渲染单独的子节点</h3><p>我们经常会用TransitionGroup来作为单独子节点的渲染和移除时的效果，诸如手风琴效果的面板。</p>
-<p>正常情况下，TransitionGroup把其子节点包裹在一个span（或者自定义的component中），这是因为react的render函数必须返回单独子节点，但是TransitionGroup并不需要这样的规则。</p>
-<p>然而，如果你需要只渲染一个单独子节点，你可以通过定义一个只渲染第一个子节点的组件：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">function FirstChild(props) &#123;</div><div class="line">  const childrenArray = React.Children.toArray(props.children);</div><div class="line">  return childrenArray[0] || null;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>现在你可以指定TransitionGroup的component属性为FirstChild来避免包裹外层组件：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;TransitionGroup component=&#123;FirstChild&#125;&gt;</div><div class="line">  &#123;someCondition ? &lt;MyComponent /&gt; : null&#125;</div><div class="line">&lt;/TransitionGroup&gt;</div></pre></td></tr></table></figure>
-<p>这仅仅在你只想要渲染一个子节点时有用，在需要渲染多个节点时没有效果。</p>
-
+        
+          <p class="article-more-link">
+            <a href="/2017/08/02/react/react文档-css动画/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/08/02/react/react文档-css动画/" data-id="cj5unypuv000cngqoetntgsik" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/08/02/react/react文档-css动画/" data-id="cj5uo5qva000jp8qobok58pgn" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
@@ -210,7 +152,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/08/02/css/Flexbox布局兼容性总结/" data-id="cj5unypum0007ngqosf2kkijv" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/08/02/css/Flexbox布局兼容性总结/" data-id="cj5uo5quf0001p8qoxtfgsnxb" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/flexbox/">flexbox</a></li></ul>
@@ -255,74 +197,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/08/02/javascript/关于同一元素下dbClick触发两次click的问题/" data-id="cj5unypuo0008ngqoa94lzym1" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/08/02/javascript/关于同一元素下dbClick触发两次click的问题/" data-id="cj5uo5qv5000ep8qozgx3m2ms" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-react/react获取父组件或子组件属性" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/08/02/react/react获取父组件或子组件属性/" class="article-date">
-  <time datetime="2017-08-02T06:09:44.000Z" itemprop="datePublished">2017-08-02</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/02/react/react获取父组件或子组件属性/">React获取父组件或子组件属性</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="获取子组件的方法"><a href="#获取子组件的方法" class="headerlink" title="获取子组件的方法"></a>获取子组件的方法</h2><p>可以通过递归this.props.children中得到</p>
-<h2 id="获取父组件的方法"><a href="#获取父组件的方法" class="headerlink" title="获取父组件的方法"></a>获取父组件的方法</h2><p>方法一：可以通过react内部私有函数this._reactInternalInstance._currentElement._owner._instance获取</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">var Parent = React.createClass(&#123;</div><div class="line">  render() &#123;</div><div class="line">      return &lt;Child v=&quot;test&quot; /&gt;;</div><div class="line">  &#125;,</div><div class="line">  doAThing() &#123;</div><div class="line">    console.log(&quot;I&apos;m the parent, doing a thing.&quot;, this.props.testing);</div><div class="line">  &#125;</div><div class="line">&#125;);</div><div class="line">var Child = React.createClass(&#123;</div><div class="line">  render() &#123;</div><div class="line">    return &lt;button onClick=&#123;this.onClick&#125;&gt;&#123;this.props.v&#125;&lt;/button&gt;</div><div class="line">  &#125;,</div><div class="line">  onClick() &#123;</div><div class="line">    var parent = this._reactInternalInstance._currentElement._owner._instance;</div><div class="line">    console.log(&quot;parent:&quot;, parent);</div><div class="line">    parent.doAThing();</div><div class="line">  &#125;</div><div class="line">&#125;);</div><div class="line">ReactDOM.render(&lt;Parent testing=&#123;true&#125; /&gt;, container);</div></pre></td></tr></table></figure>
-<p>但是这种方法是不推荐的。</p>
-<p>方法二：通过属性传递给子组件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">class Parent extends React.Component &#123;</div><div class="line">    constructor(props) &#123;</div><div class="line">        super(props)</div><div class="line">        this.fn = this.fn.bind(this)</div><div class="line">    &#125;</div><div class="line">    fn() &#123;</div><div class="line">        console.log(&apos;parent&apos;)</div><div class="line">    &#125;</div><div class="line">    render() &#123;</div><div class="line">        return &lt;Child fn=&#123;this.fn&#125; /&gt;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">const Child = (&#123; fn &#125;) =&gt; &lt;button onClick=&#123;fn&#125;&gt;Click me!&lt;/button&gt;</div></pre></td></tr></table></figure>
-<p>但是这种只在Child组件在Parent组件中时才可以用。</p>
-<p>方法三：使用上下文（没有直接的父/子关系）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">class Parent extends React.Component &#123;</div><div class="line">    constructor(props) &#123;</div><div class="line">        super(props)</div><div class="line">        this.fn = this.fn.bind(this)</div><div class="line">    &#125;</div><div class="line">    getChildContext() &#123;</div><div class="line">        return &#123;</div><div class="line">            fn: this.fn,</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    fn() &#123;</div><div class="line">        console.log(&apos;parent&apos;)</div><div class="line">    &#125;</div><div class="line">    render() &#123;</div><div class="line">        return &lt;Child fn=&#123;this.fn&#125; /&gt;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">Parent.childContextTypes = &#123;</div><div class="line">    fn: React.PropTypes.func,</div><div class="line">&#125;</div><div class="line">const Child = (props, &#123; fn &#125;) =&gt; &lt;button onClick=&#123;fn&#125;&gt;Click me!&lt;/button&gt;</div><div class="line">Child.contextTypes = &#123;</div><div class="line">    fn: React.PropTypes.func,</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="给子组件（没有直接父-子关系）添加属性"><a href="#给子组件（没有直接父-子关系）添加属性" class="headerlink" title="给子组件（没有直接父/子关系）添加属性"></a>给子组件（没有直接父/子关系）添加属性</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">return React.cloneElement(this.props.children, &#123;/*要添加的属性*/&#125;)</div></pre></td></tr></table></figure>
-<h2 id="React关于子组件的API"><a href="#React关于子组件的API" class="headerlink" title="React关于子组件的API"></a>React关于子组件的API</h2><h3 id="React-chlidren-map"><a href="#React-chlidren-map" class="headerlink" title="React.chlidren.map"></a>React.chlidren.map</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">React.Children.map(children, function[(thisArg)])</div></pre></td></tr></table></figure>
-<p>对包含在 children 中的每个直接子元素调用一个函数，使用 this 设置 thisArg 。 如果 children 是一个键片段（keyed fragment）或数组，它将被遍历：该函数永远不会传递容器对象（container objects）。 如果 children 为 null 或 undefined ，返回 null 或 undefined，而不是一个数组。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">import React from &apos;react&apos;;</div><div class="line">const Salmonize = (&#123; children &#125;) =&gt; (</div><div class="line">  &lt;div&gt;</div><div class="line">    &#123;React.Children.map(children, child =&gt; (</div><div class="line">      React.cloneElement(child, &#123;</div><div class="line">        style: &#123;</div><div class="line">          backgroundColor: &apos;salmon&apos;,</div><div class="line">          color: &apos;seagreen&apos;,</div><div class="line">        &#125;</div><div class="line">      &#125;)</div><div class="line">    ))&#125;</div><div class="line">  &lt;/div&gt;</div><div class="line">);</div><div class="line">const SalmonBlog = (&#123; title, posts &#125;) =&gt; (</div><div class="line">  &lt;div&gt;</div><div class="line">    &lt;Salmonize&gt;</div><div class="line">      &lt;NavBar title=&#123;title&#125; /&gt;</div><div class="line">    &lt;/Salmonize&gt;</div><div class="line">    &#123;posts.map(post =&gt; (</div><div class="line">      &lt;Post key=&#123;post.id&#125;&gt;</div><div class="line">        &lt;Salmonize&gt;</div><div class="line">          &lt;PostHeader title=&#123;post.title&#125; /&gt;</div><div class="line">        &lt;/Salmonize&gt;</div><div class="line">        &lt;PostBody text=&#123;post.text&#125; /&gt;</div><div class="line">      &lt;/Post&gt;</div><div class="line">    ))&#125;</div><div class="line">  &lt;/div&gt;</div><div class="line">);</div></pre></td></tr></table></figure>
-<p>在上面这个例子中，Salmonize组件并不需要在乎谁是它的子组件，它通过遍历克隆每个子组件，通过React.cloneElement给子组件增加属性。</p>
-<p>在React中编写真正可重复使用的组件肯定有点棘手，如果你遇到这样的麻烦，那么这种map和clone方法可以帮助到你。</p>
-<h3 id="React-children-forEach"><a href="#React-children-forEach" class="headerlink" title="React.children.forEach"></a>React.children.forEach</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">React.Children.forEach(children, function[(thisArg)])</div></pre></td></tr></table></figure>
-<p>类似React.children.map，但是没有返回值。</p>
-<h3 id="React-Children-count"><a href="#React-Children-count" class="headerlink" title="React.Children.count"></a>React.Children.count</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">React.Children.count(children)</div></pre></td></tr></table></figure>
-<p>返回 children 中的组件总数，等于传递给 map 或 forEach 的回调将被调用的次数。</p>
-<h3 id="React-Children-only"><a href="#React-Children-only" class="headerlink" title="React.Children.only"></a>React.Children.only</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">React.Children.only(children)</div></pre></td></tr></table></figure>
-<p>返回 children 中的唯一子集。否则抛出异常。当您想要确保组件只有一个子级时，这可能会派上用场，如果不满足此条件，则会抛出错误。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">export default React.createClass(&#123;</div><div class="line">  // ...</div><div class="line">  render: function() &#123;</div><div class="line">    const &#123;name, selectedValue, onChange, children&#125; = this.props;</div><div class="line">    const renderedChildren = children(radio(name, selectedValue, onChange));</div><div class="line">    return renderedChildren &amp;&amp; React.Children.only(renderedChildren);</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<h3 id="React-Children-toArray"><a href="#React-Children-toArray" class="headerlink" title="React.Children.toArray"></a>React.Children.toArray</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">React.Children.toArray(children)</div></pre></td></tr></table></figure>
-<p>将 children 不透明数据结构作为一个平面数组返回，并且 key 分配给每个子集。 如果你想在渲染方法中操作children集合，特别是如果你想在传递它之前重新排序或切割 this.props.children ，这将非常有用。</p>
-<p>该方法将children组件的支持转换为纯JavaScript数组，这可以使您比React.Children.map提供更多的灵活性。React.Children.toArray最近在我想要渲染一个分隔符的列表中时，它们之间散布着很方便。这导致我创建一个完成这个的组件。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">import React from &apos;react&apos;;</div><div class="line">const IntersperseDividers = (&#123; children &#125;) =&gt; (</div><div class="line">  &lt;div&gt;</div><div class="line">    &#123;React.Children.toArray(children).reduce((elements, child, i, array) =&gt; &#123;</div><div class="line">      elements.push(child);</div><div class="line">      if (i &lt; array.length - 1) &#123;</div><div class="line">        elements.push(&lt;hr key=&#123;`$&#123;i&#125;--divider`&#125; /&gt;);</div><div class="line">      &#125;</div><div class="line">      return elements;</div><div class="line">    &#125;, [])&#125;</div><div class="line">  &lt;/div&gt;</div><div class="line">);</div><div class="line">const List = (&#123; data &#125;) =&gt; (</div><div class="line">  &lt;IntersperseDividers&gt;</div><div class="line">    &#123;data.map((item, i) =&gt; (</div><div class="line">      &lt;div key=&#123;i&#125;&gt;</div><div class="line">        &#123;item.value&#125;</div><div class="line">      &lt;/div&gt;</div><div class="line">    ))&#125;</div><div class="line">  &lt;/IntersperseDividers&gt;</div><div class="line">);</div></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/08/02/react/react获取父组件或子组件属性/" data-id="cj5unypuz000engqopgm9swia" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
 
     </footer>
   </div>
@@ -446,7 +324,71 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/08/02/react/React要手动绑定方法的原因/" data-id="cj5unypvq000wngqowye7urot" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/08/02/react/React要手动绑定方法的原因/" data-id="cj5uo5qus0008p8qox3hasofw" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-react/react获取父组件或子组件属性" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/02/react/react获取父组件或子组件属性/" class="article-date">
+  <time datetime="2017-08-02T06:09:44.000Z" itemprop="datePublished">2017-08-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/08/02/react/react获取父组件或子组件属性/">React获取父组件或子组件属性</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="获取子组件的方法"><a href="#获取子组件的方法" class="headerlink" title="获取子组件的方法"></a>获取子组件的方法</h2><p>可以通过递归this.props.children中得到</p>
+<h2 id="获取父组件的方法"><a href="#获取父组件的方法" class="headerlink" title="获取父组件的方法"></a>获取父组件的方法</h2><p>方法一：可以通过react内部私有函数this._reactInternalInstance._currentElement._owner._instance获取</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">var Parent = React.createClass(&#123;</div><div class="line">  render() &#123;</div><div class="line">      return &lt;Child v=&quot;test&quot; /&gt;;</div><div class="line">  &#125;,</div><div class="line">  doAThing() &#123;</div><div class="line">    console.log(&quot;I&apos;m the parent, doing a thing.&quot;, this.props.testing);</div><div class="line">  &#125;</div><div class="line">&#125;);</div><div class="line">var Child = React.createClass(&#123;</div><div class="line">  render() &#123;</div><div class="line">    return &lt;button onClick=&#123;this.onClick&#125;&gt;&#123;this.props.v&#125;&lt;/button&gt;</div><div class="line">  &#125;,</div><div class="line">  onClick() &#123;</div><div class="line">    var parent = this._reactInternalInstance._currentElement._owner._instance;</div><div class="line">    console.log(&quot;parent:&quot;, parent);</div><div class="line">    parent.doAThing();</div><div class="line">  &#125;</div><div class="line">&#125;);</div><div class="line">ReactDOM.render(&lt;Parent testing=&#123;true&#125; /&gt;, container);</div></pre></td></tr></table></figure>
+<p>但是这种方法是不推荐的。</p>
+<p>方法二：通过属性传递给子组件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">class Parent extends React.Component &#123;</div><div class="line">    constructor(props) &#123;</div><div class="line">        super(props)</div><div class="line">        this.fn = this.fn.bind(this)</div><div class="line">    &#125;</div><div class="line">    fn() &#123;</div><div class="line">        console.log(&apos;parent&apos;)</div><div class="line">    &#125;</div><div class="line">    render() &#123;</div><div class="line">        return &lt;Child fn=&#123;this.fn&#125; /&gt;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">const Child = (&#123; fn &#125;) =&gt; &lt;button onClick=&#123;fn&#125;&gt;Click me!&lt;/button&gt;</div></pre></td></tr></table></figure>
+<p>但是这种只在Child组件在Parent组件中时才可以用。</p>
+<p>方法三：使用上下文（没有直接的父/子关系）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">class Parent extends React.Component &#123;</div><div class="line">    constructor(props) &#123;</div><div class="line">        super(props)</div><div class="line">        this.fn = this.fn.bind(this)</div><div class="line">    &#125;</div><div class="line">    getChildContext() &#123;</div><div class="line">        return &#123;</div><div class="line">            fn: this.fn,</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    fn() &#123;</div><div class="line">        console.log(&apos;parent&apos;)</div><div class="line">    &#125;</div><div class="line">    render() &#123;</div><div class="line">        return &lt;Child fn=&#123;this.fn&#125; /&gt;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">Parent.childContextTypes = &#123;</div><div class="line">    fn: React.PropTypes.func,</div><div class="line">&#125;</div><div class="line">const Child = (props, &#123; fn &#125;) =&gt; &lt;button onClick=&#123;fn&#125;&gt;Click me!&lt;/button&gt;</div><div class="line">Child.contextTypes = &#123;</div><div class="line">    fn: React.PropTypes.func,</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="给子组件（没有直接父-子关系）添加属性"><a href="#给子组件（没有直接父-子关系）添加属性" class="headerlink" title="给子组件（没有直接父/子关系）添加属性"></a>给子组件（没有直接父/子关系）添加属性</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">return React.cloneElement(this.props.children, &#123;/*要添加的属性*/&#125;)</div></pre></td></tr></table></figure>
+<h2 id="React关于子组件的API"><a href="#React关于子组件的API" class="headerlink" title="React关于子组件的API"></a>React关于子组件的API</h2><h3 id="React-chlidren-map"><a href="#React-chlidren-map" class="headerlink" title="React.chlidren.map"></a>React.chlidren.map</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">React.Children.map(children, function[(thisArg)])</div></pre></td></tr></table></figure>
+<p>对包含在 children 中的每个直接子元素调用一个函数，使用 this 设置 thisArg 。 如果 children 是一个键片段（keyed fragment）或数组，它将被遍历：该函数永远不会传递容器对象（container objects）。 如果 children 为 null 或 undefined ，返回 null 或 undefined，而不是一个数组。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">import React from &apos;react&apos;;</div><div class="line">const Salmonize = (&#123; children &#125;) =&gt; (</div><div class="line">  &lt;div&gt;</div><div class="line">    &#123;React.Children.map(children, child =&gt; (</div><div class="line">      React.cloneElement(child, &#123;</div><div class="line">        style: &#123;</div><div class="line">          backgroundColor: &apos;salmon&apos;,</div><div class="line">          color: &apos;seagreen&apos;,</div><div class="line">        &#125;</div><div class="line">      &#125;)</div><div class="line">    ))&#125;</div><div class="line">  &lt;/div&gt;</div><div class="line">);</div><div class="line">const SalmonBlog = (&#123; title, posts &#125;) =&gt; (</div><div class="line">  &lt;div&gt;</div><div class="line">    &lt;Salmonize&gt;</div><div class="line">      &lt;NavBar title=&#123;title&#125; /&gt;</div><div class="line">    &lt;/Salmonize&gt;</div><div class="line">    &#123;posts.map(post =&gt; (</div><div class="line">      &lt;Post key=&#123;post.id&#125;&gt;</div><div class="line">        &lt;Salmonize&gt;</div><div class="line">          &lt;PostHeader title=&#123;post.title&#125; /&gt;</div><div class="line">        &lt;/Salmonize&gt;</div><div class="line">        &lt;PostBody text=&#123;post.text&#125; /&gt;</div><div class="line">      &lt;/Post&gt;</div><div class="line">    ))&#125;</div><div class="line">  &lt;/div&gt;</div><div class="line">);</div></pre></td></tr></table></figure>
+<p>在上面这个例子中，Salmonize组件并不需要在乎谁是它的子组件，它通过遍历克隆每个子组件，通过React.cloneElement给子组件增加属性。</p>
+<p>在React中编写真正可重复使用的组件肯定有点棘手，如果你遇到这样的麻烦，那么这种map和clone方法可以帮助到你。</p>
+<h3 id="React-children-forEach"><a href="#React-children-forEach" class="headerlink" title="React.children.forEach"></a>React.children.forEach</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">React.Children.forEach(children, function[(thisArg)])</div></pre></td></tr></table></figure>
+<p>类似React.children.map，但是没有返回值。</p>
+<h3 id="React-Children-count"><a href="#React-Children-count" class="headerlink" title="React.Children.count"></a>React.Children.count</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">React.Children.count(children)</div></pre></td></tr></table></figure>
+<p>返回 children 中的组件总数，等于传递给 map 或 forEach 的回调将被调用的次数。</p>
+<h3 id="React-Children-only"><a href="#React-Children-only" class="headerlink" title="React.Children.only"></a>React.Children.only</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">React.Children.only(children)</div></pre></td></tr></table></figure>
+<p>返回 children 中的唯一子集。否则抛出异常。当您想要确保组件只有一个子级时，这可能会派上用场，如果不满足此条件，则会抛出错误。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">export default React.createClass(&#123;</div><div class="line">  // ...</div><div class="line">  render: function() &#123;</div><div class="line">    const &#123;name, selectedValue, onChange, children&#125; = this.props;</div><div class="line">    const renderedChildren = children(radio(name, selectedValue, onChange));</div><div class="line">    return renderedChildren &amp;&amp; React.Children.only(renderedChildren);</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="React-Children-toArray"><a href="#React-Children-toArray" class="headerlink" title="React.Children.toArray"></a>React.Children.toArray</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">React.Children.toArray(children)</div></pre></td></tr></table></figure>
+<p>将 children 不透明数据结构作为一个平面数组返回，并且 key 分配给每个子集。 如果你想在渲染方法中操作children集合，特别是如果你想在传递它之前重新排序或切割 this.props.children ，这将非常有用。</p>
+<p>该方法将children组件的支持转换为纯JavaScript数组，这可以使您比React.Children.map提供更多的灵活性。React.Children.toArray最近在我想要渲染一个分隔符的列表中时，它们之间散布着很方便。这导致我创建一个完成这个的组件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">import React from &apos;react&apos;;</div><div class="line">const IntersperseDividers = (&#123; children &#125;) =&gt; (</div><div class="line">  &lt;div&gt;</div><div class="line">    &#123;React.Children.toArray(children).reduce((elements, child, i, array) =&gt; &#123;</div><div class="line">      elements.push(child);</div><div class="line">      if (i &lt; array.length - 1) &#123;</div><div class="line">        elements.push(&lt;hr key=&#123;`$&#123;i&#125;--divider`&#125; /&gt;);</div><div class="line">      &#125;</div><div class="line">      return elements;</div><div class="line">    &#125;, [])&#125;</div><div class="line">  &lt;/div&gt;</div><div class="line">);</div><div class="line">const List = (&#123; data &#125;) =&gt; (</div><div class="line">  &lt;IntersperseDividers&gt;</div><div class="line">    &#123;data.map((item, i) =&gt; (</div><div class="line">      &lt;div key=&#123;i&#125;&gt;</div><div class="line">        &#123;item.value&#125;</div><div class="line">      &lt;/div&gt;</div><div class="line">    ))&#125;</div><div class="line">  &lt;/IntersperseDividers&gt;</div><div class="line">);</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/08/02/react/react获取父组件或子组件属性/" data-id="cj5uo5quz000bp8qo68vutxs8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
@@ -475,7 +417,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/08/02/javascript/for对比forEach/" data-id="cj5unypu70001ngqoraanq0kn" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/08/02/javascript/for对比forEach/" data-id="cj5uo5qv7000gp8qow9fh3vm5" class="article-share-link">Share</a>
       
       
     </footer>
@@ -548,7 +490,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/08/02/javascript/ES6的坑/" data-id="cj5unypue0003ngqo2xomlrt3" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/08/02/javascript/ES6的坑/" data-id="cj5uo5qvd000lp8qoxtaawnaj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -591,7 +533,7 @@ h1{
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/08/02/css/使用css视口单位/" data-id="cj5unypuj0005ngqoa4zlmqa6" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/08/02/css/使用css视口单位/" data-id="cj5uo5qum0004p8qoqgopq9ad" class="article-share-link">Share</a>
       
       
     </footer>
@@ -622,7 +564,7 @@ h1{
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/08/02/css/HTML不同空格的特性和表现研究/" data-id="cj5unypuf0004ngqohupjcuny" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/08/02/css/HTML不同空格的特性和表现研究/" data-id="cj5uo5qul0003p8qo5aixg21b" class="article-share-link">Share</a>
       
       
     </footer>
@@ -748,7 +690,7 @@ ExtractTextPlugin.extract({
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/08/02/webpack/迁移到webpack2/" data-id="cj5unypvo000vngqosszphto3" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/08/02/webpack/迁移到webpack2/" data-id="cj5uo5qvu000xp8qoj347641k" class="article-share-link">Share</a>
       
       
     </footer>
@@ -818,11 +760,11 @@ ExtractTextPlugin.extract({
           </li>
         
           <li>
-            <a href="/2017/08/02/react/react获取父组件或子组件属性/">React获取父组件或子组件属性</a>
+            <a href="/2017/08/02/react/React要手动绑定方法的原因/">React要手动绑定方法的原因</a>
           </li>
         
           <li>
-            <a href="/2017/08/02/react/React要手动绑定方法的原因/">React要手动绑定方法的原因</a>
+            <a href="/2017/08/02/react/react获取父组件或子组件属性/">React获取父组件或子组件属性</a>
           </li>
         
       </ul>
