@@ -3,21 +3,22 @@
 <head>
   <meta charset="utf-8">
   
-  <title>关于同一元素下dbClick触发两次click的问题 | Hexo</title>
+  <title>关于同一元素下dbClick触发两次click的问题 | liaoyf的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="问题将处理程序绑定到相同元素的click和dblclick事件是不合适的。 触发的事件顺序因浏览器而异，有些在dblclick之前接收到两个点击事件，而其他事件只有一个。 双击灵敏度（双击检测到的点击之间的最大时间）可能因操作系统和浏览器而异，并且通常是用户可配置的。 所以最好不要在同一个元素下绑定click和dbclick事件。 解决方法方法一： 12345678910111213141516v">
+  <meta name="description" content="问题将处理程序绑定到相同元素的click和dblclick事件是不合适的。 触发的事件顺序因浏览器而异，有些在dblclick之前接收到两个点击事件，而其他事件只有一个。 双击灵敏度（双击检测到的点击之间的最大时间）可能因操作系统和浏览器而异，并且通常是用户可配置的。 所以最好不要在同一个元素下绑定click和dbclick事件。">
 <meta name="keywords" content="js">
 <meta property="og:type" content="article">
 <meta property="og:title" content="关于同一元素下dbClick触发两次click的问题">
-<meta property="og:url" content="http://yoursite.com/2017/08/02/javascript/关于同一元素下dbClick触发两次click的问题/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="问题将处理程序绑定到相同元素的click和dblclick事件是不合适的。 触发的事件顺序因浏览器而异，有些在dblclick之前接收到两个点击事件，而其他事件只有一个。 双击灵敏度（双击检测到的点击之间的最大时间）可能因操作系统和浏览器而异，并且通常是用户可配置的。 所以最好不要在同一个元素下绑定click和dbclick事件。 解决方法方法一： 12345678910111213141516v">
-<meta property="og:updated_time" content="2017-08-02T06:32:12.105Z">
+<meta property="og:url" content="http://liaoyongfu.com/2017/08/02/javascript/关于同一元素下dbClick触发两次click的问题/index.html">
+<meta property="og:site_name" content="liaoyf的博客">
+<meta property="og:description" content="问题将处理程序绑定到相同元素的click和dblclick事件是不合适的。 触发的事件顺序因浏览器而异，有些在dblclick之前接收到两个点击事件，而其他事件只有一个。 双击灵敏度（双击检测到的点击之间的最大时间）可能因操作系统和浏览器而异，并且通常是用户可配置的。 所以最好不要在同一个元素下绑定click和dbclick事件。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-08-02T07:09:17.232Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于同一元素下dbClick触发两次click的问题">
-<meta name="twitter:description" content="问题将处理程序绑定到相同元素的click和dblclick事件是不合适的。 触发的事件顺序因浏览器而异，有些在dblclick之前接收到两个点击事件，而其他事件只有一个。 双击灵敏度（双击检测到的点击之间的最大时间）可能因操作系统和浏览器而异，并且通常是用户可配置的。 所以最好不要在同一个元素下绑定click和dbclick事件。 解决方法方法一： 12345678910111213141516v">
+<meta name="twitter:description" content="问题将处理程序绑定到相同元素的click和dblclick事件是不合适的。 触发的事件顺序因浏览器而异，有些在dblclick之前接收到两个点击事件，而其他事件只有一个。 双击灵敏度（双击检测到的点击之间的最大时间）可能因操作系统和浏览器而异，并且通常是用户可配置的。 所以最好不要在同一个元素下绑定click和dbclick事件。">
   
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="liaoyf的博客" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -38,7 +39,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
+        <a href="/" id="logo">liaoyf的博客</a>
       </h1>
       
     </div>
@@ -53,12 +54,12 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://liaoyongfu.com"></form>
       </div>
     </div>
   </div>
@@ -90,6 +91,7 @@
 <p>触发的事件顺序因浏览器而异，有些在dblclick之前接收到两个点击事件，而其他事件只有一个。</p>
 <p>双击灵敏度（双击检测到的点击之间的最大时间）可能因操作系统和浏览器而异，并且通常是用户可配置的。</p>
 <p>所以最好不要在同一个元素下绑定click和dbclick事件。</p>
+<a id="more"></a>
 <h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>方法一：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">var v_Result;  </div><div class="line">function OneClick(event) &#123;  </div><div class="line">    console.log(&quot;detail&quot;,event.detail);  </div><div class="line">    //if (event.detail == 2)   </div><div class="line">    //  return ;   </div><div class="line">    v_Result = false;  </div><div class="line">    window.setTimeout(check, 300);  </div><div class="line">    function check() &#123;  </div><div class="line">        if (v_Result != false) return;  </div><div class="line">        console.log(&quot;单击&quot;);  </div><div class="line">    &#125;  </div><div class="line">&#125;  </div><div class="line">function TwoClick() &#123;  </div><div class="line">    v_Result = true;  </div><div class="line">    console.log(&quot;双击&quot;);  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>方法二：</p>
@@ -97,7 +99,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/08/02/javascript/关于同一元素下dbClick触发两次click的问题/" data-id="cj5uo5qv5000ep8qozgx3m2ms" class="article-share-link">Share</a>
+      <a data-url="http://liaoyongfu.com/2017/08/02/javascript/关于同一元素下dbClick触发两次click的问题/" data-id="cj5uo5qv5000ep8qozgx3m2ms" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
@@ -109,7 +111,7 @@
 <nav id="article-nav">
   
     <a href="/2017/08/02/css/Flexbox布局兼容性总结/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
+      <strong class="article-nav-caption">Récent</strong>
       <div class="article-nav-title">
         
           Flexbox布局兼容性总结
@@ -119,7 +121,7 @@
   
   
     <a href="/2017/08/02/react/React要手动绑定方法的原因/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
+      <strong class="article-nav-caption">Ancien</strong>
       <div class="article-nav-title">React要手动绑定方法的原因</div>
     </a>
   
@@ -137,7 +139,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flexbox/">flexbox</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li></ul>
     </div>
@@ -147,7 +149,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
+    <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
       <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/flexbox/" style="font-size: 10px;">flexbox</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/react/" style="font-size: 20px;">react</a>
     </div>
@@ -166,7 +168,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
         
@@ -202,8 +204,8 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2017 John Doe<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      &copy; 2017 liaoyf<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>

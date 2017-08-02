@@ -3,16 +3,17 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Hexo</title>
+  <title>liaoyf的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:title" content="liaoyf的博客">
+<meta property="og:url" content="http://liaoyongfu.com/index.html">
+<meta property="og:site_name" content="liaoyf的博客">
+<meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="liaoyf的博客">
   
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="liaoyf的博客" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -33,7 +34,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
+        <a href="/" id="logo">liaoyf的博客</a>
       </h1>
       
     </div>
@@ -48,12 +49,12 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://liaoyongfu.com"></form>
       </div>
     </div>
   </div>
@@ -93,7 +94,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/08/02/react/react文档-css动画/" data-id="cj5uo5qva000jp8qobok58pgn" class="article-share-link">Share</a>
+      <a data-url="http://liaoyongfu.com/2017/08/02/react/react文档-css动画/" data-id="cj5uo5qva000jp8qobok58pgn" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
@@ -129,30 +130,16 @@
       
         <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>IE9不支持…试了一下flexibility库，发现支持还好，就是嵌套的时候会有问题，因为它是通过定位的方式，暂时无解……</p>
 <h2 id="入门教程"><a href="#入门教程" class="headerlink" title="入门教程"></a>入门教程</h2><p><a href="http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html" target="_blank" rel="external">传送门</a></p>
-<h2 id="W3C各个版本的flex"><a href="#W3C各个版本的flex" class="headerlink" title="W3C各个版本的flex"></a>W3C各个版本的flex</h2><h3 id="2009-version"><a href="#2009-version" class="headerlink" title="2009 version"></a>2009 version</h3><p>标志：display: box; or a property that is box-{*} (eg. box-pack)</p>
-<h3 id="2011-version"><a href="#2011-version" class="headerlink" title="2011 version"></a>2011 version</h3><p>标志：display: flexbox; or the flex() function or flex-pack property</p>
-<h3 id="2012-version"><a href="#2012-version" class="headerlink" title="2012 version"></a>2012 version</h3><p>标志：display: flex/inline-flex; and flex-{*} properties</p>
-<h3 id="2014-version"><a href="#2014-version" class="headerlink" title="2014 version"></a>2014 version</h3><p>新增了对flex项z-index的规定</p>
-<h3 id="2015-W3C-Editor’s-Draft"><a href="#2015-W3C-Editor’s-Draft" class="headerlink" title="2015 W3C Editor’s Draft"></a>2015 W3C Editor’s Draft</h3><p>没有大的改动</p>
-<p>P.S.注意2015的是W3C Editor’s Draft，只是个草案，还处于修修改改的阶段，还没有征集浏览器供应商的意见。</p>
-<h2 id="浏览器兼容性"><a href="#浏览器兼容性" class="headerlink" title="浏览器兼容性"></a>浏览器兼容性</h2><p>关于flex的W3C规范： <a href="http://dev.w3.org/csswg/css-flexbox-1/" target="_blank" rel="external">http://dev.w3.org/csswg/css-flexbox-1/</a></p>
-<p>浏览器兼容性可以参考CanIUse： <a href="http://caniuse.com/#feat=flexbox" target="_blank" rel="external">http://caniuse.com/#feat=flexbox</a></p>
-<p>根据CanIUse的数据可以总结如下：</p>
-<p>IE10部分支持2012，需要-ms-前缀</p>
-<p>Android4.1/4.2-4.3部分支持2009 ，需要-webkit-前缀</p>
-<p>Safari7/7.1/8部分支持2012， 需要-webkit-前缀</p>
-<p>IOS Safari7.0-7.1/8.1-8.3部分支持2012，需要-webkit-前缀</p>
-<p>所以需要考虑新版本2012： <a href="http://www.w3.org/TR/2012/CR-css3-flexbox-20120918/" target="_blank" rel="external">http://www.w3.org/TR/2012/CR-css3-flexbox-20120918/</a></p>
-<p>而Android需要考虑旧版本2009： <a href="http://www.w3.org/TR/2009/WD-css3-flexbox-20090723/" target="_blank" rel="external">http://www.w3.org/TR/2009/WD-css3-flexbox-20090723/</a></p>
-<h2 id="浏览器兼容的flex语法"><a href="#浏览器兼容的flex语法" class="headerlink" title="浏览器兼容的flex语法"></a>浏览器兼容的flex语法</h2><p>上面分析得很清楚，针对需要兼容的目标使用对应版本的语法就好了，下面给出常用的布局代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div></pre></td><td class="code"><pre><div class="line">/* 子元素-平均分栏 */</div><div class="line">.flex1 &#123;</div><div class="line">	-webkit-box-flex: 1;	  /* OLD - iOS 6-, Safari 3.1-6 */</div><div class="line">	-moz-box-flex: 1;		 /* OLD - Firefox 19- */</div><div class="line">	width: 20%;			   /* For old syntax, otherwise collapses. */</div><div class="line">	-webkit-flex: 1;		  /* Chrome */</div><div class="line">	-ms-flex: 1;			  /* IE 10 */</div><div class="line">	flex: 1;				  /* NEW, Spec - Opera 12.1, Firefox 20+ */</div><div class="line">&#125;</div><div class="line">/* 父元素-横向排列（主轴） */</div><div class="line">.flex-h &#123;</div><div class="line">	display: box;			  /* OLD - Android 4.4- */</div><div class="line">	display: -webkit-box;	  /* OLD - iOS 6-, Safari 3.1-6 */</div><div class="line">	display: -moz-box;		 /* OLD - Firefox 19- (buggy but mostly works) */</div><div class="line">	display: -ms-flexbox;	  /* TWEENER - IE 10 */</div><div class="line">	display: -webkit-flex;	 /* NEW - Chrome */</div><div class="line">	display: flex;			 /* NEW, Spec - Opera 12.1, Firefox 20+ */</div><div class="line">	/* 09版 */</div><div class="line">	-webkit-box-orient: horizontal;</div><div class="line">	/* 12版 */</div><div class="line">	-webkit-flex-direction: row;</div><div class="line">	-moz-flex-direction: row;</div><div class="line">	-ms-flex-direction: row;</div><div class="line">	-o-flex-direction: row;</div><div class="line">	flex-direction: row;</div><div class="line">&#125;</div><div class="line">/* 父元素-横向换行 */</div><div class="line">.flex-hw &#123;</div><div class="line">	/* 09版 */</div><div class="line">	/*-webkit-box-lines: multiple;*/</div><div class="line">	/* 12版 */</div><div class="line">	-webkit-flex-wrap: wrap;</div><div class="line">	-moz-flex-wrap: wrap;</div><div class="line">	-ms-flex-wrap: wrap;</div><div class="line">	-o-flex-wrap: wrap;</div><div class="line">	flex-wrap: wrap;</div><div class="line">&#125;</div><div class="line">/* 父元素-水平居中（主轴是横向才生效） */</div><div class="line">.flex-hc &#123;</div><div class="line">	/* 09版 */</div><div class="line">	-webkit-box-pack: center;</div><div class="line">	/* 12版 */</div><div class="line">	-webkit-justify-content: center;</div><div class="line">	-moz-justify-content: center;</div><div class="line">	-ms-justify-content: center;</div><div class="line">	-o-justify-content: center;</div><div class="line">	justify-content: center;</div><div class="line">	/* 其它取值如下：</div><div class="line">		align-items	 主轴原点方向对齐</div><div class="line">		flex-end		主轴延伸方向对齐</div><div class="line">		space-between   等间距排列，首尾不留白</div><div class="line">		space-around	等间距排列，首尾留白</div><div class="line">	 */</div><div class="line">&#125;</div><div class="line">/* 父元素-纵向排列（主轴） */</div><div class="line">.flex-v &#123;</div><div class="line">	display: box;			  /* OLD - Android 4.4- */</div><div class="line">	display: -webkit-box;	  /* OLD - iOS 6-, Safari 3.1-6 */</div><div class="line">	display: -moz-box;		 /* OLD - Firefox 19- (buggy but mostly works) */</div><div class="line">	display: -ms-flexbox;	  /* TWEENER - IE 10 */</div><div class="line">	display: -webkit-flex;	 /* NEW - Chrome */</div><div class="line">	display: flex;			 /* NEW, Spec - Opera 12.1, Firefox 20+ */</div><div class="line">	/* 09版 */</div><div class="line">	-webkit-box-orient: vertical;</div><div class="line">	/* 12版 */</div><div class="line">	-webkit-flex-direction: column;</div><div class="line">	-moz-flex-direction: column;</div><div class="line">	-ms-flex-direction: column;</div><div class="line">	-o-flex-direction: column;</div><div class="line">	flex-direction: column;</div><div class="line">&#125;</div><div class="line">/* 父元素-纵向换行 */</div><div class="line">.flex-vw &#123;</div><div class="line">	/* 09版 */</div><div class="line">	/*-webkit-box-lines: multiple;*/</div><div class="line">	/* 12版 */</div><div class="line">	-webkit-flex-wrap: wrap;</div><div class="line">	-moz-flex-wrap: wrap;</div><div class="line">	-ms-flex-wrap: wrap;</div><div class="line">	-o-flex-wrap: wrap;</div><div class="line">	flex-wrap: wrap;</div><div class="line">&#125;</div><div class="line">/* 父元素-竖直居中（主轴是横向才生效） */</div><div class="line">.flex-vc &#123;</div><div class="line">	/* 09版 */</div><div class="line">	-webkit-box-align: center;</div><div class="line">	/* 12版 */</div><div class="line">	-webkit-align-items: center;</div><div class="line">	-moz-align-items: center;</div><div class="line">	-ms-align-items: center;</div><div class="line">	-o-align-items: center;</div><div class="line">	align-items: center;</div><div class="line">&#125;</div><div class="line">/* 子元素-显示在从左向右（从上向下）第1个位置，用于改变源文档顺序显示 */</div><div class="line">.flex-1 &#123;</div><div class="line">	-webkit-box-ordinal-group: 1;   /* OLD - iOS 6-, Safari 3.1-6 */</div><div class="line">	-moz-box-ordinal-group: 1;	  /* OLD - Firefox 19- */</div><div class="line">	-ms-flex-order: 1;			  /* TWEENER - IE 10 */</div><div class="line">	-webkit-order: 1;			   /* NEW - Chrome */</div><div class="line">	order: 1;					   /* NEW, Spec - Opera 12.1, Firefox 20+ */</div><div class="line">&#125;</div><div class="line">/* 子元素-显示在从左向右（从上向下）第2个位置，用于改变源文档顺序显示 */</div><div class="line">.flex-2 &#123;</div><div class="line">	-webkit-box-ordinal-group: 2;   /* OLD - iOS 6-, Safari 3.1-6 */</div><div class="line">	-moz-box-ordinal-group: 2;	  /* OLD - Firefox 19- */</div><div class="line">	-ms-flex-order: 2;			  /* TWEENER - IE 10 */</div><div class="line">	-webkit-order: 2;			   /* NEW - Chrome */</div><div class="line">	order: 2;					   /* NEW, Spec - Opera 12.1, Firefox 20+ */</div><div class="line">&#125;</div><div class="line">为了更好的兼容性，我们需要给容器声明flex-h/flex-v，而不是一般的flex：</div><div class="line">/* 父元素-flex容器 */</div><div class="line">.flex &#123;</div><div class="line">	display: box;			  /* OLD - Android 4.4- */</div><div class="line">	display: -webkit-box;	  /* OLD - iOS 6-, Safari 3.1-6 */</div><div class="line">	display: -moz-box;		 /* OLD - Firefox 19- (buggy but mostly works) */</div><div class="line">	display: -ms-flexbox;	  /* TWEENER - IE 10 */</div><div class="line">	display: -webkit-flex;	 /* NEW - Chrome */</div><div class="line">	display: flex;			 /* NEW, Spec - Opera 12.1, Firefox 20+ */</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>所以，建议在需要兼容Android时（2009版语法）采用flex-h/flex-v声明容器使用flex模式，在不需要兼容Android时（2012版语法）使用flex设置容器</p>
-<p>注意：上面给的代码并不是完全兼容各个高端浏览器的，但要比任何其它现有代码兼容性好，具体兼容性测试结果请看Demo</p>
-<h2 id="sass定义"><a href="#sass定义" class="headerlink" title="sass定义"></a>sass定义</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div></pre></td><td class="code"><pre><div class="line">@mixin flex&#123;</div><div class="line">  display: box;   /* old - Android 4.4- */</div><div class="line">  display: -webkit-box; /* old - IOS 6-, Safari 3.1-6 */</div><div class="line">  display: -moz-box;  /* old - Firefox 19 - (buggy but most works) */</div><div class="line">  display: -ms-flexbox;   /* IE 10 */</div><div class="line">  display: -webkit-flex;  /* New - Chrome */</div><div class="line">  display: flex;</div><div class="line">  -js-display: flex;</div><div class="line">&#125;</div><div class="line">@mixin flexDirection($type: row)&#123;</div><div class="line">  /* 09版 */</div><div class="line">  @if $type == &apos;row&apos;&#123;</div><div class="line">    -webkit-box-orient: horizontal;</div><div class="line">  &#125;@else if $type == &apos;row-reverse&apos;&#123;</div><div class="line">    -webkit-box-orient: horizontal;</div><div class="line">  &#125;@else if $type == &apos;column&apos;&#123;</div><div class="line">    -webkit-box-orient: vertical;</div><div class="line">  &#125;@else if $type == &apos;column-reverse&apos;&#123;</div><div class="line">    -webkit-box-orient: vertical;</div><div class="line">  &#125;</div><div class="line">  /* 12版 */</div><div class="line">  -webkit-flex-direction: $type;</div><div class="line">  -moz-flex-direction: $type;</div><div class="line">  -ms-flex-direction: $type;</div><div class="line">  -o-flex-direction: $type;</div><div class="line">  flex-direction: $type;</div><div class="line">  -js-flex-direction: $type;</div><div class="line">&#125;</div><div class="line">@mixin flexWrap($type: nowrap)&#123;</div><div class="line">  /* 09版 */</div><div class="line">  /*-webkit-box-lines: multiple;*/</div><div class="line">  /* 12版 */</div><div class="line">  -webkit-flex-wrap: $type;</div><div class="line">  -moz-flex-wrap: $type;</div><div class="line">  -ms-flex-wrap: $type;</div><div class="line">  -o-flex-wrap: $type;</div><div class="line">  flex-wrap: $type;</div><div class="line">  -js-flex-wrap: $type;</div><div class="line">&#125;</div><div class="line">@mixin justifyContent($type: flex-start)&#123;</div><div class="line">  /* 09版 */</div><div class="line">  //-webkit-box-pack: justify;</div><div class="line">  /* 12版 */</div><div class="line">  -webkit-justify-content: $type;</div><div class="line">  -moz-justify-content: $type;</div><div class="line">  -ms-justify-content: $type;</div><div class="line">  -o-justify-content: $type;</div><div class="line">  justify-content: $type;</div><div class="line">  /* 其它取值如下：</div><div class="line">      align-items	 主轴原点方向对齐</div><div class="line">      flex-end		主轴延伸方向对齐</div><div class="line">      space-between   等间距排列，首尾不留白</div><div class="line">      space-around	等间距排列，首尾留白</div><div class="line">   */</div><div class="line">  -js-justify-content: $type;</div><div class="line">&#125;</div><div class="line">@mixin alignItems($type: stretch)&#123;</div><div class="line">  /* 09版 */</div><div class="line">  //-webkit-box-align: center;</div><div class="line">  /* 12版 */</div><div class="line">  -webkit-align-items: $type;</div><div class="line">  -moz-align-items: $type;</div><div class="line">  -ms-align-items: $type;</div><div class="line">  -o-align-items: $type;</div><div class="line">  align-items: $type;</div><div class="line">  -js-align-items: $type;</div><div class="line">&#125;</div><div class="line">@mixin alignContent($type: stretch)&#123;</div><div class="line">  /* 09版 */</div><div class="line">  //-webkit-box-align: center;</div><div class="line">  /* 12版 */</div><div class="line">  -webkit-align-content: $type;</div><div class="line">  -moz-align-content: $type;</div><div class="line">  -ms-align-content: $type;</div><div class="line">  -o-align-content: $type;</div><div class="line">  align-content: $type;</div><div class="line">  -js-align-content: $type;</div><div class="line">&#125;</div><div class="line">@mixin flexOrder($val: 0)&#123;</div><div class="line">  -webkit-box-ordinal-group: $val;   /* OLD - iOS 6-, Safari 3.1-6 */</div><div class="line">  -moz-box-ordinal-group: $val;	  /* OLD - Firefox 19- */</div><div class="line">  -ms-flex-order: $val;			  /* TWEENER - IE 10 */</div><div class="line">  -webkit-order: $val;			   /* NEW - Chrome */</div><div class="line">  order: $val;					   /* NEW, Spec - Opera 12.1, Firefox 20+ */</div><div class="line">  -js-order: $val;</div><div class="line">&#125;</div><div class="line">@mixin flexGrow($val: 0)&#123;</div><div class="line">  -webkit-box-flex-grow: $val;	  /* OLD - iOS 6-, Safari 3.1-6 */</div><div class="line">  -moz-box-flex-grow: $val;		 /* OLD - Firefox 19- */</div><div class="line">  -webkit-flex-grow: $val;		  /* Chrome */</div><div class="line">  -ms-flex-grow: $val;			  /* IE 10 */</div><div class="line">  flex-grow: $val;				  /* NEW, Spec - Opera 12.1, Firefox 20+ */</div><div class="line">  -js-flex-grow: $val;</div><div class="line">&#125;</div><div class="line">@mixin flexShrink($val: 1)&#123;</div><div class="line">  -webkit-box-flex-shrink: $val;	  /* OLD - iOS 6-, Safari 3.1-6 */</div><div class="line">  -moz-box-flex-shrink: $val;		 /* OLD - Firefox 19- */</div><div class="line">  -webkit-flex-shrink: $val;		  /* Chrome */</div><div class="line">  -ms-flex-shrink: $val;			  /* IE 10 */</div><div class="line">  flex-shrink: $val;				  /* NEW, Spec - Opera 12.1, Firefox 20+ */</div><div class="line">  -js-flex-shrink: $val;</div><div class="line">&#125;</div><div class="line">//横向</div><div class="line">.#&#123;$namespace&#125;flex-h&#123;</div><div class="line">  @include flex();</div><div class="line">  @include flexDirection();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="W3C各个版本的flex"><a href="#W3C各个版本的flex" class="headerlink" title="W3C各个版本的flex"></a>W3C各个版本的flex</h2>
+        
+          <p class="article-more-link">
+            <a href="/2017/08/02/css/Flexbox布局兼容性总结/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/08/02/css/Flexbox布局兼容性总结/" data-id="cj5uo5quf0001p8qoxtfgsnxb" class="article-share-link">Share</a>
+      <a data-url="http://liaoyongfu.com/2017/08/02/css/Flexbox布局兼容性总结/" data-id="cj5uo5quf0001p8qoxtfgsnxb" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/flexbox/">flexbox</a></li></ul>
@@ -190,14 +177,15 @@
 <p>触发的事件顺序因浏览器而异，有些在dblclick之前接收到两个点击事件，而其他事件只有一个。</p>
 <p>双击灵敏度（双击检测到的点击之间的最大时间）可能因操作系统和浏览器而异，并且通常是用户可配置的。</p>
 <p>所以最好不要在同一个元素下绑定click和dbclick事件。</p>
-<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>方法一：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">var v_Result;  </div><div class="line">function OneClick(event) &#123;  </div><div class="line">    console.log(&quot;detail&quot;,event.detail);  </div><div class="line">    //if (event.detail == 2)   </div><div class="line">    //  return ;   </div><div class="line">    v_Result = false;  </div><div class="line">    window.setTimeout(check, 300);  </div><div class="line">    function check() &#123;  </div><div class="line">        if (v_Result != false) return;  </div><div class="line">        console.log(&quot;单击&quot;);  </div><div class="line">    &#125;  </div><div class="line">&#125;  </div><div class="line">function TwoClick() &#123;  </div><div class="line">    v_Result = true;  </div><div class="line">    console.log(&quot;双击&quot;);  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>方法二：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">var clickTimer = null;  </div><div class="line">function _click() &#123;  </div><div class="line">    if (clickTimer) &#123;  </div><div class="line">        console.log(&quot;clearTimeout&quot;, clickTimer);  </div><div class="line">        window.clearTimeout(clickTimer);  </div><div class="line">        clickTimer = null;  </div><div class="line">    &#125;  </div><div class="line">  </div><div class="line">    clickTimer = window.setTimeout(function() &#123;  </div><div class="line">        // your click process code here  </div><div class="line">        console.log(&quot;你单击了我&quot;);  </div><div class="line">    &#125;,  </div><div class="line">    300);  </div><div class="line">    console.log(&quot;setTimeout&quot;, clickTimer);  </div><div class="line">&#125;  </div><div class="line">  </div><div class="line">function _dblclick() &#123;  </div><div class="line">    console.log(&quot;dblclick&quot;);  </div><div class="line">    if (clickTimer) &#123;  </div><div class="line">        console.log(&quot;=clearTimeout&quot;, clickTimer);  </div><div class="line">        window.clearTimeout(clickTimer);  </div><div class="line">        clickTimer = null;  </div><div class="line">    &#125;  </div><div class="line">  </div><div class="line">    // your click process code here  </div><div class="line">    console.log(&quot;你双击了我&quot;);  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+        
+          <p class="article-more-link">
+            <a href="/2017/08/02/javascript/关于同一元素下dbClick触发两次click的问题/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/08/02/javascript/关于同一元素下dbClick触发两次click的问题/" data-id="cj5uo5qv5000ep8qozgx3m2ms" class="article-share-link">Share</a>
+      <a data-url="http://liaoyongfu.com/2017/08/02/javascript/关于同一元素下dbClick触发两次click的问题/" data-id="cj5uo5qv5000ep8qozgx3m2ms" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
@@ -244,87 +232,15 @@
 </li>
 </ul>
 <p>所有这些使用的模式都不同地定义函数上下文。接下来我们看看各种模式的区别。</p>
-<h3 id="函数调用模式"><a href="#函数调用模式" class="headerlink" title="函数调用模式"></a>函数调用模式</h3><p>定义：如果在调用时没有.操作，那么上下文可能为window。</p>
-<p>调用函数最直接的方法就是直接调用它：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var func = function()&#123;</div><div class="line">    //...</div><div class="line">&#125;;</div><div class="line">func();</div></pre></td></tr></table></figure>
-<p>这时的上下文（this）将会设置成javascript操作环境的全局变量，在浏览器中，它是window变量。</p>
-<p>我们再来看另一个例子：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var unicorns = &#123;</div><div class="line">  func: function() &#123; // ... &#125;</div><div class="line">&#125;;</div><div class="line">var fun = unicorns.func;</div><div class="line">fun();</div></pre></td></tr></table></figure>
-<p>你认为在func中的上下文为uniconrns对象？那是错误的，由于上下文时通过调用此函数时确定的，所以这里的上下文还是window。</p>
-<h3 id="方法调用模式"><a href="#方法调用模式" class="headerlink" title="方法调用模式"></a>方法调用模式</h3><p>定义：如果函数调用中有点操作，则上下文将会是一序列点中最右边的那个变量。</p>
-<p>如上面的例子中，如果我们直接调用unicorns.func()，上下文会是unicorns对象。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">var frog = &#123;</div><div class="line">  RUN_SOUND: &quot;POP!!&quot;,</div><div class="line">  run: function() &#123;</div><div class="line">    return this.RUN_SOUND;</div><div class="line">  &#125;</div><div class="line">&#125;;</div><div class="line">frog.run(); // returns &quot;POP!!&quot; since this points to the `frog` object.</div><div class="line">var runningFun = frog.run;</div><div class="line">runningFun(); // returns &quot;undefined&quot; since this points to the window</div></pre></td></tr></table></figure>
-<h3 id="构造函数模式"><a href="#构造函数模式" class="headerlink" title="构造函数模式"></a>构造函数模式</h3><p>定义：每次看到一个new函数名后，你this将指向一个新创建的新对象。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">function Wizard() &#123;</div><div class="line">  this.castSpell = function() &#123; return &quot;KABOOM&quot;; &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>直接调用它将会是window（因为它是一个函数调用），但是如果通过new来调用：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">function Wizard() &#123;</div><div class="line">  this.castSpell = function() &#123; return &quot;KABOOM&quot;; &#125;;</div><div class="line">&#125;</div><div class="line">var merlin = new Wizard(); // this is set to an empty object &#123;&#125;. Returns `this` implicitly.</div><div class="line">merlin.castSpell() // returns &quot;KABOOM&quot;;</div></pre></td></tr></table></figure>
-<p>这将会发生两件事：</p>
-<ul>
-<li><p>函数将会有一个指向当前对象的上下文this。</p>
-</li>
-<li><p>如果没有指定return或者这个函数返回一个非对象值，this将从这个函数返回。</p>
-</li>
-</ul>
-<h3 id="应用调用模式"><a href="#应用调用模式" class="headerlink" title="应用调用模式"></a>应用调用模式</h3><p>当你对函数有引用的时候，你可以通过两种方法来手动提供上下文：</p>
-<ul>
-<li><p>call</p>
-</li>
-<li><p>apply</p>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">function addAndSetX(a, b) &#123;</div><div class="line">  this.x += a + b;</div><div class="line">&#125;</div><div class="line">var obj1 = &#123; x: 1, y: 2 &#125;;</div><div class="line">addAndSetX.call(obj1, 1, 1); // this = obj1, obj1 after call = &#123; x: 3, y : 2 &#125;</div><div class="line">// It is the same as:</div><div class="line">// addAndSetX.apply(obj1, [1, 1]);</div></pre></td></tr></table></figure>
-<p>如果您需要调用从某个其他地方传递的函数（例如，作为参数到函数中）与某个上下文对象，这是非常方便的。它不是非常可用于异步回调，因为绑定与一个函数调用相结合。</p>
-<p>要使用回调设置正确的上下文，您可能需要另一种方便的技术 - 您可以从中创建有界函数。</p>
-<h3 id="绑定功能"><a href="#绑定功能" class="headerlink" title="绑定功能"></a>绑定功能</h3><p>有界函数是一个限定给定上下文的函数，这意味着无论你怎么调用它，它的上下文都是不变的。唯一例外是总是返回一个新上下文的new运算符。</p>
-<p>要是普通函数变成有界函数，应该使用bind方法，bind方法将您要将函数绑定到的上下文作为第一个参数。其余的参数是将始终传递给这样的函数的参数。</p>
-<p>结果返回有界函数。我们来看一个例子：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">function add(x, y) &#123;</div><div class="line">  this.result += x + y;</div><div class="line">&#125;</div><div class="line">var computation1 = &#123; result: 0 &#125;;</div><div class="line">var boundedAdd = add.bind(computation1);</div><div class="line">boundedAdd(1, 2); // `this` is set to `computation1`.</div><div class="line">                  //  computation1 after call: &#123; result: 3 &#125;</div><div class="line">var boundedAddPlusTwo = add.bind(computation1, 2);</div><div class="line">boundedAddPlusTwo(4); // `this` is set to `computation1`.</div><div class="line">                      // computation1 after call: &#123; result: 9 &#125;</div></pre></td></tr></table></figure>
-<p>被绑定了的函数甚至不能在通过call或apply改变上下文：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">var obj = &#123; boundedPlusTwo: boundedAddPlusTwo &#125;;</div><div class="line">obj.boundedPlusTwo(4); // `this` is set to `computation1`.</div><div class="line">                       // even though method is called on `obj`.</div><div class="line">                       // computation1 after call: &#123; result: 15 &#125;</div><div class="line">var computation2 = &#123; result: 0 &#125;;</div><div class="line">boundedAdd.call(computation2, 1, 2); // `this` is set to `computation1`.</div><div class="line">                                     // even though context passed to call is</div><div class="line">                                     // `computation2`</div><div class="line">                                     // computation1 after call: &#123; result: 18 &#125;</div></pre></td></tr></table></figure>
-<p>您现在已经掌握了关于JavaScript的知识，现在让我们来看react中的情况。</p>
-<h2 id="怎么绑定以及绑定什么"><a href="#怎么绑定以及绑定什么" class="headerlink" title="怎么绑定以及绑定什么"></a>怎么绑定以及绑定什么</h2><p>ECMAScript 2015（ECMAScript 6）引入了一种新的类语法，可用于创建React组件类。实际上，这个类语法是面向对象JavaScript 的旧的原型系统的语法糖。</p>
-<p>这意味着ES2015类中的函数上下文调用遵循与其余JavaScript相同的原则。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">class Foo &#123;</div><div class="line">  constructor() &#123;</div><div class="line">    this.x = 2;</div><div class="line">    this.y = 4;</div><div class="line">  &#125;</div><div class="line">  bar() &#123;</div><div class="line">    // ...</div><div class="line">  &#125;</div><div class="line">  baz() &#123;</div><div class="line">    // ...</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>与以下大致相同：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">function Foo() &#123;</div><div class="line">  this.x = 2;</div><div class="line">  this.y = 4;</div><div class="line">  this.bar = function() &#123; // ... &#125;;</div><div class="line">  this.baz = function() &#123; // ... &#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>记住这只是一个简化。在确定函数上下文调用的情况下，这个更复杂的逻辑遵循与上面的代码片段相同的原理。</p>
-<h3 id="React-createClass"><a href="#React-createClass" class="headerlink" title="React.createClass"></a>React.createClass</h3><p>在这个语法下，绑定问题是不存在的，在传递给对象的对象中定义的所有方法React.createClass将自动绑定到组件实例。这意味着你可以随时使用setState，访问props和state等等这些方法。</p>
-<p>尽管在99％的情况下可能完全可以接受，但它限制了您对任意设置上下文的能力 - 这可能是更复杂的代码库中的一个大问题。</p>
-<h3 id="ECMAScript-2015-classes"><a href="#ECMAScript-2015-classes" class="headerlink" title="ECMAScript 2015 classes"></a>ECMAScript 2015 classes</h3><p>在ECMAScript 2015 classes写法中，你需要手动绑定方法。</p>
-<p>以下是React库中是可以识别为方法调用模式执行调用：</p>
-<ul>
-<li><p>组件生命周期方法。它仅仅通过component.componentDidUpdate(…)方式调用（因此，this已经正确绑定到组件实例本身）。</p>
-</li>
-<li><p>render方法。它也是被识别为方法调用模式执行调用。大多数的非事件处理函数在render方法中调用，它已经被自动绑定到组件实例，所以你可以放心使用。</p>
-</li>
-</ul>
-<p>但是，传递给事件处理属性的函数可能有许多来源，甚至可能通过顶级组件的属性从非React级别传递给他们。</p>
-<p>在React.createClassReact假定它们来自您的组件并自动绑定它们。但是在ES2015 classes中你有自由。在引擎中，它们被以函数调用模式调用。</p>
-<p>这意味这，在默认情况下，你无法在事件处理程序中读取组件属性、状态和组件的方法，为此，你需要明确地绑定他们。</p>
-<p>绑定事件处理程序的最佳位置是构造函数：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">class InputExample extends React.Component &#123;</div><div class="line">  constructor(props) &#123;</div><div class="line">    super(props);</div><div class="line">    this.state = &#123; text: &apos;&apos; &#125;;</div><div class="line">    this.change = this.change.bind(this);</div><div class="line">  &#125;</div><div class="line">  change(ev) &#123;</div><div class="line">    this.setState(&#123; text: ev.target.value &#125;);</div><div class="line">  &#125;</div><div class="line">  render() &#123;</div><div class="line">    let &#123; text &#125; = this.state;</div><div class="line">    return (&lt;input type=&quot;text&quot; value=&#123;text&#125; onChange=&#123;this.change&#125; /&gt;);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这样你的事件处理程序的上下文将会绑定到组件实例中。</p>
-<h3 id="类属性"><a href="#类属性" class="headerlink" title="类属性"></a>类属性</h3><p>有一个实验功能，称为类属性，可以帮助您明确避免绑定方法。它是用于在构造函数中定义字段和函数的语法糖。看起来像这样：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">class InputExample extends React.Component &#123;</div><div class="line">  state = &#123; text: &apos;&apos; &#125;;</div><div class="line">  // ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>并编译成以下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">class InputExample extends React.Component &#123;</div><div class="line">  constructor(...arguments) &#123;</div><div class="line">    super(...arguments);</div><div class="line">    this.state = &#123; text: &apos;&apos; &#125;;</div><div class="line">  &#125;</div><div class="line">  // ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>那么怎么定义一个方法呢？</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">class InputExample extends React.Component &#123;</div><div class="line">  state = &#123; text: &apos;&apos; &#125;;</div><div class="line">  change = function(ev) &#123;</div><div class="line">    this.setState(&#123; text: ev.target.value &#125;);</div><div class="line">  &#125;;</div><div class="line">  // ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>所以现在，你得到一个等同于以下类：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">class InputExample extends React.Component &#123;</div><div class="line">  constructor(...arguments) &#123;</div><div class="line">    super(...arguments);</div><div class="line">    this.state = &#123; text: &apos;&apos; &#125;;</div><div class="line">    this.change = function(ev) &#123;</div><div class="line">      this.setState(&#123; text: ev.target.value &#125;);</div><div class="line">    &#125;;</div><div class="line">  &#125;</div><div class="line">  // ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>但是这样有一个问题，this.change函数上下文还是错误的，所以我们要结合箭头函数：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">class InputExample extends React.Component &#123;</div><div class="line">  state = &#123; text: &apos;&apos; &#125;;</div><div class="line">  change = ev =&gt; this.setState(&#123;text: ev.target.value&#125;);</div><div class="line">  render() &#123;</div><div class="line">    let &#123;text&#125; = this.state;</div><div class="line">    return (&lt;input type=&quot;text&quot; value=&#123;text&#125; onChange=&#123;this.change&#125; /&gt;);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>该解决方案的缺点是类属性仍处于实验阶段。这意味着此功能可以在ECMAScript 2016（也称为ECMAScript 7或ES7）的后续迭代中被删除，而不会发出警告。</p>
-<h3 id="createClass以及class语法编译完的不同"><a href="#createClass以及class语法编译完的不同" class="headerlink" title="createClass以及class语法编译完的不同"></a>createClass以及class语法编译完的不同</h3><p>我们先来看类写法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">class Todo extends Component&#123;</div><div class="line">    handleClick()&#123;</div><div class="line">        console.info(this);</div><div class="line">    &#125;</div><div class="line">    method()&#123;</div><div class="line">        console.info(this);</div><div class="line">    &#125;</div><div class="line">    render()&#123;</div><div class="line">        this.method();</div><div class="line">        return (</div><div class="line">            &lt;div&gt;</div><div class="line">                &lt;p onClick=&#123;this.handleClick&#125;&gt;Hello&lt;/p&gt;</div><div class="line">            &lt;/div&gt;</div><div class="line">        )</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>编译完：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">var Todo = function (_Component) &#123;</div><div class="line">    _inherits(Todo, _Component);</div><div class="line">    function Todo() &#123;</div><div class="line">        _classCallCheck(this, Todo);</div><div class="line">        return _possibleConstructorReturn(this, _Component.apply(this, arguments));</div><div class="line">    &#125;</div><div class="line">    Todo.prototype.handleClick = function handleClick() &#123;</div><div class="line">        console.info(this);</div><div class="line">    &#125;;</div><div class="line">    Todo.prototype.method = function method() &#123;</div><div class="line">        console.info(this);</div><div class="line">    &#125;;</div><div class="line">    Todo.prototype.render = function render() &#123;</div><div class="line">        this.method();</div><div class="line">        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(</div><div class="line">            &apos;div&apos;,</div><div class="line">            null,</div><div class="line">            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(</div><div class="line">                &apos;p&apos;,</div><div class="line">                &#123; onClick: this.handleClick &#125;,</div><div class="line">                &apos;Hello&apos;</div><div class="line">            )</div><div class="line">        );</div><div class="line">    &#125;;</div><div class="line">    return Todo;</div><div class="line">&#125;(__WEBPACK_IMPORTED_MODULE_0_react__[&quot;Component&quot;]);</div></pre></td></tr></table></figure>
-<p>this.handleClick被放在{onClick: this.handleClick}中，所以当被调用的时候会被识别为函数调用模式，所以这时的上下文是null（为什么不是window或其他的？？？）</p>
-
+        
+          <p class="article-more-link">
+            <a href="/2017/08/02/react/React要手动绑定方法的原因/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/08/02/react/React要手动绑定方法的原因/" data-id="cj5uo5qus0008p8qox3hasofw" class="article-share-link">Share</a>
+      <a data-url="http://liaoyongfu.com/2017/08/02/react/React要手动绑定方法的原因/" data-id="cj5uo5qus0008p8qox3hasofw" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
@@ -359,36 +275,15 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="获取子组件的方法"><a href="#获取子组件的方法" class="headerlink" title="获取子组件的方法"></a>获取子组件的方法</h2><p>可以通过递归this.props.children中得到</p>
-<h2 id="获取父组件的方法"><a href="#获取父组件的方法" class="headerlink" title="获取父组件的方法"></a>获取父组件的方法</h2><p>方法一：可以通过react内部私有函数this._reactInternalInstance._currentElement._owner._instance获取</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">var Parent = React.createClass(&#123;</div><div class="line">  render() &#123;</div><div class="line">      return &lt;Child v=&quot;test&quot; /&gt;;</div><div class="line">  &#125;,</div><div class="line">  doAThing() &#123;</div><div class="line">    console.log(&quot;I&apos;m the parent, doing a thing.&quot;, this.props.testing);</div><div class="line">  &#125;</div><div class="line">&#125;);</div><div class="line">var Child = React.createClass(&#123;</div><div class="line">  render() &#123;</div><div class="line">    return &lt;button onClick=&#123;this.onClick&#125;&gt;&#123;this.props.v&#125;&lt;/button&gt;</div><div class="line">  &#125;,</div><div class="line">  onClick() &#123;</div><div class="line">    var parent = this._reactInternalInstance._currentElement._owner._instance;</div><div class="line">    console.log(&quot;parent:&quot;, parent);</div><div class="line">    parent.doAThing();</div><div class="line">  &#125;</div><div class="line">&#125;);</div><div class="line">ReactDOM.render(&lt;Parent testing=&#123;true&#125; /&gt;, container);</div></pre></td></tr></table></figure>
-<p>但是这种方法是不推荐的。</p>
-<p>方法二：通过属性传递给子组件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">class Parent extends React.Component &#123;</div><div class="line">    constructor(props) &#123;</div><div class="line">        super(props)</div><div class="line">        this.fn = this.fn.bind(this)</div><div class="line">    &#125;</div><div class="line">    fn() &#123;</div><div class="line">        console.log(&apos;parent&apos;)</div><div class="line">    &#125;</div><div class="line">    render() &#123;</div><div class="line">        return &lt;Child fn=&#123;this.fn&#125; /&gt;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">const Child = (&#123; fn &#125;) =&gt; &lt;button onClick=&#123;fn&#125;&gt;Click me!&lt;/button&gt;</div></pre></td></tr></table></figure>
-<p>但是这种只在Child组件在Parent组件中时才可以用。</p>
-<p>方法三：使用上下文（没有直接的父/子关系）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">class Parent extends React.Component &#123;</div><div class="line">    constructor(props) &#123;</div><div class="line">        super(props)</div><div class="line">        this.fn = this.fn.bind(this)</div><div class="line">    &#125;</div><div class="line">    getChildContext() &#123;</div><div class="line">        return &#123;</div><div class="line">            fn: this.fn,</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    fn() &#123;</div><div class="line">        console.log(&apos;parent&apos;)</div><div class="line">    &#125;</div><div class="line">    render() &#123;</div><div class="line">        return &lt;Child fn=&#123;this.fn&#125; /&gt;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">Parent.childContextTypes = &#123;</div><div class="line">    fn: React.PropTypes.func,</div><div class="line">&#125;</div><div class="line">const Child = (props, &#123; fn &#125;) =&gt; &lt;button onClick=&#123;fn&#125;&gt;Click me!&lt;/button&gt;</div><div class="line">Child.contextTypes = &#123;</div><div class="line">    fn: React.PropTypes.func,</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="给子组件（没有直接父-子关系）添加属性"><a href="#给子组件（没有直接父-子关系）添加属性" class="headerlink" title="给子组件（没有直接父/子关系）添加属性"></a>给子组件（没有直接父/子关系）添加属性</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">return React.cloneElement(this.props.children, &#123;/*要添加的属性*/&#125;)</div></pre></td></tr></table></figure>
-<h2 id="React关于子组件的API"><a href="#React关于子组件的API" class="headerlink" title="React关于子组件的API"></a>React关于子组件的API</h2><h3 id="React-chlidren-map"><a href="#React-chlidren-map" class="headerlink" title="React.chlidren.map"></a>React.chlidren.map</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">React.Children.map(children, function[(thisArg)])</div></pre></td></tr></table></figure>
-<p>对包含在 children 中的每个直接子元素调用一个函数，使用 this 设置 thisArg 。 如果 children 是一个键片段（keyed fragment）或数组，它将被遍历：该函数永远不会传递容器对象（container objects）。 如果 children 为 null 或 undefined ，返回 null 或 undefined，而不是一个数组。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">import React from &apos;react&apos;;</div><div class="line">const Salmonize = (&#123; children &#125;) =&gt; (</div><div class="line">  &lt;div&gt;</div><div class="line">    &#123;React.Children.map(children, child =&gt; (</div><div class="line">      React.cloneElement(child, &#123;</div><div class="line">        style: &#123;</div><div class="line">          backgroundColor: &apos;salmon&apos;,</div><div class="line">          color: &apos;seagreen&apos;,</div><div class="line">        &#125;</div><div class="line">      &#125;)</div><div class="line">    ))&#125;</div><div class="line">  &lt;/div&gt;</div><div class="line">);</div><div class="line">const SalmonBlog = (&#123; title, posts &#125;) =&gt; (</div><div class="line">  &lt;div&gt;</div><div class="line">    &lt;Salmonize&gt;</div><div class="line">      &lt;NavBar title=&#123;title&#125; /&gt;</div><div class="line">    &lt;/Salmonize&gt;</div><div class="line">    &#123;posts.map(post =&gt; (</div><div class="line">      &lt;Post key=&#123;post.id&#125;&gt;</div><div class="line">        &lt;Salmonize&gt;</div><div class="line">          &lt;PostHeader title=&#123;post.title&#125; /&gt;</div><div class="line">        &lt;/Salmonize&gt;</div><div class="line">        &lt;PostBody text=&#123;post.text&#125; /&gt;</div><div class="line">      &lt;/Post&gt;</div><div class="line">    ))&#125;</div><div class="line">  &lt;/div&gt;</div><div class="line">);</div></pre></td></tr></table></figure>
-<p>在上面这个例子中，Salmonize组件并不需要在乎谁是它的子组件，它通过遍历克隆每个子组件，通过React.cloneElement给子组件增加属性。</p>
-<p>在React中编写真正可重复使用的组件肯定有点棘手，如果你遇到这样的麻烦，那么这种map和clone方法可以帮助到你。</p>
-<h3 id="React-children-forEach"><a href="#React-children-forEach" class="headerlink" title="React.children.forEach"></a>React.children.forEach</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">React.Children.forEach(children, function[(thisArg)])</div></pre></td></tr></table></figure>
-<p>类似React.children.map，但是没有返回值。</p>
-<h3 id="React-Children-count"><a href="#React-Children-count" class="headerlink" title="React.Children.count"></a>React.Children.count</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">React.Children.count(children)</div></pre></td></tr></table></figure>
-<p>返回 children 中的组件总数，等于传递给 map 或 forEach 的回调将被调用的次数。</p>
-<h3 id="React-Children-only"><a href="#React-Children-only" class="headerlink" title="React.Children.only"></a>React.Children.only</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">React.Children.only(children)</div></pre></td></tr></table></figure>
-<p>返回 children 中的唯一子集。否则抛出异常。当您想要确保组件只有一个子级时，这可能会派上用场，如果不满足此条件，则会抛出错误。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">export default React.createClass(&#123;</div><div class="line">  // ...</div><div class="line">  render: function() &#123;</div><div class="line">    const &#123;name, selectedValue, onChange, children&#125; = this.props;</div><div class="line">    const renderedChildren = children(radio(name, selectedValue, onChange));</div><div class="line">    return renderedChildren &amp;&amp; React.Children.only(renderedChildren);</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<h3 id="React-Children-toArray"><a href="#React-Children-toArray" class="headerlink" title="React.Children.toArray"></a>React.Children.toArray</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">React.Children.toArray(children)</div></pre></td></tr></table></figure>
-<p>将 children 不透明数据结构作为一个平面数组返回，并且 key 分配给每个子集。 如果你想在渲染方法中操作children集合，特别是如果你想在传递它之前重新排序或切割 this.props.children ，这将非常有用。</p>
-<p>该方法将children组件的支持转换为纯JavaScript数组，这可以使您比React.Children.map提供更多的灵活性。React.Children.toArray最近在我想要渲染一个分隔符的列表中时，它们之间散布着很方便。这导致我创建一个完成这个的组件。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">import React from &apos;react&apos;;</div><div class="line">const IntersperseDividers = (&#123; children &#125;) =&gt; (</div><div class="line">  &lt;div&gt;</div><div class="line">    &#123;React.Children.toArray(children).reduce((elements, child, i, array) =&gt; &#123;</div><div class="line">      elements.push(child);</div><div class="line">      if (i &lt; array.length - 1) &#123;</div><div class="line">        elements.push(&lt;hr key=&#123;`$&#123;i&#125;--divider`&#125; /&gt;);</div><div class="line">      &#125;</div><div class="line">      return elements;</div><div class="line">    &#125;, [])&#125;</div><div class="line">  &lt;/div&gt;</div><div class="line">);</div><div class="line">const List = (&#123; data &#125;) =&gt; (</div><div class="line">  &lt;IntersperseDividers&gt;</div><div class="line">    &#123;data.map((item, i) =&gt; (</div><div class="line">      &lt;div key=&#123;i&#125;&gt;</div><div class="line">        &#123;item.value&#125;</div><div class="line">      &lt;/div&gt;</div><div class="line">    ))&#125;</div><div class="line">  &lt;/IntersperseDividers&gt;</div><div class="line">);</div></pre></td></tr></table></figure>
-
+        
+          <p class="article-more-link">
+            <a href="/2017/08/02/react/react获取父组件或子组件属性/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/08/02/react/react获取父组件或子组件属性/" data-id="cj5uo5quz000bp8qo68vutxs8" class="article-share-link">Share</a>
+      <a data-url="http://liaoyongfu.com/2017/08/02/react/react获取父组件或子组件属性/" data-id="cj5uo5quz000bp8qo68vutxs8" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
@@ -417,7 +312,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/08/02/javascript/for对比forEach/" data-id="cj5uo5qv7000gp8qow9fh3vm5" class="article-share-link">Share</a>
+      <a data-url="http://liaoyongfu.com/2017/08/02/javascript/for对比forEach/" data-id="cj5uo5qv7000gp8qow9fh3vm5" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -490,7 +385,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/08/02/javascript/ES6的坑/" data-id="cj5uo5qvd000lp8qoxtaawnaj" class="article-share-link">Share</a>
+      <a data-url="http://liaoyongfu.com/2017/08/02/javascript/ES6的坑/" data-id="cj5uo5qvd000lp8qoxtaawnaj" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -533,7 +428,7 @@ h1{
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/08/02/css/使用css视口单位/" data-id="cj5uo5qum0004p8qoqgopq9ad" class="article-share-link">Share</a>
+      <a data-url="http://liaoyongfu.com/2017/08/02/css/使用css视口单位/" data-id="cj5uo5qum0004p8qoqgopq9ad" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -564,7 +459,7 @@ h1{
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/08/02/css/HTML不同空格的特性和表现研究/" data-id="cj5uo5qul0003p8qo5aixg21b" class="article-share-link">Share</a>
+      <a data-url="http://liaoyongfu.com/2017/08/02/css/HTML不同空格的特性和表现研究/" data-id="cj5uo5qul0003p8qo5aixg21b" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -690,7 +585,7 @@ ExtractTextPlugin.extract({
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/08/02/webpack/迁移到webpack2/" data-id="cj5uo5qvu000xp8qoj347641k" class="article-share-link">Share</a>
+      <a data-url="http://liaoyongfu.com/2017/08/02/webpack/迁移到webpack2/" data-id="cj5uo5qvu000xp8qoj347641k" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -714,7 +609,7 @@ ExtractTextPlugin.extract({
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flexbox/">flexbox</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li></ul>
     </div>
@@ -724,7 +619,7 @@ ExtractTextPlugin.extract({
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
+    <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
       <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/flexbox/" style="font-size: 10px;">flexbox</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/react/" style="font-size: 20px;">react</a>
     </div>
@@ -743,7 +638,7 @@ ExtractTextPlugin.extract({
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
         
@@ -779,8 +674,8 @@ ExtractTextPlugin.extract({
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2017 John Doe<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      &copy; 2017 liaoyf<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>

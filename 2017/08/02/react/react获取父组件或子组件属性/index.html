@@ -3,21 +3,22 @@
 <head>
   <meta charset="utf-8">
   
-  <title>React获取父组件或子组件属性 | Hexo</title>
+  <title>React获取父组件或子组件属性 | liaoyf的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="获取子组件的方法可以通过递归this.props.children中得到 获取父组件的方法方法一：可以通过react内部私有函数this._reactInternalInstance._currentElement._owner._instance获取 12345678910111213141516171819var Parent = React.createClass(&amp;#123;  rende">
+  <meta name="description" content="获取子组件的方法可以通过递归this.props.children中得到">
 <meta name="keywords" content="react">
 <meta property="og:type" content="article">
 <meta property="og:title" content="React获取父组件或子组件属性">
-<meta property="og:url" content="http://yoursite.com/2017/08/02/react/react获取父组件或子组件属性/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="获取子组件的方法可以通过递归this.props.children中得到 获取父组件的方法方法一：可以通过react内部私有函数this._reactInternalInstance._currentElement._owner._instance获取 12345678910111213141516171819var Parent = React.createClass(&amp;#123;  rende">
-<meta property="og:updated_time" content="2017-08-02T06:27:25.718Z">
+<meta property="og:url" content="http://liaoyongfu.com/2017/08/02/react/react获取父组件或子组件属性/index.html">
+<meta property="og:site_name" content="liaoyf的博客">
+<meta property="og:description" content="获取子组件的方法可以通过递归this.props.children中得到">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-08-02T07:09:24.511Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React获取父组件或子组件属性">
-<meta name="twitter:description" content="获取子组件的方法可以通过递归this.props.children中得到 获取父组件的方法方法一：可以通过react内部私有函数this._reactInternalInstance._currentElement._owner._instance获取 12345678910111213141516171819var Parent = React.createClass(&amp;#123;  rende">
+<meta name="twitter:description" content="获取子组件的方法可以通过递归this.props.children中得到">
   
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="liaoyf的博客" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -38,7 +39,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
+        <a href="/" id="logo">liaoyf的博客</a>
       </h1>
       
     </div>
@@ -53,12 +54,12 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://liaoyongfu.com"></form>
       </div>
     </div>
   </div>
@@ -87,6 +88,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="获取子组件的方法"><a href="#获取子组件的方法" class="headerlink" title="获取子组件的方法"></a>获取子组件的方法</h2><p>可以通过递归this.props.children中得到</p>
+<a id="more"></a>
 <h2 id="获取父组件的方法"><a href="#获取父组件的方法" class="headerlink" title="获取父组件的方法"></a>获取父组件的方法</h2><p>方法一：可以通过react内部私有函数this._reactInternalInstance._currentElement._owner._instance获取</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">var Parent = React.createClass(&#123;</div><div class="line">  render() &#123;</div><div class="line">      return &lt;Child v=&quot;test&quot; /&gt;;</div><div class="line">  &#125;,</div><div class="line">  doAThing() &#123;</div><div class="line">    console.log(&quot;I&apos;m the parent, doing a thing.&quot;, this.props.testing);</div><div class="line">  &#125;</div><div class="line">&#125;);</div><div class="line">var Child = React.createClass(&#123;</div><div class="line">  render() &#123;</div><div class="line">    return &lt;button onClick=&#123;this.onClick&#125;&gt;&#123;this.props.v&#125;&lt;/button&gt;</div><div class="line">  &#125;,</div><div class="line">  onClick() &#123;</div><div class="line">    var parent = this._reactInternalInstance._currentElement._owner._instance;</div><div class="line">    console.log(&quot;parent:&quot;, parent);</div><div class="line">    parent.doAThing();</div><div class="line">  &#125;</div><div class="line">&#125;);</div><div class="line">ReactDOM.render(&lt;Parent testing=&#123;true&#125; /&gt;, container);</div></pre></td></tr></table></figure>
 <p>但是这种方法是不推荐的。</p>
@@ -116,7 +118,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/08/02/react/react获取父组件或子组件属性/" data-id="cj5uo5quz000bp8qo68vutxs8" class="article-share-link">Share</a>
+      <a data-url="http://liaoyongfu.com/2017/08/02/react/react获取父组件或子组件属性/" data-id="cj5uo5quz000bp8qo68vutxs8" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
@@ -128,7 +130,7 @@
 <nav id="article-nav">
   
     <a href="/2017/08/02/react/React要手动绑定方法的原因/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
+      <strong class="article-nav-caption">Récent</strong>
       <div class="article-nav-title">
         
           React要手动绑定方法的原因
@@ -138,7 +140,7 @@
   
   
     <a href="/2017/08/02/javascript/for对比forEach/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
+      <strong class="article-nav-caption">Ancien</strong>
       <div class="article-nav-title"></div>
     </a>
   
@@ -156,7 +158,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flexbox/">flexbox</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li></ul>
     </div>
@@ -166,7 +168,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
+    <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
       <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/flexbox/" style="font-size: 10px;">flexbox</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/react/" style="font-size: 20px;">react</a>
     </div>
@@ -185,7 +187,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
         
@@ -221,8 +223,8 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2017 John Doe<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      &copy; 2017 liaoyf<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>

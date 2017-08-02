@@ -3,21 +3,22 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Flexbox布局兼容性总结 | Hexo</title>
+  <title>Flexbox布局兼容性总结 | liaoyf的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="写在前面IE9不支持…试了一下flexibility库，发现支持还好，就是嵌套的时候会有问题，因为它是通过定位的方式，暂时无解…… 入门教程传送门 W3C各个版本的flex2009 version标志：display: box; or a property that is box-{*} (eg. box-pack) 2011 version标志：display: flexbox; or the">
+  <meta name="description" content="写在前面IE9不支持…试了一下flexibility库，发现支持还好，就是嵌套的时候会有问题，因为它是通过定位的方式，暂时无解…… 入门教程传送门 W3C各个版本的flex">
 <meta name="keywords" content="css,flexbox">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Flexbox布局兼容性总结">
-<meta property="og:url" content="http://yoursite.com/2017/08/02/css/Flexbox布局兼容性总结/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="写在前面IE9不支持…试了一下flexibility库，发现支持还好，就是嵌套的时候会有问题，因为它是通过定位的方式，暂时无解…… 入门教程传送门 W3C各个版本的flex2009 version标志：display: box; or a property that is box-{*} (eg. box-pack) 2011 version标志：display: flexbox; or the">
-<meta property="og:updated_time" content="2017-08-02T06:37:26.049Z">
+<meta property="og:url" content="http://liaoyongfu.com/2017/08/02/css/Flexbox布局兼容性总结/index.html">
+<meta property="og:site_name" content="liaoyf的博客">
+<meta property="og:description" content="写在前面IE9不支持…试了一下flexibility库，发现支持还好，就是嵌套的时候会有问题，因为它是通过定位的方式，暂时无解…… 入门教程传送门 W3C各个版本的flex">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-08-02T07:09:07.962Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Flexbox布局兼容性总结">
-<meta name="twitter:description" content="写在前面IE9不支持…试了一下flexibility库，发现支持还好，就是嵌套的时候会有问题，因为它是通过定位的方式，暂时无解…… 入门教程传送门 W3C各个版本的flex2009 version标志：display: box; or a property that is box-{*} (eg. box-pack) 2011 version标志：display: flexbox; or the">
+<meta name="twitter:description" content="写在前面IE9不支持…试了一下flexibility库，发现支持还好，就是嵌套的时候会有问题，因为它是通过定位的方式，暂时无解…… 入门教程传送门 W3C各个版本的flex">
   
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="liaoyf的博客" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -38,7 +39,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
+        <a href="/" id="logo">liaoyf的博客</a>
       </h1>
       
     </div>
@@ -53,12 +54,12 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://liaoyongfu.com"></form>
       </div>
     </div>
   </div>
@@ -88,7 +89,8 @@
       
         <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>IE9不支持…试了一下flexibility库，发现支持还好，就是嵌套的时候会有问题，因为它是通过定位的方式，暂时无解……</p>
 <h2 id="入门教程"><a href="#入门教程" class="headerlink" title="入门教程"></a>入门教程</h2><p><a href="http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html" target="_blank" rel="external">传送门</a></p>
-<h2 id="W3C各个版本的flex"><a href="#W3C各个版本的flex" class="headerlink" title="W3C各个版本的flex"></a>W3C各个版本的flex</h2><h3 id="2009-version"><a href="#2009-version" class="headerlink" title="2009 version"></a>2009 version</h3><p>标志：display: box; or a property that is box-{*} (eg. box-pack)</p>
+<h2 id="W3C各个版本的flex"><a href="#W3C各个版本的flex" class="headerlink" title="W3C各个版本的flex"></a>W3C各个版本的flex</h2><a id="more"></a>
+<h3 id="2009-version"><a href="#2009-version" class="headerlink" title="2009 version"></a>2009 version</h3><p>标志：display: box; or a property that is box-{*} (eg. box-pack)</p>
 <h3 id="2011-version"><a href="#2011-version" class="headerlink" title="2011 version"></a>2011 version</h3><p>标志：display: flexbox; or the flex() function or flex-pack property</p>
 <h3 id="2012-version"><a href="#2012-version" class="headerlink" title="2012 version"></a>2012 version</h3><p>标志：display: flex/inline-flex; and flex-{*} properties</p>
 <h3 id="2014-version"><a href="#2014-version" class="headerlink" title="2014 version"></a>2014 version</h3><p>新增了对flex项z-index的规定</p>
@@ -111,7 +113,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/08/02/css/Flexbox布局兼容性总结/" data-id="cj5uo5quf0001p8qoxtfgsnxb" class="article-share-link">Share</a>
+      <a data-url="http://liaoyongfu.com/2017/08/02/css/Flexbox布局兼容性总结/" data-id="cj5uo5quf0001p8qoxtfgsnxb" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/flexbox/">flexbox</a></li></ul>
@@ -123,7 +125,7 @@
 <nav id="article-nav">
   
     <a href="/2017/08/02/react/react文档-css动画/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
+      <strong class="article-nav-caption">Récent</strong>
       <div class="article-nav-title">
         
           react文档-css动画
@@ -133,7 +135,7 @@
   
   
     <a href="/2017/08/02/javascript/关于同一元素下dbClick触发两次click的问题/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
+      <strong class="article-nav-caption">Ancien</strong>
       <div class="article-nav-title">关于同一元素下dbClick触发两次click的问题</div>
     </a>
   
@@ -151,7 +153,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flexbox/">flexbox</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li></ul>
     </div>
@@ -161,7 +163,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
+    <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
       <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/flexbox/" style="font-size: 10px;">flexbox</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/react/" style="font-size: 20px;">react</a>
     </div>
@@ -180,7 +182,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
         
@@ -216,8 +218,8 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2017 John Doe<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      &copy; 2017 liaoyf<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
