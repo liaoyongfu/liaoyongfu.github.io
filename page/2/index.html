@@ -317,6 +317,225 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2017/08/02/webpack/迁移到webpack2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liaoyf">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="liaoyf的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/02/webpack/迁移到webpack2/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-02T11:44:45+08:00">
+                2017-08-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="迁移到webpack2"><a href="#迁移到webpack2" class="headerlink" title="迁移到webpack2"></a>迁移到webpack2</h1><p>Webpack is on the verge of having its latest major version released, and it’s expected to drop very soon. However, the main thing holding the release back is documentation, and the code is mostly written. I recently took the time to update our work project from Webpack 1 to 2, and thought I’d document the steps taken for anyone else who wants to make the move.</p>
+<p>You can also check out <a href="https://webpack.js.org" target="_blank" rel="external">the migration guide on the Webpack documentation</a>.</p>
+<p><strong>Install the webpack2</strong></p>
+<p>The first thing to do is install the latest version. Because it’s not a stable release, you have to specify the exact beta version you’d like. At the time of writing it’s 2.1.0-beta.25:</p>
+<pre><code>npm install --save-dev webpack@2.1.0-beta.25
+</code></pre><p>If you’re using any other Webpack plugins, be aware that they might need updating. For example, the Extract Text Plugin has a v2 in beta also:</p>
+<pre><code>npm install --save-dev extract-text-webpack-plugin@2.0.0-beta.4
+</code></pre><p><strong>module.loaders =&gt; module.rules</strong></p>
+<p>This is not a breaking change because module.loaders will continue to be supported, but in the future it will be deprecated in favour of module.rules. This is just an easy renaming step.</p>
+<pre><code>// before
+modules: {
+  loaders: {...}
+}
+
+// after
+modules: {
+  rules: {...}
+}
+</code></pre><p><strong>resolve.modulesDirectories =&gt; resolve.modules</strong></p>
+<p>Another renaming step, the resolve options have been renamed:</p>
+<pre><code>// before
+resolve: {
+  modulesDirectories: [...],
+}
+
+// after
+resolve: {
+  modules: [...],
+}
+</code></pre><p><strong>No webpack.optimize.OccurenceOrderPlugin</strong></p>
+<p>It’s now included by default, so there is no need to have this in our config.</p>
+<p><strong>Configuring loaders</strong></p>
+<p>At work we’re using postcss and postcss-loader to load our CSS through Webpack. The loader used to expect a top level postcss key in the Webpack config. As of Webpack 2 this is no longer allowed; we can instead define an options key when we configure the loader. This replaces the query option from Webpack 1. Any plugin that looked for top level configuration will have to be swapped to this style.</p>
+<pre><code>// before, in Webpack top level
+postcss: {
+  plugins: ...
+}
+
+// after
+module: {
+  rules: [{
+    test: /\.scss$/,
+    use: [
+      {
+        loader: &apos;postcss-loader&apos;,
+        options: {
+          plugins: ...
+        }
+      },
+      &apos;sass-loader&apos;
+    ]
+  }]
+}
+</code></pre><p><strong>ExtractTextPlugin changes</strong></p>
+<p>The above change to loader configuration also makes it way easier to configure multiple loaders; previously it would only be possible to pass an array of loaders in string form to some plugins, such as ExtractTextPlugin:</p>
+<pre><code>// Webpack 1
+ExtractTextPlugin.extract(
+  &apos;style-loader&apos;,
+  &apos;css-loader!postcss-loader!sass-loader&apos;
+);
+</code></pre><p>This quickly got very hard to work with if you had to pass options:</p>
+<pre><code>// Webpack 1
+ExtractTextPlugin.extract(
+  &apos;style-loader&apos;,
+  &apos;css-loader?modules-true!postcss-loader!sass-loader&apos;
+);
+</code></pre><p>But now Webpack 2 can deal with arrays of objects to configure loaders. We can replace the above with:</p>
+<pre><code>// Webpack 2
+var loaders = [
+  {
+    loader: &apos;css-loader&apos;,
+    options: {
+      modules: true
+    }
+  },
+  {
+    loader: &apos;postcss-loader&apos;
+  },
+  {
+    loader: &apos;sass-loader&apos;
+  }
+]
+</code></pre><p>Whereas in Webpack 1 we used the key query for configuring loaders, we now use options. ExtractTextPlugin can now take this array, rather than only allowing the string form:</p>
+<pre><code>// Webpack 2
+ExtractTextPlugin.extract({
+  fallbackLoader: &apos;style-loader&apos;,
+  loader: loaders,
+})
+</code></pre><p><strong>Stop Babel from compiling ES2015 modules</strong></p>
+<p>Webpack 1 wasn’t able to parse ES2015 modules, so Babel would convert them into CommonJS. Webpack 2 can parse ES2015 modules, and is able to eliminate dead code based on which modules are used, so it’s recommended that you tell Babel not to convert modules into CommonJS. You can do this by changing your .babelrc:</p>
+<pre><code>// before
+&quot;presets&quot;: [&quot;es2015&quot;]
+
+// after
+&quot;presets&quot;: [
+  [&quot;es2015&quot;, { &quot;modules&quot;: false }]
+]
+</code></pre><p>We’ve seen a good file size saving by doing this, and hopefully this will continue to improve in the future!</p>
+<p><strong>Fin</strong></p>
+<p>Webpack 2 offers better performance, improved bundling and a much nicer experience when configuring it. Given that the code is so stable, despite its beta status, I highly recommend giving it a go on your projects when you can.</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2017/08/02/webpack/webpack遇到的坑/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2077,142 +2296,6 @@ ReactDOM.render(&lt;TodoApp /&gt;, document.getElementById(&apos;todoApp&apos;))
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2017/08/02/react/React入门——简介/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="liaoyf">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="liaoyf的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/02/react/React入门——简介/" itemprop="url">未命名</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-02T11:44:45+08:00">
-                2017-08-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="React入门——简介"><a href="#React入门——简介" class="headerlink" title="React入门——简介"></a>React入门——简介</h1><p>一、什么是React？</p>
-<p>React是Facebook开源的一个用于构建用户界面的Javascript库，他不是一个框架，而是专注于MVC架构中的V，即视图。这使得React很容易和开发者已有的开发栈进行融合。React顺应了Web开发组件化的趋势。应用React时，你总是应该从UI出发抽象出不同的组件，然后像搭积木一样把它们拼装起来。</p>
-<p>二、React能做什么？</p>
-<p><img src="0006.png" alt="22"></p>
-<p>补充：桌面应用程序（NW.js和Electron.js）</p>
-<p>二、React全家桶 </p>
-<ul>
-<li>自身库： react.js、react-dom.js、add-ons</li>
-<li>语法：ES5/ES6、JSX</li>
-<li>构建工具：Fis3、webpack、babel</li>
-<li>状态管理：Redux、Flux、react-redux、Immutable</li>
-<li>路由：react-router、react-redux-router</li>
-<li>日志：redux-logger</li>
-<li>中间件：redux-thunk</li>
-<li>主题：react-bootstrap</li>
-<li>表单：redux-form</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2263,7 +2346,7 @@ ReactDOM.render(&lt;TodoApp /&gt;, document.getElementById(&apos;todoApp&apos;))
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-count">22</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
