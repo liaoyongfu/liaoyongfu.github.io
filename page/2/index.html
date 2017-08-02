@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/page/2/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-webpack/webpack遇到的坑" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/02/webpack/webpack遇到的坑/" class="article-date">
+  <time datetime="2017-08-02T03:44:45.722Z" itemprop="datePublished">2017-08-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="webpack的坑"><a href="#webpack的坑" class="headerlink" title="webpack的坑"></a>webpack的坑</h1><hr>
+<ol>
+<li><p>引用jQuery插件时会报”jQuery is not defined”，解决方法：</p>
+<p> <strong>(1). Prefer unminified CommonJS/AMD over dist</strong></p>
+<p> Most modules link the dist version in the main field of their package.json. While this is useful for most developers, for webpack it is better to alias the src version because this way webpack is able to optimize dependencies better (e.g. when using the DedupePlugin).</p>
+<pre><code>// webpack.config.js
+module.exports = {
+    ...
+    resolve: {
+        alias: {
+            jquery: &quot;jquery/src/jquery&quot;
+        }
+    }
+};
+
+However, in most cases the dist version works just fine as well.
+</code></pre><p> <strong>(2). Use the ProvidePlugin to inject implicit globals</strong></p>
+<p> Most legacy modules rely on the presence of specific globals, like jQuery plugins do on $ or jQuery. In this scenario you can configure webpack, to prepend var $ = require(“jquery”) everytime it encounters the global $ identifier.</p>
+<pre><code>var webpack = require(&quot;webpack&quot;);
+    ...
+    plugins: [
+        new webpack.ProvidePlugin({
+            $: &quot;jquery&quot;,
+            jQuery: &quot;jquery&quot;
+        })
+    ]
+</code></pre><p> <strong>(3). Use the imports-loader to configure this</strong></p>
+<p> Some legacy modules rely on this being the window object. This becomes a problem when the module is executed in a CommonJS context where this equals module.exports. In this case you can override this with the imports-loader.</p>
+<p> Run <code>npm i imports-loader --save-dev</code> and then</p>
+<pre><code>module: {
+    loaders: [
+        {
+            test: /[\/\\]node_modules[\/\\]some-module[\/\\]index\.js$/,
+            loader: &quot;imports?this=&gt;window&quot;
+        }
+    ]
+}
+</code></pre><p> The imports-loader can also be used to manually inject variables of all kinds. But most of the time the ProvidePlugin is more useful when it comes to implicit globals.</p>
+<p> <strong>(4). Use the imports-loader to disable AMD</strong></p>
+<p> There are modules that support different module styles, like AMD, CommonJS and legacy. However, most of the time they first check for define and then use some quirky code to export properties. In these cases, it could help to force the CommonJS path by setting define = false.</p>
+<pre><code>module: {
+    loaders: [
+        {
+            test: /[\/\\]node_modules[\/\\]some-module[\/\\]index\.js$/,
+            loader: &quot;imports?define=&gt;false&quot;
+        }
+    ]
+}
+</code></pre><p> <strong>(5). Use the script-loader to globally import scripts</strong></p>
+<p> If you don’t care about global variables and just want legacy scripts to work, you can also use the script-loader. It executes the module in a global context, just as if you had included them via the <code>&lt;script&gt;</code> tag.</p>
+<p> <strong>(6). Use noParse to include large dists</strong></p>
+<p> When there is no AMD/CommonJS version of the module and you want to include the dist, you can flag this module as noParse. Then webpack will just include the module without parsing it, which can be used to improve the build time. This means that any feature requiring the AST, like the ProvidePlugin, will not work.</p>
+<pre><code>module: {
+    noParse: [
+        /[\/\\]node_modules[\/\\]angular[\/\\]angular\.js$/
+    ]
+}
+</code></pre></li>
+<li><p>常见的loader</p>
+<pre><code>{
+        test: /\.js/,
+        loader: &quot;babel-loader&quot;,
+        query: {
+            &quot;presets&quot;: [&quot;es2015&quot;, &apos;stage-0&apos;],
+            plugins: []
+        },
+        exclude: /(node_modules)/
+    },
+    {
+        test: /\.css$/,
+        //注意：此处不能有autoprefix-loader
+        loader: ExtractText.extract(&apos;style-loader&apos;, &apos;css-loader&apos;)
+    },
+    {
+        test: /\.(png|gif|jpg|jpeg)$/,
+        loader: &quot;url?name=img/[hash:8].[ext]&quot;
+    },
+    {
+        test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
+        loader: &apos;url?name=font/[name].[ext]&amp;limit=10000&amp;minetype=application/font-woff&apos;
+    },
+    {
+        test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
+        loader: &apos;url?name=font/[name].[ext]&amp;limit=10&amp;minetype=application/font-woff&apos;
+    },
+    {
+        test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+        loader: &apos;url?name=font/[name].[ext]&amp;limit=10&amp;minetype=application/octet-stream&apos;
+    },
+    {
+        test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+        loader: &apos;file&apos;
+    },
+    {
+        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+        loader: &apos;url?limit=10&amp;minetype=image/svg+xml&apos;
+    }
+</code></pre></li>
+<li><p>样式的loader</p>
+<pre><code>(1)style-loader|css-loader is the way to do it just with css
+(2)style-loader|css-loader|postcss-loader is the way to post-process css
+(3)style-loader|css-loader|less-loader is the way to do it if you want to use less
+(4)style-loader|css-loader|postcss-loader|less-loader is the way to post-process the compiled less (css)
+</code></pre></li>
+<li><p>ES6引用<code>art-template</code>,报错：<code>Module not found: Error: Cannot resolve module &#39;fs&#39;</code>，解决方法：</p>
+<pre><code>//webpack.config.js
+module.exports={
+    node: {
+        fs: &quot;empty&quot;
+    }
+};
+</code></pre><p> <a href="https://github.com/pugjs/pug-loader/issues/8" target="_blank" rel="external">参考链接</a></p>
+</li>
+<li><p>webpack开发时打包第三方库都比较大，可以通过配置<code>alias</code>指向压缩版本：</p>
+<pre><code>resolve: {
+    alias: {
+        modernizr$: path.resolve(__dirname, &quot;./.modernizrrc&quot;),
+        bootstrap: path.join(__dirname, &quot;./node_modules/bootstrap/dist/js/bootstrap.min.js&quot;),
+        bootstrapCss: path.join(__dirname, &quot;./node_modules/bootstrap/dist/css/bootstrap.min.css&quot;),
+        fontAwesomeCss: path.join(__dirname, &quot;./node_modules/font-awesome/css/font-awesome.min.css&quot;)
+    }
+    }
+</code></pre></li>
+<li><p>引用第三方插件如：<code>ulynlist</code>，需要配置别名：</p>
+<pre><code>alias: {
+    &apos;ulynlist.table&apos;: path.join(__dirname, &apos;./src/sslib/ulynlist/ulynlist.table.js&apos;),
+    &apos;ulynlist.pager&apos;: path.join(__dirname, &apos;./src/sslib/ulynlist/ulynlist.pager.js&apos;),
+    artTemplate: path.join(__dirname, &apos;./node_modules/art-template&apos;)
+}
+</code></pre></li>
+<li><p>import样式文件页面会有闪烁现象，这是可以通过<code>extract-text-webpack-plugin</code>抽取样式文件，就不会有这个问题了</p>
+</li>
+<li>使用ES6 + webpack + angular教程<a href="http://angular-tips.com/blog/2015/06/using-angular-1-dot-x-with-es6-and-webpack/" target="_blank" rel="external">参考链接</a></li>
+<li><p>合并jquery和第三方插件时，外面是读取不到<code>$</code>和<code>jQuery</code>的，所以我们可以通过<code>expose-loader</code>把<code>jQuery</code>对象导出到全局:</p>
+<p> You can either do this when you require it:</p>
+<pre><code>require(&quot;expose?$!jquery&quot;);
+</code></pre><p> or you can do this in your config:</p>
+<pre><code>loaders: [
+    { test: require.resolve(&apos;jquery&apos;), loader: &apos;expose?jQuery!expose?$&apos; }
+]
+</code></pre><p> 相同的道理，如果插件里有this，则我们可以通过<code>imports-loader</code>把this当成window处理：</p>
+<pre><code>{ 
+    test: require.resolve(&apos;respond.js&apos;), 
+    loader: &apos;imports?this=&gt;window&apos; 
+}
+</code></pre></li>
+<li><p>使用第三方插件，如果其没有判断commonjs这一层，则我们可以配合exports-loader和imports-loader使用，如eos3还有eos服务，eos3需要导出eos对象，eos服务的js需要导入eos这个对象：</p>
+<pre><code>import &apos;exports?eos!./lib/eos3/eos3&apos;;
+//这里define设为false，防止组件判断为AMD模块
+import &apos;imports?define=&gt;false,this=&gt;window!./lib/auth/dmService&apos;;
+</code></pre></li>
+<li><p>webpack-dev-server默认是localhost访问，不能通过ip访问，我们可以配置如下：</p>
+<p>webpack-dev-server –host 0.0.0.0</p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/08/02/webpack/webpack遇到的坑/" data-id="cj5unypvn000tngqoe8q1fztp" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-webpack/webpack学习06——怎么写loader" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/02/webpack/webpack学习06——怎么写loader/" class="article-date">
+  <time datetime="2017-08-02T03:44:45.712Z" itemprop="datePublished">2017-08-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="webpack学习06——怎么写loader"><a href="#webpack学习06——怎么写loader" class="headerlink" title="webpack学习06——怎么写loader"></a>webpack学习06——怎么写loader</h1><p>一个loader是一个node模块，导出一个函数。这个函数当资源被转换时会执行，这个loader有一个入参：待转换资源名称。可以在loader中通过<code>this</code>访问上下文。</p>
+<p>一个同步的loader可以仅仅返回一个值。在其他情况下，loader可以通过<code>this.callback(err, values)</code>返回多个值。</p>
+<p>一个loader被期望返回一个或两个值，第一个值返回字符串或buffer类型的javascript代码，第二个返回sourceMap。</p>
+<p>在复杂的情况下，当多个loader链接时，仅仅只要最后一个loader返回资源文件，仅仅第一个loader期望返回一个或两个值（javascript代码或buffer）。</p>
+<p>Example:</p>
+<pre><code>module.exports = function(source){
+    return source;
+};
+</code></pre><p>//</p>
+<pre><code>// Identity loader with SourceMap support
+module.exports = function(source, map) {
+  this.callback(null, source, map);
+};
+</code></pre><h2 id="指南"><a href="#指南" class="headerlink" title="指南"></a>指南</h2><p>（按优先顺序排序，第一个应该得到最高优先级）</p>
+<h3 id="只做一个单一的任务"><a href="#只做一个单一的任务" class="headerlink" title="只做一个单一的任务"></a>只做一个单一的任务</h3><p>loader可以被链接，他们不应该转换为javascript代码，如果他们不需要的话。<br>例如：从模板中通过查询参数渲染html，我会编写一个从源代码中编译的loader，执行他并返回一个包含包含html的字符串，这是不好的。而是我应该编写装载程序在这个用例中的每一个任务，并将它们全部应用（流水线）：</p>
+<ul>
+<li>jade-loader: Convert template to a module that exports a function.</li>
+<li>apply-loader: Takes a function exporting module and returns raw result by applying      query parameters.</li>
+<li>html-loader: Takes HTML and exports a string exporting module.</li>
+</ul>
+<h3 id="generate-modules-that-are-modular"><a href="#generate-modules-that-are-modular" class="headerlink" title="generate modules that are modular"></a>generate modules that are modular</h3><p>加载程序生成模块应尊重相同的设计原则，如正常模块。例子：这是一个糟糕的设计：（不模块化，全局状态，…）</p>
+<pre><code>require(&quot;any-template-language-loader!./xyz.atl&quot;);
+
+var html = anyTemplateLanguage.render(&quot;xyz&quot;);
+</code></pre><h3 id="标志本身缓存如果可能的话"><a href="#标志本身缓存如果可能的话" class="headerlink" title="标志本身缓存如果可能的话"></a>标志本身缓存如果可能的话</h3><p>大多数装载机是可缓存的，所以他们应该标志本身作为缓存。只要在loader中调用<code>cacheable</code>。</p>
+<pre><code>//Cacheable identity loader
+module.exports = function(source){
+    this.cacheable();
+    return source();
+};
+</code></pre><h3 id="not-keep-state-between-runs-and-modules"><a href="#not-keep-state-between-runs-and-modules" class="headerlink" title="not keep state between runs and modules"></a>not keep state between runs and modules</h3><p>一个加载程序应该独立于编译的其他模块（由装载程序发布的这些模块的期望）。一个程序应该独立于以前的编译的模块。</p>
+<h3 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h3><p>如果loader需要依赖第三方资源（如从系统中读取文件），他们必须要写清楚，此信息用于无效的缓存装载机和编译在观看模式。</p>
+<pre><code>// Loader adding a header
+var path = require(&quot;path&quot;);
+module.exports = function(source) {
+    this.cacheable();
+    var callback = this.async();
+    var headerPath = path.resolve(&quot;header.js&quot;);
+    this.addDependency(headerPath);
+    fs.readFile(headerPath, &quot;utf-8&quot;, function(err, header) {
+        if(err) return callback(err);
+        callback(null, header + &quot;\n&quot; + source);
+    });
+};
+</code></pre><h3 id="解决依赖关系"><a href="#解决依赖关系" class="headerlink" title="解决依赖关系"></a>解决依赖关系</h3><p>一些语言有自己的解决依赖图式，例如css的<code>@import</code>和<code>url(...)</code>。这些必须被模块系统解决。</p>
+<p>有两个方法可以做到：</p>
+<ul>
+<li>把他们转换成<code>require</code>；</li>
+<li>使用<code>this.resolve</code>解析路径；</li>
+</ul>
+<p>例子1：css-loader把依赖转换成require其他样式文件。<br>例子2：less-loader不转换为require，因为因为所有的less文件需要编译一次跟踪变量和混合，因此，less-loader扩展less编译器一个自定义的路径解决方法，该自定义逻辑使用this.resolve解决模块的系统配置文件（走样，自定义模块目录，等）。<br>If the language only accept relative urls (like css: url(file) always means ./file), there is the ~-convention to specify references to modules:</p>
+<pre><code>url(file) -&gt; require(&quot;./file&quot;)
+url(~module) -&gt; require(&quot;module&quot;)
+</code></pre><h3 id="抽离公共代码"><a href="#抽离公共代码" class="headerlink" title="抽离公共代码"></a>抽离公共代码</h3><p>don’t generate much code that is common in every module processed by that loader. Create a (runtime) file in the loader and generate a require to that common code.</p>
+<h3 id="不应嵌入绝对路径"><a href="#不应嵌入绝对路径" class="headerlink" title="不应嵌入绝对路径"></a>不应嵌入绝对路径</h3><p>don’t put absolute paths in to the module code. They break hashing when the root for the project is moved. There is a method <code>stringifyRequest</code> in loader-utils which converts an absolute path to an relative one.</p>
+<p>Example:</p>
+<pre><code>var loaderUtils = require(&quot;loader-utils&quot;);
+return &quot;var runtime = require(&quot; +
+  loaderUtils.stringifyRequest(this, &quot;!&quot; + require.resolve(&quot;module/runtime&quot;)) +
+  &quot;);&quot;;
+</code></pre><h3 id="use-a-library-as-peerDependencies-when-they-wrap-it"><a href="#use-a-library-as-peerDependencies-when-they-wrap-it" class="headerlink" title="use a library as peerDependencies when they wrap it"></a>use a library as peerDependencies when they wrap it</h3><p>using a peerDependency allows the application developer to specify the exact version in package.json if desired. The dependency should be relatively open to allow updating the library without needing to publish a new loader version.</p>
+<pre><code>&quot;peerDependencies&quot;: {
+    &quot;library&quot;: &quot;^1.3.5&quot;
+}
+</code></pre><h3 id="programmable-objects-as-query-option"><a href="#programmable-objects-as-query-option" class="headerlink" title="programmable objects as query-option"></a>programmable objects as query-option</h3><p>there are situations where your loader requires programmable objects with functions which cannot stringified as query-string. The less-loader, for example, provides the possibility to specify LESS-plugins. In these cases, a loader is allowed to extend webpack’s options-object to retrieve that specific option. In order to avoid name collisions, however, it is important that the option is namespaced under the loader’s camelCased npm-name.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/08/02/webpack/webpack学习06——怎么写loader/" data-id="cj5unypvl000sngqoxb5uhdzh" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-webpack/webpack学习05——长期缓存" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/02/webpack/webpack学习05——长期缓存/" class="article-date">
+  <time datetime="2017-08-02T03:44:45.702Z" itemprop="datePublished">2017-08-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="webpack学习05——长期缓存"><a href="#webpack学习05——长期缓存" class="headerlink" title="webpack学习05——长期缓存"></a>webpack学习05——长期缓存</h2><p>有两种级别的添加hash方法：</p>
+<ul>
+<li>Compute a hash of all chunks and add it.</li>
+<li>Compute a hash per chunk and add it.</li>
+</ul>
+<h2 id="方法一：只有一个hash"><a href="#方法一：只有一个hash" class="headerlink" title="方法一：只有一个hash"></a>方法一：只有一个hash</h2><pre><code>{
+    output: {
+        path: path.join(__dirname, &quot;assets&quot;, &quot;[hash]&quot;),
+        publicPath: &quot;assets/[hash]/&quot;,
+        filename: &quot;output.[hash].bundle.js&quot;,
+        chunkFilename: &quot;[id].[hash].bundle.js&quot;
+    }
+}
+</code></pre><h2 id="方法二：每个块都有一个hash"><a href="#方法二：每个块都有一个hash" class="headerlink" title="方法二：每个块都有一个hash"></a>方法二：每个块都有一个hash</h2><pre><code>output: { chunkFilename: &quot;[chunkhash].bundle.js&quot; }
+</code></pre><p>Note that you need to reference the entry chunk with its hash in your HTML. You may want to extract the hash or the filename from the stats.</p>
+<p>In combination with Hot Code Replacement you must use option 1, but not on the publicPath config option.</p>
+<h2 id="从文件名获取状态"><a href="#从文件名获取状态" class="headerlink" title="从文件名获取状态"></a>从文件名获取状态</h2><p>You probably want to access the final filename of the asset to embed it into your HTML. This information is available in the webpack stats. If you are using the CLI you can run it with –json to get the stats as JSON to stdout.</p>
+<p>You can add a plugin such as assets-webpack-plugin to your configuration which allows you to access the stats object. Here is an example how to write it into a file:</p>
+<pre><code>plugins: [
+  function() {
+    this.plugin(&quot;done&quot;, function(stats) {
+      require(&quot;fs&quot;).writeFileSync(
+        path.join(__dirname, &quot;..&quot;, &quot;stats.json&quot;),
+        JSON.stringify(stats.toJson()));
+    });
+  }
+]
+</code></pre><p>The stats JSON contains a useful property assetsByChunkName which is a object containing chunk name as key and filename(s) as value.</p>
+<blockquote>
+<p>Note: It’s an array if you are emitting multiple assets per chunk. I. e. a JavaScript file and a SourceMap. The first one is your JavaScript source.</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/08/02/webpack/webpack学习05——长期缓存/" data-id="cj5unypvf000ongqof3urraxp" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-webpack/webpack学习04——压缩优化" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/02/webpack/webpack学习04——压缩优化/" class="article-date">
+  <time datetime="2017-08-02T03:44:45.692Z" itemprop="datePublished">2017-08-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="webpack学习04——压缩优化"><a href="#webpack学习04——压缩优化" class="headerlink" title="webpack学习04——压缩优化"></a>webpack学习04——压缩优化</h2><h2 id="压缩"><a href="#压缩" class="headerlink" title="压缩"></a>压缩</h2><p>为了压缩你的脚本（和你的样式，如果你用<code>css-loader</code>的话），webpack支持下面两个途径：</p>
+<pre><code>--optimize-minimize 或者 new webpack.optimize.UglifyJsPlugin()
+</code></pre><p>webpack给你的模块和块赋予了id来区别他们，webpack可以为经常用到的id通过下面途径得到最小id长度：</p>
+<pre><code>--optimize-occurrence-order resp. new webpack.optimize.OccurrenceOrderPlugin()
+</code></pre><h2 id="去重"><a href="#去重" class="headerlink" title="去重"></a>去重</h2><p>如果你使用第三方库有相同依赖时，会重复引用相同的文件，webpack可以找到并去重，默认是不开启的，可以使用一下方法开启：</p>
+<pre><code>--optimize-dedupe resp. new webpack.optimize.DedupePlugin()
+</code></pre><h2 id="块优化"><a href="#块优化" class="headerlink" title="块优化"></a>块优化</h2><p>限制快的最大大小 –optimize-max-chunks 15 new webpack.optimize.LimitChunkCountPlugin({maxChunks: 15})<br>限制块的最小大小 –optimize-min-chunk-size 10000 new webpack.optimize.MinChunkSizePlugin({minChunkSize: 10000})</p>
+<p>Webpack会照顾它通过合并块（它会合并块，有重复的模块）。不会有东西合并到入口块，所以不会影响初始页面加载时间。</p>
+<h3 id="单页应用"><a href="#单页应用" class="headerlink" title="单页应用"></a>单页应用</h3><p>A Single-Page-App is the type of web app webpack is designed and optimized for.</p>
+<p>You may have split the app into multiple chunks, which are loaded at your router. The entry chunk only contains the router and some libraries, but no content. This works great while your user is navigating through your app, but for initial page load you need 2 round trips: One for the router and one for the current content page.</p>
+<p>If you use the HTML5 History API to reflect the current content page in the URL, your server can know which content page will be requested by the client code. To save round trips to the server you can include the content chunk in the response: This is possible by just adding it as script tag. The browser will load both chunks parallel.</p>
+<pre><code>&lt;script src=&quot;entry-chunk.js&quot; type=&quot;text/javascript&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;3.chunk.js&quot; type=&quot;text/javascript&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+</code></pre><p>You can extract the chunk filename from the stats. (stats-webpack-plugin could be used for exports the build stats)</p>
+<h3 id="多页应用"><a href="#多页应用" class="headerlink" title="多页应用"></a>多页应用</h3><pre><code>var CommonsChunkPlugin = require(&quot;webpack/lib/optimize/CommonsChunkPlugin&quot;);
+module.exports = {
+    entry: {
+        p1: &quot;./page1&quot;,
+        p2: &quot;./page2&quot;,
+        p3: &quot;./page3&quot;,
+        ap1: &quot;./admin/page1&quot;,
+        ap2: &quot;./admin/page2&quot;
+    },
+    output: {
+        filename: &quot;[name].js&quot;
+    },
+    plugins: [
+        new CommonsChunkPlugin(&quot;admin-commons.js&quot;, [&quot;ap1&quot;, &quot;ap2&quot;]),
+        new CommonsChunkPlugin(&quot;commons.js&quot;, [&quot;p1&quot;, &quot;p2&quot;, &quot;admin-commons.js&quot;])
+    ]
+};
+// &lt;script&gt;s required:
+// page1.html: commons.js, p1.js
+// page2.html: commons.js, p2.js
+// page3.html: p3.js
+// admin-page1.html: commons.js, admin-commons.js, ap1.js
+// admin-page2.html: commons.js, admin-commons.js, ap2.js
+</code></pre><p>Advanced hint: You can run code inside the commons chunk:</p>
+<pre><code>var CommonsChunkPlugin = require(&quot;webpack/lib/optimize/CommonsChunkPlugin&quot;);
+module.exports = {
+    entry: {
+        p1: &quot;./page1&quot;,
+        p2: &quot;./page2&quot;,
+        commons: &quot;./entry-for-the-commons-chunk&quot;
+    },
+    plugins: [
+        new CommonsChunkPlugin(&quot;commons&quot;, &quot;commons.js&quot;)
+    ]
+};
+</code></pre><p>See also multiple-entry-points example and advanced multiple-commons-chunks example.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/08/02/webpack/webpack学习04——压缩优化/" data-id="cj5unypvb000mngqo6hrk3023" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-webpack/webpack学习03——样式" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/02/webpack/webpack学习03——样式/" class="article-date">
+  <time datetime="2017-08-02T03:44:45.682Z" itemprop="datePublished">2017-08-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="webpack学习03——样式"><a href="#webpack学习03——样式" class="headerlink" title="webpack学习03——样式"></a>webpack学习03——样式</h2><h2 id="嵌入样式"><a href="#嵌入样式" class="headerlink" title="嵌入样式"></a>嵌入样式</h2><pre><code>{ test: /\.css$/, loader: &quot;style-loader!css-loader&quot; }
+</code></pre><p>这种情况下会在页面添加style标签式的样式</p>
+<h2 id="抽成样式文件"><a href="#抽成样式文件" class="headerlink" title="抽成样式文件"></a>抽成样式文件</h2><p>可以使用<code>extract-text-webpack-plugin</code>抽成样式文件。</p>
+<pre><code>var ExtractTextPlugin = require(&quot;extract-text-webpack-plugin&quot;);
+...
+loaders: [
+    // Extract css files
+    {
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract(&quot;style-loader&quot;, &quot;css-loader&quot;)
+    },
+    // Optionally extract less files
+    // or any other compile-to-css language
+    {
+        test: /\.less$/,
+        loader: ExtractTextPlugin.extract(&quot;style-loader&quot;, &quot;css-loader!less-loader&quot;)
+    }
+    // You could also use other loaders the same way. I. e. the autoprefixer-loader
+],
+plugins: [
+     new ExtractTextPlugin(&quot;[name].css&quot;)
+]
+</code></pre><h3 id="所有样式文件合并成一个样式文件"><a href="#所有样式文件合并成一个样式文件" class="headerlink" title="所有样式文件合并成一个样式文件"></a>所有样式文件合并成一个样式文件</h3><pre><code>plugins: [
+    new ExtractTextPlugin(&quot;style.css&quot;, {
+        allChunks: true
+    })
+]
+</code></pre><h3 id="公共样式"><a href="#公共样式" class="headerlink" title="公共样式"></a>公共样式</h3><p>和<code>CommonsChunkPlugin</code>一起使用，commons块就会生成commons.css样文件。</p>
+<pre><code>plugins: [
+    new webpack.optimize.CommonsChunkPlugin(&quot;commons&quot;, &quot;commons.js&quot;),
+    new ExtractTextPlugin(&quot;[name].css&quot;)
+]
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/08/02/webpack/webpack学习03——样式/" data-id="cj5unypvi000qngqo2uy0tzqq" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-webpack/webpack学习02——代码分割" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/02/webpack/webpack学习02——代码分割/" class="article-date">
+  <time datetime="2017-08-02T03:44:45.673Z" itemprop="datePublished">2017-08-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="webpack学习02——代码分割"><a href="#webpack学习02——代码分割" class="headerlink" title="webpack学习02——代码分割"></a>webpack学习02——代码分割</h1><h2 id="定义一个代码分割点"><a href="#定义一个代码分割点" class="headerlink" title="定义一个代码分割点"></a>定义一个代码分割点</h2><h3 id="commonjs-require-ensure"><a href="#commonjs-require-ensure" class="headerlink" title="commonjs: require.ensure"></a>commonjs: <code>require.ensure</code></h3><pre><code>require.ensure(dependencies, callback)
+</code></pre><p>example:</p>
+<pre><code>//require.ensure仅仅加载而不执行模块
+require.ensure([&quot;module-a&quot;, &quot;module-b&quot;], function(require) {
+    var a = require(&quot;module-a&quot;);
+    // ...
+});
+</code></pre><h3 id="AMD-require"><a href="#AMD-require" class="headerlink" title="AMD: require"></a>AMD: <code>require</code></h3><pre><code>require(dependencies, callback)
+</code></pre><p>example:</p>
+<pre><code>//AMD的require加载并会执行模块
+require([&quot;module-a&quot;, &quot;module-b&quot;], function(a, b) {
+    // ...
+});
+</code></pre><h3 id="ES6模块"><a href="#ES6模块" class="headerlink" title="ES6模块"></a>ES6模块</h3><p><strong>webpack1是不支持原生es6模块的，可以通过babal转换</strong></p>
+<h2 id="块的内容"><a href="#块的内容" class="headerlink" title="块的内容"></a>块的内容</h2><p>所有分隔的文件会成为一个块，这个块是由其依赖递归加进去的。</p>
+<h2 id="块压缩"><a href="#块压缩" class="headerlink" title="块压缩"></a>块压缩</h2><p>如果两个块包含同一个模块，他们会被合并成一个。这可能造成块有相同的父级。<br>如果一个模块在一个块的所有父级中是可获取的，这个模块将会在这个块中删除。<br>如果一个块包含另一个块的所有模块，则存储这个块，它实现多个块。</p>
+<h2 id="块加载"><a href="#块加载" class="headerlink" title="块加载"></a>块加载</h2><p>根据配置<code>target</code>目标，将将块加载的运行时逻辑添加到包中。例如：<code>web</code>目标块通过jsonp加载。只有一个块被加载一次，并行请求被合并成一个。运行时检查加载的块是否完成多个块。</p>
+<h2 id="块的类型"><a href="#块的类型" class="headerlink" title="块的类型"></a>块的类型</h2><h3 id="入口块"><a href="#入口块" class="headerlink" title="入口块"></a>入口块</h3><p>一个入口块包含了请求时加载的模块。如果这个块包含模块<code>0</code>则加载并执行它，如果没有，它等待有请求模块<code>0</code>的块。</p>
+<h3 id="正常块"><a href="#正常块" class="headerlink" title="正常块"></a>正常块</h3><p>一个正常的块不会在运行时加载，它仅仅包含一些模块，这个结构依赖于块加载算法，例如：如果目标是jsonp，则这些模块会包含一个jsonp回调函数，这个块当然还包含它负责的一些块id列表。</p>
+<h3 id="初始化块（非入口）"><a href="#初始化块（非入口）" class="headerlink" title="初始化块（非入口）"></a>初始化块（非入口）</h3><p>一个初始化块是一个正常的块，不同的仅仅是压缩工具视它更重要，因为它计算向初始加载时间（像入口块），这个块类型可以结合<code>CommonsChunkPlugin</code>发生。</p>
+<h3 id="分隔app和vendor代码"><a href="#分隔app和vendor代码" class="headerlink" title="分隔app和vendor代码"></a>分隔app和vendor代码</h3><pre><code>var webpack = require(&quot;webpack&quot;);
+
+module.exports = {
+  entry: {
+    app: &quot;./app.js&quot;,
+    vendor: [&quot;jquery&quot;, &quot;underscore&quot;, ...],
+  },
+  output: {
+    filename: &quot;bundle.js&quot;
+  },
+  plugins: [
+    new webpack.optimize.CommonsChunkPlugin(/* chunkName= */&quot;vendor&quot;, /* filename= */&quot;vendor.bundle.js&quot;)
+  ]
+};
+</code></pre><p>vendor块将会从移除所有在app块中的模块，使得bundle块仅仅包含你的代码而不包含其依赖。</p>
+<pre><code>&lt;script src=&quot;vendor.bundle.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;bundle.js&quot;&gt;&lt;/script&gt;
+</code></pre><h3 id="多入口块"><a href="#多入口块" class="headerlink" title="多入口块"></a>多入口块</h3><h4 id="加载多入口"><a href="#加载多入口" class="headerlink" title="加载多入口"></a>加载多入口</h4><p>通过<code>CommonsChukPlugin</code>运行时被移动到公共块，入口文件变成初始化块。只有当初始块可以被加载时，其他入口块才可以被加载。</p>
+<pre><code>var webpack = require(&quot;webpack&quot;);
+module.exports = {
+    entry: { a: &quot;./a&quot;, b: &quot;./b&quot; },
+    output: { filename: &quot;[name].js&quot; },
+    plugins: [ new webpack.optimize.CommonsChunkPlugin(&quot;init.js&quot;) ]
+}
+
+&lt;script src=&quot;init.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;a.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;b.js&quot;&gt;&lt;/script&gt;
+</code></pre><h3 id="公共块"><a href="#公共块" class="headerlink" title="公共块"></a>公共块</h3><p><code>CommonsChunkPlugin</code>可以移动发生在多个入口的模块到一个新的块（公共块），运行时也移动到公共块，这意味着旧的入口块已经变成初始化块。</p>
+<h3 id="压缩优化插件"><a href="#压缩优化插件" class="headerlink" title="压缩优化插件"></a>压缩优化插件</h3><ul>
+<li>LimitChunkCountPlugin</li>
+<li>MinChunkSizePlugin</li>
+<li>AggressiveMergingPlugin</li>
+</ul>
+<h3 id="命名块"><a href="#命名块" class="headerlink" title="命名块"></a>命名块</h3><p>The require.ensure function accepts an additional 3rd parameter. This must be a string. If two split point pass the same string they use the same chunk.</p>
+<h4 id="require-include"><a href="#require-include" class="headerlink" title="require.include"></a>require.include</h4><pre><code>require.include(request)
+</code></pre><p>require.include is a webpack specific function that adds a module to the current chunk, but doesn’t evaluate it (The statement is removed from the bundle).</p>
+<p>Example:</p>
+<pre><code>require.ensure([&quot;./file&quot;], function(require) {
+  require(&quot;./file2&quot;);
+});
+
+// is equal to
+
+require.ensure([], function(require) {
+  require.include(&quot;./file&quot;);
+  require(&quot;./file2&quot;);
+});
+</code></pre><p>require.include can be useful if a module is in multiple child chunks. A require.include in the parent would include the module and the instances of the modules in the child chunks would disappear.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/08/02/webpack/webpack学习02——代码分割/" data-id="cj5unypv8000jngqoog1eg79s" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-webpack/webpack学习01——简介" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/02/webpack/webpack学习01——简介/" class="article-date">
+  <time datetime="2017-08-02T03:44:45.663Z" itemprop="datePublished">2017-08-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="webpack学习01——简介"><a href="#webpack学习01——简介" class="headerlink" title="webpack学习01——简介"></a>webpack学习01——简介</h1><hr>
+<p>webpack是一个模块打包工具，</p>
+<ul>
+<li>webpack特性：<ul>
+<li>插件：webpack有大量的插件，大多数的功能是使用这个接口的内部插件，这使得webpack很很大的<strong>灵活性</strong>;</li>
+<li>性能：webpack使用异步I/O和多级缓存机制，使得webpack有更快的速度，而且编辑速度超快；</li>
+<li>加载器(loaders)：webpack通过定义loaders预处理文件，这允许你打包<strong>任何资源</strong>而不仅仅是javascript，你也可以自己写适合自己的加载器;</li>
+<li>模块化：webpack支持AMD和CommonJs模块化规范，它能够聪明地分析你的代码，甚至有一个评估引擎来评估简单的表达式，这个允许你<strong>支持大多数现存模块化规范</strong></li>
+<li>代码分割：webpack允许你把代码分割成不同的块<code>thunk</code>，块是按需加载的，这个可以减少初始加载所发费的时间。</li>
+<li>代码压缩：webpack可以压缩你的代码，它当然也支持通过哈希缓存；</li>
+<li>开发工具：WebPACK支持调试简单sourceurls和sourcemaps。还可以通过<code>development middleware</code>和<code>development server</code>实现<strong>自动刷新</strong>功能;</li>
+<li>多个目标：webpack的首要目标是<code>web</code>，但是它也支持在WebWorkers、Node.js中使用；</li>
+</ul>
+</li>
+<li>加载器：<ul>
+<li>转换文件；</li>
+<li>加载器可以通过管道被链接，最后一个加载器则返回javascript，其他的加载器则可以返回任意的格式代码；</li>
+<li>加载器可以是同步或异步的；</li>
+<li>加载器在<code>Node.js</code>环境中运行，所以你可以做任何你想要的事情；</li>
+<li>加载器支持查询参数；</li>
+<li>加载器可以在配置中绑定到扩展名或正则表达式的监听；</li>
+<li>加载器可以被发布到<code>npm</code>上或从<code>npm</code>中安装下来；</li>
+<li>Normal modules can export a loader in addition to the normal main via package.json loader.</li>
+<li>加载器可以访问配置；</li>
+<li>插件可以向加载器提供更多的特性和功能；</li>
+<li>加载器可以调用额外的任意文件；</li>
+<li>。。。</li>
+</ul>
+</li>
+<li><p>加载器解决方案</p>
+<p>  加载器类似模块，一个加载器导出一个兼容于Node的javascript函数，一般情况下，你通过<code>npm</code>管理你的加载器，当然你也可以作为文件在你的项目中使用</p>
+<ul>
+<li>引用加载器：加载器一般以<code>xxx-loader</code>命名，<code>xxx</code>是其名字，例如：<code>json-loader</code>；</li>
+<li>你可以通过全名<code>xxx-loader</code>或者短名<code>xxx</code>来使用加载器；</li>
+<li>加载器的命名惯例和优先顺序是由<code>resolveLoader.moduleTemplates</code>配置决定的；</li>
+<li><p>加载器的命名惯例一些情况下是很有用的，特别是在<code>require()</code>里面引用加载器的时候；</p>
+<p>加载器的使用情况：</p>
+</li>
+<li><p>在<code>require()</code>语句内；</p>
+<pre><code>//使用文件loader.js来转换file.txt文件
+require(&apos;./loader!./dir/file.txt&apos;);
+
+//使用jade-loader，如果配置文件中已经有绑定到此文件的加载器，他们仍然会运行的
+require(&apos;jade!./template.jade&apos;);
+
+//由less-loader-&gt;css-loader-&gt;style-loader转换顺序，由于有前缀`!`，所以如果在配置文件中已经
+//有绑定到此文件的加载器，他们将不会运行
+require(&apos;!style!css!less!bootstrap/less/bootstrap.less&apos;);    
+</code></pre></li>
+<li><p>在配置文件中配置；（推荐这种方式）</p>
+<pre><code>{
+    module: {
+        loaders: [
+            {test: /\.jade$/, loader: &apos;jade&apos;},
+            {test: /\.css$/, loader: &apos;style!css&apos;},
+            {test: /\.css$/, loaders: [&apos;style&apos;, &apos;css&apos;]}
+        ]
+    }
+}        
+</code></pre></li>
+<li><p>在<code>CLI</code>命令行中配置；</p>
+<pre><code>webpack --module-bind jade --module-bind &apos;css=style!css&apos;
+</code></pre></li>
+</ul>
+</li>
+<li><p>加载器的查询参数</p>
+<p>  可以在加载器后面加上<code>?</code>添加多个查询参数，例如：<code>url-loader?mimetype=image/png</code>.大多数的加载器支持正常的格式<code>?key=value&amp;key2=value2</code>和JSON对象格式<code>?{key: &quot;value&quot;, key2: &quot;value2&quot;}</code></p>
+<ul>
+<li><p>在<code>require()</code>语句中：</p>
+<pre><code>require(&apos;url-loader?mimetype=image/png!./file.png&apos;);
+</code></pre></li>
+<li><p>在配置中：</p>
+<pre><code>{test: /\.png$/, loader: &apos;url-loader?mimetype=image/png&apos;}
+</code></pre><p>  或者</p>
+<pre><code>{
+    test: /\.png$/,
+    loader: &apos;url-loader&apos;,
+    query: {
+        mimetype: &apos;image/png&apos;
+    }
+}
+</code></pre></li>
+<li><p>在CLI中：</p>
+<pre><code>webpack --module-bind &quot;png=url-loader?mimetype=image/png&quot;
+</code></pre></li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/08/02/webpack/webpack学习01——简介/" data-id="cj5unypv5000hngqo35tslq7s" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-react/创建一个React项目" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/02/react/创建一个React项目/" class="article-date">
+  <time datetime="2017-08-02T03:44:45.648Z" itemprop="datePublished">2017-08-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="创建一个React项目"><a href="#创建一个React项目" class="headerlink" title="创建一个React项目"></a>创建一个React项目</h1><hr>
+<p>React由Facebook所写，由虚拟Dom、组件化获得广大前端开发者的青睐，下面我们通过一个示例来演示创建React项目的步骤：</p>
+<h2 id="为什么用React"><a href="#为什么用React" class="headerlink" title="为什么用React"></a>为什么用<code>React</code></h2><p>React解决了创建大型项目性能以及复用性问题，React可以有两种写法：</p>
+<p><em>使用React.createClass语法</em></p>
+<pre><code>var HelloComponent = React.createClass({
+      render: function() {
+        return (
+              &lt;div className=&quot;hello&quot;&gt;
+                Hello, world!
+              &lt;/div&gt;
+        );
+      }
+});
+</code></pre><p><em>使用ES6语法</em></p>
+<pre><code>class HelloComponent extends React.Component {
+  render() {
+    return (
+      &lt;div className=&quot;hello&quot;&gt;
+        Hello, world!
+      &lt;/div&gt;
+    );
+  }
+}
+</code></pre><h2 id="创建React项目"><a href="#创建React项目" class="headerlink" title="创建React项目"></a>创建React项目</h2><ol>
+<li>安装<code>Node.js</code>和<code>NPM</code>，然后运行<code>npm init</code>创建一个<code>package.json</code>文件.</li>
+<li>在控制台中运行：<code>npm install react react-dom babel-core babel-loader babel-preset-es2015 babel-preset-react webpack webpack-dev-server --save</code></li>
+<li>创建<code>webpack.config.js</code>配置文件，这个的作用是帮我们打包资源，转换JSX为JS文件、合并、压缩、编译等等等。。。</li>
+</ol>
+<p>一个简单的webpack.config.js大致如下：</p>
+<pre><code>var debug = process.env.NODE_ENV !== &quot;production&quot;;
+var webpack = require(&apos;webpack&apos;);
+var path = require(&apos;path&apos;);
+
+module.exports = {
+  context: path.join(__dirname, &quot;src&quot;),
+  devtool: debug ? &quot;inline-sourcemap&quot; : null,
+  entry: &quot;./js/App.js&quot;,
+  devServer: {
+    inline: true,
+    port: 3333
+  },
+  module: {
+    loaders: [
+      {
+        test: /\.jsx?$/,
+        exclude: /(node_modules|bower_components)/,
+        loader: &apos;babel-loader&apos;,
+        query: {
+          presets: [&apos;react&apos;, &apos;es2015&apos;],
+          plugins: [&apos;react-html-attrs&apos;, &apos;transform-class-properties&apos;, &apos;transform-decorators-legacy&apos;],
+        }
+      }
+    ]
+  },
+  output: {
+    path: __dirname + &quot;/src/&quot;,
+    filename: &quot;bundle.min.js&quot;
+  },
+  plugins: debug ? [] : [
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false }),
+  ],
+};
+</code></pre><p>程序的入口通过<code>entry</code>设置，即页面第一次加载运行的文件，Webpack将把所有的JS和JSX文件到文件的输出对象，通过<code>devServer</code>设置webpack开发服务器为内联，并设置端口为<code>3333</code>，在<code>module</code>配置中，我们配置<code>babel</code>转换规则：使用<code>react</code>和<code>es2015</code>,plugins增加了类的属性和装饰器的功能。</p>
+<h3 id="热加载"><a href="#热加载" class="headerlink" title="热加载"></a>热加载</h3><p>首先安装热加载模块：</p>
+<pre><code>npm install --save-dev babel-preset-react-hmre
+</code></pre><p>然后加到配置中：</p>
+<pre><code>....
+query: {
+  presets: [&apos;react&apos;, &apos;es2015&apos;, &apos;react-hmre&apos;],
+  plugins: [&apos;react-html-attrs&apos;, &apos;transform-class-properties&apos;, &apos;transform-decorators-legacy&apos;],
+}
+</code></pre><p>另一个选择是安装<code>react-hot-loader</code>然后添加<code>react-hot</code>到<code>webpack.config.js</code>配置中：</p>
+<pre><code>...
+loader: [&apos;babel-loader&apos;, &apos;react-hot&apos;]
+...
+</code></pre><p>为了运行项目更简单，我们一般会使用package.json的命令：</p>
+<pre><code>{
+  &quot;scripts&quot;: {
+    &quot;start&quot;: &quot;node_modules/.bin/webpack-dev-server --progress --inline --hot&quot;,
+  }
+}
+</code></pre><p>注意：我们命令中添加了<code>--hot</code>，这个启动了热加载模式.</p>
+<h2 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h2><p>路由是一个应用非常重要的一部分，在React中比较受欢迎的莫属<code>React Router</code>了，事实上，很多开发者认为它就是React官方版的路由，当然，你得先安装它：</p>
+<pre><code>npm install --save react-router
+</code></pre><p>一个简单的示例看起来是这样子的：</p>
+<pre><code>import React from &apos;react&apos;;
+import { render } from &apos;react-dom&apos;;
+import { browserHistory, Router, Route, IndexRoute } from &apos;react-router&apos;
+
+import App from &apos;../components/App&apos;
+import Home from &apos;../components/Home&apos;
+import About from &apos;../components/About&apos;
+import Features from &apos;../components/Features&apos;
+
+render(
+  &lt;Router history={browserHistory}&gt;
+    &lt;Route path=&apos;/&apos; component={App}&gt;
+      &lt;IndexRoute component={Home} /&gt;
+      &lt;Route path=&apos;about&apos; component={About} /&gt;
+      &lt;Route path=&apos;features&apos; component={Features} /&gt;
+    &lt;/Route&gt;
+  &lt;/Router&gt;,
+  document.getElementById(&apos;app&apos;)
+)
+</code></pre><h2 id="国际化-I18N"><a href="#国际化-I18N" class="headerlink" title="国际化(I18N)"></a>国际化(I18N)</h2><p>通过<code>react-intl</code>你可以很轻松地实现国际化，它支持超过150中不同语言，默认是英文，呃~</p>
+<h2 id="权限认证"><a href="#权限认证" class="headerlink" title="权限认证"></a>权限认证</h2><p>Authentication is an important part of any application. The best way to do user authentication for single page apps is via JSON Web Tokens (JWT). A typical authentication flow is this:</p>
+<ul>
+<li>A user signs up/logs in, generate JWT token and return it to the client</li>
+<li>Store the JWT token on the client and send it via headers/query parameters for future requests</li>
+</ul>
+<p>A comprehensive example of adding authentication to a ReactJS app is here. Using Redux? Here is a good example of setting up authentication in your ReactJS application.</p>
+<h2 id="数据持久化"><a href="#数据持久化" class="headerlink" title="数据持久化"></a>数据持久化</h2><p>Without a backend, you can persist data in your Single Page App by using Firebase. In a Reactjs app, all you simply need is ReactFire. It is a ReactJS mixin for easy Firebase integration. With ReactFire, it only takes a few lines of JavaScript to integrate Firebase data into React apps via the ReactFireMixin</p>
+<pre><code>npm install --save reactfire react firebase
+</code></pre><p>TodoList Example</p>
+<pre><code>import React from &apos;react&apos;;
+
+class TodoList extends React.Component {
+  render() {
+    var _this = this;
+    var createItem = (item, index) =&gt; {
+      return (
+        &lt;li key={ index }&gt;
+          { item.text }
+          &lt;span onClick={ _this.props.removeItem.bind(null, item[&apos;.key&apos;]) }
+                style=&gt;
+            X
+          &lt;/span&gt;
+        &lt;/li&gt;
+      );
+    };
+
+    return &lt;ul&gt;{ this.props.items.map(createItem) }&lt;/ul&gt;;
+  }
+}
+
+class TodoApp extends React.Component {
+  getInitialState() {
+    return {
+      items: [],
+      text: &apos;&apos;
+    };
+  }
+
+  componentWillMount() {
+    this.firebaseRef = firebase.database().ref(&apos;todoApp/items&apos;);
+    this.firebaseRef.limitToLast(25).on(&apos;value&apos;, function(dataSnapshot) {
+      var items = [];
+      dataSnapshot.forEach(childSnapshot =&gt; {
+        const item = childSnapshot.val();
+        item[&apos;.key&apos;] = childSnapshot.key;
+        items.push(item);
+      });
+
+      this.setState({
+        items: items
+      });
+    }.bind(this));
+  }
+
+  componentWillUnmount() {
+    this.firebaseRef.off();
+  }
+
+  onChange(e) {
+    this.setState({text: e.target.value});
+  }
+
+  removeItem(key) {
+    var firebaseRef = firebase.database().ref(&apos;todoApp/items&apos;);;
+    firebaseRef.child(key).remove();
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    if (this.state.text &amp;&amp; this.state.text.trim().length !== 0) {
+      this.firebaseRef.push({
+        text: this.state.text
+      });
+      this.setState({
+        text: &apos;&apos;
+      });
+    }
+  }
+
+  render() {
+    return (
+      &lt;div&gt;
+        &lt;TodoList items={ this.state.items } removeItem={ this.removeItem } /&gt;
+        &lt;form onSubmit={ this.handleSubmit }&gt;
+          &lt;input onChange={ this.onChange } value={ this.state.text } /&gt;
+          &lt;button&gt;{ &apos;Add #&apos; + (this.state.items.length + 1) }&lt;/button&gt;
+        &lt;/form&gt;
+      &lt;/div&gt;
+    );
+  }
+}
+
+ReactDOM.render(&lt;TodoApp /&gt;, document.getElementById(&apos;todoApp&apos;));
+</code></pre><p>More information about persisting your data using ReactFire <a href="https://github.com/firebase/reactfire/blob/master/docs/quickstart.md" target="_blank" rel="external">here</a>.</p>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>Most projects become a mountain of spaghetti code at some point during development due to lack of solid tests or no tests at all. ReactJS apps are no different, but this can be avoided if you know some core principles. When writing tests for ReactJS code, it is helpful to pull out any functionality that doesn’t have to do with any UI components into separate modules, so that they can be tested separately. Tools for unit testing those functionalities are mocha, expect, chai, jasmine.</p>
+<p>Testing becomes tricky in a ReactJS application when you have to deal with components. How do you test stateless components? How do you test components with state? Now, ReactJS provides a nice set of test utilities that allow us to inspect and examine the components we build. A particular concept worthy of mention is Shallow Rendering. Instead of rendering into a DOM the idea of shallow rendering is to instantiate a component and get the result of its render method. You can also check its props and children and verify they work as expected. More information here.</p>
+<p>Facebook uses Jest to test React applications. AirBnB uses Enzyme. When bootstrapping your ReactJS application, you can set up any of these awesome tools to implement testing.</p>
+<h2 id="脚手架和模板"><a href="#脚手架和模板" class="headerlink" title="脚手架和模板"></a>脚手架和模板</h2><p>A lot of tools have been mentioned in this post in relation to setting up different parts of a ReactJS app. If you don’t intend writing your app from scratch, there are lots of generators and boilerplates that tie all these tools together to give you a great starting point for your app. One fantastic example is React Starter Kit. It has a Yeoman generator. It’s an isomorphic web app boilerplate that contains almost everything you need to build a ReactJS app. Another boilerplate is React Static boilerplate, it helps you build a web app that can be hosted directly from CDNs like Firebase and Github Pages. Other alternatives are React redux starter kit and React webpack generator. Recently, a nice and effective tool called create-react-app was released by the guys at Facebook. It’s a CLI tool that helps create React apps with no build configuration!</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>There are several tools that will help bootstrap your React app, we looked at a couple that we consider quite good and will have your application up and running in no time. But feel free to search for your own tools, and if you think that we are missing something, let us know in the comments. Setting up a React project should be painless!</p>
+<p>“Setting up a React project should be painless!”</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/08/02/react/创建一个React项目/" data-id="cj5unypv2000fngqofz8f4olb" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-react/React遇到的坑" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/02/react/React遇到的坑/" class="article-date">
+  <time datetime="2017-08-02T03:44:45.639Z" itemprop="datePublished">2017-08-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="React遇到的坑"><a href="#React遇到的坑" class="headerlink" title="React遇到的坑"></a>React遇到的坑</h1><hr>
+<ol>
+<li>经常有编辑和查看的页面，编辑取消时需要调用redux-form的<code>resetForm()</code>方法。</li>
+<li>少用jquery！少用jquery！少用jquery！比如<code>$(&#39;input&#39;).prop(&#39;checked&#39;, true)</code>这样是不会触发<code>input</code>的<code>onChange</code>事件的，原因是？？？</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/08/02/react/React遇到的坑/" data-id="cj5unypuu000bngqo86cmjqha" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-react/React入门——简介" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/02/react/React入门——简介/" class="article-date">
+  <time datetime="2017-08-02T03:44:45.629Z" itemprop="datePublished">2017-08-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="React入门——简介"><a href="#React入门——简介" class="headerlink" title="React入门——简介"></a>React入门——简介</h1><p>一、什么是React？</p>
+<p>React是Facebook开源的一个用于构建用户界面的Javascript库，他不是一个框架，而是专注于MVC架构中的V，即视图。这使得React很容易和开发者已有的开发栈进行融合。React顺应了Web开发组件化的趋势。应用React时，你总是应该从UI出发抽象出不同的组件，然后像搭积木一样把它们拼装起来。</p>
+<p>二、React能做什么？</p>
+<p><img src="0006.png" alt="22"></p>
+<p>补充：桌面应用程序（NW.js和Electron.js）</p>
+<p>二、React全家桶 </p>
+<ul>
+<li>自身库： react.js、react-dom.js、add-ons</li>
+<li>语法：ES5/ES6、JSX</li>
+<li>构建工具：Fis3、webpack、babel</li>
+<li>状态管理：Redux、Flux、react-redux、Immutable</li>
+<li>路由：react-router、react-redux-router</li>
+<li>日志：redux-logger</li>
+<li>中间件：redux-thunk</li>
+<li>主题：react-bootstrap</li>
+<li>表单：redux-form</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/08/02/react/React入门——简介/" data-id="cj5unypus000angqo6l2vlr8c" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">__('next') &raquo;</a>
+  </nav>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flexbox/">flexbox</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/flexbox/" style="font-size: 10px;">flexbox</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/react/" style="font-size: 20px;">react</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/08/02/react/react文档-css动画/">react文档-css动画</a>
+          </li>
+        
+          <li>
+            <a href="/2017/08/02/css/Flexbox布局兼容性总结/">Flexbox布局兼容性总结</a>
+          </li>
+        
+          <li>
+            <a href="/2017/08/02/javascript/关于同一元素下dbClick触发两次click的问题/">关于同一元素下dbClick触发两次click的问题</a>
+          </li>
+        
+          <li>
+            <a href="/2017/08/02/react/react获取父组件或子组件属性/">React获取父组件或子组件属性</a>
+          </li>
+        
+          <li>
+            <a href="/2017/08/02/react/React要手动绑定方法的原因/">React要手动绑定方法的原因</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

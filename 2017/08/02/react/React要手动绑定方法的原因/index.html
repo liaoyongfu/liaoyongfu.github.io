@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>React要手动绑定方法的原因 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="我们从javascript开始吧在js中，函数的上下文是指函数调用的时候，而不是定义的时候。 有以下四中调用函数的模式：  函数调用模式  方法调用模式  构造函数调用模式  应用调用模式   所有这些使用的模式都不同地定义函数上下文。接下来我们看看各种模式的区别。 函数调用模式定义：如果在调用时没有.操作，那么上下文可能为window。 调用函数最直接的方法就是直接调用它： 1234var fu">
+<meta name="keywords" content="react">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React要手动绑定方法的原因">
+<meta property="og:url" content="http://yoursite.com/2017/08/02/react/React要手动绑定方法的原因/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="我们从javascript开始吧在js中，函数的上下文是指函数调用的时候，而不是定义的时候。 有以下四中调用函数的模式：  函数调用模式  方法调用模式  构造函数调用模式  应用调用模式   所有这些使用的模式都不同地定义函数上下文。接下来我们看看各种模式的区别。 函数调用模式定义：如果在调用时没有.操作，那么上下文可能为window。 调用函数最直接的方法就是直接调用它： 1234var fu">
+<meta property="og:updated_time" content="2017-08-02T06:22:37.778Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="React要手动绑定方法的原因">
+<meta name="twitter:description" content="我们从javascript开始吧在js中，函数的上下文是指函数调用的时候，而不是定义的时候。 有以下四中调用函数的模式：  函数调用模式  方法调用模式  构造函数调用模式  应用调用模式   所有这些使用的模式都不同地定义函数上下文。接下来我们看看各种模式的区别。 函数调用模式定义：如果在调用时没有.操作，那么上下文可能为window。 调用函数最直接的方法就是直接调用它： 1234var fu">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-react/React要手动绑定方法的原因" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/02/react/React要手动绑定方法的原因/" class="article-date">
+  <time datetime="2017-08-02T06:09:44.000Z" itemprop="datePublished">2017-08-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      React要手动绑定方法的原因
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="我们从javascript开始吧"><a href="#我们从javascript开始吧" class="headerlink" title="我们从javascript开始吧"></a>我们从javascript开始吧</h2><p>在js中，函数的上下文是指函数调用的时候，而不是定义的时候。</p>
+<p>有以下四中调用函数的模式：</p>
+<ul>
+<li><p>函数调用模式</p>
+</li>
+<li><p>方法调用模式</p>
+</li>
+<li><p>构造函数调用模式</p>
+</li>
+<li><p>应用调用模式</p>
+</li>
+</ul>
+<p>所有这些使用的模式都不同地定义函数上下文。接下来我们看看各种模式的区别。</p>
+<h3 id="函数调用模式"><a href="#函数调用模式" class="headerlink" title="函数调用模式"></a>函数调用模式</h3><p>定义：如果在调用时没有.操作，那么上下文可能为window。</p>
+<p>调用函数最直接的方法就是直接调用它：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var func = function()&#123;</div><div class="line">    //...</div><div class="line">&#125;;</div><div class="line">func();</div></pre></td></tr></table></figure>
+<p>这时的上下文（this）将会设置成javascript操作环境的全局变量，在浏览器中，它是window变量。</p>
+<p>我们再来看另一个例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var unicorns = &#123;</div><div class="line">  func: function() &#123; // ... &#125;</div><div class="line">&#125;;</div><div class="line">var fun = unicorns.func;</div><div class="line">fun();</div></pre></td></tr></table></figure>
+<p>你认为在func中的上下文为uniconrns对象？那是错误的，由于上下文时通过调用此函数时确定的，所以这里的上下文还是window。</p>
+<h3 id="方法调用模式"><a href="#方法调用模式" class="headerlink" title="方法调用模式"></a>方法调用模式</h3><p>定义：如果函数调用中有点操作，则上下文将会是一序列点中最右边的那个变量。</p>
+<p>如上面的例子中，如果我们直接调用unicorns.func()，上下文会是unicorns对象。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">var frog = &#123;</div><div class="line">  RUN_SOUND: &quot;POP!!&quot;,</div><div class="line">  run: function() &#123;</div><div class="line">    return this.RUN_SOUND;</div><div class="line">  &#125;</div><div class="line">&#125;;</div><div class="line">frog.run(); // returns &quot;POP!!&quot; since this points to the `frog` object.</div><div class="line">var runningFun = frog.run;</div><div class="line">runningFun(); // returns &quot;undefined&quot; since this points to the window</div></pre></td></tr></table></figure>
+<h3 id="构造函数模式"><a href="#构造函数模式" class="headerlink" title="构造函数模式"></a>构造函数模式</h3><p>定义：每次看到一个new函数名后，你this将指向一个新创建的新对象。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">function Wizard() &#123;</div><div class="line">  this.castSpell = function() &#123; return &quot;KABOOM&quot;; &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>直接调用它将会是window（因为它是一个函数调用），但是如果通过new来调用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">function Wizard() &#123;</div><div class="line">  this.castSpell = function() &#123; return &quot;KABOOM&quot;; &#125;;</div><div class="line">&#125;</div><div class="line">var merlin = new Wizard(); // this is set to an empty object &#123;&#125;. Returns `this` implicitly.</div><div class="line">merlin.castSpell() // returns &quot;KABOOM&quot;;</div></pre></td></tr></table></figure>
+<p>这将会发生两件事：</p>
+<ul>
+<li><p>函数将会有一个指向当前对象的上下文this。</p>
+</li>
+<li><p>如果没有指定return或者这个函数返回一个非对象值，this将从这个函数返回。</p>
+</li>
+</ul>
+<h3 id="应用调用模式"><a href="#应用调用模式" class="headerlink" title="应用调用模式"></a>应用调用模式</h3><p>当你对函数有引用的时候，你可以通过两种方法来手动提供上下文：</p>
+<ul>
+<li><p>call</p>
+</li>
+<li><p>apply</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">function addAndSetX(a, b) &#123;</div><div class="line">  this.x += a + b;</div><div class="line">&#125;</div><div class="line">var obj1 = &#123; x: 1, y: 2 &#125;;</div><div class="line">addAndSetX.call(obj1, 1, 1); // this = obj1, obj1 after call = &#123; x: 3, y : 2 &#125;</div><div class="line">// It is the same as:</div><div class="line">// addAndSetX.apply(obj1, [1, 1]);</div></pre></td></tr></table></figure>
+<p>如果您需要调用从某个其他地方传递的函数（例如，作为参数到函数中）与某个上下文对象，这是非常方便的。它不是非常可用于异步回调，因为绑定与一个函数调用相结合。</p>
+<p>要使用回调设置正确的上下文，您可能需要另一种方便的技术 - 您可以从中创建有界函数。</p>
+<h3 id="绑定功能"><a href="#绑定功能" class="headerlink" title="绑定功能"></a>绑定功能</h3><p>有界函数是一个限定给定上下文的函数，这意味着无论你怎么调用它，它的上下文都是不变的。唯一例外是总是返回一个新上下文的new运算符。</p>
+<p>要是普通函数变成有界函数，应该使用bind方法，bind方法将您要将函数绑定到的上下文作为第一个参数。其余的参数是将始终传递给这样的函数的参数。</p>
+<p>结果返回有界函数。我们来看一个例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">function add(x, y) &#123;</div><div class="line">  this.result += x + y;</div><div class="line">&#125;</div><div class="line">var computation1 = &#123; result: 0 &#125;;</div><div class="line">var boundedAdd = add.bind(computation1);</div><div class="line">boundedAdd(1, 2); // `this` is set to `computation1`.</div><div class="line">                  //  computation1 after call: &#123; result: 3 &#125;</div><div class="line">var boundedAddPlusTwo = add.bind(computation1, 2);</div><div class="line">boundedAddPlusTwo(4); // `this` is set to `computation1`.</div><div class="line">                      // computation1 after call: &#123; result: 9 &#125;</div></pre></td></tr></table></figure>
+<p>被绑定了的函数甚至不能在通过call或apply改变上下文：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">var obj = &#123; boundedPlusTwo: boundedAddPlusTwo &#125;;</div><div class="line">obj.boundedPlusTwo(4); // `this` is set to `computation1`.</div><div class="line">                       // even though method is called on `obj`.</div><div class="line">                       // computation1 after call: &#123; result: 15 &#125;</div><div class="line">var computation2 = &#123; result: 0 &#125;;</div><div class="line">boundedAdd.call(computation2, 1, 2); // `this` is set to `computation1`.</div><div class="line">                                     // even though context passed to call is</div><div class="line">                                     // `computation2`</div><div class="line">                                     // computation1 after call: &#123; result: 18 &#125;</div></pre></td></tr></table></figure>
+<p>您现在已经掌握了关于JavaScript的知识，现在让我们来看react中的情况。</p>
+<h2 id="怎么绑定以及绑定什么"><a href="#怎么绑定以及绑定什么" class="headerlink" title="怎么绑定以及绑定什么"></a>怎么绑定以及绑定什么</h2><p>ECMAScript 2015（ECMAScript 6）引入了一种新的类语法，可用于创建React组件类。实际上，这个类语法是面向对象JavaScript 的旧的原型系统的语法糖。</p>
+<p>这意味着ES2015类中的函数上下文调用遵循与其余JavaScript相同的原则。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">class Foo &#123;</div><div class="line">  constructor() &#123;</div><div class="line">    this.x = 2;</div><div class="line">    this.y = 4;</div><div class="line">  &#125;</div><div class="line">  bar() &#123;</div><div class="line">    // ...</div><div class="line">  &#125;</div><div class="line">  baz() &#123;</div><div class="line">    // ...</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>与以下大致相同：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">function Foo() &#123;</div><div class="line">  this.x = 2;</div><div class="line">  this.y = 4;</div><div class="line">  this.bar = function() &#123; // ... &#125;;</div><div class="line">  this.baz = function() &#123; // ... &#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>记住这只是一个简化。在确定函数上下文调用的情况下，这个更复杂的逻辑遵循与上面的代码片段相同的原理。</p>
+<h3 id="React-createClass"><a href="#React-createClass" class="headerlink" title="React.createClass"></a>React.createClass</h3><p>在这个语法下，绑定问题是不存在的，在传递给对象的对象中定义的所有方法React.createClass将自动绑定到组件实例。这意味着你可以随时使用setState，访问props和state等等这些方法。</p>
+<p>尽管在99％的情况下可能完全可以接受，但它限制了您对任意设置上下文的能力 - 这可能是更复杂的代码库中的一个大问题。</p>
+<h3 id="ECMAScript-2015-classes"><a href="#ECMAScript-2015-classes" class="headerlink" title="ECMAScript 2015 classes"></a>ECMAScript 2015 classes</h3><p>在ECMAScript 2015 classes写法中，你需要手动绑定方法。</p>
+<p>以下是React库中是可以识别为方法调用模式执行调用：</p>
+<ul>
+<li><p>组件生命周期方法。它仅仅通过component.componentDidUpdate(…)方式调用（因此，this已经正确绑定到组件实例本身）。</p>
+</li>
+<li><p>render方法。它也是被识别为方法调用模式执行调用。大多数的非事件处理函数在render方法中调用，它已经被自动绑定到组件实例，所以你可以放心使用。</p>
+</li>
+</ul>
+<p>但是，传递给事件处理属性的函数可能有许多来源，甚至可能通过顶级组件的属性从非React级别传递给他们。</p>
+<p>在React.createClassReact假定它们来自您的组件并自动绑定它们。但是在ES2015 classes中你有自由。在引擎中，它们被以函数调用模式调用。</p>
+<p>这意味这，在默认情况下，你无法在事件处理程序中读取组件属性、状态和组件的方法，为此，你需要明确地绑定他们。</p>
+<p>绑定事件处理程序的最佳位置是构造函数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">class InputExample extends React.Component &#123;</div><div class="line">  constructor(props) &#123;</div><div class="line">    super(props);</div><div class="line">    this.state = &#123; text: &apos;&apos; &#125;;</div><div class="line">    this.change = this.change.bind(this);</div><div class="line">  &#125;</div><div class="line">  change(ev) &#123;</div><div class="line">    this.setState(&#123; text: ev.target.value &#125;);</div><div class="line">  &#125;</div><div class="line">  render() &#123;</div><div class="line">    let &#123; text &#125; = this.state;</div><div class="line">    return (&lt;input type=&quot;text&quot; value=&#123;text&#125; onChange=&#123;this.change&#125; /&gt;);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这样你的事件处理程序的上下文将会绑定到组件实例中。</p>
+<h3 id="类属性"><a href="#类属性" class="headerlink" title="类属性"></a>类属性</h3><p>有一个实验功能，称为类属性，可以帮助您明确避免绑定方法。它是用于在构造函数中定义字段和函数的语法糖。看起来像这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">class InputExample extends React.Component &#123;</div><div class="line">  state = &#123; text: &apos;&apos; &#125;;</div><div class="line">  // ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>并编译成以下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">class InputExample extends React.Component &#123;</div><div class="line">  constructor(...arguments) &#123;</div><div class="line">    super(...arguments);</div><div class="line">    this.state = &#123; text: &apos;&apos; &#125;;</div><div class="line">  &#125;</div><div class="line">  // ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>那么怎么定义一个方法呢？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">class InputExample extends React.Component &#123;</div><div class="line">  state = &#123; text: &apos;&apos; &#125;;</div><div class="line">  change = function(ev) &#123;</div><div class="line">    this.setState(&#123; text: ev.target.value &#125;);</div><div class="line">  &#125;;</div><div class="line">  // ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>所以现在，你得到一个等同于以下类：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">class InputExample extends React.Component &#123;</div><div class="line">  constructor(...arguments) &#123;</div><div class="line">    super(...arguments);</div><div class="line">    this.state = &#123; text: &apos;&apos; &#125;;</div><div class="line">    this.change = function(ev) &#123;</div><div class="line">      this.setState(&#123; text: ev.target.value &#125;);</div><div class="line">    &#125;;</div><div class="line">  &#125;</div><div class="line">  // ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>但是这样有一个问题，this.change函数上下文还是错误的，所以我们要结合箭头函数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">class InputExample extends React.Component &#123;</div><div class="line">  state = &#123; text: &apos;&apos; &#125;;</div><div class="line">  change = ev =&gt; this.setState(&#123;text: ev.target.value&#125;);</div><div class="line">  render() &#123;</div><div class="line">    let &#123;text&#125; = this.state;</div><div class="line">    return (&lt;input type=&quot;text&quot; value=&#123;text&#125; onChange=&#123;this.change&#125; /&gt;);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>该解决方案的缺点是类属性仍处于实验阶段。这意味着此功能可以在ECMAScript 2016（也称为ECMAScript 7或ES7）的后续迭代中被删除，而不会发出警告。</p>
+<h3 id="createClass以及class语法编译完的不同"><a href="#createClass以及class语法编译完的不同" class="headerlink" title="createClass以及class语法编译完的不同"></a>createClass以及class语法编译完的不同</h3><p>我们先来看类写法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">class Todo extends Component&#123;</div><div class="line">    handleClick()&#123;</div><div class="line">        console.info(this);</div><div class="line">    &#125;</div><div class="line">    method()&#123;</div><div class="line">        console.info(this);</div><div class="line">    &#125;</div><div class="line">    render()&#123;</div><div class="line">        this.method();</div><div class="line">        return (</div><div class="line">            &lt;div&gt;</div><div class="line">                &lt;p onClick=&#123;this.handleClick&#125;&gt;Hello&lt;/p&gt;</div><div class="line">            &lt;/div&gt;</div><div class="line">        )</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>编译完：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">var Todo = function (_Component) &#123;</div><div class="line">    _inherits(Todo, _Component);</div><div class="line">    function Todo() &#123;</div><div class="line">        _classCallCheck(this, Todo);</div><div class="line">        return _possibleConstructorReturn(this, _Component.apply(this, arguments));</div><div class="line">    &#125;</div><div class="line">    Todo.prototype.handleClick = function handleClick() &#123;</div><div class="line">        console.info(this);</div><div class="line">    &#125;;</div><div class="line">    Todo.prototype.method = function method() &#123;</div><div class="line">        console.info(this);</div><div class="line">    &#125;;</div><div class="line">    Todo.prototype.render = function render() &#123;</div><div class="line">        this.method();</div><div class="line">        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(</div><div class="line">            &apos;div&apos;,</div><div class="line">            null,</div><div class="line">            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(</div><div class="line">                &apos;p&apos;,</div><div class="line">                &#123; onClick: this.handleClick &#125;,</div><div class="line">                &apos;Hello&apos;</div><div class="line">            )</div><div class="line">        );</div><div class="line">    &#125;;</div><div class="line">    return Todo;</div><div class="line">&#125;(__WEBPACK_IMPORTED_MODULE_0_react__[&quot;Component&quot;]);</div></pre></td></tr></table></figure>
+<p>this.handleClick被放在{onClick: this.handleClick}中，所以当被调用的时候会被识别为函数调用模式，所以这时的上下文是null（为什么不是window或其他的？？？）</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/08/02/react/React要手动绑定方法的原因/" data-id="cj5unypvq000wngqowye7urot" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/08/02/react/react获取父组件或子组件属性/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          React获取父组件或子组件属性
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/08/02/javascript/for对比forEach/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flexbox/">flexbox</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/flexbox/" style="font-size: 10px;">flexbox</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/react/" style="font-size: 20px;">react</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/08/02/react/react文档-css动画/">react文档-css动画</a>
+          </li>
+        
+          <li>
+            <a href="/2017/08/02/css/Flexbox布局兼容性总结/">Flexbox布局兼容性总结</a>
+          </li>
+        
+          <li>
+            <a href="/2017/08/02/javascript/关于同一元素下dbClick触发两次click的问题/">关于同一元素下dbClick触发两次click的问题</a>
+          </li>
+        
+          <li>
+            <a href="/2017/08/02/react/react获取父组件或子组件属性/">React获取父组件或子组件属性</a>
+          </li>
+        
+          <li>
+            <a href="/2017/08/02/react/React要手动绑定方法的原因/">React要手动绑定方法的原因</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

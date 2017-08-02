@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>React获取父组件或子组件属性 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="获取子组件的方法可以通过递归this.props.children中得到 获取父组件的方法方法一：可以通过react内部私有函数this._reactInternalInstance._currentElement._owner._instance获取 12345678910111213141516171819var Parent = React.createClass(&amp;#123;  rende">
+<meta name="keywords" content="react">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React获取父组件或子组件属性">
+<meta property="og:url" content="http://yoursite.com/2017/08/02/react/react获取父组件或子组件属性/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="获取子组件的方法可以通过递归this.props.children中得到 获取父组件的方法方法一：可以通过react内部私有函数this._reactInternalInstance._currentElement._owner._instance获取 12345678910111213141516171819var Parent = React.createClass(&amp;#123;  rende">
+<meta property="og:updated_time" content="2017-08-02T06:27:25.718Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="React获取父组件或子组件属性">
+<meta name="twitter:description" content="获取子组件的方法可以通过递归this.props.children中得到 获取父组件的方法方法一：可以通过react内部私有函数this._reactInternalInstance._currentElement._owner._instance获取 12345678910111213141516171819var Parent = React.createClass(&amp;#123;  rende">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-react/react获取父组件或子组件属性" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/02/react/react获取父组件或子组件属性/" class="article-date">
+  <time datetime="2017-08-02T06:09:44.000Z" itemprop="datePublished">2017-08-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      React获取父组件或子组件属性
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="获取子组件的方法"><a href="#获取子组件的方法" class="headerlink" title="获取子组件的方法"></a>获取子组件的方法</h2><p>可以通过递归this.props.children中得到</p>
+<h2 id="获取父组件的方法"><a href="#获取父组件的方法" class="headerlink" title="获取父组件的方法"></a>获取父组件的方法</h2><p>方法一：可以通过react内部私有函数this._reactInternalInstance._currentElement._owner._instance获取</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">var Parent = React.createClass(&#123;</div><div class="line">  render() &#123;</div><div class="line">      return &lt;Child v=&quot;test&quot; /&gt;;</div><div class="line">  &#125;,</div><div class="line">  doAThing() &#123;</div><div class="line">    console.log(&quot;I&apos;m the parent, doing a thing.&quot;, this.props.testing);</div><div class="line">  &#125;</div><div class="line">&#125;);</div><div class="line">var Child = React.createClass(&#123;</div><div class="line">  render() &#123;</div><div class="line">    return &lt;button onClick=&#123;this.onClick&#125;&gt;&#123;this.props.v&#125;&lt;/button&gt;</div><div class="line">  &#125;,</div><div class="line">  onClick() &#123;</div><div class="line">    var parent = this._reactInternalInstance._currentElement._owner._instance;</div><div class="line">    console.log(&quot;parent:&quot;, parent);</div><div class="line">    parent.doAThing();</div><div class="line">  &#125;</div><div class="line">&#125;);</div><div class="line">ReactDOM.render(&lt;Parent testing=&#123;true&#125; /&gt;, container);</div></pre></td></tr></table></figure>
+<p>但是这种方法是不推荐的。</p>
+<p>方法二：通过属性传递给子组件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">class Parent extends React.Component &#123;</div><div class="line">    constructor(props) &#123;</div><div class="line">        super(props)</div><div class="line">        this.fn = this.fn.bind(this)</div><div class="line">    &#125;</div><div class="line">    fn() &#123;</div><div class="line">        console.log(&apos;parent&apos;)</div><div class="line">    &#125;</div><div class="line">    render() &#123;</div><div class="line">        return &lt;Child fn=&#123;this.fn&#125; /&gt;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">const Child = (&#123; fn &#125;) =&gt; &lt;button onClick=&#123;fn&#125;&gt;Click me!&lt;/button&gt;</div></pre></td></tr></table></figure>
+<p>但是这种只在Child组件在Parent组件中时才可以用。</p>
+<p>方法三：使用上下文（没有直接的父/子关系）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">class Parent extends React.Component &#123;</div><div class="line">    constructor(props) &#123;</div><div class="line">        super(props)</div><div class="line">        this.fn = this.fn.bind(this)</div><div class="line">    &#125;</div><div class="line">    getChildContext() &#123;</div><div class="line">        return &#123;</div><div class="line">            fn: this.fn,</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    fn() &#123;</div><div class="line">        console.log(&apos;parent&apos;)</div><div class="line">    &#125;</div><div class="line">    render() &#123;</div><div class="line">        return &lt;Child fn=&#123;this.fn&#125; /&gt;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">Parent.childContextTypes = &#123;</div><div class="line">    fn: React.PropTypes.func,</div><div class="line">&#125;</div><div class="line">const Child = (props, &#123; fn &#125;) =&gt; &lt;button onClick=&#123;fn&#125;&gt;Click me!&lt;/button&gt;</div><div class="line">Child.contextTypes = &#123;</div><div class="line">    fn: React.PropTypes.func,</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="给子组件（没有直接父-子关系）添加属性"><a href="#给子组件（没有直接父-子关系）添加属性" class="headerlink" title="给子组件（没有直接父/子关系）添加属性"></a>给子组件（没有直接父/子关系）添加属性</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">return React.cloneElement(this.props.children, &#123;/*要添加的属性*/&#125;)</div></pre></td></tr></table></figure>
+<h2 id="React关于子组件的API"><a href="#React关于子组件的API" class="headerlink" title="React关于子组件的API"></a>React关于子组件的API</h2><h3 id="React-chlidren-map"><a href="#React-chlidren-map" class="headerlink" title="React.chlidren.map"></a>React.chlidren.map</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">React.Children.map(children, function[(thisArg)])</div></pre></td></tr></table></figure>
+<p>对包含在 children 中的每个直接子元素调用一个函数，使用 this 设置 thisArg 。 如果 children 是一个键片段（keyed fragment）或数组，它将被遍历：该函数永远不会传递容器对象（container objects）。 如果 children 为 null 或 undefined ，返回 null 或 undefined，而不是一个数组。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">import React from &apos;react&apos;;</div><div class="line">const Salmonize = (&#123; children &#125;) =&gt; (</div><div class="line">  &lt;div&gt;</div><div class="line">    &#123;React.Children.map(children, child =&gt; (</div><div class="line">      React.cloneElement(child, &#123;</div><div class="line">        style: &#123;</div><div class="line">          backgroundColor: &apos;salmon&apos;,</div><div class="line">          color: &apos;seagreen&apos;,</div><div class="line">        &#125;</div><div class="line">      &#125;)</div><div class="line">    ))&#125;</div><div class="line">  &lt;/div&gt;</div><div class="line">);</div><div class="line">const SalmonBlog = (&#123; title, posts &#125;) =&gt; (</div><div class="line">  &lt;div&gt;</div><div class="line">    &lt;Salmonize&gt;</div><div class="line">      &lt;NavBar title=&#123;title&#125; /&gt;</div><div class="line">    &lt;/Salmonize&gt;</div><div class="line">    &#123;posts.map(post =&gt; (</div><div class="line">      &lt;Post key=&#123;post.id&#125;&gt;</div><div class="line">        &lt;Salmonize&gt;</div><div class="line">          &lt;PostHeader title=&#123;post.title&#125; /&gt;</div><div class="line">        &lt;/Salmonize&gt;</div><div class="line">        &lt;PostBody text=&#123;post.text&#125; /&gt;</div><div class="line">      &lt;/Post&gt;</div><div class="line">    ))&#125;</div><div class="line">  &lt;/div&gt;</div><div class="line">);</div></pre></td></tr></table></figure>
+<p>在上面这个例子中，Salmonize组件并不需要在乎谁是它的子组件，它通过遍历克隆每个子组件，通过React.cloneElement给子组件增加属性。</p>
+<p>在React中编写真正可重复使用的组件肯定有点棘手，如果你遇到这样的麻烦，那么这种map和clone方法可以帮助到你。</p>
+<h3 id="React-children-forEach"><a href="#React-children-forEach" class="headerlink" title="React.children.forEach"></a>React.children.forEach</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">React.Children.forEach(children, function[(thisArg)])</div></pre></td></tr></table></figure>
+<p>类似React.children.map，但是没有返回值。</p>
+<h3 id="React-Children-count"><a href="#React-Children-count" class="headerlink" title="React.Children.count"></a>React.Children.count</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">React.Children.count(children)</div></pre></td></tr></table></figure>
+<p>返回 children 中的组件总数，等于传递给 map 或 forEach 的回调将被调用的次数。</p>
+<h3 id="React-Children-only"><a href="#React-Children-only" class="headerlink" title="React.Children.only"></a>React.Children.only</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">React.Children.only(children)</div></pre></td></tr></table></figure>
+<p>返回 children 中的唯一子集。否则抛出异常。当您想要确保组件只有一个子级时，这可能会派上用场，如果不满足此条件，则会抛出错误。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">export default React.createClass(&#123;</div><div class="line">  // ...</div><div class="line">  render: function() &#123;</div><div class="line">    const &#123;name, selectedValue, onChange, children&#125; = this.props;</div><div class="line">    const renderedChildren = children(radio(name, selectedValue, onChange));</div><div class="line">    return renderedChildren &amp;&amp; React.Children.only(renderedChildren);</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="React-Children-toArray"><a href="#React-Children-toArray" class="headerlink" title="React.Children.toArray"></a>React.Children.toArray</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">React.Children.toArray(children)</div></pre></td></tr></table></figure>
+<p>将 children 不透明数据结构作为一个平面数组返回，并且 key 分配给每个子集。 如果你想在渲染方法中操作children集合，特别是如果你想在传递它之前重新排序或切割 this.props.children ，这将非常有用。</p>
+<p>该方法将children组件的支持转换为纯JavaScript数组，这可以使您比React.Children.map提供更多的灵活性。React.Children.toArray最近在我想要渲染一个分隔符的列表中时，它们之间散布着很方便。这导致我创建一个完成这个的组件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">import React from &apos;react&apos;;</div><div class="line">const IntersperseDividers = (&#123; children &#125;) =&gt; (</div><div class="line">  &lt;div&gt;</div><div class="line">    &#123;React.Children.toArray(children).reduce((elements, child, i, array) =&gt; &#123;</div><div class="line">      elements.push(child);</div><div class="line">      if (i &lt; array.length - 1) &#123;</div><div class="line">        elements.push(&lt;hr key=&#123;`$&#123;i&#125;--divider`&#125; /&gt;);</div><div class="line">      &#125;</div><div class="line">      return elements;</div><div class="line">    &#125;, [])&#125;</div><div class="line">  &lt;/div&gt;</div><div class="line">);</div><div class="line">const List = (&#123; data &#125;) =&gt; (</div><div class="line">  &lt;IntersperseDividers&gt;</div><div class="line">    &#123;data.map((item, i) =&gt; (</div><div class="line">      &lt;div key=&#123;i&#125;&gt;</div><div class="line">        &#123;item.value&#125;</div><div class="line">      &lt;/div&gt;</div><div class="line">    ))&#125;</div><div class="line">  &lt;/IntersperseDividers&gt;</div><div class="line">);</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/08/02/react/react获取父组件或子组件属性/" data-id="cj5unypuz000engqopgm9swia" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/08/02/javascript/关于同一元素下dbClick触发两次click的问题/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          关于同一元素下dbClick触发两次click的问题
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/08/02/react/React要手动绑定方法的原因/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">React要手动绑定方法的原因</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flexbox/">flexbox</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/flexbox/" style="font-size: 10px;">flexbox</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/react/" style="font-size: 20px;">react</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/08/02/react/react文档-css动画/">react文档-css动画</a>
+          </li>
+        
+          <li>
+            <a href="/2017/08/02/css/Flexbox布局兼容性总结/">Flexbox布局兼容性总结</a>
+          </li>
+        
+          <li>
+            <a href="/2017/08/02/javascript/关于同一元素下dbClick触发两次click的问题/">关于同一元素下dbClick触发两次click的问题</a>
+          </li>
+        
+          <li>
+            <a href="/2017/08/02/react/react获取父组件或子组件属性/">React获取父组件或子组件属性</a>
+          </li>
+        
+          <li>
+            <a href="/2017/08/02/react/React要手动绑定方法的原因/">React要手动绑定方法的原因</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

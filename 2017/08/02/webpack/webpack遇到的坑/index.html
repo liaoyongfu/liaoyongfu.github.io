@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="webpack的坑  引用jQuery插件时会报”jQuery is not defined”，解决方法：  (1). Prefer unminified CommonJS/AMD over dist  Most modules link the dist version in the main field of their package.json. While this is useful f">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/2017/08/02/webpack/webpack遇到的坑/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="webpack的坑  引用jQuery插件时会报”jQuery is not defined”，解决方法：  (1). Prefer unminified CommonJS/AMD over dist  Most modules link the dist version in the main field of their package.json. While this is useful f">
+<meta property="og:updated_time" content="2016-12-05T11:57:04.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+<meta name="twitter:description" content="webpack的坑  引用jQuery插件时会报”jQuery is not defined”，解决方法：  (1). Prefer unminified CommonJS/AMD over dist  Most modules link the dist version in the main field of their package.json. While this is useful f">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-webpack/webpack遇到的坑" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/02/webpack/webpack遇到的坑/" class="article-date">
+  <time datetime="2017-08-02T03:44:45.722Z" itemprop="datePublished">2017-08-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="webpack的坑"><a href="#webpack的坑" class="headerlink" title="webpack的坑"></a>webpack的坑</h1><hr>
+<ol>
+<li><p>引用jQuery插件时会报”jQuery is not defined”，解决方法：</p>
+<p> <strong>(1). Prefer unminified CommonJS/AMD over dist</strong></p>
+<p> Most modules link the dist version in the main field of their package.json. While this is useful for most developers, for webpack it is better to alias the src version because this way webpack is able to optimize dependencies better (e.g. when using the DedupePlugin).</p>
+<pre><code>// webpack.config.js
+module.exports = {
+    ...
+    resolve: {
+        alias: {
+            jquery: &quot;jquery/src/jquery&quot;
+        }
+    }
+};
+
+However, in most cases the dist version works just fine as well.
+</code></pre><p> <strong>(2). Use the ProvidePlugin to inject implicit globals</strong></p>
+<p> Most legacy modules rely on the presence of specific globals, like jQuery plugins do on $ or jQuery. In this scenario you can configure webpack, to prepend var $ = require(“jquery”) everytime it encounters the global $ identifier.</p>
+<pre><code>var webpack = require(&quot;webpack&quot;);
+    ...
+    plugins: [
+        new webpack.ProvidePlugin({
+            $: &quot;jquery&quot;,
+            jQuery: &quot;jquery&quot;
+        })
+    ]
+</code></pre><p> <strong>(3). Use the imports-loader to configure this</strong></p>
+<p> Some legacy modules rely on this being the window object. This becomes a problem when the module is executed in a CommonJS context where this equals module.exports. In this case you can override this with the imports-loader.</p>
+<p> Run <code>npm i imports-loader --save-dev</code> and then</p>
+<pre><code>module: {
+    loaders: [
+        {
+            test: /[\/\\]node_modules[\/\\]some-module[\/\\]index\.js$/,
+            loader: &quot;imports?this=&gt;window&quot;
+        }
+    ]
+}
+</code></pre><p> The imports-loader can also be used to manually inject variables of all kinds. But most of the time the ProvidePlugin is more useful when it comes to implicit globals.</p>
+<p> <strong>(4). Use the imports-loader to disable AMD</strong></p>
+<p> There are modules that support different module styles, like AMD, CommonJS and legacy. However, most of the time they first check for define and then use some quirky code to export properties. In these cases, it could help to force the CommonJS path by setting define = false.</p>
+<pre><code>module: {
+    loaders: [
+        {
+            test: /[\/\\]node_modules[\/\\]some-module[\/\\]index\.js$/,
+            loader: &quot;imports?define=&gt;false&quot;
+        }
+    ]
+}
+</code></pre><p> <strong>(5). Use the script-loader to globally import scripts</strong></p>
+<p> If you don’t care about global variables and just want legacy scripts to work, you can also use the script-loader. It executes the module in a global context, just as if you had included them via the <code>&lt;script&gt;</code> tag.</p>
+<p> <strong>(6). Use noParse to include large dists</strong></p>
+<p> When there is no AMD/CommonJS version of the module and you want to include the dist, you can flag this module as noParse. Then webpack will just include the module without parsing it, which can be used to improve the build time. This means that any feature requiring the AST, like the ProvidePlugin, will not work.</p>
+<pre><code>module: {
+    noParse: [
+        /[\/\\]node_modules[\/\\]angular[\/\\]angular\.js$/
+    ]
+}
+</code></pre></li>
+<li><p>常见的loader</p>
+<pre><code>{
+        test: /\.js/,
+        loader: &quot;babel-loader&quot;,
+        query: {
+            &quot;presets&quot;: [&quot;es2015&quot;, &apos;stage-0&apos;],
+            plugins: []
+        },
+        exclude: /(node_modules)/
+    },
+    {
+        test: /\.css$/,
+        //注意：此处不能有autoprefix-loader
+        loader: ExtractText.extract(&apos;style-loader&apos;, &apos;css-loader&apos;)
+    },
+    {
+        test: /\.(png|gif|jpg|jpeg)$/,
+        loader: &quot;url?name=img/[hash:8].[ext]&quot;
+    },
+    {
+        test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
+        loader: &apos;url?name=font/[name].[ext]&amp;limit=10000&amp;minetype=application/font-woff&apos;
+    },
+    {
+        test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
+        loader: &apos;url?name=font/[name].[ext]&amp;limit=10&amp;minetype=application/font-woff&apos;
+    },
+    {
+        test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+        loader: &apos;url?name=font/[name].[ext]&amp;limit=10&amp;minetype=application/octet-stream&apos;
+    },
+    {
+        test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+        loader: &apos;file&apos;
+    },
+    {
+        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+        loader: &apos;url?limit=10&amp;minetype=image/svg+xml&apos;
+    }
+</code></pre></li>
+<li><p>样式的loader</p>
+<pre><code>(1)style-loader|css-loader is the way to do it just with css
+(2)style-loader|css-loader|postcss-loader is the way to post-process css
+(3)style-loader|css-loader|less-loader is the way to do it if you want to use less
+(4)style-loader|css-loader|postcss-loader|less-loader is the way to post-process the compiled less (css)
+</code></pre></li>
+<li><p>ES6引用<code>art-template</code>,报错：<code>Module not found: Error: Cannot resolve module &#39;fs&#39;</code>，解决方法：</p>
+<pre><code>//webpack.config.js
+module.exports={
+    node: {
+        fs: &quot;empty&quot;
+    }
+};
+</code></pre><p> <a href="https://github.com/pugjs/pug-loader/issues/8" target="_blank" rel="external">参考链接</a></p>
+</li>
+<li><p>webpack开发时打包第三方库都比较大，可以通过配置<code>alias</code>指向压缩版本：</p>
+<pre><code>resolve: {
+    alias: {
+        modernizr$: path.resolve(__dirname, &quot;./.modernizrrc&quot;),
+        bootstrap: path.join(__dirname, &quot;./node_modules/bootstrap/dist/js/bootstrap.min.js&quot;),
+        bootstrapCss: path.join(__dirname, &quot;./node_modules/bootstrap/dist/css/bootstrap.min.css&quot;),
+        fontAwesomeCss: path.join(__dirname, &quot;./node_modules/font-awesome/css/font-awesome.min.css&quot;)
+    }
+    }
+</code></pre></li>
+<li><p>引用第三方插件如：<code>ulynlist</code>，需要配置别名：</p>
+<pre><code>alias: {
+    &apos;ulynlist.table&apos;: path.join(__dirname, &apos;./src/sslib/ulynlist/ulynlist.table.js&apos;),
+    &apos;ulynlist.pager&apos;: path.join(__dirname, &apos;./src/sslib/ulynlist/ulynlist.pager.js&apos;),
+    artTemplate: path.join(__dirname, &apos;./node_modules/art-template&apos;)
+}
+</code></pre></li>
+<li><p>import样式文件页面会有闪烁现象，这是可以通过<code>extract-text-webpack-plugin</code>抽取样式文件，就不会有这个问题了</p>
+</li>
+<li>使用ES6 + webpack + angular教程<a href="http://angular-tips.com/blog/2015/06/using-angular-1-dot-x-with-es6-and-webpack/" target="_blank" rel="external">参考链接</a></li>
+<li><p>合并jquery和第三方插件时，外面是读取不到<code>$</code>和<code>jQuery</code>的，所以我们可以通过<code>expose-loader</code>把<code>jQuery</code>对象导出到全局:</p>
+<p> You can either do this when you require it:</p>
+<pre><code>require(&quot;expose?$!jquery&quot;);
+</code></pre><p> or you can do this in your config:</p>
+<pre><code>loaders: [
+    { test: require.resolve(&apos;jquery&apos;), loader: &apos;expose?jQuery!expose?$&apos; }
+]
+</code></pre><p> 相同的道理，如果插件里有this，则我们可以通过<code>imports-loader</code>把this当成window处理：</p>
+<pre><code>{ 
+    test: require.resolve(&apos;respond.js&apos;), 
+    loader: &apos;imports?this=&gt;window&apos; 
+}
+</code></pre></li>
+<li><p>使用第三方插件，如果其没有判断commonjs这一层，则我们可以配合exports-loader和imports-loader使用，如eos3还有eos服务，eos3需要导出eos对象，eos服务的js需要导入eos这个对象：</p>
+<pre><code>import &apos;exports?eos!./lib/eos3/eos3&apos;;
+//这里define设为false，防止组件判断为AMD模块
+import &apos;imports?define=&gt;false,this=&gt;window!./lib/auth/dmService&apos;;
+</code></pre></li>
+<li><p>webpack-dev-server默认是localhost访问，不能通过ip访问，我们可以配置如下：</p>
+<p>webpack-dev-server –host 0.0.0.0</p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/08/02/webpack/webpack遇到的坑/" data-id="cj5unypvn000tngqoe8q1fztp" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/08/02/webpack/迁移到webpack2/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/08/02/webpack/webpack学习06——怎么写loader/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flexbox/">flexbox</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/flexbox/" style="font-size: 10px;">flexbox</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/react/" style="font-size: 20px;">react</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/08/02/react/react文档-css动画/">react文档-css动画</a>
+          </li>
+        
+          <li>
+            <a href="/2017/08/02/css/Flexbox布局兼容性总结/">Flexbox布局兼容性总结</a>
+          </li>
+        
+          <li>
+            <a href="/2017/08/02/javascript/关于同一元素下dbClick触发两次click的问题/">关于同一元素下dbClick触发两次click的问题</a>
+          </li>
+        
+          <li>
+            <a href="/2017/08/02/react/react获取父组件或子组件属性/">React获取父组件或子组件属性</a>
+          </li>
+        
+          <li>
+            <a href="/2017/08/02/react/React要手动绑定方法的原因/">React要手动绑定方法的原因</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

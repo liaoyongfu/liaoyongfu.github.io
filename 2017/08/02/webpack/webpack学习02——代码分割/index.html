@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="webpack学习02——代码分割定义一个代码分割点commonjs: require.ensurerequire.ensure(dependencies, callback) example: //require.ensure仅仅加载而不执行模块 require.ensure([&amp;quot;module-a&amp;quot;, &amp;quot;module-b&amp;quot;], function(requi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/2017/08/02/webpack/webpack学习02——代码分割/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="webpack学习02——代码分割定义一个代码分割点commonjs: require.ensurerequire.ensure(dependencies, callback) example: //require.ensure仅仅加载而不执行模块 require.ensure([&amp;quot;module-a&amp;quot;, &amp;quot;module-b&amp;quot;], function(requi">
+<meta property="og:updated_time" content="2016-12-05T11:57:04.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+<meta name="twitter:description" content="webpack学习02——代码分割定义一个代码分割点commonjs: require.ensurerequire.ensure(dependencies, callback) example: //require.ensure仅仅加载而不执行模块 require.ensure([&amp;quot;module-a&amp;quot;, &amp;quot;module-b&amp;quot;], function(requi">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-webpack/webpack学习02——代码分割" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/02/webpack/webpack学习02——代码分割/" class="article-date">
+  <time datetime="2017-08-02T03:44:45.673Z" itemprop="datePublished">2017-08-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="webpack学习02——代码分割"><a href="#webpack学习02——代码分割" class="headerlink" title="webpack学习02——代码分割"></a>webpack学习02——代码分割</h1><h2 id="定义一个代码分割点"><a href="#定义一个代码分割点" class="headerlink" title="定义一个代码分割点"></a>定义一个代码分割点</h2><h3 id="commonjs-require-ensure"><a href="#commonjs-require-ensure" class="headerlink" title="commonjs: require.ensure"></a>commonjs: <code>require.ensure</code></h3><pre><code>require.ensure(dependencies, callback)
+</code></pre><p>example:</p>
+<pre><code>//require.ensure仅仅加载而不执行模块
+require.ensure([&quot;module-a&quot;, &quot;module-b&quot;], function(require) {
+    var a = require(&quot;module-a&quot;);
+    // ...
+});
+</code></pre><h3 id="AMD-require"><a href="#AMD-require" class="headerlink" title="AMD: require"></a>AMD: <code>require</code></h3><pre><code>require(dependencies, callback)
+</code></pre><p>example:</p>
+<pre><code>//AMD的require加载并会执行模块
+require([&quot;module-a&quot;, &quot;module-b&quot;], function(a, b) {
+    // ...
+});
+</code></pre><h3 id="ES6模块"><a href="#ES6模块" class="headerlink" title="ES6模块"></a>ES6模块</h3><p><strong>webpack1是不支持原生es6模块的，可以通过babal转换</strong></p>
+<h2 id="块的内容"><a href="#块的内容" class="headerlink" title="块的内容"></a>块的内容</h2><p>所有分隔的文件会成为一个块，这个块是由其依赖递归加进去的。</p>
+<h2 id="块压缩"><a href="#块压缩" class="headerlink" title="块压缩"></a>块压缩</h2><p>如果两个块包含同一个模块，他们会被合并成一个。这可能造成块有相同的父级。<br>如果一个模块在一个块的所有父级中是可获取的，这个模块将会在这个块中删除。<br>如果一个块包含另一个块的所有模块，则存储这个块，它实现多个块。</p>
+<h2 id="块加载"><a href="#块加载" class="headerlink" title="块加载"></a>块加载</h2><p>根据配置<code>target</code>目标，将将块加载的运行时逻辑添加到包中。例如：<code>web</code>目标块通过jsonp加载。只有一个块被加载一次，并行请求被合并成一个。运行时检查加载的块是否完成多个块。</p>
+<h2 id="块的类型"><a href="#块的类型" class="headerlink" title="块的类型"></a>块的类型</h2><h3 id="入口块"><a href="#入口块" class="headerlink" title="入口块"></a>入口块</h3><p>一个入口块包含了请求时加载的模块。如果这个块包含模块<code>0</code>则加载并执行它，如果没有，它等待有请求模块<code>0</code>的块。</p>
+<h3 id="正常块"><a href="#正常块" class="headerlink" title="正常块"></a>正常块</h3><p>一个正常的块不会在运行时加载，它仅仅包含一些模块，这个结构依赖于块加载算法，例如：如果目标是jsonp，则这些模块会包含一个jsonp回调函数，这个块当然还包含它负责的一些块id列表。</p>
+<h3 id="初始化块（非入口）"><a href="#初始化块（非入口）" class="headerlink" title="初始化块（非入口）"></a>初始化块（非入口）</h3><p>一个初始化块是一个正常的块，不同的仅仅是压缩工具视它更重要，因为它计算向初始加载时间（像入口块），这个块类型可以结合<code>CommonsChunkPlugin</code>发生。</p>
+<h3 id="分隔app和vendor代码"><a href="#分隔app和vendor代码" class="headerlink" title="分隔app和vendor代码"></a>分隔app和vendor代码</h3><pre><code>var webpack = require(&quot;webpack&quot;);
+
+module.exports = {
+  entry: {
+    app: &quot;./app.js&quot;,
+    vendor: [&quot;jquery&quot;, &quot;underscore&quot;, ...],
+  },
+  output: {
+    filename: &quot;bundle.js&quot;
+  },
+  plugins: [
+    new webpack.optimize.CommonsChunkPlugin(/* chunkName= */&quot;vendor&quot;, /* filename= */&quot;vendor.bundle.js&quot;)
+  ]
+};
+</code></pre><p>vendor块将会从移除所有在app块中的模块，使得bundle块仅仅包含你的代码而不包含其依赖。</p>
+<pre><code>&lt;script src=&quot;vendor.bundle.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;bundle.js&quot;&gt;&lt;/script&gt;
+</code></pre><h3 id="多入口块"><a href="#多入口块" class="headerlink" title="多入口块"></a>多入口块</h3><h4 id="加载多入口"><a href="#加载多入口" class="headerlink" title="加载多入口"></a>加载多入口</h4><p>通过<code>CommonsChukPlugin</code>运行时被移动到公共块，入口文件变成初始化块。只有当初始块可以被加载时，其他入口块才可以被加载。</p>
+<pre><code>var webpack = require(&quot;webpack&quot;);
+module.exports = {
+    entry: { a: &quot;./a&quot;, b: &quot;./b&quot; },
+    output: { filename: &quot;[name].js&quot; },
+    plugins: [ new webpack.optimize.CommonsChunkPlugin(&quot;init.js&quot;) ]
+}
+
+&lt;script src=&quot;init.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;a.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;b.js&quot;&gt;&lt;/script&gt;
+</code></pre><h3 id="公共块"><a href="#公共块" class="headerlink" title="公共块"></a>公共块</h3><p><code>CommonsChunkPlugin</code>可以移动发生在多个入口的模块到一个新的块（公共块），运行时也移动到公共块，这意味着旧的入口块已经变成初始化块。</p>
+<h3 id="压缩优化插件"><a href="#压缩优化插件" class="headerlink" title="压缩优化插件"></a>压缩优化插件</h3><ul>
+<li>LimitChunkCountPlugin</li>
+<li>MinChunkSizePlugin</li>
+<li>AggressiveMergingPlugin</li>
+</ul>
+<h3 id="命名块"><a href="#命名块" class="headerlink" title="命名块"></a>命名块</h3><p>The require.ensure function accepts an additional 3rd parameter. This must be a string. If two split point pass the same string they use the same chunk.</p>
+<h4 id="require-include"><a href="#require-include" class="headerlink" title="require.include"></a>require.include</h4><pre><code>require.include(request)
+</code></pre><p>require.include is a webpack specific function that adds a module to the current chunk, but doesn’t evaluate it (The statement is removed from the bundle).</p>
+<p>Example:</p>
+<pre><code>require.ensure([&quot;./file&quot;], function(require) {
+  require(&quot;./file2&quot;);
+});
+
+// is equal to
+
+require.ensure([], function(require) {
+  require.include(&quot;./file&quot;);
+  require(&quot;./file2&quot;);
+});
+</code></pre><p>require.include can be useful if a module is in multiple child chunks. A require.include in the parent would include the module and the instances of the modules in the child chunks would disappear.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/08/02/webpack/webpack学习02——代码分割/" data-id="cj5unypv8000jngqoog1eg79s" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/08/02/webpack/webpack学习03——样式/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/08/02/webpack/webpack学习01——简介/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flexbox/">flexbox</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/flexbox/" style="font-size: 10px;">flexbox</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/react/" style="font-size: 20px;">react</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/08/02/react/react文档-css动画/">react文档-css动画</a>
+          </li>
+        
+          <li>
+            <a href="/2017/08/02/css/Flexbox布局兼容性总结/">Flexbox布局兼容性总结</a>
+          </li>
+        
+          <li>
+            <a href="/2017/08/02/javascript/关于同一元素下dbClick触发两次click的问题/">关于同一元素下dbClick触发两次click的问题</a>
+          </li>
+        
+          <li>
+            <a href="/2017/08/02/react/react获取父组件或子组件属性/">React获取父组件或子组件属性</a>
+          </li>
+        
+          <li>
+            <a href="/2017/08/02/react/React要手动绑定方法的原因/">React要手动绑定方法的原因</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

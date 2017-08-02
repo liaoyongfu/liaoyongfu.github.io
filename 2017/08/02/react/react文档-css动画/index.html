@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>react文档-css动画 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="TransitionGroup和CSSTransitionGroup已移动到react-transition-group有社区维护。它的1.x分支与现有插件的API是完全兼容的。 TransitionGroup是一个具有低级API的动画组件，而CSSTransitionGroup是一个基于css的animation和transition更容易被使用的组件。 高级API：CSSTransitionG">
+<meta name="keywords" content="react">
+<meta property="og:type" content="article">
+<meta property="og:title" content="react文档-css动画">
+<meta property="og:url" content="http://yoursite.com/2017/08/02/react/react文档-css动画/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="TransitionGroup和CSSTransitionGroup已移动到react-transition-group有社区维护。它的1.x分支与现有插件的API是完全兼容的。 TransitionGroup是一个具有低级API的动画组件，而CSSTransitionGroup是一个基于css的animation和transition更容易被使用的组件。 高级API：CSSTransitionG">
+<meta property="og:updated_time" content="2017-08-02T06:46:28.729Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="react文档-css动画">
+<meta name="twitter:description" content="TransitionGroup和CSSTransitionGroup已移动到react-transition-group有社区维护。它的1.x分支与现有插件的API是完全兼容的。 TransitionGroup是一个具有低级API的动画组件，而CSSTransitionGroup是一个基于css的animation和transition更容易被使用的组件。 高级API：CSSTransitionG">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-react/react文档-css动画" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/02/react/react文档-css动画/" class="article-date">
+  <time datetime="2017-08-02T06:38:52.000Z" itemprop="datePublished">2017-08-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      react文档-css动画
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>TransitionGroup和CSSTransitionGroup已移动到react-transition-group有社区维护。它的1.x分支与现有插件的API是完全兼容的。</p>
+<p>TransitionGroup是一个具有低级API的动画组件，而CSSTransitionGroup是一个基于css的animation和transition更容易被使用的组件。</p>
+<h2 id="高级API：CSSTransitionGroup"><a href="#高级API：CSSTransitionGroup" class="headerlink" title="高级API：CSSTransitionGroup"></a>高级API：CSSTransitionGroup</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line">import &#123; CSSTransitionGroup &#125; from &apos;react-transition-group&apos; // ES6</div><div class="line">var CSSTransitionGroup = require(&apos;react-transition-group/CSSTransitionGroup&apos;) // ES5 with npm</div><div class="line"></div><div class="line">class TodoList extends React.Component&#123;</div><div class="line">    constructor()&#123;</div><div class="line">        super();</div><div class="line">        </div><div class="line">        this.state = &#123;</div><div class="line">            items: [</div><div class="line">                &apos;hello&apos;,</div><div class="line">                &apos;world&apos;,</div><div class="line">                &apos;click&apos;,</div><div class="line">                &apos;me&apos;</div><div class="line">            ]</div><div class="line">        &#125;;</div><div class="line">        this.handleAdd = this.handleAdd.bind(this);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    handleAdd() &#123;</div><div class="line">        const newItems = this.state.items.concat([</div><div class="line">          prompt(&apos;Enter some text&apos;)</div><div class="line">        ]);</div><div class="line">        this.setState(&#123;items: newItems&#125;);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    handleRemove(i) &#123;</div><div class="line">        let newItems = this.state.items.slice();</div><div class="line">        newItems.splice(i, 1);</div><div class="line">        this.setState(&#123;items: newItems&#125;);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    render()&#123;</div><div class="line">        const items = this.state.items.map((item, i) =&gt; (</div><div class="line">          &lt;div key=&#123;i&#125; onClick=&#123;() =&gt; this.handleRemove(i)&#125;&gt;</div><div class="line">            &#123;item&#125;</div><div class="line">          &lt;/div&gt;</div><div class="line">        ));</div><div class="line">        return (</div><div class="line">            &lt;div&gt;</div><div class="line">                &lt;button type=&quot;button&quot; onClick=&#123;this.handleAdd&#125;&gt;Add Item&lt;/button&gt;</div><div class="line">                &lt;CSSTransitionGroup</div><div class="line">                    transitionName=&quot;example&quot;</div><div class="line">                    transitionEnterTimeout=&#123;500&#125;</div><div class="line">                    transitionLeaveTimeout=&#123;300&#125;</div><div class="line">                &gt;</div><div class="line">                    &#123;items&#125;</div><div class="line">                &lt;/CSSTransitionGroup&gt;</div><div class="line">            &lt;/div&gt;</div><div class="line">        );</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<script src="https://jsfiddle.net/liaoyf/f4dxmnbr/2/embedded/js,html,css,result/dark/"></script>
+
+<p>在这个组件中，当一个新的Item被添加时，ReactCSSTransitionGroup将获得一个example-enter的类和example-enter-active的类，这些类名是基于trnasitionName的值。</p>
+<p>您可以使用这些类来触发css动画或转换。例如：尝试添加如下样式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">.example-enter&#123;</div><div class="line">    opacity: 0.01;</div><div class="line">&#125;</div><div class="line">.example-enter.example-enter-active&#123;</div><div class="line">    opacity: 1;</div><div class="line">    transition: opacity 500ms ease-in;</div><div class="line">&#125;</div><div class="line">.example-leave&#123;</div><div class="line">    opacity: 1;</div><div class="line">&#125;</div><div class="line">.example-leavel.example-leavel-active&#123;</div><div class="line">    opacity: 0.01;</div><div class="line">    transition: opacity 300ms ease-in;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="初始化加载动画"><a href="#初始化加载动画" class="headerlink" title="初始化加载动画"></a>初始化加载动画</h3><p>ReactCSSTransitionGroup提供一个可选的属性transitionAppear，以在组件的初始渲染时添加额外的过渡阶段。默认为false：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">render() &#123;</div><div class="line">  return (</div><div class="line">    &lt;CSSTransitionGroup</div><div class="line">      transitionName=&quot;example&quot;</div><div class="line">      transitionAppear=&#123;true&#125;</div><div class="line">      transitionAppearTimeout=&#123;500&#125;</div><div class="line">      transitionEnter=&#123;false&#125;</div><div class="line">      transitionLeave=&#123;false&#125;&gt;</div><div class="line">      &lt;h1&gt;Fading at Initial Mount&lt;/h1&gt;</div><div class="line">    &lt;/CSSTransitionGroup&gt;</div><div class="line">  );</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在初始化渲染ReactCSSTransitionGroup过程中，example-appear类和example-appear-active类将被添加。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">.example-appear &#123;</div><div class="line">  opacity: 0.01;</div><div class="line">&#125;</div><div class="line">.example-appear.example-appear-active &#123;</div><div class="line">  opacity: 1;</div><div class="line">  transition: opacity .5s ease-in;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在初始化渲染阶段，所有ReactCSSTransitionGroup的孩子节点将会appear而不是enter，然而，所有孩子稍后被渲染后将会触发enter而不是appear。</p>
+<p>注意：</p>
+<p>属性transitionAppear在0.13版本中才被添加进入ReactCSSTransitionGroup中，为了向后兼容，默认值为false。</p>
+<p>然而，transitionEnter和transtionLeave默认为true，所以你默认只要指定transitionEnterTimeout和transitionLeaveTimeout。</p>
+<h3 id="自定义类名"><a href="#自定义类名" class="headerlink" title="自定义类名"></a>自定义类名</h3><p>当然，我们也可以使用自定义类名代替每一步默认的类名。你可以通过传递一个包含enter或leave或appear等等的对象给transitionName而不是字符串。</p>
+<p>如果未提供active时，默认会为添加-active后的类名：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">&lt;CSSTransitionGroup</div><div class="line">    transitionName=&#123;</div><div class="line">        &#123;</div><div class="line">            enter: &apos;enter&apos;,</div><div class="line">            enterActive: &apos;enterActive&apos;,</div><div class="line">            leave: &apos;leave&apos;,</div><div class="line">            leaveActive: &apos;leaveActive&apos;,</div><div class="line">            appear: &apos;appear&apos;,</div><div class="line">            appearActive: &apos;appearActive&apos;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&gt;</div><div class="line">&#123;item&#125;</div><div class="line">&lt;/CSSTransitionGroup&gt;</div><div class="line">&lt;CSSTransitionGroup</div><div class="line">  transitionName=&#123; &#123;</div><div class="line">    enter: &apos;enter&apos;,</div><div class="line">    leave: &apos;leave&apos;,</div><div class="line">    appear: &apos;appear&apos;</div><div class="line">  &#125; &#125;&gt;</div><div class="line">  &#123;item2&#125;</div><div class="line">&lt;/CSSTransitionGroup&gt;</div></pre></td></tr></table></figure>
+<h3 id="动画组必须已经被渲染到DOM"><a href="#动画组必须已经被渲染到DOM" class="headerlink" title="动画组必须已经被渲染到DOM"></a>动画组必须已经被渲染到DOM</h3><p>为了时其子节点的动画能够生效，ReactCSSTransitionGroup必须已经被加载进DOM中，或者transitionAppear必须为true。</p>
+<p>下面的例子将不会正常运行，因为ReactCSSTransitionGroup被和新的item一起渲染，而不是新的item渲染进其子节点：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">render() &#123;</div><div class="line">  const items = this.state.items.map((item, i) =&gt; (</div><div class="line">    &lt;div key=&#123;item&#125; onClick=&#123;() =&gt; this.handleRemove(i)&#125;&gt;</div><div class="line">      &lt;CSSTransitionGroup transitionName=&quot;example&quot;&gt;</div><div class="line">        &#123;item&#125;</div><div class="line">      &lt;/CSSTransitionGroup&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">  ));</div><div class="line">  return (</div><div class="line">    &lt;div&gt;</div><div class="line">      &lt;button onClick=&#123;this.handleAdd&#125;&gt;Add Item&lt;/button&gt;</div><div class="line">      &#123;items&#125;</div><div class="line">    &lt;/div&gt;</div><div class="line">  );</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="渲染一个或零个子节点"><a href="#渲染一个或零个子节点" class="headerlink" title="渲染一个或零个子节点"></a>渲染一个或零个子节点</h3><p>在上面的例子中，我们渲染了一个列表节点，当然，ReactCSSTransitionGroup也可以渲染一个或零个节点：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">import ReactCSSTransitionGroup from &apos;react-addons-css-transition-group&apos;;</div><div class="line">function ImageCarousel(props) &#123;</div><div class="line">  return (</div><div class="line">    &lt;div&gt;</div><div class="line">      &lt;CSSTransitionGroup</div><div class="line">        transitionName=&quot;carousel&quot;</div><div class="line">        transitionEnterTimeout=&#123;300&#125;</div><div class="line">        transitionLeaveTimeout=&#123;300&#125;&gt;</div><div class="line">        &lt;img src=&#123;props.imageSrc&#125; key=&#123;props.imageSrc&#125; /&gt;</div><div class="line">      &lt;/CSSTransitionGroup&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">  );</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="禁用动画"><a href="#禁用动画" class="headerlink" title="禁用动画"></a>禁用动画</h3><p>可以通过设置false来禁用指定阶段，如：transitionEnter为false禁用进入后的动画效果。</p>
+<p>注意：使用ReactCSSTransitionGroup你没办法知道一个transition已经结束或其他更详细的细节，如果你需要，则得使用低级APIReactTransitionGroup，它提供更多的钩子让你能够监听。</p>
+<h2 id="低级API：TransitionGroup"><a href="#低级API：TransitionGroup" class="headerlink" title="低级API：TransitionGroup"></a>低级API：TransitionGroup</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">import TransitionGroup from &apos;react-transition-group/TransitionGroup&apos; // ES6</div><div class="line">var TransitionGroup = require(&apos;react-transition-group/TransitionGroup&apos;) // ES5 with npm</div></pre></td></tr></table></figure>
+<p>ReactTransitionGroup是动画的基础。当子节点添加或删除，下面这些钩子函数将会被调用：</p>
+<ul>
+<li>componentWillAppear(callback)</li>
+</ul>
+<p>这个方法将在渲染到节点时调用，它将阻塞其他当前正在发生的动画，知道callback被调用。这个方法仅仅在初始化渲染TransitionGroup时被调用。</p>
+<ul>
+<li>componentDidAppear()</li>
+</ul>
+<p>这个方法将在componentWillAppear的callback被调用后被调用。</p>
+<ul>
+<li>componentWillEnter(callback)</li>
+</ul>
+<p>当有新元素被添加到TransitionGroup时调用，它将会阻塞其他动画知道callback调用。</p>
+<ul>
+<li>componentDidEnter()</li>
+</ul>
+<p>在componentWillEnter的callback调用后触发。</p>
+<ul>
+<li>componentWillLeave(callback)</li>
+</ul>
+<p>当有元素被移除时触发，尽管元素已经被删除，但它还是还将保留在DOM中，直到callback被调用。</p>
+<ul>
+<li>componentDidLeave()</li>
+</ul>
+<p>在componentWillLeave的callback被调用时触发（和componentWillUnmount()同时触发）。</p>
+<h3 id="渲染其他组件"><a href="#渲染其他组件" class="headerlink" title="渲染其他组件"></a>渲染其他组件</h3><p>TransitionGroup默认渲染为一个span，你通过增加一个compoennt属性改变默认行为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;TransitionGroup component=&quot;ul&quot;&gt;</div><div class="line">    &#123;/*...*/&#125;</div><div class="line">&lt;/TranstionGroup&gt;</div></pre></td></tr></table></figure>
+<p>另外，用户自定义的属性也会对应增加到组件的属性，如下例子，ul也将会得到className属性：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;TransitionGroup component=&quot;ul&quot; className=&quot;animated-list&quot;&gt;</div><div class="line">  &#123;/* ... */&#125;</div><div class="line">&lt;/TransitionGroup&gt;</div></pre></td></tr></table></figure>
+<p>所有react可以渲染的组件都可以成为component，它不是必须为一个DOM节点，如：component={CustomList}，那么，TransitionGroup的子节点传递给CustomList组件的属性this.props.children。</p>
+<h3 id="渲染单独的子节点"><a href="#渲染单独的子节点" class="headerlink" title="渲染单独的子节点"></a>渲染单独的子节点</h3><p>我们经常会用TransitionGroup来作为单独子节点的渲染和移除时的效果，诸如手风琴效果的面板。</p>
+<p>正常情况下，TransitionGroup把其子节点包裹在一个span（或者自定义的component中），这是因为react的render函数必须返回单独子节点，但是TransitionGroup并不需要这样的规则。</p>
+<p>然而，如果你需要只渲染一个单独子节点，你可以通过定义一个只渲染第一个子节点的组件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">function FirstChild(props) &#123;</div><div class="line">  const childrenArray = React.Children.toArray(props.children);</div><div class="line">  return childrenArray[0] || null;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>现在你可以指定TransitionGroup的component属性为FirstChild来避免包裹外层组件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;TransitionGroup component=&#123;FirstChild&#125;&gt;</div><div class="line">  &#123;someCondition ? &lt;MyComponent /&gt; : null&#125;</div><div class="line">&lt;/TransitionGroup&gt;</div></pre></td></tr></table></figure>
+<p>这仅仅在你只想要渲染一个子节点时有用，在需要渲染多个节点时没有效果。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/08/02/react/react文档-css动画/" data-id="cj5unypuv000cngqoetntgsik" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/08/02/css/Flexbox布局兼容性总结/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Flexbox布局兼容性总结</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flexbox/">flexbox</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/flexbox/" style="font-size: 10px;">flexbox</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/react/" style="font-size: 20px;">react</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/08/02/react/react文档-css动画/">react文档-css动画</a>
+          </li>
+        
+          <li>
+            <a href="/2017/08/02/css/Flexbox布局兼容性总结/">Flexbox布局兼容性总结</a>
+          </li>
+        
+          <li>
+            <a href="/2017/08/02/javascript/关于同一元素下dbClick触发两次click的问题/">关于同一元素下dbClick触发两次click的问题</a>
+          </li>
+        
+          <li>
+            <a href="/2017/08/02/react/react获取父组件或子组件属性/">React获取父组件或子组件属性</a>
+          </li>
+        
+          <li>
+            <a href="/2017/08/02/react/React要手动绑定方法的原因/">React要手动绑定方法的原因</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

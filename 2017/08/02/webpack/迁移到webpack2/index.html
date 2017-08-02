@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="迁移到webpack2Webpack is on the verge of having its latest major version released, and it’s expected to drop very soon. However, the main thing holding the release back is documentation, and the code is">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/2017/08/02/webpack/迁移到webpack2/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="迁移到webpack2Webpack is on the verge of having its latest major version released, and it’s expected to drop very soon. However, the main thing holding the release back is documentation, and the code is">
+<meta property="og:updated_time" content="2016-12-05T11:57:04.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+<meta name="twitter:description" content="迁移到webpack2Webpack is on the verge of having its latest major version released, and it’s expected to drop very soon. However, the main thing holding the release back is documentation, and the code is">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-webpack/迁移到webpack2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/02/webpack/迁移到webpack2/" class="article-date">
+  <time datetime="2017-08-02T03:44:45.731Z" itemprop="datePublished">2017-08-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="迁移到webpack2"><a href="#迁移到webpack2" class="headerlink" title="迁移到webpack2"></a>迁移到webpack2</h1><p>Webpack is on the verge of having its latest major version released, and it’s expected to drop very soon. However, the main thing holding the release back is documentation, and the code is mostly written. I recently took the time to update our work project from Webpack 1 to 2, and thought I’d document the steps taken for anyone else who wants to make the move.</p>
+<p>You can also check out <a href="https://webpack.js.org" target="_blank" rel="external">the migration guide on the Webpack documentation</a>.</p>
+<p><strong>Install the webpack2</strong></p>
+<p>The first thing to do is install the latest version. Because it’s not a stable release, you have to specify the exact beta version you’d like. At the time of writing it’s 2.1.0-beta.25:</p>
+<pre><code>npm install --save-dev webpack@2.1.0-beta.25
+</code></pre><p>If you’re using any other Webpack plugins, be aware that they might need updating. For example, the Extract Text Plugin has a v2 in beta also:</p>
+<pre><code>npm install --save-dev extract-text-webpack-plugin@2.0.0-beta.4
+</code></pre><p><strong>module.loaders =&gt; module.rules</strong></p>
+<p>This is not a breaking change because module.loaders will continue to be supported, but in the future it will be deprecated in favour of module.rules. This is just an easy renaming step.</p>
+<pre><code>// before
+modules: {
+  loaders: {...}
+}
+
+// after
+modules: {
+  rules: {...}
+}
+</code></pre><p><strong>resolve.modulesDirectories =&gt; resolve.modules</strong></p>
+<p>Another renaming step, the resolve options have been renamed:</p>
+<pre><code>// before
+resolve: {
+  modulesDirectories: [...],
+}
+
+// after
+resolve: {
+  modules: [...],
+}
+</code></pre><p><strong>No webpack.optimize.OccurenceOrderPlugin</strong></p>
+<p>It’s now included by default, so there is no need to have this in our config.</p>
+<p><strong>Configuring loaders</strong></p>
+<p>At work we’re using postcss and postcss-loader to load our CSS through Webpack. The loader used to expect a top level postcss key in the Webpack config. As of Webpack 2 this is no longer allowed; we can instead define an options key when we configure the loader. This replaces the query option from Webpack 1. Any plugin that looked for top level configuration will have to be swapped to this style.</p>
+<pre><code>// before, in Webpack top level
+postcss: {
+  plugins: ...
+}
+
+// after
+module: {
+  rules: [{
+    test: /\.scss$/,
+    use: [
+      {
+        loader: &apos;postcss-loader&apos;,
+        options: {
+          plugins: ...
+        }
+      },
+      &apos;sass-loader&apos;
+    ]
+  }]
+}
+</code></pre><p><strong>ExtractTextPlugin changes</strong></p>
+<p>The above change to loader configuration also makes it way easier to configure multiple loaders; previously it would only be possible to pass an array of loaders in string form to some plugins, such as ExtractTextPlugin:</p>
+<pre><code>// Webpack 1
+ExtractTextPlugin.extract(
+  &apos;style-loader&apos;,
+  &apos;css-loader!postcss-loader!sass-loader&apos;
+);
+</code></pre><p>This quickly got very hard to work with if you had to pass options:</p>
+<pre><code>// Webpack 1
+ExtractTextPlugin.extract(
+  &apos;style-loader&apos;,
+  &apos;css-loader?modules-true!postcss-loader!sass-loader&apos;
+);
+</code></pre><p>But now Webpack 2 can deal with arrays of objects to configure loaders. We can replace the above with:</p>
+<pre><code>// Webpack 2
+var loaders = [
+  {
+    loader: &apos;css-loader&apos;,
+    options: {
+      modules: true
+    }
+  },
+  {
+    loader: &apos;postcss-loader&apos;
+  },
+  {
+    loader: &apos;sass-loader&apos;
+  }
+]
+</code></pre><p>Whereas in Webpack 1 we used the key query for configuring loaders, we now use options. ExtractTextPlugin can now take this array, rather than only allowing the string form:</p>
+<pre><code>// Webpack 2
+ExtractTextPlugin.extract({
+  fallbackLoader: &apos;style-loader&apos;,
+  loader: loaders,
+})
+</code></pre><p><strong>Stop Babel from compiling ES2015 modules</strong></p>
+<p>Webpack 1 wasn’t able to parse ES2015 modules, so Babel would convert them into CommonJS. Webpack 2 can parse ES2015 modules, and is able to eliminate dead code based on which modules are used, so it’s recommended that you tell Babel not to convert modules into CommonJS. You can do this by changing your .babelrc:</p>
+<pre><code>// before
+&quot;presets&quot;: [&quot;es2015&quot;]
+
+// after
+&quot;presets&quot;: [
+  [&quot;es2015&quot;, { &quot;modules&quot;: false }]
+]
+</code></pre><p>We’ve seen a good file size saving by doing this, and hopefully this will continue to improve in the future!</p>
+<p><strong>Fin</strong></p>
+<p>Webpack 2 offers better performance, improved bundling and a much nicer experience when configuring it. Given that the code is so stable, despite its beta status, I highly recommend giving it a go on your projects when you can.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/08/02/webpack/迁移到webpack2/" data-id="cj5unypvo000vngqosszphto3" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/08/02/css/HTML不同空格的特性和表现研究/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/08/02/webpack/webpack遇到的坑/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flexbox/">flexbox</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/flexbox/" style="font-size: 10px;">flexbox</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/react/" style="font-size: 20px;">react</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/08/02/react/react文档-css动画/">react文档-css动画</a>
+          </li>
+        
+          <li>
+            <a href="/2017/08/02/css/Flexbox布局兼容性总结/">Flexbox布局兼容性总结</a>
+          </li>
+        
+          <li>
+            <a href="/2017/08/02/javascript/关于同一元素下dbClick触发两次click的问题/">关于同一元素下dbClick触发两次click的问题</a>
+          </li>
+        
+          <li>
+            <a href="/2017/08/02/react/react获取父组件或子组件属性/">React获取父组件或子组件属性</a>
+          </li>
+        
+          <li>
+            <a href="/2017/08/02/react/React要手动绑定方法的原因/">React要手动绑定方法的原因</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

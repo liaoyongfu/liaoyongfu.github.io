@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Flexbox布局兼容性总结 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="写在前面IE9不支持…试了一下flexibility库，发现支持还好，就是嵌套的时候会有问题，因为它是通过定位的方式，暂时无解…… 入门教程传送门 W3C各个版本的flex2009 version标志：display: box; or a property that is box-{*} (eg. box-pack) 2011 version标志：display: flexbox; or the">
+<meta name="keywords" content="css,flexbox">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flexbox布局兼容性总结">
+<meta property="og:url" content="http://yoursite.com/2017/08/02/css/Flexbox布局兼容性总结/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="写在前面IE9不支持…试了一下flexibility库，发现支持还好，就是嵌套的时候会有问题，因为它是通过定位的方式，暂时无解…… 入门教程传送门 W3C各个版本的flex2009 version标志：display: box; or a property that is box-{*} (eg. box-pack) 2011 version标志：display: flexbox; or the">
+<meta property="og:updated_time" content="2017-08-02T06:37:26.049Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Flexbox布局兼容性总结">
+<meta name="twitter:description" content="写在前面IE9不支持…试了一下flexibility库，发现支持还好，就是嵌套的时候会有问题，因为它是通过定位的方式，暂时无解…… 入门教程传送门 W3C各个版本的flex2009 version标志：display: box; or a property that is box-{*} (eg. box-pack) 2011 version标志：display: flexbox; or the">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-css/Flexbox布局兼容性总结" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/02/css/Flexbox布局兼容性总结/" class="article-date">
+  <time datetime="2017-08-02T06:32:43.000Z" itemprop="datePublished">2017-08-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Flexbox布局兼容性总结
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>IE9不支持…试了一下flexibility库，发现支持还好，就是嵌套的时候会有问题，因为它是通过定位的方式，暂时无解……</p>
+<h2 id="入门教程"><a href="#入门教程" class="headerlink" title="入门教程"></a>入门教程</h2><p><a href="http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html" target="_blank" rel="external">传送门</a></p>
+<h2 id="W3C各个版本的flex"><a href="#W3C各个版本的flex" class="headerlink" title="W3C各个版本的flex"></a>W3C各个版本的flex</h2><h3 id="2009-version"><a href="#2009-version" class="headerlink" title="2009 version"></a>2009 version</h3><p>标志：display: box; or a property that is box-{*} (eg. box-pack)</p>
+<h3 id="2011-version"><a href="#2011-version" class="headerlink" title="2011 version"></a>2011 version</h3><p>标志：display: flexbox; or the flex() function or flex-pack property</p>
+<h3 id="2012-version"><a href="#2012-version" class="headerlink" title="2012 version"></a>2012 version</h3><p>标志：display: flex/inline-flex; and flex-{*} properties</p>
+<h3 id="2014-version"><a href="#2014-version" class="headerlink" title="2014 version"></a>2014 version</h3><p>新增了对flex项z-index的规定</p>
+<h3 id="2015-W3C-Editor’s-Draft"><a href="#2015-W3C-Editor’s-Draft" class="headerlink" title="2015 W3C Editor’s Draft"></a>2015 W3C Editor’s Draft</h3><p>没有大的改动</p>
+<p>P.S.注意2015的是W3C Editor’s Draft，只是个草案，还处于修修改改的阶段，还没有征集浏览器供应商的意见。</p>
+<h2 id="浏览器兼容性"><a href="#浏览器兼容性" class="headerlink" title="浏览器兼容性"></a>浏览器兼容性</h2><p>关于flex的W3C规范： <a href="http://dev.w3.org/csswg/css-flexbox-1/" target="_blank" rel="external">http://dev.w3.org/csswg/css-flexbox-1/</a></p>
+<p>浏览器兼容性可以参考CanIUse： <a href="http://caniuse.com/#feat=flexbox" target="_blank" rel="external">http://caniuse.com/#feat=flexbox</a></p>
+<p>根据CanIUse的数据可以总结如下：</p>
+<p>IE10部分支持2012，需要-ms-前缀</p>
+<p>Android4.1/4.2-4.3部分支持2009 ，需要-webkit-前缀</p>
+<p>Safari7/7.1/8部分支持2012， 需要-webkit-前缀</p>
+<p>IOS Safari7.0-7.1/8.1-8.3部分支持2012，需要-webkit-前缀</p>
+<p>所以需要考虑新版本2012： <a href="http://www.w3.org/TR/2012/CR-css3-flexbox-20120918/" target="_blank" rel="external">http://www.w3.org/TR/2012/CR-css3-flexbox-20120918/</a></p>
+<p>而Android需要考虑旧版本2009： <a href="http://www.w3.org/TR/2009/WD-css3-flexbox-20090723/" target="_blank" rel="external">http://www.w3.org/TR/2009/WD-css3-flexbox-20090723/</a></p>
+<h2 id="浏览器兼容的flex语法"><a href="#浏览器兼容的flex语法" class="headerlink" title="浏览器兼容的flex语法"></a>浏览器兼容的flex语法</h2><p>上面分析得很清楚，针对需要兼容的目标使用对应版本的语法就好了，下面给出常用的布局代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div></pre></td><td class="code"><pre><div class="line">/* 子元素-平均分栏 */</div><div class="line">.flex1 &#123;</div><div class="line">	-webkit-box-flex: 1;	  /* OLD - iOS 6-, Safari 3.1-6 */</div><div class="line">	-moz-box-flex: 1;		 /* OLD - Firefox 19- */</div><div class="line">	width: 20%;			   /* For old syntax, otherwise collapses. */</div><div class="line">	-webkit-flex: 1;		  /* Chrome */</div><div class="line">	-ms-flex: 1;			  /* IE 10 */</div><div class="line">	flex: 1;				  /* NEW, Spec - Opera 12.1, Firefox 20+ */</div><div class="line">&#125;</div><div class="line">/* 父元素-横向排列（主轴） */</div><div class="line">.flex-h &#123;</div><div class="line">	display: box;			  /* OLD - Android 4.4- */</div><div class="line">	display: -webkit-box;	  /* OLD - iOS 6-, Safari 3.1-6 */</div><div class="line">	display: -moz-box;		 /* OLD - Firefox 19- (buggy but mostly works) */</div><div class="line">	display: -ms-flexbox;	  /* TWEENER - IE 10 */</div><div class="line">	display: -webkit-flex;	 /* NEW - Chrome */</div><div class="line">	display: flex;			 /* NEW, Spec - Opera 12.1, Firefox 20+ */</div><div class="line">	/* 09版 */</div><div class="line">	-webkit-box-orient: horizontal;</div><div class="line">	/* 12版 */</div><div class="line">	-webkit-flex-direction: row;</div><div class="line">	-moz-flex-direction: row;</div><div class="line">	-ms-flex-direction: row;</div><div class="line">	-o-flex-direction: row;</div><div class="line">	flex-direction: row;</div><div class="line">&#125;</div><div class="line">/* 父元素-横向换行 */</div><div class="line">.flex-hw &#123;</div><div class="line">	/* 09版 */</div><div class="line">	/*-webkit-box-lines: multiple;*/</div><div class="line">	/* 12版 */</div><div class="line">	-webkit-flex-wrap: wrap;</div><div class="line">	-moz-flex-wrap: wrap;</div><div class="line">	-ms-flex-wrap: wrap;</div><div class="line">	-o-flex-wrap: wrap;</div><div class="line">	flex-wrap: wrap;</div><div class="line">&#125;</div><div class="line">/* 父元素-水平居中（主轴是横向才生效） */</div><div class="line">.flex-hc &#123;</div><div class="line">	/* 09版 */</div><div class="line">	-webkit-box-pack: center;</div><div class="line">	/* 12版 */</div><div class="line">	-webkit-justify-content: center;</div><div class="line">	-moz-justify-content: center;</div><div class="line">	-ms-justify-content: center;</div><div class="line">	-o-justify-content: center;</div><div class="line">	justify-content: center;</div><div class="line">	/* 其它取值如下：</div><div class="line">		align-items	 主轴原点方向对齐</div><div class="line">		flex-end		主轴延伸方向对齐</div><div class="line">		space-between   等间距排列，首尾不留白</div><div class="line">		space-around	等间距排列，首尾留白</div><div class="line">	 */</div><div class="line">&#125;</div><div class="line">/* 父元素-纵向排列（主轴） */</div><div class="line">.flex-v &#123;</div><div class="line">	display: box;			  /* OLD - Android 4.4- */</div><div class="line">	display: -webkit-box;	  /* OLD - iOS 6-, Safari 3.1-6 */</div><div class="line">	display: -moz-box;		 /* OLD - Firefox 19- (buggy but mostly works) */</div><div class="line">	display: -ms-flexbox;	  /* TWEENER - IE 10 */</div><div class="line">	display: -webkit-flex;	 /* NEW - Chrome */</div><div class="line">	display: flex;			 /* NEW, Spec - Opera 12.1, Firefox 20+ */</div><div class="line">	/* 09版 */</div><div class="line">	-webkit-box-orient: vertical;</div><div class="line">	/* 12版 */</div><div class="line">	-webkit-flex-direction: column;</div><div class="line">	-moz-flex-direction: column;</div><div class="line">	-ms-flex-direction: column;</div><div class="line">	-o-flex-direction: column;</div><div class="line">	flex-direction: column;</div><div class="line">&#125;</div><div class="line">/* 父元素-纵向换行 */</div><div class="line">.flex-vw &#123;</div><div class="line">	/* 09版 */</div><div class="line">	/*-webkit-box-lines: multiple;*/</div><div class="line">	/* 12版 */</div><div class="line">	-webkit-flex-wrap: wrap;</div><div class="line">	-moz-flex-wrap: wrap;</div><div class="line">	-ms-flex-wrap: wrap;</div><div class="line">	-o-flex-wrap: wrap;</div><div class="line">	flex-wrap: wrap;</div><div class="line">&#125;</div><div class="line">/* 父元素-竖直居中（主轴是横向才生效） */</div><div class="line">.flex-vc &#123;</div><div class="line">	/* 09版 */</div><div class="line">	-webkit-box-align: center;</div><div class="line">	/* 12版 */</div><div class="line">	-webkit-align-items: center;</div><div class="line">	-moz-align-items: center;</div><div class="line">	-ms-align-items: center;</div><div class="line">	-o-align-items: center;</div><div class="line">	align-items: center;</div><div class="line">&#125;</div><div class="line">/* 子元素-显示在从左向右（从上向下）第1个位置，用于改变源文档顺序显示 */</div><div class="line">.flex-1 &#123;</div><div class="line">	-webkit-box-ordinal-group: 1;   /* OLD - iOS 6-, Safari 3.1-6 */</div><div class="line">	-moz-box-ordinal-group: 1;	  /* OLD - Firefox 19- */</div><div class="line">	-ms-flex-order: 1;			  /* TWEENER - IE 10 */</div><div class="line">	-webkit-order: 1;			   /* NEW - Chrome */</div><div class="line">	order: 1;					   /* NEW, Spec - Opera 12.1, Firefox 20+ */</div><div class="line">&#125;</div><div class="line">/* 子元素-显示在从左向右（从上向下）第2个位置，用于改变源文档顺序显示 */</div><div class="line">.flex-2 &#123;</div><div class="line">	-webkit-box-ordinal-group: 2;   /* OLD - iOS 6-, Safari 3.1-6 */</div><div class="line">	-moz-box-ordinal-group: 2;	  /* OLD - Firefox 19- */</div><div class="line">	-ms-flex-order: 2;			  /* TWEENER - IE 10 */</div><div class="line">	-webkit-order: 2;			   /* NEW - Chrome */</div><div class="line">	order: 2;					   /* NEW, Spec - Opera 12.1, Firefox 20+ */</div><div class="line">&#125;</div><div class="line">为了更好的兼容性，我们需要给容器声明flex-h/flex-v，而不是一般的flex：</div><div class="line">/* 父元素-flex容器 */</div><div class="line">.flex &#123;</div><div class="line">	display: box;			  /* OLD - Android 4.4- */</div><div class="line">	display: -webkit-box;	  /* OLD - iOS 6-, Safari 3.1-6 */</div><div class="line">	display: -moz-box;		 /* OLD - Firefox 19- (buggy but mostly works) */</div><div class="line">	display: -ms-flexbox;	  /* TWEENER - IE 10 */</div><div class="line">	display: -webkit-flex;	 /* NEW - Chrome */</div><div class="line">	display: flex;			 /* NEW, Spec - Opera 12.1, Firefox 20+ */</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>所以，建议在需要兼容Android时（2009版语法）采用flex-h/flex-v声明容器使用flex模式，在不需要兼容Android时（2012版语法）使用flex设置容器</p>
+<p>注意：上面给的代码并不是完全兼容各个高端浏览器的，但要比任何其它现有代码兼容性好，具体兼容性测试结果请看Demo</p>
+<h2 id="sass定义"><a href="#sass定义" class="headerlink" title="sass定义"></a>sass定义</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div></pre></td><td class="code"><pre><div class="line">@mixin flex&#123;</div><div class="line">  display: box;   /* old - Android 4.4- */</div><div class="line">  display: -webkit-box; /* old - IOS 6-, Safari 3.1-6 */</div><div class="line">  display: -moz-box;  /* old - Firefox 19 - (buggy but most works) */</div><div class="line">  display: -ms-flexbox;   /* IE 10 */</div><div class="line">  display: -webkit-flex;  /* New - Chrome */</div><div class="line">  display: flex;</div><div class="line">  -js-display: flex;</div><div class="line">&#125;</div><div class="line">@mixin flexDirection($type: row)&#123;</div><div class="line">  /* 09版 */</div><div class="line">  @if $type == &apos;row&apos;&#123;</div><div class="line">    -webkit-box-orient: horizontal;</div><div class="line">  &#125;@else if $type == &apos;row-reverse&apos;&#123;</div><div class="line">    -webkit-box-orient: horizontal;</div><div class="line">  &#125;@else if $type == &apos;column&apos;&#123;</div><div class="line">    -webkit-box-orient: vertical;</div><div class="line">  &#125;@else if $type == &apos;column-reverse&apos;&#123;</div><div class="line">    -webkit-box-orient: vertical;</div><div class="line">  &#125;</div><div class="line">  /* 12版 */</div><div class="line">  -webkit-flex-direction: $type;</div><div class="line">  -moz-flex-direction: $type;</div><div class="line">  -ms-flex-direction: $type;</div><div class="line">  -o-flex-direction: $type;</div><div class="line">  flex-direction: $type;</div><div class="line">  -js-flex-direction: $type;</div><div class="line">&#125;</div><div class="line">@mixin flexWrap($type: nowrap)&#123;</div><div class="line">  /* 09版 */</div><div class="line">  /*-webkit-box-lines: multiple;*/</div><div class="line">  /* 12版 */</div><div class="line">  -webkit-flex-wrap: $type;</div><div class="line">  -moz-flex-wrap: $type;</div><div class="line">  -ms-flex-wrap: $type;</div><div class="line">  -o-flex-wrap: $type;</div><div class="line">  flex-wrap: $type;</div><div class="line">  -js-flex-wrap: $type;</div><div class="line">&#125;</div><div class="line">@mixin justifyContent($type: flex-start)&#123;</div><div class="line">  /* 09版 */</div><div class="line">  //-webkit-box-pack: justify;</div><div class="line">  /* 12版 */</div><div class="line">  -webkit-justify-content: $type;</div><div class="line">  -moz-justify-content: $type;</div><div class="line">  -ms-justify-content: $type;</div><div class="line">  -o-justify-content: $type;</div><div class="line">  justify-content: $type;</div><div class="line">  /* 其它取值如下：</div><div class="line">      align-items	 主轴原点方向对齐</div><div class="line">      flex-end		主轴延伸方向对齐</div><div class="line">      space-between   等间距排列，首尾不留白</div><div class="line">      space-around	等间距排列，首尾留白</div><div class="line">   */</div><div class="line">  -js-justify-content: $type;</div><div class="line">&#125;</div><div class="line">@mixin alignItems($type: stretch)&#123;</div><div class="line">  /* 09版 */</div><div class="line">  //-webkit-box-align: center;</div><div class="line">  /* 12版 */</div><div class="line">  -webkit-align-items: $type;</div><div class="line">  -moz-align-items: $type;</div><div class="line">  -ms-align-items: $type;</div><div class="line">  -o-align-items: $type;</div><div class="line">  align-items: $type;</div><div class="line">  -js-align-items: $type;</div><div class="line">&#125;</div><div class="line">@mixin alignContent($type: stretch)&#123;</div><div class="line">  /* 09版 */</div><div class="line">  //-webkit-box-align: center;</div><div class="line">  /* 12版 */</div><div class="line">  -webkit-align-content: $type;</div><div class="line">  -moz-align-content: $type;</div><div class="line">  -ms-align-content: $type;</div><div class="line">  -o-align-content: $type;</div><div class="line">  align-content: $type;</div><div class="line">  -js-align-content: $type;</div><div class="line">&#125;</div><div class="line">@mixin flexOrder($val: 0)&#123;</div><div class="line">  -webkit-box-ordinal-group: $val;   /* OLD - iOS 6-, Safari 3.1-6 */</div><div class="line">  -moz-box-ordinal-group: $val;	  /* OLD - Firefox 19- */</div><div class="line">  -ms-flex-order: $val;			  /* TWEENER - IE 10 */</div><div class="line">  -webkit-order: $val;			   /* NEW - Chrome */</div><div class="line">  order: $val;					   /* NEW, Spec - Opera 12.1, Firefox 20+ */</div><div class="line">  -js-order: $val;</div><div class="line">&#125;</div><div class="line">@mixin flexGrow($val: 0)&#123;</div><div class="line">  -webkit-box-flex-grow: $val;	  /* OLD - iOS 6-, Safari 3.1-6 */</div><div class="line">  -moz-box-flex-grow: $val;		 /* OLD - Firefox 19- */</div><div class="line">  -webkit-flex-grow: $val;		  /* Chrome */</div><div class="line">  -ms-flex-grow: $val;			  /* IE 10 */</div><div class="line">  flex-grow: $val;				  /* NEW, Spec - Opera 12.1, Firefox 20+ */</div><div class="line">  -js-flex-grow: $val;</div><div class="line">&#125;</div><div class="line">@mixin flexShrink($val: 1)&#123;</div><div class="line">  -webkit-box-flex-shrink: $val;	  /* OLD - iOS 6-, Safari 3.1-6 */</div><div class="line">  -moz-box-flex-shrink: $val;		 /* OLD - Firefox 19- */</div><div class="line">  -webkit-flex-shrink: $val;		  /* Chrome */</div><div class="line">  -ms-flex-shrink: $val;			  /* IE 10 */</div><div class="line">  flex-shrink: $val;				  /* NEW, Spec - Opera 12.1, Firefox 20+ */</div><div class="line">  -js-flex-shrink: $val;</div><div class="line">&#125;</div><div class="line">//横向</div><div class="line">.#&#123;$namespace&#125;flex-h&#123;</div><div class="line">  @include flex();</div><div class="line">  @include flexDirection();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/08/02/css/Flexbox布局兼容性总结/" data-id="cj5unypum0007ngqosf2kkijv" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/flexbox/">flexbox</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/08/02/react/react文档-css动画/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          react文档-css动画
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/08/02/javascript/关于同一元素下dbClick触发两次click的问题/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">关于同一元素下dbClick触发两次click的问题</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/flexbox/">flexbox</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/flexbox/" style="font-size: 10px;">flexbox</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/react/" style="font-size: 20px;">react</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/08/02/react/react文档-css动画/">react文档-css动画</a>
+          </li>
+        
+          <li>
+            <a href="/2017/08/02/css/Flexbox布局兼容性总结/">Flexbox布局兼容性总结</a>
+          </li>
+        
+          <li>
+            <a href="/2017/08/02/javascript/关于同一元素下dbClick触发两次click的问题/">关于同一元素下dbClick触发两次click的问题</a>
+          </li>
+        
+          <li>
+            <a href="/2017/08/02/react/react获取父组件或子组件属性/">React获取父组件或子组件属性</a>
+          </li>
+        
+          <li>
+            <a href="/2017/08/02/react/React要手动绑定方法的原因/">React要手动绑定方法的原因</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
