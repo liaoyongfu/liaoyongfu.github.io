@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Tag: react | liaoyf的博客</title>
+  <title>liaoyf的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
 <meta property="og:title" content="liaoyf的博客">
-<meta property="og:url" content="http://liaoyongfu.com/tags/react/index.html">
+<meta property="og:url" content="http://liaoyongfu.com/page/3/index.html">
 <meta property="og:site_name" content="liaoyf的博客">
 <meta property="og:locale" content="zh-CN">
 <meta name="twitter:card" content="summary">
@@ -62,89 +62,83 @@
       <div class="outer">
         <section id="main">
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/08/02/react/React高阶组件/" class="archive-article-date">
-  <time datetime="2017-08-02T07:35:43.000Z" itemprop="datePublished">8月 2</time>
+    <article id="post-angular2/遇到的问题" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/02/angular2/遇到的问题/" class="article-date">
+  <time datetime="2016-08-02T06:38:52.000Z" itemprop="datePublished">2016-08-02</time>
 </a>
-      
-    </header>
+    
   </div>
-</article>
-  
+  <div class="article-inner">
     
     
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/08/02/react/react文档-css动画/" class="archive-article-date">
-  <time datetime="2017-08-02T06:38:52.000Z" itemprop="datePublished">8月 2</time>
-</a>
-      
+      <header class="article-header">
+        
   
     <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/02/react/react文档-css动画/">react文档-css动画</a>
+      <a class="article-title" href="/2016/08/02/angular2/遇到的问题/">angular2遇到的问题.md</a>
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/08/02/react/React要手动绑定方法的原因/" class="archive-article-date">
-  <time datetime="2017-08-02T06:09:44.000Z" itemprop="datePublished">8月 2</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/02/react/React要手动绑定方法的原因/">React要手动绑定方法的原因</a>
-    </h1>
-  
+        <ol>
+<li><p>在组件时<code>moduleId: module.id</code>时，报<code>Cannot find name &#39;module&#39;</code>?</p>
+<p> 解决方法：</p>
+<p> You need to install node ambientDependencies. Typings.json</p>
+<pre><code>&quot;ambientDependencies&quot;: {
+    &quot;node&quot;: &quot;github:DefinitelyTyped/DefinitelyTyped/node/node.d.ts#138ad74b9e8e6c08af7633964962835add4c91e2&quot;
+}
+</code></pre><p> Another way can use typings manager to install node definition file globally:</p>
+<pre><code>typings install dt~node --global --save
+</code></pre><p> Then your typings.json file will look like this:</p>
+<pre><code>&quot;globalDependencies&quot;: {
+      &quot;node&quot;: &quot;registry:dt/node#6.0.0+20160608110640&quot;
+}
+</code></pre><p> If you use Typescript 2^ just use the following command:</p>
+<pre><code>npm install @types/node --global --save
+</code></pre><p> Or install it within the project:</p>
+<pre><code>npm install @types/node --save
+</code></pre><p> and then add a reference to it from your bootstrap:</p>
+<pre><code>///&lt;reference path=&quot;../../node_modules/@types/node/index.d.ts&quot; /&gt;
+</code></pre></li>
+<li><p>而后出现<code>Url.match is not a function</code>?</p>
+<p> 解决方法：</p>
+</li>
+<li><p>报错：<code>Property &#39;find&#39; does not exist on type &#39;Hero[]&#39;.</code>?</p>
+<p> 解决方法：在<code>typings.json</code>中配置如下代码</p>
+<pre><code>{
+      &quot;globalDependencies&quot;: {
+        &quot;core-js&quot;: &quot;registry:dt/core-js#0.0.0+20160725163759&quot;,
+        &quot;jasmine&quot;: &quot;registry:dt/jasmine#2.2.0+20160621224255&quot;,
+           &quot;node&quot;: &quot;registry:dt/node#6.0.0+20160909174046&quot;
+      }
+}
+</code></pre></li>
+</ol>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/08/02/react/react获取父组件或子组件属性/" class="archive-article-date">
-  <time datetime="2017-08-02T06:09:44.000Z" itemprop="datePublished">8月 2</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/08/02/react/react获取父组件或子组件属性/">React获取父组件或子组件属性</a>
-    </h1>
-  
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://liaoyongfu.com/2016/08/02/angular2/遇到的问题/" data-id="cj5upcia400001sqo06zmjok5" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/angular/">angular</a></li></ul>
 
-    </header>
+    </footer>
   </div>
+  
 </article>
-  
-  
-    </div></section>
+
+
   
 
+
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/page/2/">&laquo; 上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+  </nav>
 </section>
         
           <aside id="sidebar">
