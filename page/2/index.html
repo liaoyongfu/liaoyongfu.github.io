@@ -2260,6 +2260,7 @@ ReactDOM.render(&lt;TodoApp /&gt;, document.getElementById(&apos;todoApp&apos;))
 <ol>
 <li>经常有编辑和查看的页面，编辑取消时需要调用redux-form的<code>resetForm()</code>方法。</li>
 <li>少用jquery！少用jquery！少用jquery！比如<code>$(&#39;input&#39;).prop(&#39;checked&#39;, true)</code>这样是不会触发<code>input</code>的<code>onChange</code>事件的，原因是？？？</li>
+<li>当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。<br>参考网址：<a href="https://stackoverflow.com/questions/25385578/nested-react-input-element-loses-focus-on-typing" target="_blank" rel="external">https://stackoverflow.com/questions/25385578/nested-react-input-element-loses-focus-on-typing</a></li>
 </ol>
 
           
