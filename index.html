@@ -317,7 +317,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2017/08/02/javascript/js浅拷贝和深拷贝/">
+    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2017/09/29/react/React 16新增功能/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="liaoyf">
@@ -336,7 +336,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/08/02/javascript/js浅拷贝和深拷贝/" itemprop="url">js浅拷贝和深拷贝</a></h1>
+                <a class="post-title-link" href="/2017/09/29/react/React 16新增功能/" itemprop="url">React 16新增功能</a></h1>
         
 
         <div class="post-meta">
@@ -348,8 +348,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-02T15:35:43+08:00">
-                2017-08-02
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-29T15:19:23+08:00">
+                2017-09-29
               </time>
             
 
@@ -387,23 +387,158 @@
 
       
         
-          <h2 id="javaScript的变量类型"><a href="#javaScript的变量类型" class="headerlink" title="javaScript的变量类型"></a>javaScript的变量类型</h2><p>（1）基本类型：</p>
-<p>5种基本数据类型Undefined、Null、Boolean、Number 和 String，变量是直接按值存放的，存放在栈内存中的简单数据段，可以直接访问。</p>
-<p>（2）引用类型：</p>
-<p>存放在堆内存中的对象，变量保存的是一个指针，这个指针指向另一个位置。当需要访问引用类型（如对象，数组等）的值时，首先从栈中获得该对象的地址指针，然后再从堆内存中取得所需的数据。</p>
-<blockquote>
-<p>JavaScript存储对象都是存地址的，所以浅拷贝会导致 obj1 和obj2 指向同一块内存地址。改变了其中一方的内容，都是在原来的内存上做修改会导致拷贝对象和源对象都发生改变，而深拷贝是开辟一块新的内存地址，将原对象的各个属性逐个复制进去。对拷贝对象和源对象各自的操作互不影响。</p>
-</blockquote>
-<p>例如：数组拷贝</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//浅拷贝，双向改变,指向同一片内存空间</div><div class="line">var arr1 = [1, 2, 3];</div><div class="line">var arr2 = arr1;</div><div class="line">arr1[0] = &apos;change&apos;;</div><div class="line">console.log(&apos;shallow copy: &apos; + arr1 + &quot; );   //shallow copy: change,2,3</div><div class="line">console.log(&apos;shallow copy: &apos; + arr2 + &quot; );   //shallow copy: change,2,3</div></pre></td></tr></table></figure>
-<h2 id="浅拷贝的实现"><a href="#浅拷贝的实现" class="headerlink" title="浅拷贝的实现"></a>浅拷贝的实现</h2>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/08/02/javascript/js浅拷贝和深拷贝/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
+            <h2 id="官网介绍"><a href="#官网介绍" class="headerlink" title="官网介绍"></a>官网介绍</h2><p><a href="https://facebook.github.io/react/blog/2017/09/26/react-v16.0.html" target="_blank" rel="external">https://facebook.github.io/react/blog/2017/09/26/react-v16.0.html</a></p>
+<h2 id="render函数不必在包一层元素"><a href="#render函数不必在包一层元素" class="headerlink" title="render函数不必在包一层元素"></a>render函数不必在包一层元素</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">render() &#123;</div><div class="line">  // No need to wrap list items in an extra element!</div><div class="line">  return [</div><div class="line">    // Don&apos;t forget the keys :)</div><div class="line">    &lt;li key=&quot;A&quot;&gt;First item&lt;/li&gt;,</div><div class="line">    &lt;li key=&quot;B&quot;&gt;Second item&lt;/li&gt;,</div><div class="line">    &lt;li key=&quot;C&quot;&gt;Third item&lt;/li&gt;,</div><div class="line">  ];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="更好的错误处理"><a href="#更好的错误处理" class="headerlink" title="更好的错误处理"></a>更好的错误处理</h2><p>以前的版本，如果子组件有报错整个组件本身直接不渲染，而现在可以通过<code>componentDidCatch</code>捕获错误信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">class ErrorBoundary extends React.Component &#123;</div><div class="line">    constructor(props) &#123;</div><div class="line">        super(props);</div><div class="line">        this.state = &#123; error: null, errorInfo: null &#125;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    componentDidCatch(error, errorInfo) &#123;</div><div class="line">        // Catch errors in any components below and re-render with error message</div><div class="line">        this.setState(&#123;</div><div class="line">            error: error,</div><div class="line">            errorInfo: errorInfo</div><div class="line">        &#125;)</div><div class="line">        // You can also log error messages to an error reporting service here</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    render() &#123;</div><div class="line">        if (this.state.errorInfo) &#123;</div><div class="line">            // Error path</div><div class="line">            return (</div><div class="line">                &lt;div&gt;</div><div class="line">                    &lt;h2&gt;Something went wrong.&lt;/h2&gt;</div><div class="line">                    &lt;details style=&#123;&#123; whiteSpace: &apos;pre-wrap&apos; &#125;&#125;&gt;</div><div class="line">                        &#123;this.state.error &amp;&amp; this.state.error.toString()&#125;</div><div class="line">                        &lt;br /&gt;</div><div class="line">                        &#123;this.state.errorInfo.componentStack&#125;</div><div class="line">                    &lt;/details&gt;</div><div class="line">                &lt;/div&gt;</div><div class="line">            );</div><div class="line">        &#125;</div><div class="line">        // Normally, just render children</div><div class="line">        return this.props.children;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Portals"><a href="#Portals" class="headerlink" title="Portals"></a>Portals</h2><p>现在可以通过<code>React.createPortal(&lt;SomeComponent/&gt;, document.getElementById(&#39;root&#39;))</code>的形式在react应用容器之外修改或增加DOM：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">render() &#123;</div><div class="line">  // React does *not* create a new div. It renders the children into `domNode`.</div><div class="line">  // `domNode` is any valid DOM node, regardless of its location in the DOM.</div><div class="line">  return ReactDOM.createPortal(</div><div class="line">    this.props.children,</div><div class="line">    domNode,</div><div class="line">  );</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这样对于像要创建模态框就很容易了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line">class Overlay extends React.Component&#123;</div><div class="line">    constructor()&#123;</div><div class="line">        super();</div><div class="line"></div><div class="line">        this.overlayContainer = document.createElement(&apos;div&apos;);</div><div class="line">        document.body.appendChild(this.overlayContainer);</div><div class="line">    &#125;</div><div class="line">    componentWillUnmount()&#123;</div><div class="line">        document.body.removeChild(this.overlayContainer);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    render()&#123;</div><div class="line">        return ReactDOM.createPortal(</div><div class="line">            &lt;div className=&quot;overlay&quot; style=&#123;&#123;position: &apos;absolute&apos;, top: 0, right: 0, bottom: 0, left: 0, background: &apos;rgba(0,0,0, 0.5)&apos;, color: &apos;#fff&apos;&#125;&#125;&gt;</div><div class="line">                &#123;this.props.children&#125;</div><div class="line">            &lt;/div&gt;,</div><div class="line">            this.overlayContainer</div><div class="line">        )</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Demo extends React.Component&#123;</div><div class="line">    constructor()&#123;</div><div class="line">        super();</div><div class="line"></div><div class="line">        this.state = &#123;</div><div class="line">            overlayActive: true</div><div class="line">        &#125;;</div><div class="line">    &#125;</div><div class="line">    render()&#123;</div><div class="line">        return (</div><div class="line">            &lt;div&gt;</div><div class="line">                &lt;button type=&quot;button&quot; onClick=&#123;() =&gt; this.setState(&#123;</div><div class="line">                    user: null</div><div class="line">                &#125;)&#125;&gt;Update&lt;/button&gt;</div><div class="line">                &#123;this.state.overlayActive &amp;&amp; (</div><div class="line">                    &lt;Overlay onClose=&#123;() =&gt; this.setState(&#123;overlayActive: false&#125;)&#125;&gt;</div><div class="line">                        hello modal!!!</div><div class="line">                        &lt;button type=&quot;button&quot; onClick=&#123;() =&gt; this.setState(&#123;overlayActive: false&#125;)&#125;&gt;Close&lt;/button&gt;</div><div class="line">                    &lt;/Overlay&gt;</div><div class="line">                )&#125;</div><div class="line">            &lt;/div&gt;</div><div class="line">        );</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="更好的服务端渲染"><a href="#更好的服务端渲染" class="headerlink" title="更好的服务端渲染"></a>更好的服务端渲染</h2><p>省略。。。</p>
+<h2 id="支持自定义DOM属性"><a href="#支持自定义DOM属性" class="headerlink" title="支持自定义DOM属性"></a>支持自定义DOM属性</h2><p>以前是直接忽视无法识别的属性，而现在是直接渲染给DOM，这也直接节省了很多代码。</p>
+<p>具体参考：<a href="https://facebook.github.io/react/blog/2017/09/08/dom-attributes-in-react-16.html" target="_blank" rel="external">https://facebook.github.io/react/blog/2017/09/08/dom-attributes-in-react-16.html</a></p>
+<h2 id="文件减少"><a href="#文件减少" class="headerlink" title="文件减少"></a>文件减少</h2><ul>
+<li><p>react is 5.3 kb (2.2 kb gzipped), down from 20.7 kb (6.9 kb gzipped).</p>
+</li>
+<li><p>react-dom is 103.7 kb (32.6 kb gzipped), down from 141 kb (42.9 kb gzipped).</p>
+</li>
+<li><p>react + react-dom is 109 kb (34.8 kb gzipped), down from 161.7 kb (49.8 kb gzipped).</p>
+</li>
+</ul>
+<h2 id="MIT协议"><a href="#MIT协议" class="headerlink" title="MIT协议"></a>MIT协议</h2><p>妥协了…</p>
+<h2 id="新的核心架构Fiber"><a href="#新的核心架构Fiber" class="headerlink" title="新的核心架构Fiber"></a>新的核心架构Fiber</h2>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2017/09/29/react-native/react-native中FlatList的使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liaoyf">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="liaoyf的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/09/29/react-native/react-native中FlatList的使用/" itemprop="url">react-native中FlatList的使用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-29T10:18:53+08:00">
+                2017-09-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>原文地址：<a href="https://medium.com/react-native-development/how-to-use-the-flatlist-component-react-native-basics-92c482816fe6" target="_blank" rel="external">https://medium.com/react-native-development/how-to-use-the-flatlist-component-react-native-basics-92c482816fe6</a></p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>自从0.43版本以来，react-native新增了两个新的列表视图组件：<code>FlatList</code>以及<code>SectionList</code>，现在我们来看看<code>FlatList</code>组件的使用。</p>
+<h2 id="简单示例"><a href="#简单示例" class="headerlink" title="简单示例"></a>简单示例</h2><p>在<code>FlatList</code>中有个比较重要的属性：<code>data</code>和<code>renderItem</code>属性，data为object数组，renderItem可以控制每个item的渲染规则。</p>
+<p>这边的示例我们将会从<a href="https://randomuser.me/" target="_blank" rel="external">Random User Generator API</a>中拿，UI渲染将会使用<a href="https://github.com/react-native-training/react-native-elements" target="_blank" rel="external">react-native-elements</a>的组件。</p>
+<p><a href="https://github.com/spencercarli/react-native-flatlist-demo" target="_blank" rel="external">点击查看完整源代码</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line">//FlatListDemo.js</div><div class="line">import React, &#123; Component &#125; from &quot;react&quot;;</div><div class="line">import &#123; View, Text, FlatList &#125; from &quot;react-native&quot;;</div><div class="line"></div><div class="line">class FlatListDemo extends Component &#123;</div><div class="line">  constructor(props) &#123;</div><div class="line">    super(props);</div><div class="line"></div><div class="line">    this.state = &#123;</div><div class="line">      loading: false,</div><div class="line">      data: [],</div><div class="line">      page: 1,</div><div class="line">      seed: 1,</div><div class="line">      error: null,</div><div class="line">      refreshing: false,</div><div class="line">    &#125;;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  componentDidMount() &#123;</div><div class="line">    this.makeRemoteRequest();</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  makeRemoteRequest = () =&gt; &#123;</div><div class="line">    const &#123; page, seed &#125; = this.state;</div><div class="line">    const url = `https://randomuser.me/api/?seed=$&#123;seed&#125;&amp;page=$&#123;page&#125;&amp;results=20`;</div><div class="line">    this.setState(&#123; loading: true &#125;);</div><div class="line">    fetch(url)</div><div class="line">      .then(res =&gt; res.json())</div><div class="line">      .then(res =&gt; &#123;</div><div class="line">        this.setState(&#123;</div><div class="line">          data: page === 1 ? res.results : [...this.state.data, ...res.results],</div><div class="line">          error: res.error || null,</div><div class="line">          loading: false,</div><div class="line">          refreshing: false</div><div class="line">        &#125;);</div><div class="line">      &#125;)</div><div class="line">      .catch(error =&gt; &#123;</div><div class="line">        this.setState(&#123; error, loading: false &#125;);</div><div class="line">      &#125;);</div><div class="line">  &#125;;</div><div class="line"></div><div class="line">  render() &#123;</div><div class="line">    return (</div><div class="line">      &lt;View style=&#123;&#123; flex: 1, alignItems: &quot;center&quot;, justifyContent: &quot;center&quot; &#125;&#125;&gt;</div><div class="line">        &lt;Text&gt;Coming soon...&lt;/Text&gt;</div><div class="line">      &lt;/View&gt;</div><div class="line">    );</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">export default FlatListDemo;</div></pre></td></tr></table></figure>
+<p>然后外边就可以使用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">import FlatList from &apos;./FlatListDemo.js&apos;;</div><div class="line">import React from &apos;react&apos;;</div><div class="line">import &#123; List, ListItem &#125; from &apos;react-native-elements&apos;;</div><div class="line"></div><div class="line">class AwesomeProject extends React.Component&#123;</div><div class="line">    render()&#123;</div><div class="line">        &lt;List&gt;</div><div class="line">            &lt;FlatList</div><div class="line">                data=&#123;this.state.data&#125;</div><div class="line">                renderItem=&#123;(&#123; item &#125;) =&gt; (</div><div class="line">                  &lt;ListItem</div><div class="line">                    roundAvatar</div><div class="line">                    title=&#123;`$&#123;item.name.first&#125; $&#123;item.name.last&#125;`&#125;</div><div class="line">                    subtitle=&#123;item.email&#125;</div><div class="line">                    avatar=&#123;&#123; uri: item.picture.thumbnail &#125;&#125;</div><div class="line">                    keyExtractor=&#123;item =&gt; item.email&#125;</div><div class="line">                  /&gt;</div><div class="line">                )&#125;</div><div class="line">            /&gt;</div><div class="line">        &lt;/List&gt;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>效果图如下：</p>
+<p><img src="../../images/1-wxQVmFfaj-wSlBCL5oq2Jw.png" alt="demo"></p>
+
+          
         
       
     </div>
@@ -629,6 +764,139 @@
 <p>实际上你不用自己写，recompose 提供了这个函数。</p>
 
           
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2017/08/02/javascript/js浅拷贝和深拷贝/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liaoyf">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="liaoyf的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/02/javascript/js浅拷贝和深拷贝/" itemprop="url">js浅拷贝和深拷贝</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-02T15:35:43+08:00">
+                2017-08-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="javaScript的变量类型"><a href="#javaScript的变量类型" class="headerlink" title="javaScript的变量类型"></a>javaScript的变量类型</h2><p>（1）基本类型：</p>
+<p>5种基本数据类型Undefined、Null、Boolean、Number 和 String，变量是直接按值存放的，存放在栈内存中的简单数据段，可以直接访问。</p>
+<p>（2）引用类型：</p>
+<p>存放在堆内存中的对象，变量保存的是一个指针，这个指针指向另一个位置。当需要访问引用类型（如对象，数组等）的值时，首先从栈中获得该对象的地址指针，然后再从堆内存中取得所需的数据。</p>
+<blockquote>
+<p>JavaScript存储对象都是存地址的，所以浅拷贝会导致 obj1 和obj2 指向同一块内存地址。改变了其中一方的内容，都是在原来的内存上做修改会导致拷贝对象和源对象都发生改变，而深拷贝是开辟一块新的内存地址，将原对象的各个属性逐个复制进去。对拷贝对象和源对象各自的操作互不影响。</p>
+</blockquote>
+<p>例如：数组拷贝</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//浅拷贝，双向改变,指向同一片内存空间</div><div class="line">var arr1 = [1, 2, 3];</div><div class="line">var arr2 = arr1;</div><div class="line">arr1[0] = &apos;change&apos;;</div><div class="line">console.log(&apos;shallow copy: &apos; + arr1 + &quot; );   //shallow copy: change,2,3</div><div class="line">console.log(&apos;shallow copy: &apos; + arr2 + &quot; );   //shallow copy: change,2,3</div></pre></td></tr></table></figure>
+<h2 id="浅拷贝的实现"><a href="#浅拷贝的实现" class="headerlink" title="浅拷贝的实现"></a>浅拷贝的实现</h2>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/02/javascript/js浅拷贝和深拷贝/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1218,142 +1486,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2017/08/02/react/React要手动绑定方法的原因/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="liaoyf">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="liaoyf的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/02/react/React要手动绑定方法的原因/" itemprop="url">React要手动绑定方法的原因</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-02T14:09:44+08:00">
-                2017-08-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="我们从javascript开始吧"><a href="#我们从javascript开始吧" class="headerlink" title="我们从javascript开始吧"></a>我们从javascript开始吧</h2><p>在js中，函数的上下文是指函数调用的时候，而不是定义的时候。</p>
-<p>有以下四中调用函数的模式：</p>
-<ul>
-<li><p>函数调用模式</p>
-</li>
-<li><p>方法调用模式</p>
-</li>
-<li><p>构造函数调用模式</p>
-</li>
-<li><p>应用调用模式</p>
-</li>
-</ul>
-<p>所有这些使用的模式都不同地定义函数上下文。接下来我们看看各种模式的区别。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/08/02/react/React要手动绑定方法的原因/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2017/08/02/react/react获取父组件或子组件属性/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1478,7 +1610,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2017/08/02/css/使用css视口单位/">
+    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2017/08/02/react/React要手动绑定方法的原因/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="liaoyf">
@@ -1497,7 +1629,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/08/02/css/使用css视口单位/" itemprop="url">未命名</a></h1>
+                <a class="post-title-link" href="/2017/08/02/react/React要手动绑定方法的原因/" itemprop="url">React要手动绑定方法的原因</a></h1>
         
 
         <div class="post-meta">
@@ -1509,7 +1641,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-02T11:44:45+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-02T14:09:44+08:00">
                 2017-08-02
               </time>
             
@@ -1548,150 +1680,26 @@
 
       
         
-          
-            <h1 id="使用css视口单位"><a href="#使用css视口单位" class="headerlink" title="使用css视口单位"></a>使用css视口单位</h1><hr>
-<p>css提供了许多单位用来规定元素，最熟悉的莫属<code>px</code>、<code>%</code>、<code>pt</code>、<code>em</code>以及最近比较火的<code>rem</code>，还有其他两个<code>vw</code>、<code>vh</code>，它们是相对单位，但是不同于<code>em</code>和<code>rem</code>那样相对于当前元素或相对于根元素，他们是相对于视口，一个视口单位等于1%的视口的宽度（<code>vw</code>）或高度（<code>vh</code>）。</p>
-<p>这是很有用的。<code>vw</code>单位可以用于一些有大小的规则（如：<code>font-size</code>、或者一个<code>div</code>的高度），下面是一些使用案例：</p>
-<h2 id="使标题固定"><a href="#使标题固定" class="headerlink" title="使标题固定"></a>使标题固定</h2><p>如果你想让一个标题占满横向屏幕且让他固定在一行，你可以使用<code>vw</code>单位，这实际上是用原生的方法实现了jquery插件<a href="http://fittextjs.com/" target="_blank" rel="external">FitText</a>的功能，但是相对于使用<code>vw</code>，FitText需要手动管理大小，使用检查工具，是一个快速的方法以确定适当的值。</p>
-<pre><code>//html
-&lt;h1&gt;Always a great fit!&lt;/h1&gt;
-//css
-h1{
-    font-size: 12vw;
-    text-align: center;
-}
-</code></pre><h2 id="Infinite-Lines"><a href="#Infinite-Lines" class="headerlink" title="Infinite Lines"></a>Infinite Lines</h2><p>Whilst building the falcon633 WordPress theme (used on this site), I needed to create an angled background that would appear to continue indefinitely. This is achievable by 1) making sure that the angle in the centre stays the same regardless of window size and 2) setting the height to be relative to the viewport width. I used an SVG background for the overall cut-out then set the height based on the width using vw units.</p>
-<h2 id="简单的视频包装"><a href="#简单的视频包装" class="headerlink" title="简单的视频包装"></a>简单的视频包装</h2><p>Let’s say you want to set the proportions of an element, an <code>iframe</code>, to stay at a fixed aspect ratio. You previously might have chosen to create a relative div filling the required space, then set carefully selected padding values with iframe inside absolutely positioned to cling to div on all sides (e.g. the approach demonstrated here).</p>
-<p>A better solution could be to use the vw and vh units. This way you can set your height and width directly on the element in question, whilst also keeping the ‘layers-for-layout’ number down.</p>
-<h2 id="全屏的hero-Image"><a href="#全屏的hero-Image" class="headerlink" title="全屏的hero Image"></a>全屏的<a href="https://en.wikipedia.org/wiki/Hero_image" title="Hero Image" target="_blank" rel="external"><code>hero Image</code></a></h2><p>你要做的只是在<code>body</code>和<code>html</code>上运用<code>height: 100%</code>，然后在元素上简单地使用<code>width: 100vw; heihgt: 100vh</code>就行了。</p>
-<h2 id="div居中"><a href="#div居中" class="headerlink" title="div居中"></a><code>div</code>居中</h2><p>一个常见的需求是要让一个<code>div</code>在页面中居中，这时候只要设置<code>margin: 20vh 20vw; width: 60vw, height: 60vh; padding: 10vh 10vw</code>即可。</p>
-<h2 id="浏览器支持情况"><a href="#浏览器支持情况" class="headerlink" title="浏览器支持情况"></a>浏览器支持情况</h2><p>IE9及以上</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2017/08/02/css/HTML不同空格的特性和表现研究/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="liaoyf">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="liaoyf的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/02/css/HTML不同空格的特性和表现研究/" itemprop="url">未命名</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-02T11:44:45+08:00">
-                2017-08-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="HTML不同空格的特性和表现研究"><a href="#HTML不同空格的特性和表现研究" class="headerlink" title="HTML不同空格的特性和表现研究"></a>HTML不同空格的特性和表现研究</h1><hr>
-<h2 id="Unicode编码空格"><a href="#Unicode编码空格" class="headerlink" title="Unicode编码空格"></a>Unicode编码空格</h2><ul>
-<li><code>&amp;nbsp;</code>: <strong>不换行空格</strong>,用于不会被浏览器判断为可以在中间打断，比如：<code>There is&amp;nbsp;Space</code>，如果会换行，只会在<code>There</code>和<code>is</code>之间换行，而不会在<code>is</code>和<code>Space</code>之间换行。</li>
-<li>跟随字体大小产生相应空白的空格：<code>&amp;ensp;</code>(1/2em)，<code>&amp;emsp;</code>(1em)，<code>&amp;thinsp;</code>(1/6em)，这类就很适合坐表单<code>label</code>的排版了，坑爹，终于找到好的解决方法了</li>
+          <h2 id="我们从javascript开始吧"><a href="#我们从javascript开始吧" class="headerlink" title="我们从javascript开始吧"></a>我们从javascript开始吧</h2><p>在js中，函数的上下文是指函数调用的时候，而不是定义的时候。</p>
+<p>有以下四中调用函数的模式：</p>
+<ul>
+<li><p>函数调用模式</p>
+</li>
+<li><p>方法调用模式</p>
+</li>
+<li><p>构造函数调用模式</p>
+</li>
+<li><p>应用调用模式</p>
+</li>
 </ul>
-
-          
+<p>所有这些使用的模式都不同地定义函数上下文。接下来我们看看各种模式的区别。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/02/react/React要手动绑定方法的原因/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1775,7 +1783,7 @@ h1{
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1788,7 +1796,7 @@ h1{
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
