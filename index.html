@@ -317,282 +317,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2017/10/29/react/React遇到的坑/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="liaoyf">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="liaoyf的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/29/react/React遇到的坑/" itemprop="url">React遇到的坑</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-29T21:10:16+08:00">
-                2017-10-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/10/29/react/React遇到的坑/" class="leancloud_visitors" data-flag-title="React遇到的坑">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。"><a href="#当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。" class="headerlink" title="当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。"></a>当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。</h2><p> 参考网址：<a href="https://stackoverflow.com/questions/25385578/nested-react-input-element-loses-focus-on-typing" target="_blank" rel="external">https://stackoverflow.com/questions/25385578/nested-react-input-element-loses-focus-on-typing</a></p>
-<h2 id="input值不会随着属性改变而改变"><a href="#input值不会随着属性改变而改变" class="headerlink" title="input值不会随着属性改变而改变"></a>input值不会随着属性改变而改变</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;Parent&gt;</div><div class="line">    &lt;Child inputVal=&#123;this.state.inputVal&#125;/&gt;</div><div class="line">&lt;/Parent&gt;</div></pre></td></tr></table></figure>
-<p>当<code>Child</code>组件的<code>value</code>为<code>null</code>后input的值不会更改。所以一般要判断是否存在<code>null</code>值：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;FormControl value=&#123;this.props.inputVal || &apos;&apos;&#125;/&gt;</div></pre></td></tr></table></figure>
-<h2 id="UglifyJs编辑后有些arguments无效"><a href="#UglifyJs编辑后有些arguments无效" class="headerlink" title="UglifyJs编辑后有些arguments无效"></a>UglifyJs编辑后有些arguments无效</h2><p>升级uglifyjs-webpack-plugin和uglify-js：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&quot;uglify-js&quot;: &quot;^3.1.6&quot;,</div><div class="line">&quot;uglifyjs-webpack-plugin&quot;: &quot;^1.0.1&quot;,</div></pre></td></tr></table></figure>
-<hr>
-<h1 id="UI讨论"><a href="#UI讨论" class="headerlink" title="UI讨论"></a>UI讨论</h1><h2 id="UlynList"><a href="#UlynList" class="headerlink" title="UlynList"></a>UlynList</h2><h3 id="期望配置方式"><a href="#期望配置方式" class="headerlink" title="期望配置方式"></a>期望配置方式</h3><h4 id="简单列表"><a href="#简单列表" class="headerlink" title="简单列表"></a>简单列表</h4><ul>
-<li>显示  <table><br>      <tr><br>          <th>学籍号</th><br>          <th>学生姓名</th><br>          <th>身份证号</th><br>          <th>申请时间</th><br>      </tr><br>      <tr><br>          <td>1111</td><br>          <td>aaa</td><br>          <td>222</td><br>          <td>333</td><br>      </tr><br>      <tr><br>          <td>1111</td><br>          <td>aaa</td><br>          <td>222</td><br>          <td>333</td><br>      </tr><br>  </table></li>
-<li><p>配置</p>
-  <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;List&gt;</div><div class="line">    &lt;Column label=<span class="string">"学籍号"</span> field=<span class="string">"xjh"</span>/&gt;</div><div class="line">    &lt;Column label=<span class="string">"学生姓名"</span> field=<span class="string">"xm"</span>/&gt;</div><div class="line">    &lt;Column label=<span class="string">"身份证号"</span> field=<span class="string">"sfzh"</span>/&gt;</div><div class="line">    &lt;Column label=<span class="string">"申请时间"</span> field=<span class="string">"sqsj"</span>/&gt;</div><div class="line">&lt;<span class="regexp">/List&gt;</span></div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h4 id="特殊表头列表"><a href="#特殊表头列表" class="headerlink" title="特殊表头列表"></a>特殊表头列表</h4><ul>
-<li>显示  <table><br>      <tr><br>          <th colspan="4">标题</th><br>      </tr><br>      <tr><br>          <th colspan="2">基础信息</th><br>          <th colspan="2">其他</th><br>      </tr><br>      <tr><br>          <th>学籍号</th><br>          <th>学生姓名</th><br>          <th>身份证号</th><br>          <th>申请时间</th><br>      </tr><br>      <tr><br>          <td>1111</td><br>          <td>aaa</td><br>          <td>222</td><br>          <td>333</td><br>      </tr><br>      <tr><br>          <td>1111</td><br>          <td>aaa</td><br>          <td>222</td><br>          <td>333</td><br>      </tr><br>  </table></li>
-<li><p>配置</p>
-  <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;List&gt;</div><div class="line">    &lt;Column label=<span class="string">"标题"</span> row=<span class="string">"0"</span> colSpan=<span class="string">"4"</span>/&gt;</div><div class="line">    &lt;Column label=<span class="string">"基础信息"</span> row=<span class="string">"1"</span> colSpan=<span class="string">"2"</span>&gt;</div><div class="line">    &lt;Column label=<span class="string">"其他"</span> row=<span class="string">"1"</span> colSpan=<span class="string">"2"</span>&gt;</div><div class="line"></div><div class="line">    &lt;Column label=<span class="string">"学籍号"</span> row=<span class="string">"2"</span> field=<span class="string">"xjh"</span>/&gt;</div><div class="line">    &lt;Column label=<span class="string">"学生姓名"</span> row=<span class="string">"2"</span> field=<span class="string">"xm"</span>/&gt;</div><div class="line">    &lt;Column label=<span class="string">"身份证号"</span> row=<span class="string">"2"</span> field=<span class="string">"sfzh"</span>/&gt;</div><div class="line">    &lt;Column label=<span class="string">"申请时间"</span> row=<span class="string">"2"</span> field=<span class="string">"sqsj"</span>/&gt;</div><div class="line">&lt;<span class="regexp">/List&gt;</span></div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h4 id="同列-表头数量-列数量-富文本列表"><a href="#同列-表头数量-列数量-富文本列表" class="headerlink" title="同列(表头数量 = 列数量)富文本列表"></a>同列(表头数量 = 列数量)富文本列表</h4><ul>
-<li>显示<br>  <img src="resource/listExample1.png" alt=""></li>
-<li><p>配置</p>
-  <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">&lt;List&gt;</div><div class="line">    &lt;Column label=<span class="string">"教师基本"</span>&gt;</div><div class="line">        &lt;Image field=<span class="string">"pic"</span>/&gt;</div><div class="line">        &lt;Item label=<span class="string">"户口信息"</span> field=<span class="string">"hkxx"</span>/&gt;</div><div class="line">        &lt;Item label=<span class="string">"年龄性别"</span> field=<span class="string">"xb"</span>/&gt;</div><div class="line">        &lt;Item label=<span class="string">"身份证号"</span> field=<span class="string">"sfzh"</span>/&gt;</div><div class="line">        &lt;Item label=<span class="string">"户籍地址"</span> field=<span class="string">"hjdz"</span>/&gt;</div><div class="line">    &lt;<span class="regexp">/Column&gt;</span></div><div class="line"><span class="regexp">    &lt;Column label="所在学校"&gt;</span></div><div class="line"><span class="regexp">        &lt;Button field='szxx'&gt;</span></div><div class="line"><span class="regexp">        &lt;String field='ssqjvj'&gt;</span></div><div class="line"><span class="regexp">    &lt;/</span>Column&gt;</div><div class="line">    &lt;Column label=<span class="string">"学科"</span>&gt;</div><div class="line">        &lt;Link field=<span class="string">"xk"</span>&gt;</div><div class="line">    &lt;<span class="regexp">/Column&gt;</span></div><div class="line"><span class="regexp">    &lt;Column label="工作年限/</span>教师职称/所获证书<span class="string">"&gt;</span></div><div class="line"><span class="string">        &lt;Item label="</span>工作年限<span class="string">" field="</span>gznx<span class="string">"&gt;</span></div><div class="line"><span class="string">        &lt;Item label="</span>教师职称<span class="string">" field="</span>zc<span class="string">"&gt;</span></div><div class="line"><span class="string">        &lt;Item label="</span>所获证书<span class="string">" field="</span>zs<span class="string">"&gt;</span></div><div class="line"><span class="string">    &lt;/Column&gt;</span></div><div class="line"><span class="string">    &lt;Column field="</span>gxsj<span class="string">" label="</span>更新时间<span class="string">"/&gt;</span></div><div class="line"><span class="string">&lt;/List&gt;</span></div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h4 id="多行富文本列表"><a href="#多行富文本列表" class="headerlink" title="多行富文本列表"></a>多行富文本列表</h4><ul>
-<li><p>显示</p>
-  <table><br>      <tr><br>          <th colspan="2">学校信息</th><br>      </tr><br>      <tr><br>          <td>学校名称：mc1</td><br>          <td>[小学]</td><br>      </tr><br>      <tr><br>          <td>负责人姓名：xm1</td><br>          <td>负责人电话：lxdh1</td><br>      </tr><br>      <tr><br>          <td colspan="2">地址：sxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</td><br>      </tr><br>      <tr><br>          <td>学校名称：mc1</td><br>          <td>[中学]</td><br>      </tr><br>      <tr><br>          <td>负责人姓名：xm1</td><br>          <td>负责人电话：lxdh1</td><br>      </tr><br>      <tr><br>          <td colspan="2">地址：aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</td><br>      </tr><br>  </table>
-</li>
-<li><p>配置2</p>
-  <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;List&gt;</div><div class="line">    &lt;Head&gt;</div><div class="line">        &lt;Column col=&#123;<span class="number">2</span>&#125; label=<span class="string">"学校信息"</span>/&gt;</div><div class="line">    &lt;<span class="regexp">/Head&gt;</span></div><div class="line"><span class="regexp">    &lt;Body&gt;</span></div><div class="line"><span class="regexp">        &lt;InfoItem/</span>&gt;</div><div class="line">    &lt;<span class="regexp">/Body&gt;</span></div><div class="line"><span class="regexp">&lt;/</span>List&gt;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="表单"><a href="#表单" class="headerlink" title="表单"></a>表单</h3><h4 id="现状"><a href="#现状" class="headerlink" title="现状"></a>现状</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line">&lt;Panel&gt;</div><div class="line">    &lt;Panel.Head title=<span class="string">"监护人一"</span>&gt;&lt;/Panel.Head&gt;</div><div class="line">    &lt;Panel.Body full&gt;</div><div class="line">        &lt;Form&gt;</div><div class="line">            &lt;Form.Table&gt;</div><div class="line">                &lt;Form.Tr&gt;</div><div class="line">                    &lt;Form.Label required&gt;姓名&lt;/Form.Label&gt;</div><div class="line">                    &lt;Form.Content validationState=&#123;submitting &amp;&amp; !data.cy1Xm &amp;&amp; 'error'&#125;&gt;</div><div class="line">                        &lt;FormControl value=&#123;this.state.data.cy1Xm || ""&#125;</div><div class="line">                                        onChange=&#123;e=&gt;this.handleChange("cy1Xm", e.target.value)&#125;</div><div class="line">                        /&gt;</div><div class="line">                        &#123;submitting &amp;&amp; !data.cy1Xm &amp;&amp; &lt;TextTip&gt;姓名不能为空！&lt;/TextTip&gt;&#125;</div><div class="line">                    &lt;/Form.Content&gt;</div><div class="line"></div><div class="line">                    &lt;Form.Label required&gt;证件类型&lt;/Form.Label&gt;</div><div class="line">                    &lt;Form.Content validationState=&#123;submitting &amp;&amp; !data.cy1Sfzjlx &amp;&amp; 'error'&#125;&gt;</div><div class="line">                        &lt;Eselect className="g-5"</div><div class="line">                                    value=&#123;this.state.data.cy1Sfzjlx&#125;</div><div class="line">                                    onChange=&#123;e=&gt;this.handleChange("cy1Sfzjlx", e.value)&#125;</div><div class="line">                                    clearable=&#123;clearable&#125;</div><div class="line">                                    options=&#123;this.state.bm["DM_JY_SFZJLX"]&#125;</div><div class="line">                        /&gt;</div><div class="line">                        &#123;submitting &amp;&amp; !data.cy1Sfzjlx &amp;&amp; &lt;TextTip&gt;证件类型不能为空！&lt;/TextTip&gt;&#125;</div><div class="line">                    &lt;/Form.Content&gt;</div><div class="line"></div><div class="line">                    &lt;Form.Label required&gt;证件号码&lt;/Form.Label&gt;</div><div class="line">                    &lt;Form.Content validationState=&#123;submitting &amp;&amp; !data.cy1Sfzjh &amp;&amp; 'error'&#125;&gt;</div><div class="line">                        &lt;FormControl value=&#123;this.state.data.cy1Sfzjh || ""&#125;</div><div class="line">                                        onChange=&#123;e=&gt;this.handleChange("cy1Sfzjh", e.target.value)&#125;</div><div class="line">                        /&gt;</div><div class="line">                        &#123;submitting &amp;&amp; !data.cy1Sfzjh &amp;&amp; &lt;TextTip&gt;证件类型不能为空！&lt;/TextTip&gt;&#125;</div><div class="line">                    &lt;/Form.Content&gt;</div><div class="line"></div><div class="line">                    &lt;Form.Label required&gt;联系方式&lt;/Form.Label&gt;</div><div class="line">                    &lt;Form.Content validationState=&#123;submitting &amp;&amp; !data.cy1Lxdh &amp;&amp; 'error'&#125;&gt;</div><div class="line">                        &lt;FormControl value=&#123;this.state.data.cy1Lxdh || ""&#125;</div><div class="line">                                        onChange=&#123;e=&gt;this.handleChange("cy1Lxdh", e.target.value)&#125;</div><div class="line">                        /&gt;</div><div class="line">                        &#123;submitting &amp;&amp; !data.cy1Lxdh &amp;&amp; &lt;TextTip&gt;联系方式不能为空！&lt;/TextTip&gt;&#125;</div><div class="line">                    &lt;/Form.Content&gt;</div><div class="line">                &lt;/Form.Tr&gt;</div><div class="line"></div><div class="line">                &lt;Form.Tr&gt;</div><div class="line">                    &lt;Form.Label&gt;姓名是否带生僻字&lt;/Form.Label&gt;</div><div class="line">                    &lt;Form.Content&gt;</div><div class="line">                        &lt;Checkbox checked=&#123;this.state.data.cy1Sfspz =="1"&#125;</div><div class="line">                                    onChange=&#123;(e)=&gt;this.handleChange("cy1Sfspz", e.target.checked ? "1": "0")&#125; /&gt;</div><div class="line">                    &lt;/Form.Content&gt;</div><div class="line">                &lt;/Form.Tr&gt;</div><div class="line">            &lt;/Form.Table&gt;</div><div class="line">        &lt;/Form&gt;</div><div class="line">    &lt;/Panel.Body&gt;</div><div class="line">&lt;/Panel&gt;</div></pre></td></tr></table></figure>
-<h4 id="期望使用方式"><a href="#期望使用方式" class="headerlink" title="期望使用方式"></a>期望使用方式</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">&lt;Panel title=<span class="string">"监护人一"</span>&gt;</div><div class="line">    &lt;Form onChange=&#123;<span class="keyword">this</span>.handleChange&#125; value=&#123;guardian1&#125;&gt;</div><div class="line">        &lt;Row required&gt;</div><div class="line">            &lt;Input label=<span class="string">"姓名"</span> field = <span class="string">"xm"</span>&gt;</div><div class="line">                &lt;RequiredValid/&gt;</div><div class="line">            &lt;<span class="regexp">/Input&gt;</span></div><div class="line"><span class="regexp">            &lt;Select label="证件类型" field="zjlx" options=&#123;[]&#125;&gt;</span></div><div class="line"><span class="regexp">                &lt;RequiredValid&gt;</span></div><div class="line"><span class="regexp">            &lt;/</span>Select&gt;</div><div class="line">            &lt;Input label=<span class="string">"证件号码"</span> field=<span class="string">"zjhm"</span>&gt;</div><div class="line">                &lt;RequiredValid&gt;</div><div class="line">            &lt;<span class="regexp">/Input&gt;</span></div><div class="line"><span class="regexp">            &lt;Input label="联系方式" field="lxdh"&gt;</span></div><div class="line"><span class="regexp">        &lt;/</span>Row&gt;</div><div class="line">        &lt;Row&gt;</div><div class="line">            &lt;SingleCheckbox label=<span class="string">"姓名是否带生僻字"</span> field=<span class="string">"sfSpz"</span>/&gt;</div><div class="line">        &lt;<span class="regexp">/Row&gt;</span></div><div class="line"><span class="regexp">    &lt;/</span>Form&gt;</div><div class="line">&lt;<span class="regexp">/Panel&gt;</span></div></pre></td></tr></table></figure>
-<ul>
-<li><p>名词定义</p>
-<ul>
-<li>表单容器 - 例 Form Row</li>
-<li>表单项 - 例 Input Select</li>
-</ul>
-</li>
-<li><p>表单容器组件Form和Row</p>
-<ul>
-<li>作用为children公共的属性的配置，支持嵌套</li>
-<li>属性的支持不仅限于onChange</li>
-<li>作用范围为children内容</li>
-<li>优先级为由内到外</li>
-<li><p>例</p>
-  <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;Form onChange = &#123;handleChange&#125;&gt;</div><div class="line">    &lt;Input field=<span class="string">'xm'</span> onChange= &#123;inputHandleChange&#125;&gt;</div><div class="line">    &lt;Input field=<span class="string">'sfzh'</span>&gt;</div><div class="line">    &lt;Row onChange=&#123;handleChange2&#125;&gt;</div><div class="line">        &lt;Input field=<span class="string">'xxx'</span>&gt;</div><div class="line">    &lt;<span class="regexp">/Row&gt;</span></div><div class="line"><span class="regexp">&lt;/</span>Form&gt;</div></pre></td></tr></table></figure>
-<blockquote>
-<p>field = xm  对应的 onChange = inputHandleChange<br>  field = sfzh 对应的 onChange = handleChange<br>  field = xxx  对应的 onChange = handleChange2</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li><p>表单项</p>
-<ul>
-<li><p>表单项基础统一Props</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> props = &#123;  </div><div class="line">    <span class="comment">//基础属性 </span></div><div class="line">    label:<span class="string">""</span>, </div><div class="line">    field:<span class="string">""</span>,</div><div class="line">    value:<span class="string">""</span>,</div><div class="line">    onChange:<span class="function"><span class="keyword">function</span>(<span class="params">name,value,label,obj = &#123;name,value,label&#125;</span>)</span>&#123;&#125;,</div><div class="line">    disabled:<span class="literal">false</span>,</div><div class="line"></div><div class="line">    <span class="comment">//样式属性</span></div><div class="line">    <span class="keyword">with</span>:<span class="string">""</span>,</div><div class="line">    style:<span class="string">""</span>,</div><div class="line">    className:<span class="string">""</span>,</div><div class="line">    theme:<span class="built_in">Object</span></div><div class="line">&#125;</div><div class="line"><span class="comment">//props.children  //用于嵌入校验器 Valid Or Valid Array</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>类似Select,Multi CheckBox特有属性</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> props = &#123;</div><div class="line">    ...baseProps</div><div class="line">   options:[</div><div class="line">       &#123;<span class="attr">name</span>:<span class="string">""</span>,<span class="attr">value</span>:<span class="string">""</span>&#125;</div><div class="line">       <span class="comment">//...</span></div><div class="line">   ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>复合字段表单项组件      </p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;AgeRange field=&#123;[<span class="string">"ageMin"</span>,<span class="string">"ageMax"</span>]&#125; value=&#123; [data.ageMin,data.ageMax] &#125; /&gt;</div></pre></td></tr></table></figure>
-<blockquote>
-<p>这里省略label，因为通常label是确定的</p>
-</blockquote>
-</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><p>封装onChange方法为<br>  FormHelper.onChange(setState) =&gt; function(</p>
-<pre><code>field,value,label,{field,value,label}
-</code></pre><p>  ){</p>
-<p>  }</p>
-<blockquote>
-<p>参数需考虑符复合字段表单项情况</p>
-</blockquote>
-</li>
-</ul>
-<h3 id="校验"><a href="#校验" class="headerlink" title="校验"></a>校验</h3><ul>
-<li>校验的前提，表单有一致的使用方式</li>
-<li>校验器场景 <ul>
-<li>失去焦点(单一校验，多字段复合校验)</li>
-<li>提交(全局校验)</li>
-<li>异步校验(接口方式校验)</li>
-<li>多个规则？</li>
-</ul>
-</li>
-<li>校验器容器 add remove validAll</li>
-<li>规则  valid throw ValidException</li>
-<li>校验器<ul>
-<li>独立校验器（主要用于多字段复合校验）</li>
-<li>Form组件中的校验器（依赖于Form组件中的value）</li>
-</ul>
-</li>
-<li>期望使用方式:</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">&lt;Panel title=<span class="string">"监护人一"</span>&gt;</div><div class="line">    &lt;Form onChange=&#123;<span class="keyword">this</span>.handleChange&#125; value=&#123;guardian1&#125; validControl&gt;</div><div class="line">        &lt;Row required&gt;</div><div class="line">            &lt;Input label=<span class="string">"姓名"</span> field = <span class="string">"xm"</span>&gt;</div><div class="line">                &lt;RequiredValid/&gt;</div><div class="line">            &lt;<span class="regexp">/Input&gt;</span></div><div class="line"><span class="regexp">            &lt;Select label="证件类型" field="zjlx" options=&#123;[]&#125;&gt;</span></div><div class="line"><span class="regexp">                &lt;RequiredValid&gt;</span></div><div class="line"><span class="regexp">            &lt;/</span>Select&gt;</div><div class="line">            &lt;Input label=<span class="string">"证件号码"</span> field=<span class="string">"zjhm"</span>&gt;</div><div class="line">                &lt;RequiredValid&gt;</div><div class="line">            &lt;<span class="regexp">/Input&gt;</span></div><div class="line"><span class="regexp">            &lt;SfzhAndXmValid field=&#123;["xm","sfzh"]&#125;&gt;</span></div><div class="line"><span class="regexp">            &lt;Input label="联系方式" field="lxdh"/</span>&gt;</div><div class="line">        &lt;<span class="regexp">/Row&gt;</span></div><div class="line"><span class="regexp">        &lt;Row&gt;</span></div><div class="line"><span class="regexp">            &lt;SingleCheckbox label="姓名是否带生僻字" field="sfSpz"/</span>&gt;</div><div class="line">        &lt;<span class="regexp">/Row&gt;</span></div><div class="line"><span class="regexp">    &lt;/</span>Form&gt;</div><div class="line">&lt;<span class="regexp">/Panel&gt;</span></div></pre></td></tr></table></figure>
-<ul>
-<li><p>ValidConrol </p>
-<ul>
-<li>遍历children找出实现Valid的组件，注入props = {field,value,label}并按照dom元素顺序（从上到下，从外到内）加入valids集合中</li>
-<li>主要方法<ul>
-<li>add</li>
-<li>remove</li>
-<li>validAll</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>Rule封装好的校验规则</p>
-<ul>
-<li>不考虑提示信息的话，直接 valid() 返回true通过或false失败</li>
-<li>考虑提示信息的话，valid 返回true通过，throw error失败</li>
-</ul>
-</li>
-<li><p>Valid所有校验器基础接口</p>
-</li>
-<li><p>单一功能校验器</p>
-  <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> RequiredValid = <span class="function"><span class="params">props</span> =&gt;</span> &lt;Valid rule=&#123;Rule.Required&#125;&gt;</div></pre></td></tr></table></figure>
-</li>
-<li><p>复合校验器</p>
-  <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> RequiredAndFixLen = <span class="function"><span class="params">props</span> =&gt;</span> (</div><div class="line">    &lt;ValidChain&gt;</div><div class="line">        &lt;RequiredValid&gt;</div><div class="line">        &lt;FixLenValid&gt;</div><div class="line">    &lt;<span class="regexp">/ValidChain&gt;</span></div><div class="line"><span class="regexp">)</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>多字段校验器</p>
-<ul>
-<li><p>容器方式</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;NameAndSfzhValid&gt;</div><div class="line">    &lt;Input label=<span class="string">"姓名"</span> field = <span class="string">"xm"</span>&gt;</div><div class="line">            &lt;RequiredValid/&gt;</div><div class="line">    &lt;<span class="regexp">/Input&gt;</span></div><div class="line"><span class="regexp">    &lt;Select label="证件类型" field="zjlx" options=&#123;[]&#125;&gt;</span></div><div class="line"><span class="regexp">        &lt;RequiredValid&gt;</span></div><div class="line"><span class="regexp">    &lt;/</span>Select&gt;</div><div class="line">    &lt;Input label=<span class="string">"证件号码"</span> field=<span class="string">"zjhm"</span>&gt;</div><div class="line">        &lt;RequiredValid&gt;</div><div class="line">    &lt;<span class="regexp">/Input&gt;</span></div><div class="line"><span class="regexp">&lt;/</span>NameAndSfzhValid&gt;</div></pre></td></tr></table></figure>
-</li>
-<li><p>事件订阅方式实现交互</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;Input label=<span class="string">"姓名"</span> field = <span class="string">"xm"</span>&gt;</div><div class="line">    &lt;RequiredValid/&gt;</div><div class="line">&lt;<span class="regexp">/Input&gt;</span></div><div class="line"><span class="regexp">&lt;Select label="证件类型" field="zjlx" options=&#123;[]&#125;&gt;</span></div><div class="line"><span class="regexp">    &lt;RequiredValid&gt;</span></div><div class="line"><span class="regexp">&lt;/</span>Select&gt;</div><div class="line">&lt;Input label=<span class="string">"证件号码"</span> field=<span class="string">"zjhm"</span>&gt;</div><div class="line">    &lt;RequiredValid&gt;</div><div class="line">&lt;<span class="regexp">/Input&gt;</span></div><div class="line"><span class="regexp">&lt;NameAndSfzhValid/</span>&gt;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li>IE8 <ul>
-<li>配置基于React14的配套脚手架</li>
-<li>支持IE8的react实现 <a href="https://github.com/RubyLouvre/anu" target="_blank" rel="external">https://github.com/RubyLouvre/anu</a></li>
-</ul>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2017/10/12/nodejs/express入门/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1674,6 +1398,144 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2017/08/02/javascript/关于同一元素下dbClick触发两次click的问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liaoyf">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="liaoyf的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/02/javascript/关于同一元素下dbClick触发两次click的问题/" itemprop="url">关于同一元素下dbClick触发两次click的问题</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-02T14:31:15+08:00">
+                2017-08-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/08/02/javascript/关于同一元素下dbClick触发两次click的问题/" class="leancloud_visitors" data-flag-title="关于同一元素下dbClick触发两次click的问题">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>将处理程序绑定到相同元素的click和dblclick事件是不合适的。</p>
+<p>触发的事件顺序因浏览器而异，有些在dblclick之前接收到两个点击事件，而其他事件只有一个。</p>
+<p>双击灵敏度（双击检测到的点击之间的最大时间）可能因操作系统和浏览器而异，并且通常是用户可配置的。</p>
+<p>所以最好不要在同一个元素下绑定click和dbclick事件。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/02/javascript/关于同一元素下dbClick触发两次click的问题/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2017/08/02/javascript/ES6的坑/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1850,7 +1712,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2017/08/02/javascript/关于同一元素下dbClick触发两次click的问题/">
+    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2017/08/02/react/React要手动绑定方法的原因/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="liaoyf">
@@ -1869,7 +1731,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/08/02/javascript/关于同一元素下dbClick触发两次click的问题/" itemprop="url">关于同一元素下dbClick触发两次click的问题</a></h1>
+                <a class="post-title-link" href="/2017/08/02/react/React要手动绑定方法的原因/" itemprop="url">React要手动绑定方法的原因</a></h1>
         
 
         <div class="post-meta">
@@ -1881,7 +1743,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-02T14:31:15+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-02T14:09:44+08:00">
                 2017-08-02
               </time>
             
@@ -1899,7 +1761,7 @@
 
           
           
-             <span id="/2017/08/02/javascript/关于同一元素下dbClick触发两次click的问题/" class="leancloud_visitors" data-flag-title="关于同一元素下dbClick触发两次click的问题">
+             <span id="/2017/08/02/react/React要手动绑定方法的原因/" class="leancloud_visitors" data-flag-title="React要手动绑定方法的原因">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1931,13 +1793,22 @@
 
       
         
-          <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>将处理程序绑定到相同元素的click和dblclick事件是不合适的。</p>
-<p>触发的事件顺序因浏览器而异，有些在dblclick之前接收到两个点击事件，而其他事件只有一个。</p>
-<p>双击灵敏度（双击检测到的点击之间的最大时间）可能因操作系统和浏览器而异，并且通常是用户可配置的。</p>
-<p>所以最好不要在同一个元素下绑定click和dbclick事件。</p>
+          <h2 id="我们从javascript开始吧"><a href="#我们从javascript开始吧" class="headerlink" title="我们从javascript开始吧"></a>我们从javascript开始吧</h2><p>在js中，函数的上下文是指函数调用的时候，而不是定义的时候。</p>
+<p>有以下四中调用函数的模式：</p>
+<ul>
+<li><p>函数调用模式</p>
+</li>
+<li><p>方法调用模式</p>
+</li>
+<li><p>构造函数调用模式</p>
+</li>
+<li><p>应用调用模式</p>
+</li>
+</ul>
+<p>所有这些使用的模式都不同地定义函数上下文。接下来我们看看各种模式的区别。</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/08/02/javascript/关于同一元素下dbClick触发两次click的问题/#more" rel="contents">
+            <a class="btn" href="/2017/08/02/react/React要手动绑定方法的原因/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
