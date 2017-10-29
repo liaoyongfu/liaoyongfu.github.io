@@ -955,12 +955,12 @@ ReactDOM.render(&lt;TodoApp /&gt;, document.getElementById(&apos;todoApp&apos;))
         
           
             <h1 id="React遇到的坑"><a href="#React遇到的坑" class="headerlink" title="React遇到的坑"></a>React遇到的坑</h1><hr>
-<ol>
-<li>经常有编辑和查看的页面，编辑取消时需要调用redux-form的<code>resetForm()</code>方法。</li>
-<li>少用jquery！少用jquery！少用jquery！比如<code>$(&#39;input&#39;).prop(&#39;checked&#39;, true)</code>这样是不会触发<code>input</code>的<code>onChange</code>事件的，原因是？？？</li>
-<li>当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。<br>参考网址：<a href="https://stackoverflow.com/questions/25385578/nested-react-input-element-loses-focus-on-typing" target="_blank" rel="external">https://stackoverflow.com/questions/25385578/nested-react-input-element-loses-focus-on-typing</a></li>
-</ol>
-
+<h2 id="当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。"><a href="#当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。" class="headerlink" title="当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。"></a>当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。</h2><p> 参考网址：<a href="https://stackoverflow.com/questions/25385578/nested-react-input-element-loses-focus-on-typing" target="_blank" rel="external">https://stackoverflow.com/questions/25385578/nested-react-input-element-loses-focus-on-typing</a></p>
+<h2 id="input值不会随着属性改变而改变"><a href="#input值不会随着属性改变而改变" class="headerlink" title="input值不会随着属性改变而改变"></a>input值不会随着属性改变而改变</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;Parent&gt;</div><div class="line">    &lt;Child inputVal=&#123;this.state.inputVal&#125;/&gt;</div><div class="line">&lt;/Parent&gt;</div></pre></td></tr></table></figure>
+<p>当<code>Child</code>组件的<code>value</code>为<code>null</code>后input的值不会更改。所以一般要判断是否存在<code>null</code>值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;FormControl value=&#123;this.props.inputVal || &apos;&apos;&#125;/&gt;</div></pre></td></tr></table></figure>
+<h2 id="UglifyJs编辑后有些arguments无效"><a href="#UglifyJs编辑后有些arguments无效" class="headerlink" title="UglifyJs编辑后有些arguments无效"></a>UglifyJs编辑后有些arguments无效</h2><p>升级uglifyjs-webpack-plugin和uglify-js：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&quot;uglify-js&quot;: &quot;^3.1.6&quot;,</div><div class="line">&quot;uglifyjs-webpack-plugin&quot;: &quot;^1.0.1&quot;,</div></pre></td></tr></table></figure>
           
         
       

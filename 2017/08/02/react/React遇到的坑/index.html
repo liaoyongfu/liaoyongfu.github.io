@@ -94,17 +94,17 @@
 
 
 
-<meta name="description" content="React遇到的坑  经常有编辑和查看的页面，编辑取消时需要调用redux-form的resetForm()方法。 少用jquery！少用jquery！少用jquery！比如$(&amp;#39;input&amp;#39;).prop(&amp;#39;checked&amp;#39;, true)这样是不会触发input的onChange事件的，原因是？？？ 当input框输入值时输入框自动被失去了焦点，原因是在render">
+<meta name="description" content="React遇到的坑 当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。 参考网址：https://stackoverflow.com/questions/25385578/nested-react-input-element-loses-focus-on-typing input值不会随着属性改变而改变123&amp;lt;Parent&amp;gt;    &amp;lt;Ch">
 <meta property="og:type" content="article">
 <meta property="og:title" content="liaoyf的博客">
 <meta property="og:url" content="https://liaoyongfu.github.io/2017/08/02/react/React遇到的坑/index.html">
 <meta property="og:site_name" content="liaoyf的博客">
-<meta property="og:description" content="React遇到的坑  经常有编辑和查看的页面，编辑取消时需要调用redux-form的resetForm()方法。 少用jquery！少用jquery！少用jquery！比如$(&amp;#39;input&amp;#39;).prop(&amp;#39;checked&amp;#39;, true)这样是不会触发input的onChange事件的，原因是？？？ 当input框输入值时输入框自动被失去了焦点，原因是在render">
+<meta property="og:description" content="React遇到的坑 当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。 参考网址：https://stackoverflow.com/questions/25385578/nested-react-input-element-loses-focus-on-typing input值不会随着属性改变而改变123&amp;lt;Parent&amp;gt;    &amp;lt;Ch">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-09-08T07:07:33.932Z">
+<meta property="og:updated_time" content="2017-10-29T12:36:49.108Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="liaoyf的博客">
-<meta name="twitter:description" content="React遇到的坑  经常有编辑和查看的页面，编辑取消时需要调用redux-form的resetForm()方法。 少用jquery！少用jquery！少用jquery！比如$(&amp;#39;input&amp;#39;).prop(&amp;#39;checked&amp;#39;, true)这样是不会触发input的onChange事件的，原因是？？？ 当input框输入值时输入框自动被失去了焦点，原因是在render">
+<meta name="twitter:description" content="React遇到的坑 当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。 参考网址：https://stackoverflow.com/questions/25385578/nested-react-input-element-loses-focus-on-typing input值不会随着属性改变而改变123&amp;lt;Parent&amp;gt;    &amp;lt;Ch">
 
 
 
@@ -395,12 +395,12 @@
 
       
         <h1 id="React遇到的坑"><a href="#React遇到的坑" class="headerlink" title="React遇到的坑"></a>React遇到的坑</h1><hr>
-<ol>
-<li>经常有编辑和查看的页面，编辑取消时需要调用redux-form的<code>resetForm()</code>方法。</li>
-<li>少用jquery！少用jquery！少用jquery！比如<code>$(&#39;input&#39;).prop(&#39;checked&#39;, true)</code>这样是不会触发<code>input</code>的<code>onChange</code>事件的，原因是？？？</li>
-<li>当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。<br>参考网址：<a href="https://stackoverflow.com/questions/25385578/nested-react-input-element-loses-focus-on-typing" target="_blank" rel="external">https://stackoverflow.com/questions/25385578/nested-react-input-element-loses-focus-on-typing</a></li>
-</ol>
-
+<h2 id="当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。"><a href="#当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。" class="headerlink" title="当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。"></a>当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。</h2><p> 参考网址：<a href="https://stackoverflow.com/questions/25385578/nested-react-input-element-loses-focus-on-typing" target="_blank" rel="external">https://stackoverflow.com/questions/25385578/nested-react-input-element-loses-focus-on-typing</a></p>
+<h2 id="input值不会随着属性改变而改变"><a href="#input值不会随着属性改变而改变" class="headerlink" title="input值不会随着属性改变而改变"></a>input值不会随着属性改变而改变</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;Parent&gt;</div><div class="line">    &lt;Child inputVal=&#123;this.state.inputVal&#125;/&gt;</div><div class="line">&lt;/Parent&gt;</div></pre></td></tr></table></figure>
+<p>当<code>Child</code>组件的<code>value</code>为<code>null</code>后input的值不会更改。所以一般要判断是否存在<code>null</code>值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;FormControl value=&#123;this.props.inputVal || &apos;&apos;&#125;/&gt;</div></pre></td></tr></table></figure>
+<h2 id="UglifyJs编辑后有些arguments无效"><a href="#UglifyJs编辑后有些arguments无效" class="headerlink" title="UglifyJs编辑后有些arguments无效"></a>UglifyJs编辑后有些arguments无效</h2><p>升级uglifyjs-webpack-plugin和uglify-js：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&quot;uglify-js&quot;: &quot;^3.1.6&quot;,</div><div class="line">&quot;uglifyjs-webpack-plugin&quot;: &quot;^1.0.1&quot;,</div></pre></td></tr></table></figure>
       
     </div>
     
@@ -574,7 +574,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#React遇到的坑"><span class="nav-number">1.</span> <span class="nav-text">React遇到的坑</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#React遇到的坑"><span class="nav-number">1.</span> <span class="nav-text">React遇到的坑</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。"><span class="nav-number">1.1.</span> <span class="nav-text">当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#input值不会随着属性改变而改变"><span class="nav-number">1.2.</span> <span class="nav-text">input值不会随着属性改变而改变</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UglifyJs编辑后有些arguments无效"><span class="nav-number">1.3.</span> <span class="nav-text">UglifyJs编辑后有些arguments无效</span></a></li></ol></li></ol></div>
             
 
           </div>
