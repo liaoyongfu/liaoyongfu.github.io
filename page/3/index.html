@@ -317,6 +317,168 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2017/08/02/webpack/webpack学习03——样式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liaoyf">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="liaoyf的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/02/webpack/webpack学习03——样式/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-02T11:44:45+08:00">
+                2017-08-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/08/02/webpack/webpack学习03——样式/" class="leancloud_visitors" data-flag-title="">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="webpack学习03——样式"><a href="#webpack学习03——样式" class="headerlink" title="webpack学习03——样式"></a>webpack学习03——样式</h2><h2 id="嵌入样式"><a href="#嵌入样式" class="headerlink" title="嵌入样式"></a>嵌入样式</h2><pre><code>{ test: /\.css$/, loader: &quot;style-loader!css-loader&quot; }
+</code></pre><p>这种情况下会在页面添加style标签式的样式</p>
+<h2 id="抽成样式文件"><a href="#抽成样式文件" class="headerlink" title="抽成样式文件"></a>抽成样式文件</h2><p>可以使用<code>extract-text-webpack-plugin</code>抽成样式文件。</p>
+<pre><code>var ExtractTextPlugin = require(&quot;extract-text-webpack-plugin&quot;);
+...
+loaders: [
+    // Extract css files
+    {
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract(&quot;style-loader&quot;, &quot;css-loader&quot;)
+    },
+    // Optionally extract less files
+    // or any other compile-to-css language
+    {
+        test: /\.less$/,
+        loader: ExtractTextPlugin.extract(&quot;style-loader&quot;, &quot;css-loader!less-loader&quot;)
+    }
+    // You could also use other loaders the same way. I. e. the autoprefixer-loader
+],
+plugins: [
+     new ExtractTextPlugin(&quot;[name].css&quot;)
+]
+</code></pre><h3 id="所有样式文件合并成一个样式文件"><a href="#所有样式文件合并成一个样式文件" class="headerlink" title="所有样式文件合并成一个样式文件"></a>所有样式文件合并成一个样式文件</h3><pre><code>plugins: [
+    new ExtractTextPlugin(&quot;style.css&quot;, {
+        allChunks: true
+    })
+]
+</code></pre><h3 id="公共样式"><a href="#公共样式" class="headerlink" title="公共样式"></a>公共样式</h3><p>和<code>CommonsChunkPlugin</code>一起使用，commons块就会生成commons.css样文件。</p>
+<pre><code>plugins: [
+    new webpack.optimize.CommonsChunkPlugin(&quot;commons&quot;, &quot;commons.js&quot;),
+    new ExtractTextPlugin(&quot;[name].css&quot;)
+]
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2017/08/02/webpack/webpack学习02——代码分割/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -734,7 +896,7 @@ require(&apos;!style!css!less!bootstrap/less/bootstrap.less&apos;);
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2017/08/02/react/创建一个React项目/">
+    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2016/08/02/css/HTML不同空格的特性和表现研究/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="liaoyf">
@@ -753,7 +915,7 @@ require(&apos;!style!css!less!bootstrap/less/bootstrap.less&apos;);
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/08/02/react/创建一个React项目/" itemprop="url">未命名</a></h1>
+                <a class="post-title-link" href="/2016/08/02/css/HTML不同空格的特性和表现研究/" itemprop="url">HTML不同空格的特性和表现研究</a></h1>
         
 
         <div class="post-meta">
@@ -765,8 +927,8 @@ require(&apos;!style!css!less!bootstrap/less/bootstrap.less&apos;);
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-02T11:44:45+08:00">
-                2017-08-02
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-02T14:38:52+08:00">
+                2016-08-02
               </time>
             
 
@@ -783,7 +945,7 @@ require(&apos;!style!css!less!bootstrap/less/bootstrap.less&apos;);
 
           
           
-             <span id="/2017/08/02/react/创建一个React项目/" class="leancloud_visitors" data-flag-title="">
+             <span id="/2016/08/02/css/HTML不同空格的特性和表现研究/" class="leancloud_visitors" data-flag-title="HTML不同空格的特性和表现研究">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -816,213 +978,10 @@ require(&apos;!style!css!less!bootstrap/less/bootstrap.less&apos;);
       
         
           
-            <h1 id="创建一个React项目"><a href="#创建一个React项目" class="headerlink" title="创建一个React项目"></a>创建一个React项目</h1><hr>
-<p>React由Facebook所写，由虚拟Dom、组件化获得广大前端开发者的青睐，下面我们通过一个示例来演示创建React项目的步骤：</p>
-<h2 id="为什么用React"><a href="#为什么用React" class="headerlink" title="为什么用React"></a>为什么用<code>React</code></h2><p>React解决了创建大型项目性能以及复用性问题，React可以有两种写法：</p>
-<p><em>使用React.createClass语法</em></p>
-<pre><code>var HelloComponent = React.createClass({
-      render: function() {
-        return (
-              &lt;div className=&quot;hello&quot;&gt;
-                Hello, world!
-              &lt;/div&gt;
-        );
-      }
-});
-</code></pre><p><em>使用ES6语法</em></p>
-<pre><code>class HelloComponent extends React.Component {
-  render() {
-    return (
-      &lt;div className=&quot;hello&quot;&gt;
-        Hello, world!
-      &lt;/div&gt;
-    );
-  }
-}
-</code></pre><h2 id="创建React项目"><a href="#创建React项目" class="headerlink" title="创建React项目"></a>创建React项目</h2><ol>
-<li>安装<code>Node.js</code>和<code>NPM</code>，然后运行<code>npm init</code>创建一个<code>package.json</code>文件.</li>
-<li>在控制台中运行：<code>npm install react react-dom babel-core babel-loader babel-preset-es2015 babel-preset-react webpack webpack-dev-server --save</code></li>
-<li>创建<code>webpack.config.js</code>配置文件，这个的作用是帮我们打包资源，转换JSX为JS文件、合并、压缩、编译等等等。。。</li>
-</ol>
-<p>一个简单的webpack.config.js大致如下：</p>
-<pre><code>var debug = process.env.NODE_ENV !== &quot;production&quot;;
-var webpack = require(&apos;webpack&apos;);
-var path = require(&apos;path&apos;);
-
-module.exports = {
-  context: path.join(__dirname, &quot;src&quot;),
-  devtool: debug ? &quot;inline-sourcemap&quot; : null,
-  entry: &quot;./js/App.js&quot;,
-  devServer: {
-    inline: true,
-    port: 3333
-  },
-  module: {
-    loaders: [
-      {
-        test: /\.jsx?$/,
-        exclude: /(node_modules|bower_components)/,
-        loader: &apos;babel-loader&apos;,
-        query: {
-          presets: [&apos;react&apos;, &apos;es2015&apos;],
-          plugins: [&apos;react-html-attrs&apos;, &apos;transform-class-properties&apos;, &apos;transform-decorators-legacy&apos;],
-        }
-      }
-    ]
-  },
-  output: {
-    path: __dirname + &quot;/src/&quot;,
-    filename: &quot;bundle.min.js&quot;
-  },
-  plugins: debug ? [] : [
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false }),
-  ],
-};
-</code></pre><p>程序的入口通过<code>entry</code>设置，即页面第一次加载运行的文件，Webpack将把所有的JS和JSX文件到文件的输出对象，通过<code>devServer</code>设置webpack开发服务器为内联，并设置端口为<code>3333</code>，在<code>module</code>配置中，我们配置<code>babel</code>转换规则：使用<code>react</code>和<code>es2015</code>,plugins增加了类的属性和装饰器的功能。</p>
-<h3 id="热加载"><a href="#热加载" class="headerlink" title="热加载"></a>热加载</h3><p>首先安装热加载模块：</p>
-<pre><code>npm install --save-dev babel-preset-react-hmre
-</code></pre><p>然后加到配置中：</p>
-<pre><code>....
-query: {
-  presets: [&apos;react&apos;, &apos;es2015&apos;, &apos;react-hmre&apos;],
-  plugins: [&apos;react-html-attrs&apos;, &apos;transform-class-properties&apos;, &apos;transform-decorators-legacy&apos;],
-}
-</code></pre><p>另一个选择是安装<code>react-hot-loader</code>然后添加<code>react-hot</code>到<code>webpack.config.js</code>配置中：</p>
-<pre><code>...
-loader: [&apos;babel-loader&apos;, &apos;react-hot&apos;]
-...
-</code></pre><p>为了运行项目更简单，我们一般会使用package.json的命令：</p>
-<pre><code>{
-  &quot;scripts&quot;: {
-    &quot;start&quot;: &quot;node_modules/.bin/webpack-dev-server --progress --inline --hot&quot;,
-  }
-}
-</code></pre><p>注意：我们命令中添加了<code>--hot</code>，这个启动了热加载模式.</p>
-<h2 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h2><p>路由是一个应用非常重要的一部分，在React中比较受欢迎的莫属<code>React Router</code>了，事实上，很多开发者认为它就是React官方版的路由，当然，你得先安装它：</p>
-<pre><code>npm install --save react-router
-</code></pre><p>一个简单的示例看起来是这样子的：</p>
-<pre><code>import React from &apos;react&apos;;
-import { render } from &apos;react-dom&apos;;
-import { browserHistory, Router, Route, IndexRoute } from &apos;react-router&apos;
-
-import App from &apos;../components/App&apos;
-import Home from &apos;../components/Home&apos;
-import About from &apos;../components/About&apos;
-import Features from &apos;../components/Features&apos;
-
-render(
-  &lt;Router history={browserHistory}&gt;
-    &lt;Route path=&apos;/&apos; component={App}&gt;
-      &lt;IndexRoute component={Home} /&gt;
-      &lt;Route path=&apos;about&apos; component={About} /&gt;
-      &lt;Route path=&apos;features&apos; component={Features} /&gt;
-    &lt;/Route&gt;
-  &lt;/Router&gt;,
-  document.getElementById(&apos;app&apos;)
-)
-</code></pre><h2 id="国际化-I18N"><a href="#国际化-I18N" class="headerlink" title="国际化(I18N)"></a>国际化(I18N)</h2><p>通过<code>react-intl</code>你可以很轻松地实现国际化，它支持超过150中不同语言，默认是英文，呃~</p>
-<h2 id="权限认证"><a href="#权限认证" class="headerlink" title="权限认证"></a>权限认证</h2><p>Authentication is an important part of any application. The best way to do user authentication for single page apps is via JSON Web Tokens (JWT). A typical authentication flow is this:</p>
-<ul>
-<li>A user signs up/logs in, generate JWT token and return it to the client</li>
-<li>Store the JWT token on the client and send it via headers/query parameters for future requests</li>
+            <h2 id="Unicode编码空格"><a href="#Unicode编码空格" class="headerlink" title="Unicode编码空格"></a>Unicode编码空格</h2><ul>
+<li><code>&amp;nbsp;</code>: <strong>不换行空格</strong>,用于不会被浏览器判断为可以在中间打断，比如：<code>There is&amp;nbsp;Space</code>，如果会换行，只会在<code>There</code>和<code>is</code>之间换行，而不会在<code>is</code>和<code>Space</code>之间换行。</li>
+<li>跟随字体大小产生相应空白的空格：<code>&amp;ensp;</code>(1/2em)，<code>&amp;emsp;</code>(1em)，<code>&amp;thinsp;</code>(1/6em)，这类就很适合坐表单<code>label</code>的排版了，坑爹，终于找到好的解决方法了</li>
 </ul>
-<p>A comprehensive example of adding authentication to a ReactJS app is here. Using Redux? Here is a good example of setting up authentication in your ReactJS application.</p>
-<h2 id="数据持久化"><a href="#数据持久化" class="headerlink" title="数据持久化"></a>数据持久化</h2><p>Without a backend, you can persist data in your Single Page App by using Firebase. In a Reactjs app, all you simply need is ReactFire. It is a ReactJS mixin for easy Firebase integration. With ReactFire, it only takes a few lines of JavaScript to integrate Firebase data into React apps via the ReactFireMixin</p>
-<pre><code>npm install --save reactfire react firebase
-</code></pre><p>TodoList Example</p>
-<pre><code>import React from &apos;react&apos;;
-
-class TodoList extends React.Component {
-  render() {
-    var _this = this;
-    var createItem = (item, index) =&gt; {
-      return (
-        &lt;li key={ index }&gt;
-          { item.text }
-          &lt;span onClick={ _this.props.removeItem.bind(null, item[&apos;.key&apos;]) }
-                style=&gt;
-            X
-          &lt;/span&gt;
-        &lt;/li&gt;
-      );
-    };
-
-    return &lt;ul&gt;{ this.props.items.map(createItem) }&lt;/ul&gt;;
-  }
-}
-
-class TodoApp extends React.Component {
-  getInitialState() {
-    return {
-      items: [],
-      text: &apos;&apos;
-    };
-  }
-
-  componentWillMount() {
-    this.firebaseRef = firebase.database().ref(&apos;todoApp/items&apos;);
-    this.firebaseRef.limitToLast(25).on(&apos;value&apos;, function(dataSnapshot) {
-      var items = [];
-      dataSnapshot.forEach(childSnapshot =&gt; {
-        const item = childSnapshot.val();
-        item[&apos;.key&apos;] = childSnapshot.key;
-        items.push(item);
-      });
-
-      this.setState({
-        items: items
-      });
-    }.bind(this));
-  }
-
-  componentWillUnmount() {
-    this.firebaseRef.off();
-  }
-
-  onChange(e) {
-    this.setState({text: e.target.value});
-  }
-
-  removeItem(key) {
-    var firebaseRef = firebase.database().ref(&apos;todoApp/items&apos;);;
-    firebaseRef.child(key).remove();
-  }
-
-  handleSubmit(e) {
-    e.preventDefault();
-    if (this.state.text &amp;&amp; this.state.text.trim().length !== 0) {
-      this.firebaseRef.push({
-        text: this.state.text
-      });
-      this.setState({
-        text: &apos;&apos;
-      });
-    }
-  }
-
-  render() {
-    return (
-      &lt;div&gt;
-        &lt;TodoList items={ this.state.items } removeItem={ this.removeItem } /&gt;
-        &lt;form onSubmit={ this.handleSubmit }&gt;
-          &lt;input onChange={ this.onChange } value={ this.state.text } /&gt;
-          &lt;button&gt;{ &apos;Add #&apos; + (this.state.items.length + 1) }&lt;/button&gt;
-        &lt;/form&gt;
-      &lt;/div&gt;
-    );
-  }
-}
-
-ReactDOM.render(&lt;TodoApp /&gt;, document.getElementById(&apos;todoApp&apos;));
-</code></pre><p>More information about persisting your data using ReactFire <a href="https://github.com/firebase/reactfire/blob/master/docs/quickstart.md" target="_blank" rel="external">here</a>.</p>
-<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>Most projects become a mountain of spaghetti code at some point during development due to lack of solid tests or no tests at all. ReactJS apps are no different, but this can be avoided if you know some core principles. When writing tests for ReactJS code, it is helpful to pull out any functionality that doesn’t have to do with any UI components into separate modules, so that they can be tested separately. Tools for unit testing those functionalities are mocha, expect, chai, jasmine.</p>
-<p>Testing becomes tricky in a ReactJS application when you have to deal with components. How do you test stateless components? How do you test components with state? Now, ReactJS provides a nice set of test utilities that allow us to inspect and examine the components we build. A particular concept worthy of mention is Shallow Rendering. Instead of rendering into a DOM the idea of shallow rendering is to instantiate a component and get the result of its render method. You can also check its props and children and verify they work as expected. More information here.</p>
-<p>Facebook uses Jest to test React applications. AirBnB uses Enzyme. When bootstrapping your ReactJS application, you can set up any of these awesome tools to implement testing.</p>
-<h2 id="脚手架和模板"><a href="#脚手架和模板" class="headerlink" title="脚手架和模板"></a>脚手架和模板</h2><p>A lot of tools have been mentioned in this post in relation to setting up different parts of a ReactJS app. If you don’t intend writing your app from scratch, there are lots of generators and boilerplates that tie all these tools together to give you a great starting point for your app. One fantastic example is React Starter Kit. It has a Yeoman generator. It’s an isomorphic web app boilerplate that contains almost everything you need to build a ReactJS app. Another boilerplate is React Static boilerplate, it helps you build a web app that can be hosted directly from CDNs like Firebase and Github Pages. Other alternatives are React redux starter kit and React webpack generator. Recently, a nice and effective tool called create-react-app was released by the guys at Facebook. It’s a CLI tool that helps create React apps with no build configuration!</p>
-<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>There are several tools that will help bootstrap your React app, we looked at a couple that we consider quite good and will have your application up and running in no time. But feel free to search for your own tools, and if you think that we are missing something, let us know in the comments. Setting up a React project should be painless!</p>
-<p>“Setting up a React project should be painless!”</p>
 
           
         
@@ -1071,7 +1030,7 @@ ReactDOM.render(&lt;TodoApp /&gt;, document.getElementById(&apos;todoApp&apos;))
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2017/08/02/react/React遇到的坑/">
+    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2016/08/02/css/使用css视口单位/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="liaoyf">
@@ -1090,7 +1049,7 @@ ReactDOM.render(&lt;TodoApp /&gt;, document.getElementById(&apos;todoApp&apos;))
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/08/02/react/React遇到的坑/" itemprop="url">未命名</a></h1>
+                <a class="post-title-link" href="/2016/08/02/css/使用css视口单位/" itemprop="url">使用css视口单位</a></h1>
         
 
         <div class="post-meta">
@@ -1102,8 +1061,8 @@ ReactDOM.render(&lt;TodoApp /&gt;, document.getElementById(&apos;todoApp&apos;))
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-02T11:44:45+08:00">
-                2017-08-02
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-02T14:38:52+08:00">
+                2016-08-02
               </time>
             
 
@@ -1120,7 +1079,7 @@ ReactDOM.render(&lt;TodoApp /&gt;, document.getElementById(&apos;todoApp&apos;))
 
           
           
-             <span id="/2017/08/02/react/React遇到的坑/" class="leancloud_visitors" data-flag-title="">
+             <span id="/2016/08/02/css/使用css视口单位/" class="leancloud_visitors" data-flag-title="使用css视口单位">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1153,160 +1112,22 @@ ReactDOM.render(&lt;TodoApp /&gt;, document.getElementById(&apos;todoApp&apos;))
       
         
           
-            <h1 id="React遇到的坑"><a href="#React遇到的坑" class="headerlink" title="React遇到的坑"></a>React遇到的坑</h1><hr>
-<h2 id="当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。"><a href="#当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。" class="headerlink" title="当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。"></a>当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。</h2><p> 参考网址：<a href="https://stackoverflow.com/questions/25385578/nested-react-input-element-loses-focus-on-typing" target="_blank" rel="external">https://stackoverflow.com/questions/25385578/nested-react-input-element-loses-focus-on-typing</a></p>
-<h2 id="input值不会随着属性改变而改变"><a href="#input值不会随着属性改变而改变" class="headerlink" title="input值不会随着属性改变而改变"></a>input值不会随着属性改变而改变</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;Parent&gt;</div><div class="line">    &lt;Child inputVal=&#123;this.state.inputVal&#125;/&gt;</div><div class="line">&lt;/Parent&gt;</div></pre></td></tr></table></figure>
-<p>当<code>Child</code>组件的<code>value</code>为<code>null</code>后input的值不会更改。所以一般要判断是否存在<code>null</code>值：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;FormControl value=&#123;this.props.inputVal || &apos;&apos;&#125;/&gt;</div></pre></td></tr></table></figure>
-<h2 id="UglifyJs编辑后有些arguments无效"><a href="#UglifyJs编辑后有些arguments无效" class="headerlink" title="UglifyJs编辑后有些arguments无效"></a>UglifyJs编辑后有些arguments无效</h2><p>升级uglifyjs-webpack-plugin和uglify-js：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&quot;uglify-js&quot;: &quot;^3.1.6&quot;,</div><div class="line">&quot;uglifyjs-webpack-plugin&quot;: &quot;^1.0.1&quot;,</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2017/08/02/react/React入门——简介/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="liaoyf">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="liaoyf的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/02/react/React入门——简介/" itemprop="url">未命名</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-02T11:44:45+08:00">
-                2017-08-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/08/02/react/React入门——简介/" class="leancloud_visitors" data-flag-title="">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="React入门——简介"><a href="#React入门——简介" class="headerlink" title="React入门——简介"></a>React入门——简介</h1><p>一、什么是React？</p>
-<p>React是Facebook开源的一个用于构建用户界面的Javascript库，他不是一个框架，而是专注于MVC架构中的V，即视图。这使得React很容易和开发者已有的开发栈进行融合。React顺应了Web开发组件化的趋势。应用React时，你总是应该从UI出发抽象出不同的组件，然后像搭积木一样把它们拼装起来。</p>
-<p>二、React能做什么？</p>
-<p><img src="0006.png" alt="22"></p>
-<p>补充：桌面应用程序（NW.js和Electron.js）</p>
-<p>二、React全家桶 </p>
-<ul>
-<li>自身库： react.js、react-dom.js、add-ons</li>
-<li>语法：ES5/ES6、JSX</li>
-<li>构建工具：Fis3、webpack、babel</li>
-<li>状态管理：Redux、Flux、react-redux、Immutable</li>
-<li>路由：react-router、react-redux-router</li>
-<li>日志：redux-logger</li>
-<li>中间件：redux-thunk</li>
-<li>主题：react-bootstrap</li>
-<li>表单：redux-form</li>
-</ul>
+            <p>css提供了许多单位用来规定元素，最熟悉的莫属<code>px</code>、<code>%</code>、<code>pt</code>、<code>em</code>以及最近比较火的<code>rem</code>，还有其他两个<code>vw</code>、<code>vh</code>，它们是相对单位，但是不同于<code>em</code>和<code>rem</code>那样相对于当前元素或相对于根元素，他们是相对于视口，一个视口单位等于1%的视口的宽度（<code>vw</code>）或高度（<code>vh</code>）。</p>
+<p>这是很有用的。<code>vw</code>单位可以用于一些有大小的规则（如：<code>font-size</code>、或者一个<code>div</code>的高度），下面是一些使用案例：</p>
+<h2 id="使标题固定"><a href="#使标题固定" class="headerlink" title="使标题固定"></a>使标题固定</h2><p>如果你想让一个标题占满横向屏幕且让他固定在一行，你可以使用<code>vw</code>单位，这实际上是用原生的方法实现了jquery插件<a href="http://fittextjs.com/" target="_blank" rel="external">FitText</a>的功能，但是相对于使用<code>vw</code>，FitText需要手动管理大小，使用检查工具，是一个快速的方法以确定适当的值。</p>
+<pre><code>//html
+&lt;h1&gt;Always a great fit!&lt;/h1&gt;
+//css
+h1{
+    font-size: 12vw;
+    text-align: center;
+}
+</code></pre><h2 id="Infinite-Lines"><a href="#Infinite-Lines" class="headerlink" title="Infinite Lines"></a>Infinite Lines</h2><p>Whilst building the falcon633 WordPress theme (used on this site), I needed to create an angled background that would appear to continue indefinitely. This is achievable by 1) making sure that the angle in the centre stays the same regardless of window size and 2) setting the height to be relative to the viewport width. I used an SVG background for the overall cut-out then set the height based on the width using vw units.</p>
+<h2 id="简单的视频包装"><a href="#简单的视频包装" class="headerlink" title="简单的视频包装"></a>简单的视频包装</h2><p>Let’s say you want to set the proportions of an element, an <code>iframe</code>, to stay at a fixed aspect ratio. You previously might have chosen to create a relative div filling the required space, then set carefully selected padding values with iframe inside absolutely positioned to cling to div on all sides (e.g. the approach demonstrated here).</p>
+<p>A better solution could be to use the vw and vh units. This way you can set your height and width directly on the element in question, whilst also keeping the ‘layers-for-layout’ number down.</p>
+<h2 id="全屏的hero-Image"><a href="#全屏的hero-Image" class="headerlink" title="全屏的hero Image"></a>全屏的<a href="https://en.wikipedia.org/wiki/Hero_image" title="Hero Image" target="_blank" rel="external"><code>hero Image</code></a></h2><p>你要做的只是在<code>body</code>和<code>html</code>上运用<code>height: 100%</code>，然后在元素上简单地使用<code>width: 100vw; heihgt: 100vh</code>就行了。</p>
+<h2 id="div居中"><a href="#div居中" class="headerlink" title="div居中"></a><code>div</code>居中</h2><p>一个常见的需求是要让一个<code>div</code>在页面中居中，这时候只要设置<code>margin: 20vh 20vw; width: 60vw, height: 60vh; padding: 10vh 10vw</code>即可。</p>
+<h2 id="浏览器支持情况"><a href="#浏览器支持情况" class="headerlink" title="浏览器支持情况"></a>浏览器支持情况</h2><p>IE9及以上</p>
 
           
         
