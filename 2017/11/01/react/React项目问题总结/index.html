@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="react," />
 
 
 
@@ -94,17 +94,18 @@
 
 
 
-<meta name="description" content="这个是关于页面">
-<meta property="og:type" content="website">
-<meta property="og:title" content="about">
-<meta property="og:url" content="https://liaoyongfu.github.io/about/index.html">
+<meta name="description" content="目前出现的问题 需要定义很多初始化state变量？  表单编辑后点取消，重新从后台拿数据如果是null的时候它不会自动更新state？  组件复用：未编写PropTypes，如果写了有时候返回的字段是null的，怎么写PropTypes？  组件复用：如果组件自己处理内部逻辑，那外面的组件如何拿到组件里面的数据？  页面需要记住类似查询状态，如何简单有效的实现？使用高阶组件实现？如何做到不冲突？">
+<meta name="keywords" content="react">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React项目问题总结">
+<meta property="og:url" content="https://liaoyongfu.github.io/2017/11/01/react/React项目问题总结/index.html">
 <meta property="og:site_name" content="liaoyf的博客">
-<meta property="og:description" content="这个是关于页面">
+<meta property="og:description" content="目前出现的问题 需要定义很多初始化state变量？  表单编辑后点取消，重新从后台拿数据如果是null的时候它不会自动更新state？  组件复用：未编写PropTypes，如果写了有时候返回的字段是null的，怎么写PropTypes？  组件复用：如果组件自己处理内部逻辑，那外面的组件如何拿到组件里面的数据？  页面需要记住类似查询状态，如何简单有效的实现？使用高阶组件实现？如何做到不冲突？">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-08-02T07:58:48.967Z">
+<meta property="og:updated_time" content="2017-11-01T11:20:38.169Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="about">
-<meta name="twitter:description" content="这个是关于页面">
+<meta name="twitter:title" content="React项目问题总结">
+<meta name="twitter:description" content="目前出现的问题 需要定义很多初始化state变量？  表单编辑后点取消，重新从后台拿数据如果是null的时候它不会自动更新state？  组件复用：未编写PropTypes，如果写了有时候返回的字段是null的，怎么写PropTypes？  组件复用：如果组件自己处理内部逻辑，那外面的组件如何拿到组件里面的数据？  页面需要记住类似查询状态，如何简单有效的实现？使用高阶组件实现？如何做到不冲突？">
 
 
 
@@ -133,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="https://liaoyongfu.github.io/about/"/>
+  <link rel="canonical" href="https://liaoyongfu.github.io/2017/11/01/react/React项目问题总结/"/>
 
 
 
 
 
-  <title>about | liaoyf的博客</title>
+  <title>React项目问题总结 | liaoyf的博客</title>
   
 
 
@@ -304,34 +305,188 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2017/11/01/react/React项目问题总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liaoyf">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="liaoyf的博客">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">about</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <p>这个是关于页面</p>
-
+          <h1 class="post-title" itemprop="name headline">React项目问题总结</h1>
         
-      </div>
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-01T10:17:10+08:00">
+                2017-11-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/11/01/react/React项目问题总结/" class="leancloud_visitors" data-flag-title="React项目问题总结">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <h2 id="目前出现的问题"><a href="#目前出现的问题" class="headerlink" title="目前出现的问题"></a>目前出现的问题</h2><ol>
+<li><p>需要定义很多初始化state变量？</p>
+</li>
+<li><p>表单编辑后点取消，重新从后台拿数据如果是null的时候它不会自动更新state？</p>
+</li>
+<li><p>组件复用：未编写PropTypes，如果写了有时候返回的字段是null的，怎么写PropTypes？</p>
+</li>
+<li><p>组件复用：如果组件自己处理内部逻辑，那外面的组件如何拿到组件里面的数据？</p>
+</li>
+<li><p>页面需要记住类似查询状态，如何简单有效的实现？使用高阶组件实现？如何做到不冲突？</p>
+</li>
+<li><p>提示框太难用了？</p>
+</li>
+<li><p>需要封装常用的对象或数组操作工具方法</p>
+</li>
+<li><p>表单使用体验太差：需要编写一大推标签；需要手动编写value和onChange；表单校验需要改善</p>
+</li>
+<li><p>npm 包依赖如何做到同步更新？npm安装依赖包经常报错？npm打包太慢，启动太慢？打包后的文件不会自动加入svn版本控制？</p>
+</li>
+<li><p>如何做到公共thunk的合并？</p>
+</li>
+<li><p>front编译如何做到自动化？</p>
+</li>
+<li><p>process.env.NODE_ENV在编译后变成<code>I.env.NODE_ENV</code>？</p>
+</li>
+<li><p>如何require或import远程地址的文件？</p>
+</li>
+<li><p>脚手架运行时最好能判断当前的版本是不是最新的，如果不是就报错，这样能确保安装最新的脚手架？</p>
+</li>
+<li><p>热加载更新？</p>
+</li>
+<li><p>js生成sourcemap方便调试？</p>
+</li>
+</ol>
+
       
     </div>
     
     
     
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/react/" rel="tag"># react</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/10/31/react/创建一个React项目/" rel="next" title="创建一个React项目">
+                <i class="fa fa-chevron-left"></i> 创建一个React项目
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -364,8 +519,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.jpg"
@@ -431,6 +595,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#目前出现的问题"><span class="nav-number">1.</span> <span class="nav-text">目前出现的问题</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -551,10 +731,10 @@
 
 
   
-    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
 <script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
 
-  
+
 
   
 
