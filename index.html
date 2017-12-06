@@ -436,6 +436,17 @@
 </li>
 <li><p>js生成sourcemap方便调试？</p>
 </li>
+<li><p>组件间的样式在打包后会被相互影响？</p>
+</li>
+<li><p>如何解决ulynlist问题：basePath问题（貌似可以自己引）？</p>
+</li>
+<li><p>打包时如果output.publicPath为空字符串时会找不到字体图标的bug？</p>
+<p>配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    test: /\.scss$/,</div><div class="line">    use: ExtractTextPlugin.extract(&#123;</div><div class="line">        //主要是加这一句</div><div class="line">        publicPath: &apos;../&apos;,</div><div class="line">        fallback: &apos;style-loader&apos;,</div><div class="line">        use: [</div><div class="line">            &#123;</div><div class="line">                loader: &apos;css-loader?sourceMap&apos;</div><div class="line">            &#125;,</div><div class="line">            &#123;</div><div class="line">                loader: &apos;resolve-url-loader&apos;</div><div class="line">            &#125;,</div><div class="line">            &#123;</div><div class="line">                loader: &apos;sass-loader?sourceMap&apos;</div><div class="line">            &#125;</div><div class="line">        ]</div><div class="line">    &#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>样式想要抽成公用的，有两种方法：</p>
+<p>如果只想在入口引用一个，则必须写到entry中；<br>如果在多个文件中引用？</p>
+</li>
 </ol>
 
           

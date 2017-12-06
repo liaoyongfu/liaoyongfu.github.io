@@ -102,7 +102,7 @@
 <meta property="og:site_name" content="liaoyf的博客">
 <meta property="og:description" content="目前出现的问题 需要定义很多初始化state变量？  表单编辑后点取消，重新从后台拿数据如果是null的时候它不会自动更新state？  组件复用：未编写PropTypes，如果写了有时候返回的字段是null的，怎么写PropTypes？  组件复用：如果组件自己处理内部逻辑，那外面的组件如何拿到组件里面的数据？  页面需要记住类似查询状态，如何简单有效的实现？使用高阶组件实现？如何做到不冲突？">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-23T08:39:27.338Z">
+<meta property="og:updated_time" content="2017-11-27T03:29:06.325Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React项目问题总结">
 <meta name="twitter:description" content="目前出现的问题 需要定义很多初始化state变量？  表单编辑后点取消，重新从后台拿数据如果是null的时候它不会自动更新state？  组件复用：未编写PropTypes，如果写了有时候返回的字段是null的，怎么写PropTypes？  组件复用：如果组件自己处理内部逻辑，那外面的组件如何拿到组件里面的数据？  页面需要记住类似查询状态，如何简单有效的实现？使用高阶组件实现？如何做到不冲突？">
@@ -431,6 +431,17 @@
 <li><p>热加载更新？</p>
 </li>
 <li><p>js生成sourcemap方便调试？</p>
+</li>
+<li><p>组件间的样式在打包后会被相互影响？</p>
+</li>
+<li><p>如何解决ulynlist问题：basePath问题（貌似可以自己引）？</p>
+</li>
+<li><p>打包时如果output.publicPath为空字符串时会找不到字体图标的bug？</p>
+<p>配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    test: /\.scss$/,</div><div class="line">    use: ExtractTextPlugin.extract(&#123;</div><div class="line">        //主要是加这一句</div><div class="line">        publicPath: &apos;../&apos;,</div><div class="line">        fallback: &apos;style-loader&apos;,</div><div class="line">        use: [</div><div class="line">            &#123;</div><div class="line">                loader: &apos;css-loader?sourceMap&apos;</div><div class="line">            &#125;,</div><div class="line">            &#123;</div><div class="line">                loader: &apos;resolve-url-loader&apos;</div><div class="line">            &#125;,</div><div class="line">            &#123;</div><div class="line">                loader: &apos;sass-loader?sourceMap&apos;</div><div class="line">            &#125;</div><div class="line">        ]</div><div class="line">    &#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>样式想要抽成公用的，有两种方法：</p>
+<p>如果只想在入口引用一个，则必须写到entry中；<br>如果在多个文件中引用？</p>
 </li>
 </ol>
 
