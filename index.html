@@ -317,6 +317,387 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2018/02/02/react/react-bootstrap读后感/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liaoyf">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="liaoyf的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/02/02/react/react-bootstrap读后感/" itemprop="url">react-bootstrap读后感</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-02T10:13:42+08:00">
+                2018-02-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/02/02/react/react-bootstrap读后感/" class="leancloud_visitors" data-flag-title="react-bootstrap读后感">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>基于react-bootstrap的0.32.1版本。</p>
+<h2 id="eslint"><a href="#eslint" class="headerlink" title="eslint"></a>eslint</h2><h3 id="extends"><a href="#extends" class="headerlink" title="extends"></a>extends</h3><h4 id="eslint-config-airbnb"><a href="#eslint-config-airbnb" class="headerlink" title="eslint-config-airbnb"></a>eslint-config-airbnb</h4><p>使用了基于airbnb的js代码风格，详细了解：</p>
+<ul>
+<li><p><a href="https://github.com/airbnb/javascript" target="_blank" rel="external">https://github.com/airbnb/javascript</a></p>
+</li>
+<li><p>中文版：<a href="https://github.com/yuche/javascript" target="_blank" rel="external">https://github.com/yuche/javascript</a></p>
+</li>
+</ul>
+<h4 id="prettier"><a href="#prettier" class="headerlink" title="prettier"></a>prettier</h4><p>格式化代码，使代码风格统一，详细了解：</p>
+<ul>
+<li><a href="https://prettier.io/" target="_blank" rel="external">https://prettier.io/</a></li>
+</ul>
+<h2 id="plugins"><a href="#plugins" class="headerlink" title="plugins"></a>plugins</h2><ul>
+<li><p><a href="https://github.com/benmosher/eslint-plugin-import" target="_blank" rel="external">eslint-plugin-import</a>：帮助校验是否正确导入模块</p>
+</li>
+<li><p><a href="https://github.com/evcohen/eslint-plugin-jsx-a11y" target="_blank" rel="external">eslint-plugin-jsx-a11y</a>：帮助校验React属性是否支持</p>
+</li>
+<li><p><a href="https://github.com/prettier/eslint-plugin-prettier" target="_blank" rel="external">eslint-plugin-prettier</a>：prettier的eslint插件</p>
+</li>
+<li><p><a href="https://github.com/yannickcr/eslint-plugin-react" target="_blank" rel="external">eslint-plugin-react</a>：React校验规则插件</p>
+</li>
+</ul>
+<h2 id="babel插件"><a href="#babel插件" class="headerlink" title="babel插件"></a>babel插件</h2><ul>
+<li><p>babel-plugin-transform-class-properties：转换class属性，如实例属性、类静态属性</p>
+</li>
+<li><p><a href="https://github.com/59naga/babel-plugin-add-module-exports" target="_blank" rel="external">babel-plugin-add-module-exports</a>：省去<code>require(&#39;module&#39;).default</code>中的<code>default</code></p>
+</li>
+<li><p>babel-plugin-transform-export-extensions：支持<code>export * as ns from &#39;mod&#39;</code>和<code>export v from &#39;mod&#39;;</code>语法</p>
+</li>
+<li><p><a href="https://babeljs.io/docs/plugins/transform-object-rest-spread/" target="_blank" rel="external">babel-plugin-transform-object-rest-spread</a>：支持<code>...</code>运算符</p>
+</li>
+<li><p><a href="https://babeljs.io/docs/plugins/transform-runtime/" target="_blank" rel="external">babel-plugin-transform-runtime</a>：使用<code>babel-runtime</code>替换，免去引用<code>babel-polyfill</code>造成的全局变量污染</p>
+</li>
+</ul>
+<blockquote>
+<p>参考文章：</p>
+<ul>
+<li><a href="https://zhuanlan.zhihu.com/p/27777995" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/27777995</a></li>
+<li><a href="https://segmentfault.com/a/1190000009065987" target="_blank" rel="external">https://segmentfault.com/a/1190000009065987</a></li>
+</ul>
+</blockquote>
+<h2 id="preset"><a href="#preset" class="headerlink" title="preset"></a>preset</h2><ul>
+<li><p>babel-preset-env</p>
+</li>
+<li><p><a href="https://github.com/babel/babel/tree/master/packages/babel-preset-react" target="_blank" rel="external">babel-preset-react</a></p>
+</li>
+</ul>
+<h2 id="感觉挺有用的第三方模块"><a href="#感觉挺有用的第三方模块" class="headerlink" title="感觉挺有用的第三方模块"></a>感觉挺有用的第三方模块</h2><ul>
+<li><p><a href="http://chaijs.com/" target="_blank" rel="external">chai</a>：Node.js的断言库</p>
+</li>
+<li><p><a href="https://codecov.io/" target="_blank" rel="external">codecov</a>：集成测试覆盖率工具</p>
+</li>
+</ul>
+<p>参考网址：</p>
+<ul>
+<li><a href="https://www.jianshu.com/p/146c4769d4b1" target="_blank" rel="external">https://www.jianshu.com/p/146c4769d4b1</a></li>
+</ul>
+<ul>
+<li><p><a href="http://clrs.cc/" target="_blank" rel="external">colors</a>：很容易设置颜色</p>
+</li>
+<li><p><a href="https://github.com/kentcdodds/cross-env" target="_blank" rel="external">cross-env</a>：解决跨平台命令问题</p>
+</li>
+<li><p><a href="https://github.com/airbnb/enzyme" target="_blank" rel="external">enzyme</a>：测试React</p>
+</li>
+<li><p><a href="https://www.npmjs.com/package/fs-extra" target="_blank" rel="external">fs-extra</a>：为原生的<code>fs</code>模块添加<code>promise</code>支持</p>
+</li>
+<li><p><a href="https://github.com/typicode/husky" target="_blank" rel="external">husky</a>：Git hooks made easy</p>
+</li>
+<li><p><a href="http://sinonjs.org/" target="_blank" rel="external">sinon</a>：Standalone test spies, stubs and mocks for JavaScript. Works with any unit testing framework.</p>
+</li>
+<li><p><a href="https://github.com/zertosh/invariant" target="_blank" rel="external">invariant</a>：在开发环境下提示错误的快速写法</p>
+</li>
+<li><p><a href="https://github.com/BerkeleyTrue/warning" target="_blank" rel="external">warning</a>：facebook的warning，快速写警告</p>
+</li>
+<li><p><a href="https://github.com/timoxley/keycode" target="_blank" rel="external">keycode</a>：在键盘键码和键名之间进行转换，反之亦然</p>
+</li>
+</ul>
+<h2 id="用到的测试框架"><a href="#用到的测试框架" class="headerlink" title="用到的测试框架"></a>用到的测试框架</h2><ul>
+<li><p><a href="https://mochajs.org/" target="_blank" rel="external">mocha</a>：Node.js的测试框架</p>
+</li>
+<li><p><a href="https://karma-runner.github.io/2.0/index.html" target="_blank" rel="external">karama</a>：JS测试框架</p>
+</li>
+</ul>
+<p>React好像推荐的是<code>Jest</code>框架，这个<strong><em>有待了解</em></strong></p>
+<h2 id="编译提供的选择"><a href="#编译提供的选择" class="headerlink" title="编译提供的选择"></a>编译提供的选择</h2><ul>
+<li><p>dist：使用<code>webpack</code>提供的<code>webpack</code>方法进行编译；</p>
+</li>
+<li><p>lib：使用<code>babel</code>的<code>transform</code>方法编译；</p>
+</li>
+<li><p>es：使用<code>babel</code>的<code>transform</code>方法编译，和<code>lib</code>方法不同的是少了一个<code>babel-plugin-add-module-exports</code>插件；（这个文件应该没什么用吧，现在浏览器支持率这么低）</p>
+</li>
+<li><p>bower：复制<code>dist</code>文件夹</p>
+</li>
+</ul>
+<h2 id="用到的一些JS语法"><a href="#用到的一些JS语法" class="headerlink" title="用到的一些JS语法"></a>用到的一些JS语法</h2><ul>
+<li><p>柯里化函数：</p>
+<ul>
+<li><p><a href="http://www.zhangxinxu.com/wordpress/2013/02/js-currying/" target="_blank" rel="external">http://www.zhangxinxu.com/wordpress/2013/02/js-currying/</a></p>
+</li>
+<li><p><a href="https://www.jianshu.com/p/f5033cec605e" target="_blank" rel="external">https://www.jianshu.com/p/f5033cec605e</a></p>
+</li>
+</ul>
+</li>
+<li><p>async/await：</p>
+<ul>
+<li><a href="http://es6.ruanyifeng.com/#docs/generator" target="_blank" rel="external">http://es6.ruanyifeng.com/#docs/generator</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>React获取子组件或父组件属性：</p>
+<ul>
+<li><a href="https://liaoyongfu.github.io/2017/08/02/react/react%E8%8E%B7%E5%8F%96%E7%88%B6%E7%BB%84%E4%BB%B6%E6%88%96%E5%AD%90%E7%BB%84%E4%BB%B6%E5%B1%9E%E6%80%A7/">https://liaoyongfu.github.io/2017/08/02/react/react%E8%8E%B7%E5%8F%96%E7%88%B6%E7%BB%84%E4%BB%B6%E6%88%96%E5%AD%90%E7%BB%84%E4%BB%B6%E5%B1%9E%E6%80%A7/</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>TODO</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2017/12/21/react-native/react-native中遇到的坑/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liaoyf">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="liaoyf的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/12/21/react-native/react-native中遇到的坑/" itemprop="url">react-native中遇到的坑</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-21T15:37:56+08:00">
+                2017-12-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/12/21/react-native/react-native中遇到的坑/" class="leancloud_visitors" data-flag-title="react-native中遇到的坑">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Android中TextInput有下边框"><a href="#Android中TextInput有下边框" class="headerlink" title="Android中TextInput有下边框"></a>Android中TextInput有下边框</h2><p>添加<code>transparent</code>即可解决</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;TextInput underlineColorAndroid=&quot;transparent&quot;/&gt;</div></pre></td></tr></table></figure>
+<h2 id="Android中borderRadius和borderWidth一起使用时效果会出错"><a href="#Android中borderRadius和borderWidth一起使用时效果会出错" class="headerlink" title="Android中borderRadius和borderWidth一起使用时效果会出错"></a>Android中borderRadius和borderWidth一起使用时效果会出错</h2><p>看issue好像还没有解决：</p>
+<p><a href="https://github.com/facebook/react-native/issues/11042" target="_blank" rel="external">https://github.com/facebook/react-native/issues/11042</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2017/12/13/nodejs/使用node.js发送邮件/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -973,143 +1354,6 @@ ReactDOM.render(&lt;TodoApp /&gt;, document.getElementById(&apos;todoApp&apos;))
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2017/10/31/react/React遇到的坑/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="liaoyf">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="liaoyf的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/31/react/React遇到的坑/" itemprop="url">React遇到的坑.md</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-31T15:47:13+08:00">
-                2017-10-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/10/31/react/React遇到的坑/" class="leancloud_visitors" data-flag-title="React遇到的坑.md">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。"><a href="#当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。" class="headerlink" title="当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。"></a>当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。</h2><p> 参考网址：<a href="https://stackoverflow.com/questions/25385578/nested-react-input-element-loses-focus-on-typing" target="_blank" rel="external">https://stackoverflow.com/questions/25385578/nested-react-input-element-loses-focus-on-typing</a></p>
-<h2 id="input值不会随着属性改变而改变"><a href="#input值不会随着属性改变而改变" class="headerlink" title="input值不会随着属性改变而改变"></a>input值不会随着属性改变而改变</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;Parent&gt;</div><div class="line">    &lt;Child inputVal=&#123;this.state.inputVal&#125;/&gt;</div><div class="line">&lt;/Parent&gt;</div></pre></td></tr></table></figure>
-<p>当<code>Child</code>组件的<code>value</code>为<code>null</code>后input的值不会更改。所以一般要判断是否存在<code>null</code>值：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;FormControl value=&#123;this.props.inputVal || &apos;&apos;&#125;/&gt;</div></pre></td></tr></table></figure>
-<h2 id="UglifyJs编辑后有些arguments无效"><a href="#UglifyJs编辑后有些arguments无效" class="headerlink" title="UglifyJs编辑后有些arguments无效"></a>UglifyJs编辑后有些arguments无效</h2><p>升级uglifyjs-webpack-plugin和uglify-js：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&quot;uglify-js&quot;: &quot;^3.1.6&quot;,</div><div class="line">&quot;uglifyjs-webpack-plugin&quot;: &quot;^1.0.1&quot;,</div></pre></td></tr></table></figure>
-<h2 id="上传文件不能上传同一张图片"><a href="#上传文件不能上传同一张图片" class="headerlink" title="上传文件不能上传同一张图片"></a>上传文件不能上传同一张图片</h2><p>在上传完成后，设置<code>$(&#39;input&#39;).val(&#39;&#39;)</code>即可。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2017/10/31/react/React入门——简介/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1209,6 +1453,143 @@ ReactDOM.render(&lt;TodoApp /&gt;, document.getElementById(&apos;todoApp&apos;))
 <li>主题：react-bootstrap</li>
 <li>表单：redux-form</li>
 </ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2017/10/31/react/React遇到的坑/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liaoyf">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="liaoyf的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/31/react/React遇到的坑/" itemprop="url">React遇到的坑.md</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-31T15:47:13+08:00">
+                2017-10-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/10/31/react/React遇到的坑/" class="leancloud_visitors" data-flag-title="React遇到的坑.md">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。"><a href="#当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。" class="headerlink" title="当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。"></a>当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。</h2><p> 参考网址：<a href="https://stackoverflow.com/questions/25385578/nested-react-input-element-loses-focus-on-typing" target="_blank" rel="external">https://stackoverflow.com/questions/25385578/nested-react-input-element-loses-focus-on-typing</a></p>
+<h2 id="input值不会随着属性改变而改变"><a href="#input值不会随着属性改变而改变" class="headerlink" title="input值不会随着属性改变而改变"></a>input值不会随着属性改变而改变</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;Parent&gt;</div><div class="line">    &lt;Child inputVal=&#123;this.state.inputVal&#125;/&gt;</div><div class="line">&lt;/Parent&gt;</div></pre></td></tr></table></figure>
+<p>当<code>Child</code>组件的<code>value</code>为<code>null</code>后input的值不会更改。所以一般要判断是否存在<code>null</code>值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;FormControl value=&#123;this.props.inputVal || &apos;&apos;&#125;/&gt;</div></pre></td></tr></table></figure>
+<h2 id="UglifyJs编辑后有些arguments无效"><a href="#UglifyJs编辑后有些arguments无效" class="headerlink" title="UglifyJs编辑后有些arguments无效"></a>UglifyJs编辑后有些arguments无效</h2><p>升级uglifyjs-webpack-plugin和uglify-js：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&quot;uglify-js&quot;: &quot;^3.1.6&quot;,</div><div class="line">&quot;uglifyjs-webpack-plugin&quot;: &quot;^1.0.1&quot;,</div></pre></td></tr></table></figure>
+<h2 id="上传文件不能上传同一张图片"><a href="#上传文件不能上传同一张图片" class="headerlink" title="上传文件不能上传同一张图片"></a>上传文件不能上传同一张图片</h2><p>在上传完成后，设置<code>$(&#39;input&#39;).val(&#39;&#39;)</code>即可。</p>
 
           
         
@@ -1663,290 +2044,6 @@ ReactDOM.render(&lt;TodoApp /&gt;, document.getElementById(&apos;todoApp&apos;))
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2017/09/29/react-native/react-native中FlatList的使用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="liaoyf">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="liaoyf的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/09/29/react-native/react-native中FlatList的使用/" itemprop="url">react-native中FlatList的使用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-29T10:18:53+08:00">
-                2017-09-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/09/29/react-native/react-native中FlatList的使用/" class="leancloud_visitors" data-flag-title="react-native中FlatList的使用">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>原文地址：<a href="https://medium.com/react-native-development/how-to-use-the-flatlist-component-react-native-basics-92c482816fe6" target="_blank" rel="external">https://medium.com/react-native-development/how-to-use-the-flatlist-component-react-native-basics-92c482816fe6</a></p>
-<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>自从0.43版本以来，react-native新增了两个新的列表视图组件：<code>FlatList</code>以及<code>SectionList</code>，现在我们来看看<code>FlatList</code>组件的使用。</p>
-<h2 id="简单示例"><a href="#简单示例" class="headerlink" title="简单示例"></a>简单示例</h2><p>在<code>FlatList</code>中有个比较重要的属性：<code>data</code>和<code>renderItem</code>属性，data为object数组，renderItem可以控制每个item的渲染规则。</p>
-<p>这边的示例我们将会从<a href="https://randomuser.me/" target="_blank" rel="external">Random User Generator API</a>中拿，UI渲染将会使用<a href="https://github.com/react-native-training/react-native-elements" target="_blank" rel="external">react-native-elements</a>的组件。</p>
-<p><a href="https://github.com/spencercarli/react-native-flatlist-demo" target="_blank" rel="external">点击查看完整源代码</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line">//FlatListDemo.js</div><div class="line">import React, &#123; Component &#125; from &quot;react&quot;;</div><div class="line">import &#123; View, Text, FlatList &#125; from &quot;react-native&quot;;</div><div class="line"></div><div class="line">class FlatListDemo extends Component &#123;</div><div class="line">  constructor(props) &#123;</div><div class="line">    super(props);</div><div class="line"></div><div class="line">    this.state = &#123;</div><div class="line">      loading: false,</div><div class="line">      data: [],</div><div class="line">      page: 1,</div><div class="line">      seed: 1,</div><div class="line">      error: null,</div><div class="line">      refreshing: false,</div><div class="line">    &#125;;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  componentDidMount() &#123;</div><div class="line">    this.makeRemoteRequest();</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  makeRemoteRequest = () =&gt; &#123;</div><div class="line">    const &#123; page, seed &#125; = this.state;</div><div class="line">    const url = `https://randomuser.me/api/?seed=$&#123;seed&#125;&amp;page=$&#123;page&#125;&amp;results=20`;</div><div class="line">    this.setState(&#123; loading: true &#125;);</div><div class="line">    fetch(url)</div><div class="line">      .then(res =&gt; res.json())</div><div class="line">      .then(res =&gt; &#123;</div><div class="line">        this.setState(&#123;</div><div class="line">          data: page === 1 ? res.results : [...this.state.data, ...res.results],</div><div class="line">          error: res.error || null,</div><div class="line">          loading: false,</div><div class="line">          refreshing: false</div><div class="line">        &#125;);</div><div class="line">      &#125;)</div><div class="line">      .catch(error =&gt; &#123;</div><div class="line">        this.setState(&#123; error, loading: false &#125;);</div><div class="line">      &#125;);</div><div class="line">  &#125;;</div><div class="line"></div><div class="line">  render() &#123;</div><div class="line">    return (</div><div class="line">      &lt;View style=&#123;&#123; flex: 1, alignItems: &quot;center&quot;, justifyContent: &quot;center&quot; &#125;&#125;&gt;</div><div class="line">        &lt;Text&gt;Coming soon...&lt;/Text&gt;</div><div class="line">      &lt;/View&gt;</div><div class="line">    );</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">export default FlatListDemo;</div></pre></td></tr></table></figure>
-<p>然后外边就可以使用：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">import FlatList from &apos;./FlatListDemo.js&apos;;</div><div class="line">import React from &apos;react&apos;;</div><div class="line">import &#123; List, ListItem &#125; from &apos;react-native-elements&apos;;</div><div class="line"></div><div class="line">class AwesomeProject extends React.Component&#123;</div><div class="line">    render()&#123;</div><div class="line">        &lt;List&gt;</div><div class="line">            &lt;FlatList</div><div class="line">                data=&#123;this.state.data&#125;</div><div class="line">                renderItem=&#123;(&#123; item &#125;) =&gt; (</div><div class="line">                  &lt;ListItem</div><div class="line">                    roundAvatar</div><div class="line">                    title=&#123;`$&#123;item.name.first&#125; $&#123;item.name.last&#125;`&#125;</div><div class="line">                    subtitle=&#123;item.email&#125;</div><div class="line">                    avatar=&#123;&#123; uri: item.picture.thumbnail &#125;&#125;</div><div class="line">                    keyExtractor=&#123;item =&gt; item.email&#125;</div><div class="line">                  /&gt;</div><div class="line">                )&#125;</div><div class="line">            /&gt;</div><div class="line">        &lt;/List&gt;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>效果图如下：</p>
-<p><img src="../../images/1-wxQVmFfaj-wSlBCL5oq2Jw.png" alt="demo"></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2017/08/02/javascript/js浅拷贝和深拷贝/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="liaoyf">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="liaoyf的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/02/javascript/js浅拷贝和深拷贝/" itemprop="url">js浅拷贝和深拷贝</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-02T15:35:43+08:00">
-                2017-08-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/08/02/javascript/js浅拷贝和深拷贝/" class="leancloud_visitors" data-flag-title="js浅拷贝和深拷贝">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="javaScript的变量类型"><a href="#javaScript的变量类型" class="headerlink" title="javaScript的变量类型"></a>javaScript的变量类型</h2><p>（1）基本类型：</p>
-<p>5种基本数据类型Undefined、Null、Boolean、Number 和 String，变量是直接按值存放的，存放在栈内存中的简单数据段，可以直接访问。</p>
-<p>（2）引用类型：</p>
-<p>存放在堆内存中的对象，变量保存的是一个指针，这个指针指向另一个位置。当需要访问引用类型（如对象，数组等）的值时，首先从栈中获得该对象的地址指针，然后再从堆内存中取得所需的数据。</p>
-<blockquote>
-<p>JavaScript存储对象都是存地址的，所以浅拷贝会导致 obj1 和obj2 指向同一块内存地址。改变了其中一方的内容，都是在原来的内存上做修改会导致拷贝对象和源对象都发生改变，而深拷贝是开辟一块新的内存地址，将原对象的各个属性逐个复制进去。对拷贝对象和源对象各自的操作互不影响。</p>
-</blockquote>
-<p>例如：数组拷贝</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//浅拷贝，双向改变,指向同一片内存空间</div><div class="line">var arr1 = [1, 2, 3];</div><div class="line">var arr2 = arr1;</div><div class="line">arr1[0] = &apos;change&apos;;</div><div class="line">console.log(&apos;shallow copy: &apos; + arr1 + &quot; );   //shallow copy: change,2,3</div><div class="line">console.log(&apos;shallow copy: &apos; + arr2 + &quot; );   //shallow copy: change,2,3</div></pre></td></tr></table></figure>
-<h2 id="浅拷贝的实现"><a href="#浅拷贝的实现" class="headerlink" title="浅拷贝的实现"></a>浅拷贝的实现</h2>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/08/02/javascript/js浅拷贝和深拷贝/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1997,7 +2094,7 @@ ReactDOM.render(&lt;TodoApp /&gt;, document.getElementById(&apos;todoApp&apos;))
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">28</span>
+                <span class="site-state-item-count">30</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2065,7 +2162,7 @@ ReactDOM.render(&lt;TodoApp /&gt;, document.getElementById(&apos;todoApp&apos;))
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
