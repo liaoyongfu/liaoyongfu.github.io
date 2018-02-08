@@ -317,6 +317,146 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2018/02/08/git/git笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liaoyf">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="liaoyf的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/02/08/git/git笔记/" itemprop="url">git笔记</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-08T14:58:10+08:00">
+                2018-02-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/02/08/git/git笔记/" class="leancloud_visitors" data-flag-title="git笔记">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="版本回退"><a href="#版本回退" class="headerlink" title="版本回退"></a>版本回退</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git log [--pretty=oneline]</div></pre></td></tr></table></figure>
+<p>先查看下日志，查看各个版本的<code>mode id</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git reset --hard (HEAD^ | modeid)</div></pre></td></tr></table></figure>
+<p><code>HEAD</code>表示当前版本，<code>HEAD^</code>表示上一个版本，<code>HEAD~100</code>表示之前的100个版本，也可以通过<code>modeid</code>来回退版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git reflog</div></pre></td></tr></table></figure>
+<p>记录你的每一次命令，在我们回退后又后悔的时候可以查看各个版本的<code>mode id</code></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/02/08/git/git笔记/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2018/02/02/react/react-bootstrap读后感/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -398,8 +538,7 @@
 
       
         
-          
-            <p>基于react-bootstrap的0.32.1版本。</p>
+          <p>基于react-bootstrap的0.32.1版本。</p>
 <h2 id="eslint"><a href="#eslint" class="headerlink" title="eslint"></a>eslint</h2><h3 id="extends"><a href="#extends" class="headerlink" title="extends"></a>extends</h3><h4 id="eslint-config-airbnb"><a href="#eslint-config-airbnb" class="headerlink" title="eslint-config-airbnb"></a>eslint-config-airbnb</h4><p>使用了基于airbnb的js代码风格，详细了解：</p>
 <ul>
 <li><p><a href="https://github.com/airbnb/javascript" target="_blank" rel="external">https://github.com/airbnb/javascript</a></p>
@@ -407,119 +546,13 @@
 <li><p>中文版：<a href="https://github.com/yuche/javascript" target="_blank" rel="external">https://github.com/yuche/javascript</a></p>
 </li>
 </ul>
-<h4 id="prettier"><a href="#prettier" class="headerlink" title="prettier"></a>prettier</h4><p>格式化代码，使代码风格统一，详细了解：</p>
-<ul>
-<li><a href="https://prettier.io/" target="_blank" rel="external">https://prettier.io/</a></li>
-</ul>
-<h2 id="plugins"><a href="#plugins" class="headerlink" title="plugins"></a>plugins</h2><ul>
-<li><p><a href="https://github.com/benmosher/eslint-plugin-import" target="_blank" rel="external">eslint-plugin-import</a>：帮助校验是否正确导入模块</p>
-</li>
-<li><p><a href="https://github.com/evcohen/eslint-plugin-jsx-a11y" target="_blank" rel="external">eslint-plugin-jsx-a11y</a>：帮助校验React属性是否支持</p>
-</li>
-<li><p><a href="https://github.com/prettier/eslint-plugin-prettier" target="_blank" rel="external">eslint-plugin-prettier</a>：prettier的eslint插件</p>
-</li>
-<li><p><a href="https://github.com/yannickcr/eslint-plugin-react" target="_blank" rel="external">eslint-plugin-react</a>：React校验规则插件</p>
-</li>
-</ul>
-<h2 id="babel插件"><a href="#babel插件" class="headerlink" title="babel插件"></a>babel插件</h2><ul>
-<li><p>babel-plugin-transform-class-properties：转换class属性，如实例属性、类静态属性</p>
-</li>
-<li><p><a href="https://github.com/59naga/babel-plugin-add-module-exports" target="_blank" rel="external">babel-plugin-add-module-exports</a>：省去<code>require(&#39;module&#39;).default</code>中的<code>default</code></p>
-</li>
-<li><p>babel-plugin-transform-export-extensions：支持<code>export * as ns from &#39;mod&#39;</code>和<code>export v from &#39;mod&#39;;</code>语法</p>
-</li>
-<li><p><a href="https://babeljs.io/docs/plugins/transform-object-rest-spread/" target="_blank" rel="external">babel-plugin-transform-object-rest-spread</a>：支持<code>...</code>运算符</p>
-</li>
-<li><p><a href="https://babeljs.io/docs/plugins/transform-runtime/" target="_blank" rel="external">babel-plugin-transform-runtime</a>：使用<code>babel-runtime</code>替换，免去引用<code>babel-polyfill</code>造成的全局变量污染</p>
-</li>
-</ul>
-<blockquote>
-<p>参考文章：</p>
-<ul>
-<li><a href="https://zhuanlan.zhihu.com/p/27777995" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/27777995</a></li>
-<li><a href="https://segmentfault.com/a/1190000009065987" target="_blank" rel="external">https://segmentfault.com/a/1190000009065987</a></li>
-</ul>
-</blockquote>
-<h2 id="preset"><a href="#preset" class="headerlink" title="preset"></a>preset</h2><ul>
-<li><p>babel-preset-env</p>
-</li>
-<li><p><a href="https://github.com/babel/babel/tree/master/packages/babel-preset-react" target="_blank" rel="external">babel-preset-react</a></p>
-</li>
-</ul>
-<h2 id="感觉挺有用的第三方模块"><a href="#感觉挺有用的第三方模块" class="headerlink" title="感觉挺有用的第三方模块"></a>感觉挺有用的第三方模块</h2><ul>
-<li><p><a href="http://chaijs.com/" target="_blank" rel="external">chai</a>：Node.js的断言库</p>
-</li>
-<li><p><a href="https://codecov.io/" target="_blank" rel="external">codecov</a>：集成测试覆盖率工具</p>
-</li>
-</ul>
-<blockquote>
-<p>参考网址：</p>
-<ul>
-<li><a href="https://www.jianshu.com/p/146c4769d4b1" target="_blank" rel="external">https://www.jianshu.com/p/146c4769d4b1</a></li>
-</ul>
-</blockquote>
-<ul>
-<li><p><a href="http://clrs.cc/" target="_blank" rel="external">colors</a>：很容易设置颜色</p>
-</li>
-<li><p><a href="https://github.com/kentcdodds/cross-env" target="_blank" rel="external">cross-env</a>：解决跨平台命令问题</p>
-</li>
-<li><p><a href="https://github.com/airbnb/enzyme" target="_blank" rel="external">enzyme</a>：测试React</p>
-</li>
-<li><p><a href="https://www.npmjs.com/package/fs-extra" target="_blank" rel="external">fs-extra</a>：为原生的<code>fs</code>模块添加<code>promise</code>支持</p>
-</li>
-<li><p><a href="https://github.com/typicode/husky" target="_blank" rel="external">husky</a>：Git hooks made easy</p>
-</li>
-<li><p><a href="http://sinonjs.org/" target="_blank" rel="external">sinon</a>：Standalone test spies, stubs and mocks for JavaScript. Works with any unit testing framework.</p>
-</li>
-<li><p><a href="https://github.com/zertosh/invariant" target="_blank" rel="external">invariant</a>：在开发环境下提示错误的快速写法</p>
-</li>
-<li><p><a href="https://github.com/BerkeleyTrue/warning" target="_blank" rel="external">warning</a>：facebook的warning，快速写警告</p>
-</li>
-<li><p><a href="https://github.com/timoxley/keycode" target="_blank" rel="external">keycode</a>：在键盘键码和键名之间进行转换，反之亦然</p>
-</li>
-</ul>
-<h2 id="用到的测试框架"><a href="#用到的测试框架" class="headerlink" title="用到的测试框架"></a>用到的测试框架</h2><ul>
-<li><p><a href="https://mochajs.org/" target="_blank" rel="external">mocha</a>：Node.js的测试框架</p>
-</li>
-<li><p><a href="https://karma-runner.github.io/2.0/index.html" target="_blank" rel="external">karama</a>：JS测试框架</p>
-</li>
-</ul>
-<p>React好像推荐的是<code>Jest</code>框架，这个<strong><em>有待了解</em></strong></p>
-<h2 id="编译提供的选择"><a href="#编译提供的选择" class="headerlink" title="编译提供的选择"></a>编译提供的选择</h2><ul>
-<li><p>dist：使用<code>webpack</code>提供的<code>webpack</code>方法进行编译；</p>
-</li>
-<li><p>lib：使用<code>babel</code>的<code>transform</code>方法编译；</p>
-</li>
-<li><p>es：使用<code>babel</code>的<code>transform</code>方法编译，和<code>lib</code>方法不同的是少了一个<code>babel-plugin-add-module-exports</code>插件；（这个文件应该没什么用吧，现在浏览器支持率这么低）</p>
-</li>
-<li><p>bower：复制<code>dist</code>文件夹</p>
-</li>
-</ul>
-<h2 id="用到的一些JS语法"><a href="#用到的一些JS语法" class="headerlink" title="用到的一些JS语法"></a>用到的一些JS语法</h2><ul>
-<li><p>柯里化函数：</p>
-<ul>
-<li><p><a href="http://www.zhangxinxu.com/wordpress/2013/02/js-currying/" target="_blank" rel="external">http://www.zhangxinxu.com/wordpress/2013/02/js-currying/</a></p>
-</li>
-<li><p><a href="https://www.jianshu.com/p/f5033cec605e" target="_blank" rel="external">https://www.jianshu.com/p/f5033cec605e</a></p>
-</li>
-</ul>
-</li>
-<li><p>async/await：</p>
-<ul>
-<li><a href="http://es6.ruanyifeng.com/#docs/generator" target="_blank" rel="external">http://es6.ruanyifeng.com/#docs/generator</a></li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><p>React获取子组件或父组件属性：</p>
-<ul>
-<li><a href="https://liaoyongfu.github.io/2017/08/02/react/react%E8%8E%B7%E5%8F%96%E7%88%B6%E7%BB%84%E4%BB%B6%E6%88%96%E5%AD%90%E7%BB%84%E4%BB%B6%E5%B1%9E%E6%80%A7/">https://liaoyongfu.github.io/2017/08/02/react/react%E8%8E%B7%E5%8F%96%E7%88%B6%E7%BB%84%E4%BB%B6%E6%88%96%E5%AD%90%E7%BB%84%E4%BB%B6%E5%B1%9E%E6%80%A7/</a></li>
-</ul>
-</li>
-</ul>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>TODO</p>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/02/02/react/react-bootstrap读后感/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1020,6 +1053,290 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2017/10/31/react/React入门——简介/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liaoyf">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="liaoyf的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/31/react/React入门——简介/" itemprop="url">React入门——简介</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-31T15:47:13+08:00">
+                2017-10-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/10/31/react/React入门——简介/" class="leancloud_visitors" data-flag-title="React入门——简介">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>一、什么是React？</p>
+<p>React是Facebook开源的一个用于构建用户界面的Javascript库，他不是一个框架，而是专注于MVC架构中的V，即视图。这使得React很容易和开发者已有的开发栈进行融合。React顺应了Web开发组件化的趋势。应用React时，你总是应该从UI出发抽象出不同的组件，然后像搭积木一样把它们拼装起来。</p>
+<p>二、React能做什么？</p>
+<p><img src="0006.png" alt="22"></p>
+<p>补充：桌面应用程序（NW.js和Electron.js）</p>
+<p>二、React全家桶 </p>
+<ul>
+<li>自身库： react.js、react-dom.js、add-ons</li>
+<li>语法：ES5/ES6、JSX</li>
+<li>构建工具：Fis3、webpack、babel</li>
+<li>状态管理：Redux、Flux、react-redux、Immutable</li>
+<li>路由：react-router、react-redux-router</li>
+<li>日志：redux-logger</li>
+<li>中间件：redux-thunk</li>
+<li>主题：react-bootstrap</li>
+<li>表单：redux-form</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2017/10/31/react/React遇到的坑/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liaoyf">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="liaoyf的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/31/react/React遇到的坑/" itemprop="url">React遇到的坑.md</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-31T15:47:13+08:00">
+                2017-10-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/10/31/react/React遇到的坑/" class="leancloud_visitors" data-flag-title="React遇到的坑.md">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。"><a href="#当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。" class="headerlink" title="当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。"></a>当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。</h2><p> 参考网址：<a href="https://stackoverflow.com/questions/25385578/nested-react-input-element-loses-focus-on-typing" target="_blank" rel="external">https://stackoverflow.com/questions/25385578/nested-react-input-element-loses-focus-on-typing</a></p>
+<h2 id="input值不会随着属性改变而改变"><a href="#input值不会随着属性改变而改变" class="headerlink" title="input值不会随着属性改变而改变"></a>input值不会随着属性改变而改变</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;Parent&gt;</div><div class="line">    &lt;Child inputVal=&#123;this.state.inputVal&#125;/&gt;</div><div class="line">&lt;/Parent&gt;</div></pre></td></tr></table></figure>
+<p>当<code>Child</code>组件的<code>value</code>为<code>null</code>后input的值不会更改。所以一般要判断是否存在<code>null</code>值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;FormControl value=&#123;this.props.inputVal || &apos;&apos;&#125;/&gt;</div></pre></td></tr></table></figure>
+<h2 id="UglifyJs编辑后有些arguments无效"><a href="#UglifyJs编辑后有些arguments无效" class="headerlink" title="UglifyJs编辑后有些arguments无效"></a>UglifyJs编辑后有些arguments无效</h2><p>升级uglifyjs-webpack-plugin和uglify-js：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&quot;uglify-js&quot;: &quot;^3.1.6&quot;,</div><div class="line">&quot;uglifyjs-webpack-plugin&quot;: &quot;^1.0.1&quot;,</div></pre></td></tr></table></figure>
+<h2 id="上传文件不能上传同一张图片"><a href="#上传文件不能上传同一张图片" class="headerlink" title="上传文件不能上传同一张图片"></a>上传文件不能上传同一张图片</h2><p>在上传完成后，设置<code>$(&#39;input&#39;).val(&#39;&#39;)</code>即可。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2017/10/31/react/创建一个React项目/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1356,290 +1673,6 @@ ReactDOM.render(&lt;TodoApp /&gt;, document.getElementById(&apos;todoApp&apos;))
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2017/10/31/react/React入门——简介/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="liaoyf">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="liaoyf的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/31/react/React入门——简介/" itemprop="url">React入门——简介</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-31T15:47:13+08:00">
-                2017-10-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/10/31/react/React入门——简介/" class="leancloud_visitors" data-flag-title="React入门——简介">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>一、什么是React？</p>
-<p>React是Facebook开源的一个用于构建用户界面的Javascript库，他不是一个框架，而是专注于MVC架构中的V，即视图。这使得React很容易和开发者已有的开发栈进行融合。React顺应了Web开发组件化的趋势。应用React时，你总是应该从UI出发抽象出不同的组件，然后像搭积木一样把它们拼装起来。</p>
-<p>二、React能做什么？</p>
-<p><img src="0006.png" alt="22"></p>
-<p>补充：桌面应用程序（NW.js和Electron.js）</p>
-<p>二、React全家桶 </p>
-<ul>
-<li>自身库： react.js、react-dom.js、add-ons</li>
-<li>语法：ES5/ES6、JSX</li>
-<li>构建工具：Fis3、webpack、babel</li>
-<li>状态管理：Redux、Flux、react-redux、Immutable</li>
-<li>路由：react-router、react-redux-router</li>
-<li>日志：redux-logger</li>
-<li>中间件：redux-thunk</li>
-<li>主题：react-bootstrap</li>
-<li>表单：redux-form</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2017/10/31/react/React遇到的坑/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="liaoyf">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="liaoyf的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/31/react/React遇到的坑/" itemprop="url">React遇到的坑.md</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-31T15:47:13+08:00">
-                2017-10-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/10/31/react/React遇到的坑/" class="leancloud_visitors" data-flag-title="React遇到的坑.md">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。"><a href="#当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。" class="headerlink" title="当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。"></a>当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。</h2><p> 参考网址：<a href="https://stackoverflow.com/questions/25385578/nested-react-input-element-loses-focus-on-typing" target="_blank" rel="external">https://stackoverflow.com/questions/25385578/nested-react-input-element-loses-focus-on-typing</a></p>
-<h2 id="input值不会随着属性改变而改变"><a href="#input值不会随着属性改变而改变" class="headerlink" title="input值不会随着属性改变而改变"></a>input值不会随着属性改变而改变</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;Parent&gt;</div><div class="line">    &lt;Child inputVal=&#123;this.state.inputVal&#125;/&gt;</div><div class="line">&lt;/Parent&gt;</div></pre></td></tr></table></figure>
-<p>当<code>Child</code>组件的<code>value</code>为<code>null</code>后input的值不会更改。所以一般要判断是否存在<code>null</code>值：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;FormControl value=&#123;this.props.inputVal || &apos;&apos;&#125;/&gt;</div></pre></td></tr></table></figure>
-<h2 id="UglifyJs编辑后有些arguments无效"><a href="#UglifyJs编辑后有些arguments无效" class="headerlink" title="UglifyJs编辑后有些arguments无效"></a>UglifyJs编辑后有些arguments无效</h2><p>升级uglifyjs-webpack-plugin和uglify-js：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&quot;uglify-js&quot;: &quot;^3.1.6&quot;,</div><div class="line">&quot;uglifyjs-webpack-plugin&quot;: &quot;^1.0.1&quot;,</div></pre></td></tr></table></figure>
-<h2 id="上传文件不能上传同一张图片"><a href="#上传文件不能上传同一张图片" class="headerlink" title="上传文件不能上传同一张图片"></a>上传文件不能上传同一张图片</h2><p>在上传完成后，设置<code>$(&#39;input&#39;).val(&#39;&#39;)</code>即可。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2017/10/31/css/css样式遇到的坑/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1896,161 +1929,11 @@ ReactDOM.render(&lt;TodoApp /&gt;, document.getElementById(&apos;todoApp&apos;))
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2017/09/29/react/React 16新增功能/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="liaoyf">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="liaoyf的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/09/29/react/React 16新增功能/" itemprop="url">React 16新增功能</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-29T15:19:23+08:00">
-                2017-09-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/09/29/react/React 16新增功能/" class="leancloud_visitors" data-flag-title="React 16新增功能">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="官网介绍"><a href="#官网介绍" class="headerlink" title="官网介绍"></a>官网介绍</h2><p><a href="https://facebook.github.io/react/blog/2017/09/26/react-v16.0.html" target="_blank" rel="external">https://facebook.github.io/react/blog/2017/09/26/react-v16.0.html</a></p>
-<h2 id="render函数不必在包一层元素"><a href="#render函数不必在包一层元素" class="headerlink" title="render函数不必在包一层元素"></a>render函数不必在包一层元素</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">render() &#123;</div><div class="line">  // No need to wrap list items in an extra element!</div><div class="line">  return [</div><div class="line">    // Don&apos;t forget the keys :)</div><div class="line">    &lt;li key=&quot;A&quot;&gt;First item&lt;/li&gt;,</div><div class="line">    &lt;li key=&quot;B&quot;&gt;Second item&lt;/li&gt;,</div><div class="line">    &lt;li key=&quot;C&quot;&gt;Third item&lt;/li&gt;,</div><div class="line">  ];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="更好的错误处理"><a href="#更好的错误处理" class="headerlink" title="更好的错误处理"></a>更好的错误处理</h2><p>以前的版本，如果子组件有报错整个组件本身直接不渲染，而现在可以通过<code>componentDidCatch</code>捕获错误信息：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">class ErrorBoundary extends React.Component &#123;</div><div class="line">    constructor(props) &#123;</div><div class="line">        super(props);</div><div class="line">        this.state = &#123; error: null, errorInfo: null &#125;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    componentDidCatch(error, errorInfo) &#123;</div><div class="line">        // Catch errors in any components below and re-render with error message</div><div class="line">        this.setState(&#123;</div><div class="line">            error: error,</div><div class="line">            errorInfo: errorInfo</div><div class="line">        &#125;)</div><div class="line">        // You can also log error messages to an error reporting service here</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    render() &#123;</div><div class="line">        if (this.state.errorInfo) &#123;</div><div class="line">            // Error path</div><div class="line">            return (</div><div class="line">                &lt;div&gt;</div><div class="line">                    &lt;h2&gt;Something went wrong.&lt;/h2&gt;</div><div class="line">                    &lt;details style=&#123;&#123; whiteSpace: &apos;pre-wrap&apos; &#125;&#125;&gt;</div><div class="line">                        &#123;this.state.error &amp;&amp; this.state.error.toString()&#125;</div><div class="line">                        &lt;br /&gt;</div><div class="line">                        &#123;this.state.errorInfo.componentStack&#125;</div><div class="line">                    &lt;/details&gt;</div><div class="line">                &lt;/div&gt;</div><div class="line">            );</div><div class="line">        &#125;</div><div class="line">        // Normally, just render children</div><div class="line">        return this.props.children;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="Portals"><a href="#Portals" class="headerlink" title="Portals"></a>Portals</h2><p>现在可以通过<code>React.createPortal(&lt;SomeComponent/&gt;, document.getElementById(&#39;root&#39;))</code>的形式在react应用容器之外修改或增加DOM：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">render() &#123;</div><div class="line">  // React does *not* create a new div. It renders the children into `domNode`.</div><div class="line">  // `domNode` is any valid DOM node, regardless of its location in the DOM.</div><div class="line">  return ReactDOM.createPortal(</div><div class="line">    this.props.children,</div><div class="line">    domNode,</div><div class="line">  );</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这样对于像要创建模态框就很容易了：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line">class Overlay extends React.Component&#123;</div><div class="line">    constructor()&#123;</div><div class="line">        super();</div><div class="line"></div><div class="line">        this.overlayContainer = document.createElement(&apos;div&apos;);</div><div class="line">        document.body.appendChild(this.overlayContainer);</div><div class="line">    &#125;</div><div class="line">    componentWillUnmount()&#123;</div><div class="line">        document.body.removeChild(this.overlayContainer);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    render()&#123;</div><div class="line">        return ReactDOM.createPortal(</div><div class="line">            &lt;div className=&quot;overlay&quot; style=&#123;&#123;position: &apos;absolute&apos;, top: 0, right: 0, bottom: 0, left: 0, background: &apos;rgba(0,0,0, 0.5)&apos;, color: &apos;#fff&apos;&#125;&#125;&gt;</div><div class="line">                &#123;this.props.children&#125;</div><div class="line">            &lt;/div&gt;,</div><div class="line">            this.overlayContainer</div><div class="line">        )</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Demo extends React.Component&#123;</div><div class="line">    constructor()&#123;</div><div class="line">        super();</div><div class="line"></div><div class="line">        this.state = &#123;</div><div class="line">            overlayActive: true</div><div class="line">        &#125;;</div><div class="line">    &#125;</div><div class="line">    render()&#123;</div><div class="line">        return (</div><div class="line">            &lt;div&gt;</div><div class="line">                &lt;button type=&quot;button&quot; onClick=&#123;() =&gt; this.setState(&#123;</div><div class="line">                    user: null</div><div class="line">                &#125;)&#125;&gt;Update&lt;/button&gt;</div><div class="line">                &#123;this.state.overlayActive &amp;&amp; (</div><div class="line">                    &lt;Overlay onClose=&#123;() =&gt; this.setState(&#123;overlayActive: false&#125;)&#125;&gt;</div><div class="line">                        hello modal!!!</div><div class="line">                        &lt;button type=&quot;button&quot; onClick=&#123;() =&gt; this.setState(&#123;overlayActive: false&#125;)&#125;&gt;Close&lt;/button&gt;</div><div class="line">                    &lt;/Overlay&gt;</div><div class="line">                )&#125;</div><div class="line">            &lt;/div&gt;</div><div class="line">        );</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="更好的服务端渲染"><a href="#更好的服务端渲染" class="headerlink" title="更好的服务端渲染"></a>更好的服务端渲染</h2><p>省略。。。</p>
-<h2 id="支持自定义DOM属性"><a href="#支持自定义DOM属性" class="headerlink" title="支持自定义DOM属性"></a>支持自定义DOM属性</h2><p>以前是直接忽视无法识别的属性，而现在是直接渲染给DOM，这也直接节省了很多代码。</p>
-<p>具体参考：<a href="https://facebook.github.io/react/blog/2017/09/08/dom-attributes-in-react-16.html" target="_blank" rel="external">https://facebook.github.io/react/blog/2017/09/08/dom-attributes-in-react-16.html</a></p>
-<h2 id="文件减少"><a href="#文件减少" class="headerlink" title="文件减少"></a>文件减少</h2><ul>
-<li><p>react is 5.3 kb (2.2 kb gzipped), down from 20.7 kb (6.9 kb gzipped).</p>
-</li>
-<li><p>react-dom is 103.7 kb (32.6 kb gzipped), down from 141 kb (42.9 kb gzipped).</p>
-</li>
-<li><p>react + react-dom is 109 kb (34.8 kb gzipped), down from 161.7 kb (49.8 kb gzipped).</p>
-</li>
-</ul>
-<h2 id="MIT协议"><a href="#MIT协议" class="headerlink" title="MIT协议"></a>MIT协议</h2><p>妥协了…</p>
-<h2 id="新的核心架构Fiber"><a href="#新的核心架构Fiber" class="headerlink" title="新的核心架构Fiber"></a>新的核心架构Fiber</h2>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2096,7 +1979,7 @@ ReactDOM.render(&lt;TodoApp /&gt;, document.getElementById(&apos;todoApp&apos;))
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-count">31</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2109,7 +1992,7 @@ ReactDOM.render(&lt;TodoApp /&gt;, document.getElementById(&apos;todoApp&apos;))
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

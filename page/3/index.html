@@ -317,6 +317,236 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2017/08/02/webpack/迁移到webpack2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liaoyf">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="liaoyf的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/02/webpack/迁移到webpack2/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-02T11:44:45+08:00">
+                2017-08-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/08/02/webpack/迁移到webpack2/" class="leancloud_visitors" data-flag-title="">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="迁移到webpack2"><a href="#迁移到webpack2" class="headerlink" title="迁移到webpack2"></a>迁移到webpack2</h1><p>Webpack is on the verge of having its latest major version released, and it’s expected to drop very soon. However, the main thing holding the release back is documentation, and the code is mostly written. I recently took the time to update our work project from Webpack 1 to 2, and thought I’d document the steps taken for anyone else who wants to make the move.</p>
+<p>You can also check out <a href="https://webpack.js.org" target="_blank" rel="external">the migration guide on the Webpack documentation</a>.</p>
+<p><strong>Install the webpack2</strong></p>
+<p>The first thing to do is install the latest version. Because it’s not a stable release, you have to specify the exact beta version you’d like. At the time of writing it’s 2.1.0-beta.25:</p>
+<pre><code>npm install --save-dev webpack@2.1.0-beta.25
+</code></pre><p>If you’re using any other Webpack plugins, be aware that they might need updating. For example, the Extract Text Plugin has a v2 in beta also:</p>
+<pre><code>npm install --save-dev extract-text-webpack-plugin@2.0.0-beta.4
+</code></pre><p><strong>module.loaders =&gt; module.rules</strong></p>
+<p>This is not a breaking change because module.loaders will continue to be supported, but in the future it will be deprecated in favour of module.rules. This is just an easy renaming step.</p>
+<pre><code>// before
+modules: {
+  loaders: {...}
+}
+
+// after
+modules: {
+  rules: {...}
+}
+</code></pre><p><strong>resolve.modulesDirectories =&gt; resolve.modules</strong></p>
+<p>Another renaming step, the resolve options have been renamed:</p>
+<pre><code>// before
+resolve: {
+  modulesDirectories: [...],
+}
+
+// after
+resolve: {
+  modules: [...],
+}
+</code></pre><p><strong>No webpack.optimize.OccurenceOrderPlugin</strong></p>
+<p>It’s now included by default, so there is no need to have this in our config.</p>
+<p><strong>Configuring loaders</strong></p>
+<p>At work we’re using postcss and postcss-loader to load our CSS through Webpack. The loader used to expect a top level postcss key in the Webpack config. As of Webpack 2 this is no longer allowed; we can instead define an options key when we configure the loader. This replaces the query option from Webpack 1. Any plugin that looked for top level configuration will have to be swapped to this style.</p>
+<pre><code>// before, in Webpack top level
+postcss: {
+  plugins: ...
+}
+
+// after
+module: {
+  rules: [{
+    test: /\.scss$/,
+    use: [
+      {
+        loader: &apos;postcss-loader&apos;,
+        options: {
+          plugins: ...
+        }
+      },
+      &apos;sass-loader&apos;
+    ]
+  }]
+}
+</code></pre><p><strong>ExtractTextPlugin changes</strong></p>
+<p>The above change to loader configuration also makes it way easier to configure multiple loaders; previously it would only be possible to pass an array of loaders in string form to some plugins, such as ExtractTextPlugin:</p>
+<pre><code>// Webpack 1
+ExtractTextPlugin.extract(
+  &apos;style-loader&apos;,
+  &apos;css-loader!postcss-loader!sass-loader&apos;
+);
+</code></pre><p>This quickly got very hard to work with if you had to pass options:</p>
+<pre><code>// Webpack 1
+ExtractTextPlugin.extract(
+  &apos;style-loader&apos;,
+  &apos;css-loader?modules-true!postcss-loader!sass-loader&apos;
+);
+</code></pre><p>But now Webpack 2 can deal with arrays of objects to configure loaders. We can replace the above with:</p>
+<pre><code>// Webpack 2
+var loaders = [
+  {
+    loader: &apos;css-loader&apos;,
+    options: {
+      modules: true
+    }
+  },
+  {
+    loader: &apos;postcss-loader&apos;
+  },
+  {
+    loader: &apos;sass-loader&apos;
+  }
+]
+</code></pre><p>Whereas in Webpack 1 we used the key query for configuring loaders, we now use options. ExtractTextPlugin can now take this array, rather than only allowing the string form:</p>
+<pre><code>// Webpack 2
+ExtractTextPlugin.extract({
+  fallbackLoader: &apos;style-loader&apos;,
+  loader: loaders,
+})
+</code></pre><p><strong>Stop Babel from compiling ES2015 modules</strong></p>
+<p>Webpack 1 wasn’t able to parse ES2015 modules, so Babel would convert them into CommonJS. Webpack 2 can parse ES2015 modules, and is able to eliminate dead code based on which modules are used, so it’s recommended that you tell Babel not to convert modules into CommonJS. You can do this by changing your .babelrc:</p>
+<pre><code>// before
+&quot;presets&quot;: [&quot;es2015&quot;]
+
+// after
+&quot;presets&quot;: [
+  [&quot;es2015&quot;, { &quot;modules&quot;: false }]
+]
+</code></pre><p>We’ve seen a good file size saving by doing this, and hopefully this will continue to improve in the future!</p>
+<p><strong>Fin</strong></p>
+<p>Webpack 2 offers better performance, improved bundling and a much nicer experience when configuring it. Given that the code is so stable, despite its beta status, I highly recommend giving it a go on your projects when you can.</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2017/08/02/webpack/webpack遇到的坑/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1984,175 +2214,11 @@ h1{
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2016/08/02/angular2/遇到的问题/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="liaoyf">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="liaoyf的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/08/02/angular2/遇到的问题/" itemprop="url">angular2遇到的问题.md</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-02T14:38:52+08:00">
-                2016-08-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2016/08/02/angular2/遇到的问题/" class="leancloud_visitors" data-flag-title="angular2遇到的问题.md">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ol>
-<li><p>在组件时<code>moduleId: module.id</code>时，报<code>Cannot find name &#39;module&#39;</code>?</p>
-<p> 解决方法：</p>
-<p> You need to install node ambientDependencies. Typings.json</p>
-<pre><code>&quot;ambientDependencies&quot;: {
-    &quot;node&quot;: &quot;github:DefinitelyTyped/DefinitelyTyped/node/node.d.ts#138ad74b9e8e6c08af7633964962835add4c91e2&quot;
-}
-</code></pre><p> Another way can use typings manager to install node definition file globally:</p>
-<pre><code>typings install dt~node --global --save
-</code></pre><p> Then your typings.json file will look like this:</p>
-<pre><code>&quot;globalDependencies&quot;: {
-      &quot;node&quot;: &quot;registry:dt/node#6.0.0+20160608110640&quot;
-}
-</code></pre><p> If you use Typescript 2^ just use the following command:</p>
-<pre><code>npm install @types/node --global --save
-</code></pre><p> Or install it within the project:</p>
-<pre><code>npm install @types/node --save
-</code></pre><p> and then add a reference to it from your bootstrap:</p>
-<pre><code>///&lt;reference path=&quot;../../node_modules/@types/node/index.d.ts&quot; /&gt;
-</code></pre></li>
-<li><p>而后出现<code>Url.match is not a function</code>?</p>
-<p> 解决方法：</p>
-</li>
-<li><p>报错：<code>Property &#39;find&#39; does not exist on type &#39;Hero[]&#39;.</code>?</p>
-<p> 解决方法：在<code>typings.json</code>中配置如下代码</p>
-<pre><code>{
-      &quot;globalDependencies&quot;: {
-        &quot;core-js&quot;: &quot;registry:dt/core-js#0.0.0+20160725163759&quot;,
-        &quot;jasmine&quot;: &quot;registry:dt/jasmine#2.2.0+20160621224255&quot;,
-           &quot;node&quot;: &quot;registry:dt/node#6.0.0+20160909174046&quot;
-      }
-}
-</code></pre></li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2198,7 +2264,7 @@ h1{
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-count">31</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2211,7 +2277,7 @@ h1{
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
