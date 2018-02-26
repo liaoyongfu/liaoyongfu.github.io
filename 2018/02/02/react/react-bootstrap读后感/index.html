@@ -102,10 +102,12 @@
 <meta property="og:site_name" content="liaoyf的博客">
 <meta property="og:description" content="基于react-bootstrap的0.32.1版本。 eslintextendseslint-config-airbnb使用了基于airbnb的js代码风格，详细了解：  https://github.com/airbnb/javascript  中文版：https://github.com/yuche/javascript">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-02-08T07:30:49.502Z">
+<meta property="og:image" content="https://liaoyongfu.github.io/2018/02/02/images/eslint.png">
+<meta property="og:updated_time" content="2018-02-26T03:15:40.102Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="react-bootstrap读后感">
 <meta name="twitter:description" content="基于react-bootstrap的0.32.1版本。 eslintextendseslint-config-airbnb使用了基于airbnb的js代码风格，详细了解：  https://github.com/airbnb/javascript  中文版：https://github.com/yuche/javascript">
+<meta name="twitter:image" content="https://liaoyongfu.github.io/2018/02/02/images/eslint.png">
 
 
 
@@ -514,7 +516,85 @@
 </ul>
 </li>
 </ul>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>TODO</p>
+<h2 id="使用yarn替换npm"><a href="#使用yarn替换npm" class="headerlink" title="使用yarn替换npm"></a>使用yarn替换npm</h2><p>运行<code>yarn</code>命令</p>
+<h2 id="忽略一些文件当别人安装时"><a href="#忽略一些文件当别人安装时" class="headerlink" title="忽略一些文件当别人安装时"></a>忽略一些文件当别人安装时</h2><p>通过制定<code>package.json</code>的<code>files</code>字段，或者也可以制定<code>.npmignore</code>。以下文件一定会包含：</p>
+<ul>
+<li><p>package.json</p>
+</li>
+<li><p>README</p>
+</li>
+<li><p>CHANGES / CHANGELOG / HISTORY</p>
+</li>
+<li><p>LICENSE / LICENCE</p>
+</li>
+<li><p>NOTICE</p>
+</li>
+<li><p><code>main</code>字段指定的文件</p>
+</li>
+</ul>
+<p>相反，以下文件总会被忽略：</p>
+<ul>
+<li><p>.git</p>
+</li>
+<li><p>CVS</p>
+</li>
+<li><p>.svn</p>
+</li>
+<li><p>.hg</p>
+</li>
+<li><p>.lock-wscript</p>
+</li>
+<li><p>.wafpickle-N</p>
+</li>
+<li><p>.*.swp</p>
+</li>
+<li><p>.DS_Store</p>
+</li>
+<li><p>._*</p>
+</li>
+<li><p>npm-debug.log</p>
+</li>
+<li><p>.npmrc</p>
+</li>
+<li><p>node_modules</p>
+</li>
+<li><p>config.gypi</p>
+</li>
+<li><p>*.orig</p>
+</li>
+<li><p>package-lock.json (use shrinkwrap instead)</p>
+</li>
+</ul>
+<h2 id="在webstrom中使用eslint校验"><a href="#在webstrom中使用eslint校验" class="headerlink" title="在webstrom中使用eslint校验"></a>在webstrom中使用eslint校验</h2><p>先安装eslint插件，配置<code>Eslint Plugin</code>：</p>
+<p><img src="../../images/eslint.png" alt="eslint config"></p>
+<p>然后打开<code>file/settings/Keymap</code>，搜索ESlint找到<code>Fix ESLint Problems</code>，右击选择<code>Add Keyboard Shortcut</code>， 键入<code>ctrl + e</code>（这里看个人习惯）</p>
+<blockquote>
+<p>详细：<a href="https://github.com/idok/eslint-plugin" target="_blank" rel="external">https://github.com/idok/eslint-plugin</a></p>
+</blockquote>
+<h2 id="gatsby"><a href="#gatsby" class="headerlink" title="gatsby"></a>gatsby</h2><h3 id="报错：RootQueryType-allSitePage-field-type-must-be-Output-Type-but-got-SitePageConnection"><a href="#报错：RootQueryType-allSitePage-field-type-must-be-Output-Type-but-got-SitePageConnection" class="headerlink" title="报错：RootQueryType.allSitePage field type must be Output Type but got: SitePageConnection."></a>报错：<code>RootQueryType.allSitePage field type must be Output Type but got: SitePageConnection.</code></h3><p>运行<code>yarn list gatsby</code>发现会有多个依赖：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">npm remove graphql</div><div class="line">npm install gatsby</div></pre></td></tr></table></figure>
+<blockquote>
+<p>要统一一个版本的gatsby</p>
+</blockquote>
+<h3 id="报错-quot-jsonName-quot-of-undefined"><a href="#报错-quot-jsonName-quot-of-undefined" class="headerlink" title="报错&quot;jsonName&quot; of undefined"></a>报错<code>&quot;jsonName&quot; of undefined</code></h3><p>目录中不能包含中文目录</p>
+<h3 id="Error-Schema-must-contain-unique-named-types-but-contains-multiple-types-named-“JSON”"><a href="#Error-Schema-must-contain-unique-named-types-but-contains-multiple-types-named-“JSON”" class="headerlink" title="Error: Schema must contain unique named types but contains multiple types named “JSON”"></a>Error: Schema must contain unique named types but contains multiple types named “JSON”</h3><p><a href="https://stackoverflow.com/questions/48961250/error-schema-must-contain-unique-named-types-but-contains-multiple-types-named" target="_blank" rel="external">暂时不知道为什么</a></p>
+<h3 id="有时候要删除-cache文件并重启才能生效，不知道为什么？？？"><a href="#有时候要删除-cache文件并重启才能生效，不知道为什么？？？" class="headerlink" title="有时候要删除.cache文件并重启才能生效，不知道为什么？？？"></a>有时候要删除<code>.cache</code>文件并重启才能生效，不知道为什么？？？</h3><h2 id="shareui文档构建"><a href="#shareui文档构建" class="headerlink" title="shareui文档构建"></a>shareui文档构建</h2><p>首先在根目录下运行脚手架：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">gatsby new doc </div><div class="line">cd doc</div></pre></td></tr></table></figure>
+<p>然后修改gatsby的配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">const path = require(&quot;path&quot;);</div><div class="line"></div><div class="line">module.exports = &#123;</div><div class="line">    siteMetadata: &#123;</div><div class="line">        title: &quot;Shareui文档&quot;</div><div class="line">    &#125;,</div><div class="line">    plugins: [</div><div class="line">        &quot;gatsby-plugin-react-helmet&quot;,</div><div class="line">        &#123;</div><div class="line">            resolve: &quot;gatsby-source-filesystem&quot;,</div><div class="line">            options: &#123;</div><div class="line">                path: path.resolve(__dirname, &quot;../src&quot;),</div><div class="line">                name: &quot;source&quot;</div><div class="line">            &#125;</div><div class="line">        &#125;,</div><div class="line">        &quot;gatsby-transformer-react-docgen&quot;,</div><div class="line">        &#123;</div><div class="line">            resolve: &quot;gatsby-transformer-remark&quot;,</div><div class="line">            options: &#123;</div><div class="line">                plugins: [&quot;gatsby-remark-prismjs&quot;]</div><div class="line">            &#125;</div><div class="line">        &#125;,</div><div class="line">        &quot;gatsby-plugin-catch-links&quot;</div><div class="line">    ]</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>使用<code>gatsby-source-filesystem</code>可以方便查询本地文件的相关信息；使用<code>gatsby-transformer-react-docgen</code>方便查询组件信息。</p>
+<p>在<code>src/pages</code>目录下新建<code>alert.js</code>（会自动生成alert页面）:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">import React from &quot;react&quot;;</div><div class="line">import Link from &quot;gatsby-link&quot;;</div><div class="line">import PropTable from &quot;../components/PropTable&quot;;</div><div class="line"></div><div class="line">const Page = (&#123;data&#125;) =&gt; (</div><div class="line">    &lt;div&gt;</div><div class="line">        &lt;h1&gt;&#123;data.componentMetadata &amp;&amp; data.componentMetadata.description&#125;&lt;/h1&gt;</div><div class="line">        &lt;Link to=&quot;/&quot;&gt;返回首页&lt;/Link&gt;</div><div class="line">        &lt;PropTable metadata=&#123;data&#125; /&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">);</div><div class="line"></div><div class="line">export const query = graphql`</div><div class="line">    query AlertQuery &#123;</div><div class="line">        componentMetadata(displayName: &#123;eq: &quot;Alert&quot;&#125;) &#123;</div><div class="line">            ...PropTable_metadata</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">`;</div><div class="line"></div><div class="line">export default Page;</div></pre></td></tr></table></figure>
+<p>其中的片段<code>PropTable_metadata</code>如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">export const metadataFragment = graphql`</div><div class="line">    fragment PropTable_metadata on ComponentMetadata &#123;</div><div class="line">        displayName</div><div class="line">        description</div><div class="line">        props &#123;</div><div class="line">            name</div><div class="line">            type &#123;</div><div class="line">                name</div><div class="line">                value</div><div class="line">                raw</div><div class="line">            &#125;</div><div class="line">            defaultValue &#123;</div><div class="line">                value</div><div class="line">                computed</div><div class="line">            &#125;</div><div class="line">            required</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">`;</div></pre></td></tr></table></figure>
+<p>为了列出所有的组件，我们使用<code>gatsby-source-filesystem</code>查询出在src目录下的所有组件，并添加到首页（<code>doc/src/index.js</code>）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line">import React from &quot;react&quot;;</div><div class="line">import Link from &quot;gatsby-link&quot;;</div><div class="line"></div><div class="line">const IndexPage = (&#123;data&#125;) =&gt; (</div><div class="line">    &lt;div&gt;</div><div class="line">        &lt;h3&gt;基础组件&lt;/h3&gt;</div><div class="line">        &lt;ol&gt;</div><div class="line">            &#123;data.allFile.edges</div><div class="line">                //先排序</div><div class="line">                .sort((a, b) =&gt; &#123;</div><div class="line">                    if (a.node.name &gt; b.node.name) &#123;</div><div class="line">                        return 1;</div><div class="line">                    &#125; else if (a.node.name &lt; b.node.name) &#123;</div><div class="line">                        return -1;</div><div class="line">                    &#125;</div><div class="line">                    return 0;</div><div class="line">                &#125;)</div><div class="line">                //排除index.js和utils下的文件</div><div class="line">                .map(</div><div class="line">                    (edge, index) =&gt;</div><div class="line">                        edge.node.relativeDirectory !== &quot;utils&quot; &amp;&amp;</div><div class="line">                        edge.node.name !== &quot;index&quot; &amp;&amp; (</div><div class="line">                            &lt;li key=&#123;index&#125;&gt;</div><div class="line">                                &lt;Link to=&#123;`/$&#123;edge.node.name&#125;/`&#125;&gt;</div><div class="line">                                    &#123;edge.node.name&#125;</div><div class="line">                                &lt;/Link&gt;</div><div class="line">                            &lt;/li&gt;</div><div class="line">                        )</div><div class="line">                )&#125;</div><div class="line">        &lt;/ol&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">);</div><div class="line"></div><div class="line">export const query = graphql`</div><div class="line">    query allComponent &#123;</div><div class="line">        allFile &#123;</div><div class="line">            edges &#123;</div><div class="line">                node &#123;</div><div class="line">                    name</div><div class="line">                    relativeDirectory</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">`;</div><div class="line"></div><div class="line">export default IndexPage;</div></pre></td></tr></table></figure>
+<p>读取组件的注释：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 提示框（Alert）</div><div class="line"> */</div><div class="line">class Alert extends React.Component &#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>之后通过<code>data.componentMetadata.description</code>字段即可获取。</p>
+<blockquote>
+<p>属性注释会报错<code>Error: Schema must contain unique named types but contains multiple types named “JSON”</code>，暂时不知道为什么</p>
+</blockquote>
 
       
     </div>
@@ -695,7 +775,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#eslint"><span class="nav-number">1.</span> <span class="nav-text">eslint</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#extends"><span class="nav-number">1.1.</span> <span class="nav-text">extends</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#eslint-config-airbnb"><span class="nav-number">1.1.1.</span> <span class="nav-text">eslint-config-airbnb</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#prettier"><span class="nav-number">1.1.2.</span> <span class="nav-text">prettier</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#plugins"><span class="nav-number">2.</span> <span class="nav-text">plugins</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#babel插件"><span class="nav-number">3.</span> <span class="nav-text">babel插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#preset"><span class="nav-number">4.</span> <span class="nav-text">preset</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#感觉挺有用的第三方模块"><span class="nav-number">5.</span> <span class="nav-text">感觉挺有用的第三方模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用到的测试框架"><span class="nav-number">6.</span> <span class="nav-text">用到的测试框架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译提供的选择"><span class="nav-number">7.</span> <span class="nav-text">编译提供的选择</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用到的一些JS语法"><span class="nav-number">8.</span> <span class="nav-text">用到的一些JS语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他"><span class="nav-number">9.</span> <span class="nav-text">其他</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#eslint"><span class="nav-number">1.</span> <span class="nav-text">eslint</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#extends"><span class="nav-number">1.1.</span> <span class="nav-text">extends</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#eslint-config-airbnb"><span class="nav-number">1.1.1.</span> <span class="nav-text">eslint-config-airbnb</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#prettier"><span class="nav-number">1.1.2.</span> <span class="nav-text">prettier</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#plugins"><span class="nav-number">2.</span> <span class="nav-text">plugins</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#babel插件"><span class="nav-number">3.</span> <span class="nav-text">babel插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#preset"><span class="nav-number">4.</span> <span class="nav-text">preset</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#感觉挺有用的第三方模块"><span class="nav-number">5.</span> <span class="nav-text">感觉挺有用的第三方模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用到的测试框架"><span class="nav-number">6.</span> <span class="nav-text">用到的测试框架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译提供的选择"><span class="nav-number">7.</span> <span class="nav-text">编译提供的选择</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用到的一些JS语法"><span class="nav-number">8.</span> <span class="nav-text">用到的一些JS语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用yarn替换npm"><span class="nav-number">9.</span> <span class="nav-text">使用yarn替换npm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#忽略一些文件当别人安装时"><span class="nav-number">10.</span> <span class="nav-text">忽略一些文件当别人安装时</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在webstrom中使用eslint校验"><span class="nav-number">11.</span> <span class="nav-text">在webstrom中使用eslint校验</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gatsby"><span class="nav-number">12.</span> <span class="nav-text">gatsby</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#报错：RootQueryType-allSitePage-field-type-must-be-Output-Type-but-got-SitePageConnection"><span class="nav-number">12.1.</span> <span class="nav-text">报错：RootQueryType.allSitePage field type must be Output Type but got: SitePageConnection.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#报错-quot-jsonName-quot-of-undefined"><span class="nav-number">12.2.</span> <span class="nav-text">报错"jsonName" of undefined</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Error-Schema-must-contain-unique-named-types-but-contains-multiple-types-named-“JSON”"><span class="nav-number">12.3.</span> <span class="nav-text">Error: Schema must contain unique named types but contains multiple types named “JSON”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#有时候要删除-cache文件并重启才能生效，不知道为什么？？？"><span class="nav-number">12.4.</span> <span class="nav-text">有时候要删除.cache文件并重启才能生效，不知道为什么？？？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#shareui文档构建"><span class="nav-number">13.</span> <span class="nav-text">shareui文档构建</span></a></li></ol></div>
             
 
           </div>

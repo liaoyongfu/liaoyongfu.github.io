@@ -102,7 +102,7 @@
 <meta property="og:site_name" content="liaoyf的博客">
 <meta property="og:description" content="版本回退1git log [--pretty=oneline] 先查看下日志，查看各个版本的mode id 1git reset --hard (HEAD^ | modeid) HEAD表示当前版本，HEAD^表示上一个版本，HEAD~100表示之前的100个版本，也可以通过modeid来回退版本 1git reflog 记录你的每一次命令，在我们回退后又后悔的时候可以查看各个版本的mode id">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-02-08T09:51:23.029Z">
+<meta property="og:updated_time" content="2018-02-22T02:06:35.857Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git笔记">
 <meta name="twitter:description" content="版本回退1git log [--pretty=oneline] 先查看下日志，查看各个版本的mode id 1git reset --hard (HEAD^ | modeid) HEAD表示当前版本，HEAD^表示上一个版本，HEAD~100表示之前的100个版本，也可以通过modeid来回退版本 1git reflog 记录你的每一次命令，在我们回退后又后悔的时候可以查看各个版本的mode id">
@@ -438,9 +438,7 @@
 <ul>
 <li>登陆GitHub，打开“Account settings”，“SSH Keys”页面：</li>
 </ul>
-<p>然后，点“Add SSH Key”，填上任意Title，在Key文本框里粘贴id_rsa.pub文件的内容</p>
-<p>使用命令git push -u origin master第一次推送master分支的所有内容；</p>
-<p>此后，每次本地提交后，只要有必要，就可以使用命令git push origin master推送最新修改；</p>
+<p>然后，点“Add SSH Key”，填上任意Title，在Key文本框里粘贴id_rsa.pub文件的内容使用命令git push -u origin master第一次推送master分支的所有内容；此后，每次本地提交后，只要有必要，就可以使用命令git push origin master推送最新修改；</p>
 <h2 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h2><ul>
 <li>创建一个名为<code>dev</code>的分支：</li>
 </ul>
