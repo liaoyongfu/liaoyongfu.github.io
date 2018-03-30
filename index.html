@@ -409,7 +409,11 @@
 <h2 id="react中ref传递给页面组件时失效"><a href="#react中ref传递给页面组件时失效" class="headerlink" title="react中ref传递给页面组件时失效"></a>react中<code>ref</code>传递给页面组件时失效</h2><p>比如如下代码：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let Component = require(`./$&#123;item.componentName&#125;/index.js`).default;</span><br><span class="line">return &lt;Component ref=&#123;c =&gt; this.a = c&#125; key=&#123;i&#125; &#123;...props&#125; updateCzsj=&#123;updateCzsj&#125;/&gt;;</span><br></pre></td></tr></table></figure>
 <p>这时，使用<code>ref</code>是无效的，这时因为包装了<code>withRouter</code>导致ref失效，应该使用<code>wrappedComponentRef</code>，获取时使用如下语句获取：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">this.a.component</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">this.a</span><br></pre></td></tr></table></figure>
+<h2 id="在react组件中引入样式文件导致echarts宽度计算失败的bug"><a href="#在react组件中引入样式文件导致echarts宽度计算失败的bug" class="headerlink" title="在react组件中引入样式文件导致echarts宽度计算失败的bug"></a>在react组件中引入样式文件导致echarts宽度计算失败的bug</h2><p>比如下面：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;div className=&quot;box&quot;&gt;</span><br><span class="line">    &lt;div className=&quot;left&quot;&gt;</span><br><span class="line">        &lt;Echart ...&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;div className=&quot;right&quot;&gt;</span><br><span class="line">        &lt;Echart ...&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<p><code>box</code>中的<code>left</code>、<code>right</code>各占<code>50%</code>（样式写在样式文件内），这时候渲染echarts的时候，因为样式文件还未生效，所以Echarts读取的<code>left</code>和<code>right</code>宽度是<code>100%</code>的。</p>
+<p><strong><em>这个是为什么呢？</em></strong></p>
 
           
         
