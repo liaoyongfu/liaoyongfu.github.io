@@ -102,7 +102,7 @@
 <meta property="og:site_name" content="liaoyf的博客">
 <meta property="og:description" content="协调（Reconciliation）当你使用React，在单一时间点你可以考虑render()函数作为创建React元素的树。在下一次状态或属性更新，render()函数将返回一个不同的React元素的树。React需要算出如何高效更新UI以匹配最新的树。 有一些解决将一棵树转换为另一棵树的最小操作数算法问题的通用方案。然而，树中元素个数为n，最先进的算法的时间复杂度为O(n 3 ) 。 若我们在">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-02T08:56:01.968Z">
+<meta property="og:updated_time" content="2018-04-02T09:00:00.848Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="react学习总结">
 <meta name="twitter:description" content="协调（Reconciliation）当你使用React，在单一时间点你可以考虑render()函数作为创建React元素的树。在下一次状态或属性更新，render()函数将返回一个不同的React元素的树。React需要算出如何高效更新UI以匹配最新的树。 有一些解决将一棵树转换为另一棵树的最小操作数算法问题的通用方案。然而，树中元素个数为n，最先进的算法的时间复杂度为O(n 3 ) 。 若我们在">
@@ -405,8 +405,9 @@
 </li>
 </ol>
 <p>实践中，上述假设适用于大部分应用场景。</p>
+<a id="more"></a>
 <h3 id="对比算法"><a href="#对比算法" class="headerlink" title="对比算法"></a>对比算法</h3><p>当对比两棵树时，React首先比较两个根节点。根节点的type不同，其行为也不同。</p>
-<h4 id="不同类型的元素"><a href="#不同类型的元素" class="headerlink" title="不同类型的元素"></a>不同类型的元素</h4><p>每当根元素有不同类型，React将卸载旧树并重新构建新树。从<a>到<img>或从<article>到<comment>，或从<button>到<div>，任何的调整都会导致全部重建。</div></button></comment></article></a></p>
+<h4 id="不同类型的元素"><a href="#不同类型的元素" class="headerlink" title="不同类型的元素"></a>不同类型的元素</h4><p>每当根元素有不同类型，React将卸载旧树并重新构建新树。</p>
 <p>当树被卸载，旧的DOM节点将被销毁。组件实例会调用componentWillUnmount()。当构建一棵新树，新的DOM节点被插入到DOM中。组件实例将依次调用componentWillMount()和componentDidMount()。任何与旧树有关的状态都将丢弃。</p>
 <p>这个根节点下所有的组件都将会被卸载，同时他们的状态将被销毁。例如，以下节点对比之后：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;</span><br><span class="line">  &lt;Counter /&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">&lt;span&gt;</span><br><span class="line">  &lt;Counter /&gt;</span><br><span class="line">&lt;/span&gt;</span><br></pre></td></tr></table></figure>
