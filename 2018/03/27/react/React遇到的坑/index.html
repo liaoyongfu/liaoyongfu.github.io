@@ -102,7 +102,7 @@
 <meta property="og:site_name" content="liaoyf的博客">
 <meta property="og:description" content="当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。 参考网址：https://stackoverflow.com/questions/25385578/nested-react-input-element-loses-focus-on-typing input值不会随着属性改变而改变123&amp;lt;Parent&amp;gt;    &amp;lt;Child inputV">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-30T03:16:00.818Z">
+<meta property="og:updated_time" content="2018-04-09T11:23:04.275Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React遇到的坑.md">
 <meta name="twitter:description" content="当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。 参考网址：https://stackoverflow.com/questions/25385578/nested-react-input-element-loses-focus-on-typing input值不会随着属性改变而改变123&amp;lt;Parent&amp;gt;    &amp;lt;Child inputV">
@@ -410,6 +410,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;div className=&quot;box&quot;&gt;</span><br><span class="line">    &lt;div className=&quot;left&quot;&gt;</span><br><span class="line">        &lt;Echart ...&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;div className=&quot;right&quot;&gt;</span><br><span class="line">        &lt;Echart ...&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
 <p><code>box</code>中的<code>left</code>、<code>right</code>各占<code>50%</code>（样式写在样式文件内），这时候渲染echarts的时候，因为样式文件还未生效，所以Echarts读取的<code>left</code>和<code>right</code>宽度是<code>100%</code>的。</p>
 <p><strong><em>这个是为什么呢？</em></strong></p>
+<h2 id="修改react子组件"><a href="#修改react子组件" class="headerlink" title="修改react子组件"></a>修改react子组件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">return React.Children.map(this.props.children, child =&gt; &#123;</span><br><span class="line">    if (!child) return child;</span><br><span class="line">    if (typeof child.type === &apos;function&apos; &amp;&amp; child.type.name === &apos;Tr&apos;) &#123;</span><br><span class="line">        // 这边要修改children属性而不是直接返回它的children</span><br><span class="line">        return React.cloneElement(child, &#123;</span><br><span class="line">            children: (</span><br><span class="line">                React.Children.map(child.props.children, subChild =&gt; &#123;</span><br><span class="line">                    if (typeof subChild.type === &apos;function&apos; &amp;&amp; subChild.type.name === &apos;Label&apos;) &#123;</span><br><span class="line">                        return React.cloneElement(subChild, &#123;</span><br><span class="line">                            required: true</span><br><span class="line">                        &#125;)</span><br><span class="line">                    &#125; else if (typeof subChild.type === &apos;function&apos; &amp;&amp; subChild.type.name === &apos;Content&apos;) &#123;</span><br><span class="line">                        return React.cloneElement(subChild, &#123;</span><br><span class="line">                            children: [...subChild.props.children, textTip],</span><br><span class="line">                            validationState: validationState</span><br><span class="line">                        &#125;)</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;)</span><br><span class="line">            )</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        return child;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -529,7 +530,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-count">34</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -542,7 +543,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -590,7 +591,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。"><span class="nav-number">1.</span> <span class="nav-text">当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#input值不会随着属性改变而改变"><span class="nav-number">2.</span> <span class="nav-text">input值不会随着属性改变而改变</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UglifyJs编辑后有些arguments无效"><span class="nav-number">3.</span> <span class="nav-text">UglifyJs编辑后有些arguments无效</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#上传文件不能上传同一张图片"><span class="nav-number">4.</span> <span class="nav-text">上传文件不能上传同一张图片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#react中ref传递给页面组件时失效"><span class="nav-number">5.</span> <span class="nav-text">react中ref传递给页面组件时失效</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在react组件中引入样式文件导致echarts宽度计算失败的bug"><span class="nav-number">6.</span> <span class="nav-text">在react组件中引入样式文件导致echarts宽度计算失败的bug</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。"><span class="nav-number">1.</span> <span class="nav-text">当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#input值不会随着属性改变而改变"><span class="nav-number">2.</span> <span class="nav-text">input值不会随着属性改变而改变</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UglifyJs编辑后有些arguments无效"><span class="nav-number">3.</span> <span class="nav-text">UglifyJs编辑后有些arguments无效</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#上传文件不能上传同一张图片"><span class="nav-number">4.</span> <span class="nav-text">上传文件不能上传同一张图片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#react中ref传递给页面组件时失效"><span class="nav-number">5.</span> <span class="nav-text">react中ref传递给页面组件时失效</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在react组件中引入样式文件导致echarts宽度计算失败的bug"><span class="nav-number">6.</span> <span class="nav-text">在react组件中引入样式文件导致echarts宽度计算失败的bug</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改react子组件"><span class="nav-number">7.</span> <span class="nav-text">修改react子组件</span></a></li></ol></div>
             
 
           </div>
