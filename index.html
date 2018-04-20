@@ -317,6 +317,176 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2018/04/20/css/css-transforms-3d/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liaoyf">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="liaoyf的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/20/css/css-transforms-3d/" itemprop="url">css-transforms-3d</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-20T09:43:03+08:00">
+                2018-04-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/04/20/css/css-transforms-3d/" class="leancloud_visitors" data-flag-title="css-transforms-3d">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="浏览器支持情况"><a href="#浏览器支持情况" class="headerlink" title="浏览器支持情况"></a>浏览器支持情况</h2><h3 id="2D-Transforms"><a href="#2D-Transforms" class="headerlink" title="2D Transforms"></a>2D Transforms</h3><p>Chrome    Safari    Firefox    Opera    IE    Android    iOS<br>Any        3.1+      3.5+      10.5+    9+    4.1+      At least 4</p>
+<h3 id="3D-Transforms"><a href="#3D-Transforms" class="headerlink" title="3D Transforms"></a>3D Transforms</h3><p>Chrome    Safari    Firefox    Opera    IE    Android    iOS<br>10+        4+        12+        none    10+    4.1+      5+</p>
+<h2 id="2D-Transforms-1"><a href="#2D-Transforms-1" class="headerlink" title="2D Transforms"></a>2D Transforms</h2><ul>
+<li><p>scale(): 缩放元素，包括：<code>font-size</code>,<code>padding</code>,<code>height</code>,<code>width</code>。它还提供<code>scaleX</code>和<code>scaleY</code>速记函数。</p>
+</li>
+<li><p>skewX() and skewY(): 元素向左或者向右倾斜，这个没有<code>skew</code>函数。</p>
+</li>
+<li><p>translate(): 位移元素</p>
+</li>
+<li><p>rotate(): 顺时针翻转元素</p>
+</li>
+<li><p>matrix(): 矩阵，这个函数可能不是专门用手写的，但将所有转换合并为一个。</p>
+</li>
+<li><p>perspective(): 不会影响元素本身，但会影响后代元素3D变换的变换，从而使它们都具有一致的深度透视图。</p>
+</li>
+</ul>
+<h2 id="3D-Transforms-1"><a href="#3D-Transforms-1" class="headerlink" title="3D Transforms"></a>3D Transforms</h2><h3 id="Perspective"><a href="#Perspective" class="headerlink" title="Perspective"></a>Perspective</h3><p>要激活3D空间，元素必须要有透视。可以有两种方式使用：使用<code>transform: perspective(600px)</code>或者<code>perspective: 600px</code>。</p>
+<p>perspective决定3D效果的强度的值。把它看作从观察者到物体的距离。值越大，距离越远，视觉效果越不强烈。perspective: 2000px;产生微妙的3D效果，就像我们通过双筒望远镜从远处观看物体一样。perspective: 100px;产生巨大的3D效果，就像一只看到巨大物体的小昆虫。</p>
+<p>可以在子元素上使用perspective或者父级元素，但是，当用于多个元素时，转换后的元素不会按预期排列。如果跨不同位置的元素使用相同的变换，则每个元素都有自己的视点。为了解决这个问题，请使用perspective父元素的属性，以便每个孩子可以共享相同的3D空间。参考<a href="https://desandro.github.io/3dtransforms/examples/perspective-02-children.html" target="_blank" rel="noopener">https://desandro.github.io/3dtransforms/examples/perspective-02-children.html</a></p>
+<p></p><p data-height="265" data-theme-id="0" data-slug-hash="xjGKMW" data-default-tab="css,result" data-user="liaoyf" data-embed-version="2" data-pen-title="css-3d-transforms-perspective" class="codepen">See the Pen <a href="https://codepen.io/liaoyf/pen/xjGKMW/" target="_blank" rel="noopener">css-3d-transforms-perspective</a> by liaoyf (<a href="https://codepen.io/liaoyf" target="_blank" rel="noopener">@liaoyf</a>) on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</p><p></p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+<p>默认情况下，3D空间的视点位于中心。你可以用perspective-origin属性来改变视点的位置。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">perspective-origin: 25% 75%;</span><br></pre></td></tr></table></figure>
+<h3 id="3D-Transform-functions"><a href="#3D-Transform-functions" class="headerlink" title="3D Transform functions"></a>3D Transform functions</h3><ul>
+<li>rotateX( angle )</li>
+<li>rotateY( angle )</li>
+<li>rotateZ( angle )</li>
+<li>translateZ( tz )</li>
+<li>scaleZ( sz )</li>
+</ul>
+<p>还有几个速记变换函数需要所有三个维度的值：</p>
+<ul>
+<li>translate3d( tx, ty, tz )</li>
+<li>scale3d( sx, sy, sz )</li>
+<li>rotate3d( rx, ry, rz, angle )</li>
+</ul>
+<blockquote>
+<p>这些foo3d()转换函数还具有在Safari中触发硬件加速的好处，如果您正在编写适用于iOS或Safari的生产准备CSS，请务必使用这些foo3d()函数以获得最佳的渲染性能。</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2018/04/16/javascript/逃离async、await地狱/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1650,153 +1820,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2017/10/31/react/React入门——简介/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="liaoyf">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="liaoyf的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/31/react/React入门——简介/" itemprop="url">React入门——简介</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-31T15:47:13+08:00">
-                2017-10-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/10/31/react/React入门——简介/" class="leancloud_visitors" data-flag-title="React入门——简介">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>一、什么是React？</p>
-<p>React是Facebook开源的一个用于构建用户界面的Javascript库，他不是一个框架，而是专注于MVC架构中的V，即视图。这使得React很容易和开发者已有的开发栈进行融合。React顺应了Web开发组件化的趋势。应用React时，你总是应该从UI出发抽象出不同的组件，然后像搭积木一样把它们拼装起来。</p>
-<p>二、React能做什么？</p>
-<p><img src="0006.png" alt="22"></p>
-<p>补充：桌面应用程序（NW.js和Electron.js）</p>
-<p>二、React全家桶 </p>
-<ul>
-<li>自身库： react.js、react-dom.js、add-ons</li>
-<li>语法：ES5/ES6、JSX</li>
-<li>构建工具：Fis3、webpack、babel</li>
-<li>状态管理：Redux、Flux、react-redux、Immutable</li>
-<li>路由：react-router、react-redux-router</li>
-<li>日志：redux-logger</li>
-<li>中间件：redux-thunk</li>
-<li>主题：react-bootstrap</li>
-<li>表单：redux-form</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1847,7 +1870,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-count">35</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
