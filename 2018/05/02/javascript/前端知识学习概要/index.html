@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="css," />
+  <meta name="keywords" content="javascript," />
 
 
 
@@ -94,18 +94,18 @@
 
 
 
-<meta name="description" content="Unicode编码空格 &amp;amp;nbsp;: 不换行空格,用于不会被浏览器判断为可以在中间打断，比如：There is&amp;amp;nbsp;Space，如果会换行，只会在There和is之间换行，而不会在is和Space之间换行。 跟随字体大小产生相应空白的空格：&amp;amp;ensp;(1/2em)，&amp;amp;emsp;(1em)，&amp;amp;thinsp;(1/6em)，这类就很适合坐表单label">
-<meta name="keywords" content="css">
+<meta name="description" content="了解web浏览器 浏览器如何渲染页面  浏览器的工作原理  What is a browser engine?  What forces layout / reflow   What Every Frontend Developer Should Know About Webpage Rendering">
+<meta name="keywords" content="javascript">
 <meta property="og:type" content="article">
-<meta property="og:title" content="HTML不同空格的特性和表现研究">
-<meta property="og:url" content="https://liaoyongfu.github.io/2016/08/02/css/HTML不同空格的特性和表现研究/index.html">
+<meta property="og:title" content="前端知识学习概要">
+<meta property="og:url" content="https://liaoyongfu.github.io/2018/05/02/javascript/前端知识学习概要/index.html">
 <meta property="og:site_name" content="liaoyf的博客">
-<meta property="og:description" content="Unicode编码空格 &amp;amp;nbsp;: 不换行空格,用于不会被浏览器判断为可以在中间打断，比如：There is&amp;amp;nbsp;Space，如果会换行，只会在There和is之间换行，而不会在is和Space之间换行。 跟随字体大小产生相应空白的空格：&amp;amp;ensp;(1/2em)，&amp;amp;emsp;(1em)，&amp;amp;thinsp;(1/6em)，这类就很适合坐表单label">
+<meta property="og:description" content="了解web浏览器 浏览器如何渲染页面  浏览器的工作原理  What is a browser engine?  What forces layout / reflow   What Every Frontend Developer Should Know About Webpage Rendering">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-10-31T07:46:46.379Z">
+<meta property="og:updated_time" content="2018-05-02T09:45:43.350Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="HTML不同空格的特性和表现研究">
-<meta name="twitter:description" content="Unicode编码空格 &amp;amp;nbsp;: 不换行空格,用于不会被浏览器判断为可以在中间打断，比如：There is&amp;amp;nbsp;Space，如果会换行，只会在There和is之间换行，而不会在is和Space之间换行。 跟随字体大小产生相应空白的空格：&amp;amp;ensp;(1/2em)，&amp;amp;emsp;(1em)，&amp;amp;thinsp;(1/6em)，这类就很适合坐表单label">
+<meta name="twitter:title" content="前端知识学习概要">
+<meta name="twitter:description" content="了解web浏览器 浏览器如何渲染页面  浏览器的工作原理  What is a browser engine?  What forces layout / reflow   What Every Frontend Developer Should Know About Webpage Rendering">
 
 
 
@@ -134,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="https://liaoyongfu.github.io/2016/08/02/css/HTML不同空格的特性和表现研究/"/>
+  <link rel="canonical" href="https://liaoyongfu.github.io/2018/05/02/javascript/前端知识学习概要/"/>
 
 
 
 
 
-  <title>HTML不同空格的特性和表现研究 | liaoyf的博客</title>
+  <title>前端知识学习概要 | liaoyf的博客</title>
   
 
 
@@ -317,7 +317,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2016/08/02/css/HTML不同空格的特性和表现研究/">
+    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2018/05/02/javascript/前端知识学习概要/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="liaoyf">
@@ -334,7 +334,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">HTML不同空格的特性和表现研究</h1>
+          <h1 class="post-title" itemprop="name headline">前端知识学习概要</h1>
         
 
         <div class="post-meta">
@@ -346,8 +346,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-02T14:38:52+08:00">
-                2016-08-02
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-02T16:58:29+08:00">
+                2018-05-02
               </time>
             
 
@@ -364,7 +364,7 @@
 
           
           
-             <span id="/2016/08/02/css/HTML不同空格的特性和表现研究/" class="leancloud_visitors" data-flag-title="HTML不同空格的特性和表现研究">
+             <span id="/2018/05/02/javascript/前端知识学习概要/" class="leancloud_visitors" data-flag-title="前端知识学习概要">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -395,9 +395,17 @@
       
 
       
-        <h2 id="Unicode编码空格"><a href="#Unicode编码空格" class="headerlink" title="Unicode编码空格"></a>Unicode编码空格</h2><ul>
-<li><code>&amp;nbsp;</code>: <strong>不换行空格</strong>,用于不会被浏览器判断为可以在中间打断，比如：<code>There is&amp;nbsp;Space</code>，如果会换行，只会在<code>There</code>和<code>is</code>之间换行，而不会在<code>is</code>和<code>Space</code>之间换行。</li>
-<li>跟随字体大小产生相应空白的空格：<code>&amp;ensp;</code>(1/2em)，<code>&amp;emsp;</code>(1em)，<code>&amp;thinsp;</code>(1/6em)，这类就很适合坐表单<code>label</code>的排版了，坑爹，终于找到好的解决方法了</li>
+        <h2 id="了解web浏览器"><a href="#了解web浏览器" class="headerlink" title="了解web浏览器"></a>了解web浏览器</h2><ul>
+<li><p><a href="http://dbaron.org/talks/2012-03-11-sxsw/master.xhtml" target="_blank" rel="noopener">浏览器如何渲染页面</a></p>
+</li>
+<li><p><a href="https://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/" target="_blank" rel="noopener">浏览器的工作原理</a></p>
+</li>
+<li><p><a href="https://hacks.mozilla.org/2017/05/quantum-up-close-what-is-a-browser-engine/" target="_blank" rel="noopener">What is a browser engine?</a></p>
+</li>
+<li><p><a href="https://gist.github.com/paulirish/5d52fb081b3570c81e3a" target="_blank" rel="noopener">What forces layout / reflow </a></p>
+</li>
+<li><p><a href="http://frontendbabel.info/articles/webpage-rendering-101/" target="_blank" rel="noopener">What Every Frontend Developer Should Know About Webpage Rendering</a></p>
+</li>
 </ul>
 
       
@@ -416,7 +424,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/css/" rel="tag"># css</a>
+            <a href="/tags/javascript/" rel="tag"># javascript</a>
           
         </div>
       
@@ -429,8 +437,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/08/02/css/使用css视口单位/" rel="next" title="使用css视口单位">
-                <i class="fa fa-chevron-left"></i> 使用css视口单位
+              <a href="/2018/04/20/css/css-transforms-3d/" rel="next" title="css-transforms-3d">
+                <i class="fa fa-chevron-left"></i> css-transforms-3d
               </a>
             
           </div>
@@ -438,10 +446,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/08/02/webpack/webpack学习01——简介/" rel="prev" title="">
-                 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -579,7 +583,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Unicode编码空格"><span class="nav-number">1.</span> <span class="nav-text">Unicode编码空格</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#了解web浏览器"><span class="nav-number">1.</span> <span class="nav-text">了解web浏览器</span></a></li></ol></div>
             
 
           </div>
