@@ -101,7 +101,7 @@
 <meta property="og:site_name" content="liaoyf的博客">
 <meta property="og:description" content="webpack的坑  引用jQuery插件时会报”jQuery is not defined”，解决方法：  (1). Prefer unminified CommonJS/AMD over dist  Most modules link the dist version in the main field of their package.json. While this is useful f">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2016-12-05T11:57:04.000Z">
+<meta property="og:updated_time" content="2018-05-09T03:13:32.602Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="liaoyf的博客">
 <meta name="twitter:description" content="webpack的坑  引用jQuery插件时会报”jQuery is not defined”，解决方法：  (1). Prefer unminified CommonJS/AMD over dist  Most modules link the dist version in the main field of their package.json. While this is useful f">
@@ -505,7 +505,7 @@ module.exports={
         fs: &quot;empty&quot;
     }
 };
-</code></pre><p> <a href="https://github.com/pugjs/pug-loader/issues/8" target="_blank" rel="external">参考链接</a></p>
+</code></pre><p> <a href="https://github.com/pugjs/pug-loader/issues/8" target="_blank" rel="noopener">参考链接</a></p>
 </li>
 <li><p>webpack开发时打包第三方库都比较大，可以通过配置<code>alias</code>指向压缩版本：</p>
 <pre><code>resolve: {
@@ -526,7 +526,7 @@ module.exports={
 </code></pre></li>
 <li><p>import样式文件页面会有闪烁现象，这是可以通过<code>extract-text-webpack-plugin</code>抽取样式文件，就不会有这个问题了</p>
 </li>
-<li>使用ES6 + webpack + angular教程<a href="http://angular-tips.com/blog/2015/06/using-angular-1-dot-x-with-es6-and-webpack/" target="_blank" rel="external">参考链接</a></li>
+<li>使用ES6 + webpack + angular教程<a href="http://angular-tips.com/blog/2015/06/using-angular-1-dot-x-with-es6-and-webpack/" target="_blank" rel="noopener">参考链接</a></li>
 <li><p>合并jquery和第三方插件时，外面是读取不到<code>$</code>和<code>jQuery</code>的，所以我们可以通过<code>expose-loader</code>把<code>jQuery</code>对象导出到全局:</p>
 <p> You can either do this when you require it:</p>
 <pre><code>require(&quot;expose?$!jquery&quot;);
@@ -548,8 +548,11 @@ import &apos;imports?define=&gt;false,this=&gt;window!./lib/auth/dmService&apos;
 <li><p>webpack-dev-server默认是localhost访问，不能通过ip访问，我们可以配置如下：</p>
 <p>webpack-dev-server –host 0.0.0.0</p>
 </li>
+<li><p>大项目打包时经常内存溢出：</p>
+</li>
 </ol>
-
+<p>修改打包命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node  --max_old_space_size=4096 ./node_modules/webpack/bin/webpack.js --env=prod --progress --profile --colors</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -662,7 +665,7 @@ import &apos;imports?define=&gt;false,this=&gt;window!./lib/auth/dmService&apos;
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">36</span>
+                <span class="site-state-item-count">37</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -675,7 +678,7 @@ import &apos;imports?define=&gt;false,this=&gt;window!./lib/auth/dmService&apos;
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
