@@ -94,18 +94,18 @@
 
 
 
-<meta name="description" content="当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。 参考网址：https://stackoverflow.com/questions/25385578/nested-react-input-element-loses-focus-on-typing input值不会随着属性改变而改变123&amp;lt;Parent&amp;gt;    &amp;lt;Child inputV">
+<meta name="description" content="webpack编译后，代码中判断子组件名称功能失效。因为压缩后函数名称混淆，所以不能通过typeof child.type === &amp;#39;function&amp;#39; &amp;amp;&amp;amp; child.type.name === &amp;#39;FormControl&amp;#39;，而是应该通过child.type === FormControl 当input框输入值时输入框自动被失去了焦点，原因是在re">
 <meta name="keywords" content="react">
 <meta property="og:type" content="article">
 <meta property="og:title" content="React遇到的坑.md">
 <meta property="og:url" content="https://liaoyongfu.github.io/2018/03/27/react/React遇到的坑/index.html">
 <meta property="og:site_name" content="liaoyf的博客">
-<meta property="og:description" content="当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。 参考网址：https://stackoverflow.com/questions/25385578/nested-react-input-element-loses-focus-on-typing input值不会随着属性改变而改变123&amp;lt;Parent&amp;gt;    &amp;lt;Child inputV">
+<meta property="og:description" content="webpack编译后，代码中判断子组件名称功能失效。因为压缩后函数名称混淆，所以不能通过typeof child.type === &amp;#39;function&amp;#39; &amp;amp;&amp;amp; child.type.name === &amp;#39;FormControl&amp;#39;，而是应该通过child.type === FormControl 当input框输入值时输入框自动被失去了焦点，原因是在re">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-09T11:23:04.275Z">
+<meta property="og:updated_time" content="2018-06-07T07:15:08.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React遇到的坑.md">
-<meta name="twitter:description" content="当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。 参考网址：https://stackoverflow.com/questions/25385578/nested-react-input-element-loses-focus-on-typing input值不会随着属性改变而改变123&amp;lt;Parent&amp;gt;    &amp;lt;Child inputV">
+<meta name="twitter:description" content="webpack编译后，代码中判断子组件名称功能失效。因为压缩后函数名称混淆，所以不能通过typeof child.type === &amp;#39;function&amp;#39; &amp;amp;&amp;amp; child.type.name === &amp;#39;FormControl&amp;#39;，而是应该通过child.type === FormControl 当input框输入值时输入框自动被失去了焦点，原因是在re">
 
 
 
@@ -395,7 +395,8 @@
       
 
       
-        <h2 id="当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。"><a href="#当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。" class="headerlink" title="当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。"></a>当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。</h2><p> 参考网址：<a href="https://stackoverflow.com/questions/25385578/nested-react-input-element-loses-focus-on-typing" target="_blank" rel="noopener">https://stackoverflow.com/questions/25385578/nested-react-input-element-loses-focus-on-typing</a></p>
+        <h2 id="webpack编译后，代码中判断子组件名称功能失效。"><a href="#webpack编译后，代码中判断子组件名称功能失效。" class="headerlink" title="webpack编译后，代码中判断子组件名称功能失效。"></a>webpack编译后，代码中判断子组件名称功能失效。</h2><p>因为压缩后函数名称混淆，所以不能通过<code>typeof child.type === &#39;function&#39; &amp;&amp; child.type.name === &#39;FormControl&#39;</code>，而是应该通过<code>child.type === FormControl</code></p>
+<h2 id="当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。"><a href="#当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。" class="headerlink" title="当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。"></a>当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。</h2><p> 参考网址：<a href="https://stackoverflow.com/questions/25385578/nested-react-input-element-loses-focus-on-typing" target="_blank" rel="noopener">https://stackoverflow.com/questions/25385578/nested-react-input-element-loses-focus-on-typing</a></p>
 <h2 id="input值不会随着属性改变而改变"><a href="#input值不会随着属性改变而改变" class="headerlink" title="input值不会随着属性改变而改变"></a>input值不会随着属性改变而改变</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;Parent&gt;</span><br><span class="line">    &lt;Child inputVal=&#123;this.state.inputVal&#125;/&gt;</span><br><span class="line">&lt;/Parent&gt;</span><br></pre></td></tr></table></figure>
 <p>当<code>Child</code>组件的<code>value</code>为<code>null</code>后input的值不会更改。所以一般要判断是否存在<code>null</code>值：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;FormControl value=&#123;this.props.inputVal || &apos;&apos;&#125;/&gt;</span><br></pre></td></tr></table></figure>
@@ -530,7 +531,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-count">38</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -543,7 +544,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -591,7 +592,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。"><span class="nav-number">1.</span> <span class="nav-text">当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#input值不会随着属性改变而改变"><span class="nav-number">2.</span> <span class="nav-text">input值不会随着属性改变而改变</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UglifyJs编辑后有些arguments无效"><span class="nav-number">3.</span> <span class="nav-text">UglifyJs编辑后有些arguments无效</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#上传文件不能上传同一张图片"><span class="nav-number">4.</span> <span class="nav-text">上传文件不能上传同一张图片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#react中ref传递给页面组件时失效"><span class="nav-number">5.</span> <span class="nav-text">react中ref传递给页面组件时失效</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在react组件中引入样式文件导致echarts宽度计算失败的bug"><span class="nav-number">6.</span> <span class="nav-text">在react组件中引入样式文件导致echarts宽度计算失败的bug</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改react子组件"><span class="nav-number">7.</span> <span class="nav-text">修改react子组件</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#webpack编译后，代码中判断子组件名称功能失效。"><span class="nav-number">1.</span> <span class="nav-text">webpack编译后，代码中判断子组件名称功能失效。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。"><span class="nav-number">2.</span> <span class="nav-text">当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#input值不会随着属性改变而改变"><span class="nav-number">3.</span> <span class="nav-text">input值不会随着属性改变而改变</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UglifyJs编辑后有些arguments无效"><span class="nav-number">4.</span> <span class="nav-text">UglifyJs编辑后有些arguments无效</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#上传文件不能上传同一张图片"><span class="nav-number">5.</span> <span class="nav-text">上传文件不能上传同一张图片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#react中ref传递给页面组件时失效"><span class="nav-number">6.</span> <span class="nav-text">react中ref传递给页面组件时失效</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在react组件中引入样式文件导致echarts宽度计算失败的bug"><span class="nav-number">7.</span> <span class="nav-text">在react组件中引入样式文件导致echarts宽度计算失败的bug</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改react子组件"><span class="nav-number">8.</span> <span class="nav-text">修改react子组件</span></a></li></ol></div>
             
 
           </div>

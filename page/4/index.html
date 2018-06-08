@@ -317,6 +317,167 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2017/08/02/webpack/webpack学习05——长期缓存/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liaoyf">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="liaoyf的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/02/webpack/webpack学习05——长期缓存/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-02T11:44:45+08:00">
+                2017-08-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/08/02/webpack/webpack学习05——长期缓存/" class="leancloud_visitors" data-flag-title="">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="webpack学习05——长期缓存"><a href="#webpack学习05——长期缓存" class="headerlink" title="webpack学习05——长期缓存"></a>webpack学习05——长期缓存</h2><p>有两种级别的添加hash方法：</p>
+<ul>
+<li>Compute a hash of all chunks and add it.</li>
+<li>Compute a hash per chunk and add it.</li>
+</ul>
+<h2 id="方法一：只有一个hash"><a href="#方法一：只有一个hash" class="headerlink" title="方法一：只有一个hash"></a>方法一：只有一个hash</h2><pre><code>{
+    output: {
+        path: path.join(__dirname, &quot;assets&quot;, &quot;[hash]&quot;),
+        publicPath: &quot;assets/[hash]/&quot;,
+        filename: &quot;output.[hash].bundle.js&quot;,
+        chunkFilename: &quot;[id].[hash].bundle.js&quot;
+    }
+}
+</code></pre><h2 id="方法二：每个块都有一个hash"><a href="#方法二：每个块都有一个hash" class="headerlink" title="方法二：每个块都有一个hash"></a>方法二：每个块都有一个hash</h2><pre><code>output: { chunkFilename: &quot;[chunkhash].bundle.js&quot; }
+</code></pre><p>Note that you need to reference the entry chunk with its hash in your HTML. You may want to extract the hash or the filename from the stats.</p>
+<p>In combination with Hot Code Replacement you must use option 1, but not on the publicPath config option.</p>
+<h2 id="从文件名获取状态"><a href="#从文件名获取状态" class="headerlink" title="从文件名获取状态"></a>从文件名获取状态</h2><p>You probably want to access the final filename of the asset to embed it into your HTML. This information is available in the webpack stats. If you are using the CLI you can run it with –json to get the stats as JSON to stdout.</p>
+<p>You can add a plugin such as assets-webpack-plugin to your configuration which allows you to access the stats object. Here is an example how to write it into a file:</p>
+<pre><code>plugins: [
+  function() {
+    this.plugin(&quot;done&quot;, function(stats) {
+      require(&quot;fs&quot;).writeFileSync(
+        path.join(__dirname, &quot;..&quot;, &quot;stats.json&quot;),
+        JSON.stringify(stats.toJson()));
+    });
+  }
+]
+</code></pre><p>The stats JSON contains a useful property assetsByChunkName which is a object containing chunk name as key and filename(s) as value.</p>
+<blockquote>
+<p>Note: It’s an array if you are emitting multiple assets per chunk. I. e. a JavaScript file and a SourceMap. The first one is your JavaScript source.</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2017/08/02/webpack/webpack学习04——压缩优化/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1557,7 +1718,7 @@ h1{
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-count">38</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1570,7 +1731,7 @@ h1{
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
