@@ -94,18 +94,18 @@
 
 
 
-<meta name="description" content="react-native run-ios报错报错如下： 1234567891011An error was encountered processing the command (domain=NSPOSIXErrorDomain, code=2):Failed to install the requested applicationAn application bundle was not fo">
+<meta name="description" content="react-native开发流程create-react-native-app方式使用此方式无需安装编译器、xcode或者Android Studio等。 1234npm install -g create-react-nateive-appcreate-react-native-app AwesomeProjectcd AwesomeProjectnpm start 启动后，控制台会输出一个二维">
 <meta name="keywords" content="react-native">
 <meta property="og:type" content="article">
 <meta property="og:title" content="react-native版本0.55搭建">
 <meta property="og:url" content="https://liaoyongfu.github.io/2018/06/20/react-native/react-native版本0.55搭建/index.html">
 <meta property="og:site_name" content="liaoyf的博客">
-<meta property="og:description" content="react-native run-ios报错报错如下： 1234567891011An error was encountered processing the command (domain=NSPOSIXErrorDomain, code=2):Failed to install the requested applicationAn application bundle was not fo">
+<meta property="og:description" content="react-native开发流程create-react-native-app方式使用此方式无需安装编译器、xcode或者Android Studio等。 1234npm install -g create-react-nateive-appcreate-react-native-app AwesomeProjectcd AwesomeProjectnpm start 启动后，控制台会输出一个二维">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-21T01:32:13.722Z">
+<meta property="og:updated_time" content="2018-06-21T02:38:16.046Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="react-native版本0.55搭建">
-<meta name="twitter:description" content="react-native run-ios报错报错如下： 1234567891011An error was encountered processing the command (domain=NSPOSIXErrorDomain, code=2):Failed to install the requested applicationAn application bundle was not fo">
+<meta name="twitter:description" content="react-native开发流程create-react-native-app方式使用此方式无需安装编译器、xcode或者Android Studio等。 1234npm install -g create-react-nateive-appcreate-react-native-app AwesomeProjectcd AwesomeProjectnpm start 启动后，控制台会输出一个二维">
 
 
 
@@ -395,15 +395,86 @@
       
 
       
-        <h2 id="react-native-run-ios报错"><a href="#react-native-run-ios报错" class="headerlink" title="react-native run-ios报错"></a><code>react-native run-ios</code>报错</h2><p>报错如下：</p>
+        <h2 id="react-native开发流程"><a href="#react-native开发流程" class="headerlink" title="react-native开发流程"></a>react-native开发流程</h2><h3 id="create-react-native-app方式"><a href="#create-react-native-app方式" class="headerlink" title="create-react-native-app方式"></a>create-react-native-app方式</h3><p>使用此方式无需安装编译器、xcode或者Android Studio等。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">npm install -g create-react-nateive-app</span><br><span class="line">create-react-native-app AwesomeProject</span><br><span class="line">cd AwesomeProject</span><br><span class="line">npm start</span><br></pre></td></tr></table></figure>
+<p>启动后，控制台会输出一个二维码，接下来，你需要使用手机安装<code>Expo</code>应用程序，然后使用二维码登录即可在访问，如果你修改代码，应该也会热更新。</p>
+<h3 id="用native-code构建"><a href="#用native-code构建" class="headerlink" title="用native code构建"></a>用native code构建</h3><p>在IOS上，需要安装一些必须软件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">brew install node</span><br><span class="line">brew install watchman</span><br><span class="line">npm install -g react-native-cli</span><br><span class="line">react-native init AwesomeProject</span><br><span class="line">cd AwesomeProject</span><br><span class="line">react-native run-ios</span><br></pre></td></tr></table></figure>
+<p>使用<code>Command + R</code>刷新。</p>
+<blockquote>
+<p>注意：Xcode版本必须要<code>&gt;=8</code></p>
+</blockquote>
+<h2 id="react-native-run-ios报错"><a href="#react-native-run-ios报错" class="headerlink" title="react-native run-ios报错"></a><code>react-native run-ios</code>报错</h2><p>报错如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">An error was encountered processing the command (domain=NSPOSIXErrorDomain, code=2):</span><br><span class="line">Failed to install the requested application</span><br><span class="line">An application bundle was not found at the provided path.</span><br><span class="line">Provide a valid path to the desired application bundle.</span><br><span class="line">Print: Entry, &quot;:CFBundleIdentifier&quot;, Does Not Exist</span><br><span class="line">/development/misc/react/AwesomeProject/node_modules/promise/lib/done.js:10</span><br><span class="line">      throw err;</span><br><span class="line">      ^</span><br><span class="line"></span><br><span class="line">Error: Command failed: /usr/libexec/PlistBuddy -c Print:CFBundleIdentifier build/Build/Products/Debug-iphonesimulator/AwesomeProject.app/Info.plist</span><br><span class="line">Print: Entry, &quot;:CFBundleIdentifier&quot;, Does Not Exist</span><br></pre></td></tr></table></figure>
-<p>泪崩。。。试用遍了网上大多数的解决方法均不行，浪费了好多宝贵时间，后来发现是xcode的版本问题，0.55版本要求xcode的版本要<code>&gt;= 9</code>。</p>
+<p>泪崩。。。试用遍了网上大多数的解决方法均不行，浪费了好多宝贵时间，后来发现是xcode的版本问题，0.55版本要求xcode的版本要<code>&gt;= 8</code>。</p>
 <p>所以要更新xcode版本即可解决，记得更新完后重新<code>react-native init</code>项目。</p>
 <h2 id="结合antd-mobile使用"><a href="#结合antd-mobile使用" class="headerlink" title="结合antd-mobile使用"></a>结合<code>antd-mobile</code>使用</h2><p>安装antd-mobile-rn:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add antd-mobile-rn</span><br></pre></td></tr></table></figure>
 <p>使用：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">import React, &#123; Component &#125; from &apos;react&apos;;</span><br><span class="line">import &#123; AppRegistry &#125; from &apos;react-native&apos;;</span><br><span class="line">import Button from &apos;antd-mobile-rn/lib/button&apos;;</span><br><span class="line"></span><br><span class="line">class HelloWorldApp extends Component &#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    return &lt;Button&gt;Start&lt;/Button&gt;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">AppRegistry.registerComponent(&apos;HelloWorldApp&apos;, () =&gt; HelloWorldApp);</span><br></pre></td></tr></table></figure>
 <p>更多坑请<a href="https://liaoyongfu.github.io/2017/12/21/react-native/react-native%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/">点击查看</a></p>
+<h2 id="调用原生模块"><a href="#调用原生模块" class="headerlink" title="调用原生模块"></a>调用原生模块</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import &#123; NativeModules &#125; from &apos;react-native&apos;;</span><br><span class="line">var CalendarManager = NativeModules.CalendarManager;</span><br><span class="line">CalendarManager.addEvent(&apos;Birthday Party&apos;, &apos;4 Privet Drive, Surrey&apos;);</span><br></pre></td></tr></table></figure>
+<p>详细介绍请<a href="https://facebook.github.io/react-native/docs/native-modules-ios.html" target="_blank" rel="noopener">点击查看</a></p>
+<h2 id="开发后安装问题"><a href="#开发后安装问题" class="headerlink" title="开发后安装问题"></a>开发后安装问题</h2><p>在真机上测试iOS应用需要一台Mac电脑，同时还需要注册一个Apple ID。如果你需要把应用发布到App Store，那么你还需要去苹果开发者网站购买一个开发者账户（在自己手机上测试则不用）</p>
+<h3 id="在真机上访问开发服务器（packager）"><a href="#在真机上访问开发服务器（packager）" class="headerlink" title="在真机上访问开发服务器（packager）"></a>在真机上访问开发服务器（packager）</h3><p>你可以在真机上访问开发服务器以快速测试和迭代。首先需要确保设备已使用usb连接至电脑，同时和电脑处在同一wifi网络内，然后在Xcode中选择你的设备作为编译目标（左上角运行按钮的右边），然后点击运行按钮即可。<br>如果你需要在真机上启用调试功能，则需要打开RCTWebSocketExecutor.m文件，然后将其中的”localhost”改为你的电脑的IP地址，最后启用开发者菜单中的”Debug JS Remotely”选项。</p>
+<p>开发步骤：</p>
+<ol>
+<li><p>使用xcode打开项目</p>
+</li>
+<li><p>使用USB链接手机，并和电脑处于统一wifi信号下</p>
+</li>
+<li><p>选择右上角为你的手机，然后点击三角形运行</p>
+</li>
+<li><p>输入电脑登录密码，之后软件会安装在你的手机上</p>
+</li>
+<li><p>由于软件不被信任，所以要在<code>通用-&gt;设备管理-&gt;点击信任</code></p>
+</li>
+</ol>
+<blockquote>
+<p>提示：摇晃设备就可以打开开发者菜单。</p>
+</blockquote>
+<h3 id="发布应用"><a href="#发布应用" class="headerlink" title="发布应用"></a>发布应用</h3><p>当你使用React Native做好一个漂亮的应用之后，一定跃跃欲试想要在App Store上发布了吧。发布的流程和其他iOS原生应用完全一样，除了以下一些注意事项。<br>在App Store上发布应用首先需要编译一个“发布版本”(release)的应用。具体的做法是在Xcode中选择Product -&gt; Scheme -&gt; Edit Scheme (cmd + &lt;)，然后选择Run选项卡，将Build Configuration设置为release。 Release版本的应用会自动禁用开发者菜单，同时也会将js文件和静态图片打包压缩后内置到包中，这样应用可以在本地读取而无需访问开发服务器（同时这样一来你也无法再调试，需要调试请将Buiid Configuration再改为debug）。<br>由于发布版本已经内置了js文件，因而也无法再通过开发服务器来实时更新。面向用户的热更新，请使用专门的热更新服务。<br>编译完成后，你就可以打包提交到TestFlight进行内测，或是提交到App Store进行发布。相关流程较为复杂，不熟悉原生应用发布流程的同学请自行搜索学习。</p>
+<h3 id="App-Transport-Security"><a href="#App-Transport-Security" class="headerlink" title="App Transport Security"></a>App Transport Security</h3><p>App Transport Security(简称ATS)是iOS 9中新增的一项安全特性。在默认设置下，只允许HTTPS的请求，而所有HTTP的请求都会被拒绝。详情可参考<a href="https://segmentfault.com/a/1190000002933776" target="_blank" rel="noopener">这篇帖子</a>。</p>
+<h2 id="使用react-native开发的可行性"><a href="#使用react-native开发的可行性" class="headerlink" title="使用react-native开发的可行性"></a>使用react-native开发的可行性</h2><p>根据Airbnb提供：</p>
+<h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ul>
+<li>跨平台 （只有 0.2% 的平台特定代码）</li>
+<li>统一的设计语言，同时还能为不同平台提供不同设计</li>
+<li>React 的 scale 很好，生命周期比原生简单，声明式很好</li>
+<li>迭代速度快（主要是 hot reloading 很快）</li>
+<li>大量基础设施的投入值得（网络、国际化、复杂动画、设备信息、用户信息等等都是通过一个桥把原生 api 暴露给 RN 的。）</li>
+<li>同时他们在这里也指出：他们并不相信在一个已有 app 上集成 RN 是一件简单事儿，必须要大量且持续地投入基础设施才行（说好的「满意的地方」呢）</li>
+<li>性能 （尽管大家都担心但是其实基本没有问题）</li>
+<li>不过首次渲染比较慢，导致不适合用作启动屏、deeplink，也增加了可交互时间（TTI），另外掉帧不好 debug（说好的「满意的地方」呢）</li>
+<li>Redux（好用，虽然废话太多）</li>
+<li>背后是原生，一些曾经不确定能不能做的功能（Shared element transitions、动画库 Lottie、网络层、核心基础设施）发现都能做</li>
+<li>静态分析（eslint，prettier，一些性能检测）</li>
+<li>动画</li>
+<li>JS/React 的开源生态</li>
+<li>Flexbox （via Yoga）</li>
+<li>有时候可以加上 Web 跨三端</li>
+</ul>
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><ul>
+<li>RN 太不成熟</li>
+<li>需要 fork RN</li>
+<li>JS 不行 （JS 没有类型不 scale，flow 不好用，TS 不好集成到 babel 和 metro）</li>
+<li>不好重构（JS 没有类型无法静态分析，重构引起的错误不能在编译时被捕捉到）</li>
+<li>咳，用我 FB 的新编译到 JS 语言大 ReasonML 啊……静态强类型 + 类型推断 + 自带不可变数据结构 + JS 友好语法 + 官方 React 支持，绝对 scale（咳扯远了</li>
+<li>JSCore 在 iOS / Android 上不一致 （Android 上是 RN 自己 bundle 的），很难 debug 这种坑</li>
+<li>RN 的开源库质量不行（因为太少人能精通所有平台了）</li>
+<li>做功能时要回去搞基础设施（因为有的基础设施可能还没暴露给 RN）</li>
+<li>奔溃监控（业内没方案，只能自己搞）</li>
+<li>原生桥太难写，另外 JS 的类型太难预料（和强类型语言 interop 时）<br>-RN 运行时的初始化太慢</li>
+<li>首次渲染时间慢（需要从 主线程 -&gt; JS -&gt; Yoga -&gt; 主线程）</li>
+<li>应用体积</li>
+<li>64 位 （因为 RN 不兼容的 issue 导致他们至今没法在 android 发布 64 位应用）</li>
+<li>手势（iOS 和 Android 的手势不好统一，虽然他们搞了 react-native-gesture-handler）</li>
+<li>长列表</li>
+<li>升级 RN 有的时候非常麻烦</li>
+<li>Accessibility （RN 的有 bug，又要 fork）</li>
+<li>稀奇古怪的奔溃</li>
+<li>安卓上的应用实例序列化问题</li>
+</ul>
+<h3 id="个人观点"><a href="#个人观点" class="headerlink" title="个人观点"></a>个人观点</h3><p>如果不需要开发那种非常复杂的功能，react-native社区提供的第三方库基本能满足开发需求；</p>
 
       
     </div>
@@ -584,7 +655,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#react-native-run-ios报错"><span class="nav-number">1.</span> <span class="nav-text">react-native run-ios报错</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结合antd-mobile使用"><span class="nav-number">2.</span> <span class="nav-text">结合antd-mobile使用</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#react-native开发流程"><span class="nav-number">1.</span> <span class="nav-text">react-native开发流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#create-react-native-app方式"><span class="nav-number">1.1.</span> <span class="nav-text">create-react-native-app方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用native-code构建"><span class="nav-number">1.2.</span> <span class="nav-text">用native code构建</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#react-native-run-ios报错"><span class="nav-number">2.</span> <span class="nav-text">react-native run-ios报错</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结合antd-mobile使用"><span class="nav-number">3.</span> <span class="nav-text">结合antd-mobile使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#调用原生模块"><span class="nav-number">4.</span> <span class="nav-text">调用原生模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开发后安装问题"><span class="nav-number">5.</span> <span class="nav-text">开发后安装问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#在真机上访问开发服务器（packager）"><span class="nav-number">5.1.</span> <span class="nav-text">在真机上访问开发服务器（packager）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#发布应用"><span class="nav-number">5.2.</span> <span class="nav-text">发布应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#App-Transport-Security"><span class="nav-number">5.3.</span> <span class="nav-text">App Transport Security</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用react-native开发的可行性"><span class="nav-number">6.</span> <span class="nav-text">使用react-native开发的可行性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#优点"><span class="nav-number">6.1.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缺点"><span class="nav-number">6.2.</span> <span class="nav-text">缺点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#个人观点"><span class="nav-number">6.3.</span> <span class="nav-text">个人观点</span></a></li></ol></li></ol></div>
             
 
           </div>
