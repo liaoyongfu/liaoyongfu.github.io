@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="javascript,设计模式," />
 
 
 
@@ -94,16 +94,20 @@
 
 
 
-<meta name="description" content="加油！">
-<meta property="og:type" content="website">
-<meta property="og:title" content="liaoyf的博客">
-<meta property="og:url" content="https://liaoyongfu.github.io/archives/2017/page/2/index.html">
+<meta name="description" content="灵活的javascript假如有如下的校验表单方法： 1234567891011function checkName()&amp;#123;&amp;#125;function checkEmail()&amp;#123;&amp;#125;function checkPassword()&amp;#123;&amp;#125; 这样的声明可能会和别人写的冲突，我们可以把他们放在一个变量中，这样可以减少覆盖或者被覆盖的风险： 12345var">
+<meta name="keywords" content="javascript,设计模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="javascript设计模式-面向对象">
+<meta property="og:url" content="https://liaoyongfu.github.io/2018/04/06/javascript/javascript设计模式-面向对象/index.html">
 <meta property="og:site_name" content="liaoyf的博客">
-<meta property="og:description" content="加油！">
+<meta property="og:description" content="灵活的javascript假如有如下的校验表单方法： 1234567891011function checkName()&amp;#123;&amp;#125;function checkEmail()&amp;#123;&amp;#125;function checkPassword()&amp;#123;&amp;#125; 这样的声明可能会和别人写的冲突，我们可以把他们放在一个变量中，这样可以减少覆盖或者被覆盖的风险： 12345var">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://liaoyongfu.github.io/2018/04/06/images/prototype.png">
+<meta property="og:updated_time" content="2018-06-21T01:42:16.090Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="liaoyf的博客">
-<meta name="twitter:description" content="加油！">
+<meta name="twitter:title" content="javascript设计模式-面向对象">
+<meta name="twitter:description" content="灵活的javascript假如有如下的校验表单方法： 1234567891011function checkName()&amp;#123;&amp;#125;function checkEmail()&amp;#123;&amp;#125;function checkPassword()&amp;#123;&amp;#125; 这样的声明可能会和别人写的冲突，我们可以把他们放在一个变量中，这样可以减少覆盖或者被覆盖的风险： 12345var">
+<meta name="twitter:image" content="https://liaoyongfu.github.io/2018/04/06/images/prototype.png">
 
 
 
@@ -132,13 +136,13 @@
 
 
 
-  <link rel="canonical" href="https://liaoyongfu.github.io/archives/2017/page/2/"/>
+  <link rel="canonical" href="https://liaoyongfu.github.io/2018/04/06/javascript/javascript设计模式-面向对象/"/>
 
 
 
 
 
-  <title>归档 | liaoyf的博客</title>
+  <title>javascript设计模式-面向对象 | liaoyf的博客</title>
   
 
 
@@ -173,7 +177,7 @@
     
   
 
-  <div class="container sidebar-position-left  page-archive  ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -301,410 +305,189 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
 
-      <span class="archive-page-counter">
-        
-        
-         
-        
-        OK! 目前共计 41 篇日志。 继续努力。
-      </span>
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2018/04/06/javascript/javascript设计模式-面向对象/">
 
-      
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liaoyf">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="liaoyf的博客">
+    </span>
+
+    
+      <header class="post-header">
 
         
         
+          <h1 class="post-title" itemprop="name headline">javascript设计模式-面向对象</h1>
         
 
-        
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-06T00:00:00+08:00">
+                2018-04-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-          <div class="collection-title">
-            <h2 class="archive-year motion-element" id="archive-year-2017">2017</h2>
-          </div>
-        
-        
 
-        
+          
+            
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
+          
+             <span id="/2018/04/06/javascript/javascript设计模式-面向对象/" class="leancloud_visitors" data-flag-title="javascript设计模式-面向对象">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/08/02/react/React高阶组件/" itemprop="url">
-              
-                <span itemprop="name">React高阶组件</span>
-              
-            </a>
-        
-      </h2>
+          
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-08-02T15:35:43+08:00"
-              content="2017-08-02" >
-          08-02
-        </time>
-      </div>
+          
 
-    </header>
-  </article>
+          
 
+        </div>
+      </header>
+    
 
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/08/02/react/react文档-css动画/" itemprop="url">
-              
-                <span itemprop="name">react文档-css动画</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-08-02T14:38:52+08:00"
-              content="2017-08-02" >
-          08-02
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/08/02/css/Flexbox布局兼容性总结/" itemprop="url">
-              
-                <span itemprop="name">Flexbox布局兼容性总结</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-08-02T14:32:43+08:00"
-              content="2017-08-02" >
-          08-02
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/08/02/javascript/关于同一元素下dbClick触发两次click的问题/" itemprop="url">
-              
-                <span itemprop="name">关于同一元素下dbClick触发两次click的问题</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-08-02T14:31:15+08:00"
-              content="2017-08-02" >
-          08-02
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/08/02/javascript/ES6的坑/" itemprop="url">
-              
-                <span itemprop="name">ES6的坑</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-08-02T14:31:15+08:00"
-              content="2017-08-02" >
-          08-02
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
+        <h2 id="灵活的javascript"><a href="#灵活的javascript" class="headerlink" title="灵活的javascript"></a>灵活的javascript</h2><p>假如有如下的校验表单方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function checkName()&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function checkEmail()&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function checkPassword()&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样的声明可能会和别人写的冲突，我们可以把他们放在一个变量中，这样可以减少覆盖或者被覆盖的风险：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var CheckObject = &#123;</span><br><span class="line">    checkName: function()&#123;...&#125;,</span><br><span class="line">    checkEmail: function()&#123;...&#125;,</span><br><span class="line">    checkPassword: function()&#123;...&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>使用对象实现：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var CheckObject = function()&#123;&#125;;</span><br><span class="line">CheckObject.prototype.checkName = function()&#123;&#125;;</span><br><span class="line">CheckObject.prototype.checkEmail = function()&#123;&#125;;</span><br><span class="line">CheckObject.prototype.checkPassword = function()&#123;&#125;;</span><br></pre></td></tr></table></figure>
+<p>这样别人就可以基于你的对象进行扩展。这样创建实例对象时，创建出来的对象所拥有的方法就只有一个。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var a = new CheckObject();</span><br><span class="line">a.checkName();</span><br><span class="line">a.checkEmail();</span><br><span class="line">a.checkPassword();</span><br></pre></td></tr></table></figure>
+<p>这样有个问题，每次都要书写<code>a</code>对象，我们可以通过每个方法后面返回对象来支持链式调用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var CheckObject = function()&#123;&#125;;</span><br><span class="line">CheckObject.prototype = &#123;</span><br><span class="line">    checkName: function()&#123;</span><br><span class="line">        ...</span><br><span class="line">        return this;</span><br><span class="line">    &#125;,</span><br><span class="line">    ...</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>这样就可以通过<code>a.checkName().checkEmail().checkPassword()</code>来链式调用。</p>
+<h2 id="写的都是看到的"><a href="#写的都是看到的" class="headerlink" title="写的都是看到的"></a>写的都是看到的</h2><h3 id="创建一个类"><a href="#创建一个类" class="headerlink" title="创建一个类"></a>创建一个类</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var Book = function(id, bookname, price)&#123;</span><br><span class="line">    this.id = id;</span><br><span class="line">    this.bookname = bookname;</span><br><span class="line">    this.price = price;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Book.protype.display = function()&#123;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>使用类：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var book = new Book(10, &apos;javascript begin&apos;, 120);</span><br><span class="line">book.display();</span><br></pre></td></tr></table></figure>
+<h3 id="constructor-NaN"><a href="#constructor-NaN" class="headerlink" title="constructor"></a>constructor</h3><p>constructor是一个属性，当创建一个函数或者对象时都会为其创建一个原型对象prototype，在prototype对象中又会创建一个constructor属性，那么constructor属性指向的就是拥有整个原型对象的函数或对象。</p>
+<p><img src="../../images/prototype.png" alt="prototype"></p>
+<h3 id="私有属性、私有方法、特权方法等"><a href="#私有属性、私有方法、特权方法等" class="headerlink" title="私有属性、私有方法、特权方法等"></a>私有属性、私有方法、特权方法等</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">var Book = function(id, name, price)&#123;</span><br><span class="line">    // 私有属性</span><br><span class="line">    var num = 1;</span><br><span class="line">    // 私有方法</span><br><span class="line">    function checkId()&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    // 特权方法</span><br><span class="line">    this.getName = function()&#123;&#125;;</span><br><span class="line">    this.setName = function()&#123;&#125;;</span><br><span class="line">    // 对象公有属性</span><br><span class="line">    this.id = id;</span><br><span class="line">    this.name = name;</span><br><span class="line">    this.price = price;</span><br><span class="line">    // 对象公有方法</span><br><span class="line">    this.copy = function()&#123;&#125;;</span><br><span class="line">    // 构造器</span><br><span class="line">    this.sertName(name);</span><br><span class="line">    this.setPrice(price);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 静态公有属性</span><br><span class="line">Book.isChinese = true;</span><br><span class="line"></span><br><span class="line">Book.prototype = &#123;</span><br><span class="line">    // 公有属性</span><br><span class="line">    isJSBook: true</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>有时候我们经常将类的静态变量通过闭包来实现：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">var Book = (function()&#123;</span><br><span class="line">    var bookNum = 0;</span><br><span class="line">    function checkBook(name)&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return function(newId, newName, newPrice)&#123;</span><br><span class="line">        var name, price;</span><br><span class="line"></span><br><span class="line">        function checkID(id)&#123;&#125;</span><br><span class="line"></span><br><span class="line">        bookNum++;</span><br><span class="line">        if(bookNum &gt; 100)&#123;</span><br><span class="line">            throw new Error(&apos;Error&apos;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+<p>闭包是有权访问另一个函数作用域中变量的函数，即在一个函数内部创建另一个函数。</p>
+<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">function SuperClass()&#123;</span><br><span class="line">    this.superValue = true;</span><br><span class="line">&#125;</span><br><span class="line">SuperClass.prototype.getSuperValue = function()&#123;</span><br><span class="line">    return this.superValue;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">function SubClass()&#123;</span><br><span class="line">    this.subValue = false;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 继承父类</span><br><span class="line">SubClass.prototype = new SuperClass();</span><br><span class="line">SubClass.prototype.getSubValue = function()&#123;</span><br><span class="line">    return this.subValue;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>另一种方式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">function SuperClass()&#123;</span><br><span class="line">    this.superValue = true;</span><br><span class="line">&#125;</span><br><span class="line">SuperClass.prototype.getSuperValue = function()&#123;</span><br><span class="line">    return this.superValue;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">function SubClass()&#123;</span><br><span class="line">    // 继承父类</span><br><span class="line">    SuperClass.call(this);</span><br><span class="line">    this.subValue = false;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>组合继承:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">function SuperClass()&#123;</span><br><span class="line">    this.superValue = true;</span><br><span class="line">&#125;</span><br><span class="line">SuperClass.prototype.getSuperValue = function()&#123;</span><br><span class="line">    return this.superValue;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">function SubClass()&#123;</span><br><span class="line">    // 继承父类</span><br><span class="line">    SuperClass.call(this);</span><br><span class="line">    this.subValue = false;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">SubClass.prototype = new SuperClass();</span><br></pre></td></tr></table></figure>
+<p>洁净的继承者-原型式继承：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function inheritObject(o)&#123;</span><br><span class="line">    function F()&#123;&#125;</span><br><span class="line"></span><br><span class="line">    F.prototype = o;</span><br><span class="line">    return new F();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/08/02/react/React要手动绑定方法的原因/" itemprop="url">
-              
-                <span itemprop="name">React要手动绑定方法的原因</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-08-02T14:09:44+08:00"
-              content="2017-08-02" >
-          08-02
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/08/02/react/react获取父组件或子组件属性/" itemprop="url">
-              
-                <span itemprop="name">React获取父组件或子组件属性</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-08-02T14:09:44+08:00"
-              content="2017-08-02" >
-          08-02
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/08/02/webpack/迁移到webpack2/" itemprop="url">
-              
-                <span itemprop="name">未命名</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-08-02T11:44:45+08:00"
-              content="2017-08-02" >
-          08-02
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/08/02/webpack/webpack遇到的坑/" itemprop="url">
-              
-                <span itemprop="name">未命名</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-08-02T11:44:45+08:00"
-              content="2017-08-02" >
-          08-02
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/08/02/webpack/webpack学习06——怎么写loader/" itemprop="url">
-              
-                <span itemprop="name">未命名</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-08-02T11:44:45+08:00"
-              content="2017-08-02" >
-          08-02
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/javascript/" rel="tag"># javascript</a>
+          
+            <a href="/tags/设计模式/" rel="tag"># 设计模式</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/02/react/react学习总结/" rel="next" title="react学习总结">
+                <i class="fa fa-chevron-left"></i> react学习总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/16/javascript/逃离async、await地狱/" rel="prev" title="逃离async、await地狱">
+                逃离async、await地狱 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/2017/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/archives/2017/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/2017/page/3/">3</a><a class="extend next" rel="next" href="/archives/2017/page/3/"><i class="fa fa-angle-right"></i></a>
-  </nav>
+  </article>
 
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -712,6 +495,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -732,8 +519,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.jpg"
@@ -799,6 +595,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#灵活的javascript"><span class="nav-number">1.</span> <span class="nav-text">灵活的javascript</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#写的都是看到的"><span class="nav-number">2.</span> <span class="nav-text">写的都是看到的</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建一个类"><span class="nav-number">2.1.</span> <span class="nav-text">创建一个类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#constructor-NaN"><span class="nav-number">2.2.</span> <span class="nav-text">constructor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#私有属性、私有方法、特权方法等"><span class="nav-number">2.3.</span> <span class="nav-text">私有属性、私有方法、特权方法等</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#继承"><span class="nav-number">3.</span> <span class="nav-text">继承</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -919,11 +731,9 @@
 
 
   
-  
-    <script type="text/javascript" id="motion.page.archive">
-      $('.archive-year').velocity('transition.slideLeftIn');
-    </script>
-  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
 
 
   
