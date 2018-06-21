@@ -317,6 +317,309 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2018/06/21/javascript/javascript设计模式-面向对象/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liaoyf">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="liaoyf的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/21/javascript/javascript设计模式-面向对象/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-21T09:32:13+08:00">
+                2018-06-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/06/21/javascript/javascript设计模式-面向对象/" class="leancloud_visitors" data-flag-title="">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <hr>
+<p>title: javascript设计模式-面向对象</p>
+<p>date: 2018-04-06</p>
+<p>tags:</p>
+<pre><code>- javascript
+
+- 设计模式
+</code></pre><hr>
+<h2 id="灵活的javascript"><a href="#灵活的javascript" class="headerlink" title="灵活的javascript"></a>灵活的javascript</h2><p>假如有如下的校验表单方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function checkName()&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function checkEmail()&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function checkPassword()&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样的声明可能会和别人写的冲突，我们可以把他们放在一个变量中，这样可以减少覆盖或者被覆盖的风险：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var CheckObject = &#123;</span><br><span class="line">    checkName: function()&#123;...&#125;,</span><br><span class="line">    checkEmail: function()&#123;...&#125;,</span><br><span class="line">    checkPassword: function()&#123;...&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>使用对象实现：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var CheckObject = function()&#123;&#125;;</span><br><span class="line">CheckObject.prototype.checkName = function()&#123;&#125;;</span><br><span class="line">CheckObject.prototype.checkEmail = function()&#123;&#125;;</span><br><span class="line">CheckObject.prototype.checkPassword = function()&#123;&#125;;</span><br></pre></td></tr></table></figure>
+<p>这样别人就可以基于你的对象进行扩展。这样创建实例对象时，创建出来的对象所拥有的方法就只有一个。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var a = new CheckObject();</span><br><span class="line">a.checkName();</span><br><span class="line">a.checkEmail();</span><br><span class="line">a.checkPassword();</span><br></pre></td></tr></table></figure>
+<p>这样有个问题，每次都要书写<code>a</code>对象，我们可以通过每个方法后面返回对象来支持链式调用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var CheckObject = function()&#123;&#125;;</span><br><span class="line">CheckObject.prototype = &#123;</span><br><span class="line">    checkName: function()&#123;</span><br><span class="line">        ...</span><br><span class="line">        return this;</span><br><span class="line">    &#125;,</span><br><span class="line">    ...</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>这样就可以通过<code>a.checkName().checkEmail().checkPassword()</code>来链式调用。</p>
+<h2 id="写的都是看到的"><a href="#写的都是看到的" class="headerlink" title="写的都是看到的"></a>写的都是看到的</h2><h3 id="创建一个类"><a href="#创建一个类" class="headerlink" title="创建一个类"></a>创建一个类</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var Book = function(id, bookname, price)&#123;</span><br><span class="line">    this.id = id;</span><br><span class="line">    this.bookname = bookname;</span><br><span class="line">    this.price = price;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Book.protype.display = function()&#123;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>使用类：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var book = new Book(10, &apos;javascript begin&apos;, 120);</span><br><span class="line">book.display();</span><br></pre></td></tr></table></figure>
+<h3 id="constructor-NaN"><a href="#constructor-NaN" class="headerlink" title="constructor"></a>constructor</h3><p>constructor是一个属性，当创建一个函数或者对象时都会为其创建一个原型对象prototype，在prototype对象中又会创建一个constructor属性，那么constructor属性指向的就是拥有整个原型对象的函数或对象。</p>
+<p><img src="../../images/prototype.png" alt="prototype"></p>
+<h3 id="私有属性、私有方法、特权方法等"><a href="#私有属性、私有方法、特权方法等" class="headerlink" title="私有属性、私有方法、特权方法等"></a>私有属性、私有方法、特权方法等</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">var Book = function(id, name, price)&#123;</span><br><span class="line">    // 私有属性</span><br><span class="line">    var num = 1;</span><br><span class="line">    // 私有方法</span><br><span class="line">    function checkId()&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    // 特权方法</span><br><span class="line">    this.getName = function()&#123;&#125;;</span><br><span class="line">    this.setName = function()&#123;&#125;;</span><br><span class="line">    // 对象公有属性</span><br><span class="line">    this.id = id;</span><br><span class="line">    this.name = name;</span><br><span class="line">    this.price = price;</span><br><span class="line">    // 对象公有方法</span><br><span class="line">    this.copy = function()&#123;&#125;;</span><br><span class="line">    // 构造器</span><br><span class="line">    this.sertName(name);</span><br><span class="line">    this.setPrice(price);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 静态公有属性</span><br><span class="line">Book.isChinese = true;</span><br><span class="line"></span><br><span class="line">Book.prototype = &#123;</span><br><span class="line">    // 公有属性</span><br><span class="line">    isJSBook: true</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>有时候我们经常将类的静态变量通过闭包来实现：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">var Book = (function()&#123;</span><br><span class="line">    var bookNum = 0;</span><br><span class="line">    function checkBook(name)&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return function(newId, newName, newPrice)&#123;</span><br><span class="line">        var name, price;</span><br><span class="line"></span><br><span class="line">        function checkID(id)&#123;&#125;</span><br><span class="line"></span><br><span class="line">        bookNum++;</span><br><span class="line">        if(bookNum &gt; 100)&#123;</span><br><span class="line">            throw new Error(&apos;Error&apos;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+<p>闭包是有权访问另一个函数作用域中变量的函数，即在一个函数内部创建另一个函数。</p>
+<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">function SuperClass()&#123;</span><br><span class="line">    this.superValue = true;</span><br><span class="line">&#125;</span><br><span class="line">SuperClass.prototype.getSuperValue = function()&#123;</span><br><span class="line">    return this.superValue;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">function SubClass()&#123;</span><br><span class="line">    this.subValue = false;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 继承父类</span><br><span class="line">SubClass.prototype = new SuperClass();</span><br><span class="line">SubClass.prototype.getSubValue = function()&#123;</span><br><span class="line">    return this.subValue;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>另一种方式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">function SuperClass()&#123;</span><br><span class="line">    this.superValue = true;</span><br><span class="line">&#125;</span><br><span class="line">SuperClass.prototype.getSuperValue = function()&#123;</span><br><span class="line">    return this.superValue;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">function SubClass()&#123;</span><br><span class="line">    // 继承父类</span><br><span class="line">    SuperClass.call(this);</span><br><span class="line">    this.subValue = false;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>组合继承:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">function SuperClass()&#123;</span><br><span class="line">    this.superValue = true;</span><br><span class="line">&#125;</span><br><span class="line">SuperClass.prototype.getSuperValue = function()&#123;</span><br><span class="line">    return this.superValue;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">function SubClass()&#123;</span><br><span class="line">    // 继承父类</span><br><span class="line">    SuperClass.call(this);</span><br><span class="line">    this.subValue = false;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">SubClass.prototype = new SuperClass();</span><br></pre></td></tr></table></figure>
+<p>洁净的继承者-原型式继承：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function inheritObject(o)&#123;</span><br><span class="line">    function F()&#123;&#125;</span><br><span class="line"></span><br><span class="line">    F.prototype = o;</span><br><span class="line">    return new F();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2018/06/20/react-native/react-native版本0.55搭建/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liaoyf">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="liaoyf的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/20/react-native/react-native版本0.55搭建/" itemprop="url">react-native版本0.55搭建</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-20T00:00:00+08:00">
+                2018-06-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/06/20/react-native/react-native版本0.55搭建/" class="leancloud_visitors" data-flag-title="react-native版本0.55搭建">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="react-native-run-ios报错"><a href="#react-native-run-ios报错" class="headerlink" title="react-native run-ios报错"></a><code>react-native run-ios</code>报错</h2><p>报错如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">An error was encountered processing the command (domain=NSPOSIXErrorDomain, code=2):</span><br><span class="line">Failed to install the requested application</span><br><span class="line">An application bundle was not found at the provided path.</span><br><span class="line">Provide a valid path to the desired application bundle.</span><br><span class="line">Print: Entry, &quot;:CFBundleIdentifier&quot;, Does Not Exist</span><br><span class="line">/development/misc/react/AwesomeProject/node_modules/promise/lib/done.js:10</span><br><span class="line">      throw err;</span><br><span class="line">      ^</span><br><span class="line"></span><br><span class="line">Error: Command failed: /usr/libexec/PlistBuddy -c Print:CFBundleIdentifier build/Build/Products/Debug-iphonesimulator/AwesomeProject.app/Info.plist</span><br><span class="line">Print: Entry, &quot;:CFBundleIdentifier&quot;, Does Not Exist</span><br></pre></td></tr></table></figure>
+<p>泪崩。。。试用遍了网上大多数的解决方法均不行，浪费了好多宝贵时间，后来发现是xcode的版本问题，0.55版本要求xcode的版本要<code>&gt;= 9</code>。</p>
+<p>所以要更新xcode版本即可解决，记得更新完后重新<code>react-native init</code>项目。</p>
+<h2 id="结合antd-mobile使用"><a href="#结合antd-mobile使用" class="headerlink" title="结合antd-mobile使用"></a>结合<code>antd-mobile</code>使用</h2><p>安装antd-mobile-rn:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add antd-mobile-rn</span><br></pre></td></tr></table></figure>
+<p>使用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">import React, &#123; Component &#125; from &apos;react&apos;;</span><br><span class="line">import &#123; AppRegistry &#125; from &apos;react-native&apos;;</span><br><span class="line">import Button from &apos;antd-mobile-rn/lib/button&apos;;</span><br><span class="line"></span><br><span class="line">class HelloWorldApp extends Component &#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    return &lt;Button&gt;Start&lt;/Button&gt;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">AppRegistry.registerComponent(&apos;HelloWorldApp&apos;, () =&gt; HelloWorldApp);</span><br></pre></td></tr></table></figure>
+<p>更多坑请<a href="https://liaoyongfu.github.io/2017/12/21/react-native/react-native%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/">点击查看</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2018/06/19/javascript/jest测试工具学习（入门篇）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1537,298 +1840,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2018/03/27/react/React遇到的坑/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="liaoyf">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="liaoyf的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/27/react/React遇到的坑/" itemprop="url">React遇到的坑.md</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-27T20:55:47+08:00">
-                2018-03-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/03/27/react/React遇到的坑/" class="leancloud_visitors" data-flag-title="React遇到的坑.md">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="webpack编译后，代码中判断子组件名称功能失效。"><a href="#webpack编译后，代码中判断子组件名称功能失效。" class="headerlink" title="webpack编译后，代码中判断子组件名称功能失效。"></a>webpack编译后，代码中判断子组件名称功能失效。</h2><p>因为压缩后函数名称混淆，所以不能通过<code>typeof child.type === &#39;function&#39; &amp;&amp; child.type.name === &#39;FormControl&#39;</code>，而是应该通过<code>child.type === FormControl</code></p>
-<h2 id="当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。"><a href="#当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。" class="headerlink" title="当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。"></a>当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。</h2><p> 参考网址：<a href="https://stackoverflow.com/questions/25385578/nested-react-input-element-loses-focus-on-typing" target="_blank" rel="noopener">https://stackoverflow.com/questions/25385578/nested-react-input-element-loses-focus-on-typing</a></p>
-<h2 id="input值不会随着属性改变而改变"><a href="#input值不会随着属性改变而改变" class="headerlink" title="input值不会随着属性改变而改变"></a>input值不会随着属性改变而改变</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;Parent&gt;</span><br><span class="line">    &lt;Child inputVal=&#123;this.state.inputVal&#125;/&gt;</span><br><span class="line">&lt;/Parent&gt;</span><br></pre></td></tr></table></figure>
-<p>当<code>Child</code>组件的<code>value</code>为<code>null</code>后input的值不会更改。所以一般要判断是否存在<code>null</code>值：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;FormControl value=&#123;this.props.inputVal || &apos;&apos;&#125;/&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="UglifyJs编辑后有些arguments无效"><a href="#UglifyJs编辑后有些arguments无效" class="headerlink" title="UglifyJs编辑后有些arguments无效"></a>UglifyJs编辑后有些arguments无效</h2><p>升级uglifyjs-webpack-plugin和uglify-js：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&quot;uglify-js&quot;: &quot;^3.1.6&quot;,</span><br><span class="line">&quot;uglifyjs-webpack-plugin&quot;: &quot;^1.0.1&quot;,</span><br></pre></td></tr></table></figure>
-<h2 id="上传文件不能上传同一张图片"><a href="#上传文件不能上传同一张图片" class="headerlink" title="上传文件不能上传同一张图片"></a>上传文件不能上传同一张图片</h2><p>在上传完成后，设置<code>$(&#39;input&#39;).val(&#39;&#39;)</code>即可。</p>
-<h2 id="react中ref传递给页面组件时失效"><a href="#react中ref传递给页面组件时失效" class="headerlink" title="react中ref传递给页面组件时失效"></a>react中<code>ref</code>传递给页面组件时失效</h2><p>比如如下代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let Component = require(`./$&#123;item.componentName&#125;/index.js`).default;</span><br><span class="line">return &lt;Component ref=&#123;c =&gt; this.a = c&#125; key=&#123;i&#125; &#123;...props&#125; updateCzsj=&#123;updateCzsj&#125;/&gt;;</span><br></pre></td></tr></table></figure>
-<p>这时，使用<code>ref</code>是无效的，这时因为包装了<code>withRouter</code>导致ref失效，应该使用<code>wrappedComponentRef</code>，获取时使用如下语句获取：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">this.a</span><br></pre></td></tr></table></figure>
-<h2 id="在react组件中引入样式文件导致echarts宽度计算失败的bug"><a href="#在react组件中引入样式文件导致echarts宽度计算失败的bug" class="headerlink" title="在react组件中引入样式文件导致echarts宽度计算失败的bug"></a>在react组件中引入样式文件导致echarts宽度计算失败的bug</h2><p>比如下面：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;div className=&quot;box&quot;&gt;</span><br><span class="line">    &lt;div className=&quot;left&quot;&gt;</span><br><span class="line">        &lt;Echart ...&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;div className=&quot;right&quot;&gt;</span><br><span class="line">        &lt;Echart ...&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
-<p><code>box</code>中的<code>left</code>、<code>right</code>各占<code>50%</code>（样式写在样式文件内），这时候渲染echarts的时候，因为样式文件还未生效，所以Echarts读取的<code>left</code>和<code>right</code>宽度是<code>100%</code>的。</p>
-<p><strong><em>这个是为什么呢？</em></strong></p>
-<h2 id="修改react子组件"><a href="#修改react子组件" class="headerlink" title="修改react子组件"></a>修改react子组件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">return React.Children.map(this.props.children, child =&gt; &#123;</span><br><span class="line">    if (!child) return child;</span><br><span class="line">    if (typeof child.type === &apos;function&apos; &amp;&amp; child.type.name === &apos;Tr&apos;) &#123;</span><br><span class="line">        // 这边要修改children属性而不是直接返回它的children</span><br><span class="line">        return React.cloneElement(child, &#123;</span><br><span class="line">            children: (</span><br><span class="line">                React.Children.map(child.props.children, subChild =&gt; &#123;</span><br><span class="line">                    if (typeof subChild.type === &apos;function&apos; &amp;&amp; subChild.type.name === &apos;Label&apos;) &#123;</span><br><span class="line">                        return React.cloneElement(subChild, &#123;</span><br><span class="line">                            required: true</span><br><span class="line">                        &#125;)</span><br><span class="line">                    &#125; else if (typeof subChild.type === &apos;function&apos; &amp;&amp; subChild.type.name === &apos;Content&apos;) &#123;</span><br><span class="line">                        return React.cloneElement(subChild, &#123;</span><br><span class="line">                            children: [...subChild.props.children, textTip],</span><br><span class="line">                            validationState: validationState</span><br><span class="line">                        &#125;)</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;)</span><br><span class="line">            )</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        return child;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2018/02/08/git/git笔记/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="liaoyf">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="liaoyf的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/08/git/git笔记/" itemprop="url">git笔记</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-08T14:58:10+08:00">
-                2018-02-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/02/08/git/git笔记/" class="leancloud_visitors" data-flag-title="git笔记">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="版本回退"><a href="#版本回退" class="headerlink" title="版本回退"></a>版本回退</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git log [--pretty=oneline]</div></pre></td></tr></table></figure>
-<p>先查看下日志，查看各个版本的<code>mode id</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git reset --hard (HEAD^ | modeid)</div></pre></td></tr></table></figure>
-<p><code>HEAD</code>表示当前版本，<code>HEAD^</code>表示上一个版本，<code>HEAD~100</code>表示之前的100个版本，也可以通过<code>modeid</code>来回退版本</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git reflog</div></pre></td></tr></table></figure>
-<p>记录你的每一次命令，在我们回退后又后悔的时候可以查看各个版本的<code>mode id</code></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/02/08/git/git笔记/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1874,7 +1890,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-count">41</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
