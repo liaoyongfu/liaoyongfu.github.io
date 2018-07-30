@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="javascript," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="前端调试说简单也简单，说难也难，我们今天就以chrome浏览器为主，探究常用的调试技巧。">
+<meta name="keywords" content="javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端调试技巧">
+<meta property="og:url" content="https://liaoyongfu.github.io/2018/07/25/javascript/前端调试技巧/index.html">
+<meta property="og:site_name" content="liaoyf的博客">
+<meta property="og:description" content="前端调试说简单也简单，说难也难，我们今天就以chrome浏览器为主，探究常用的调试技巧。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://liaoyongfu.github.io/2018/07/25/images/0_L5q3tcszjc1IYXRT.png">
+<meta property="og:image" content="https://liaoyongfu.github.io/2018/07/25/images/0_X3vtX9amAT_Or_DO_.png">
+<meta property="og:image" content="https://liaoyongfu.github.io/2018/07/25/javascript/前端调试技巧/0_4JoZfbntg4bGr03y_.png">
+<meta property="og:image" content="https://liaoyongfu.github.io/2018/07/25/images/0_J1jrQOkNHzaDA_hu_.png">
+<meta property="og:image" content="https://liaoyongfu.github.io/2018/07/25/images/0_JrWFBmu3UKYy-nFj_.png">
+<meta property="og:image" content="https://liaoyongfu.github.io/2018/07/25/images/0_PJTUIgivpcMGnrRP_.png">
+<meta property="og:image" content="https://liaoyongfu.github.io/2018/07/25/images/0_2ZIYZ7miEXl7iUUC_.png">
+<meta property="og:updated_time" content="2018-07-30T08:28:20.271Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端调试技巧">
+<meta name="twitter:description" content="前端调试说简单也简单，说难也难，我们今天就以chrome浏览器为主，探究常用的调试技巧。">
+<meta name="twitter:image" content="https://liaoyongfu.github.io/2018/07/25/images/0_L5q3tcszjc1IYXRT.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://liaoyongfu.github.io/2018/07/25/javascript/前端调试技巧/"/>
+
+
+
+
+
+  <title>前端调试技巧 | liaoyf的博客</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?9de8fd632ad583c841a2a4fa8c3f5bc4";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">liaoyf的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一分耕耘一分收获</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2018/07/25/javascript/前端调试技巧/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liaoyf">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="liaoyf的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">前端调试技巧</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-25T20:32:56+08:00">
+                2018-07-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/07/25/javascript/前端调试技巧/" class="leancloud_visitors" data-flag-title="前端调试技巧">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>前端调试说简单也简单，说难也难，我们今天就以chrome浏览器为主，探究常用的调试技巧。</p>
+<a id="more"></a>
+<h2 id="控制台"><a href="#控制台" class="headerlink" title="控制台"></a>控制台</h2><p>这里主要以控制台API为主：</p>
+<h3 id="console-log-——-参考"><a href="#console-log-——-参考" class="headerlink" title="console.log —— 参考"></a>console.log —— 参考</h3><p>考虑如下代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var fruits = [&#123;one: 1&#125;, &#123;two: 2&#125;, &#123;three: 3&#125;];</span><br><span class="line">console.log(&apos;fruits before modification: &apos;, fruits);</span><br><span class="line">console.log(&apos;fruits before modification - stringed: &apos;, JSON.stringify(fruits));</span><br><span class="line">fruits.splice(1);</span><br><span class="line">console.log(&apos;fruits after modification: &apos;, fruits);</span><br><span class="line">console.log(&apos;fruits after modification - stringed : &apos;, JSON.stringify(fruits))</span><br></pre></td></tr></table></figure>
+<p><img src="../../images/0_L5q3tcszjc1IYXRT.png" alt="demo"></p>
+<p>调试对象或数组时，需要小心。我们看到fruits 修改之前包含3个对象，但它们不再存在。要在此特定时刻查看结果，请使用JSON.stringify以保持信息可见。当然，对于较大的对象，这可能不方便。别担心; 稍后，我们会找到更好的解决方案。</p>
+<h3 id="console-log-——-对象属性排序"><a href="#console-log-——-对象属性排序" class="headerlink" title="console.log —— 对象属性排序"></a>console.log —— 对象属性排序</h3><p>javascript中的object类型是一个无序属性的集合，你无法确定你的对象属性是否有序，浏览器以各种方式实现，很高兴在chrome如下打印是按正常顺序排序的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var letters = &#123;</span><br><span class="line">  z: 1,</span><br><span class="line">  t: 2,</span><br><span class="line">  k: 6</span><br><span class="line">&#125;;</span><br><span class="line">console.log(&apos;fruits&apos;, letters);</span><br><span class="line">console.log(&apos;fruits - stringify&apos;, JSON.stringify(letters));</span><br></pre></td></tr></table></figure>
+<h3 id="console-assert-expression-message"><a href="#console-assert-expression-message" class="headerlink" title="console.assert(expression, message)"></a>console.assert(expression, message)</h3><p>当表达式结果为<code>false</code>时会抛出错误信息<code>message</code>，但是assert不会中断代码的执行，它可能有助于调试冗长而棘手的代码，或者发现在多次迭代后显示自身的错误。</p>
+<h3 id="console-count-label"><a href="#console-count-label" class="headerlink" title="console.count(label)"></a>console.count(label)</h3><p>运行多少次：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">for(var i =0; i &lt;=3; i++)&#123;</span><br><span class="line">	console.count(i + &apos; Can I go with you?&apos;);</span><br><span class="line">	console.count(&apos;No, no this time&apos;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// out</span><br><span class="line">0 Can I go with you?: 1</span><br><span class="line">No, no this time: 1</span><br><span class="line">1 Can I go with you?: 1</span><br><span class="line">No, no this time: 2</span><br><span class="line">2 Can I go with you?: 1</span><br><span class="line">No, no this time: 3</span><br><span class="line">3 Can I go with you?: 1</span><br><span class="line">No, no this time: 4</span><br></pre></td></tr></table></figure>
+<h3 id="console-table"><a href="#console-table" class="headerlink" title="console.table()"></a>console.table()</h3><p>以表格形式展示对象或数组。虽然好看，但是懒得用……</p>
+<h3 id="console-group-console-groupEnd"><a href="#console-group-console-groupEnd" class="headerlink" title="console.group() / console.groupEnd()"></a>console.group() / console.groupEnd()</h3><p>分组显示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">console.log(&apos;iteration&apos;);</span><br><span class="line">for(var firstLevel = 0; firstLevel&lt;2; firstLevel++)&#123;</span><br><span class="line">  console.group(&apos;First level: &apos;, firstLevel);</span><br><span class="line">  for(var secondLevel = 0; secondLevel&lt;2; secondLevel++)&#123;</span><br><span class="line">	console.group(&apos;Second level: &apos;, secondLevel);</span><br><span class="line">	for(var thirdLevel = 0; thirdLevel&lt;2; thirdLevel++)&#123;</span><br><span class="line">  	console.log(&apos;This is third level number: &apos;, thirdLevel);</span><br><span class="line">	&#125;</span><br><span class="line">	console.groupEnd();</span><br><span class="line">  &#125;</span><br><span class="line">  console.groupEnd();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="../../images/0_X3vtX9amAT_Or_DO_.png" alt="demo"></p>
+<h3 id="console-trace"><a href="#console-trace" class="headerlink" title="console.trace()"></a>console.trace()</h3><p>将堆栈跟踪打印到Console中：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function func1() &#123;</span><br><span class="line">  func2();</span><br><span class="line">&#125;</span><br><span class="line">function func2() &#123;</span><br><span class="line">  func3();</span><br><span class="line">&#125;</span><br><span class="line">function func3() &#123;</span><br><span class="line">  console.trace();</span><br><span class="line">&#125;</span><br><span class="line">func1();</span><br></pre></td></tr></table></figure>
+<p><img src="0_4JoZfbntg4bGr03y_.png" alt="demo"></p>
+<h3 id="0-4"><a href="#0-4" class="headerlink" title="$_, $0 - $4"></a>$_, $0 - $4</h3><p><code>$_</code>返回最近的表达式的值。</p>
+<p><code>$0-$4</code>作为最近5个审查过的HTML元素的引用。</p>
+<p><img src="../../images/0_J1jrQOkNHzaDA_hu_.png" alt="demo"></p>
+<h3 id="getEventListeners-object"><a href="#getEventListeners-object" class="headerlink" title="getEventListeners(object)"></a>getEventListeners(object)</h3><p>返回在特定DOM元素上注册的事件侦听器。还有一种更方便的方法来设置侦听器，但我将在下一个教程中介绍它。</p>
+<p><img src="../../images/0_JrWFBmu3UKYy-nFj_.png" alt="demo"></p>
+<h3 id="monitorEvents-DOMElement-events-unmonitorEvents-DOMElement"><a href="#monitorEvents-DOMElement-events-unmonitorEvents-DOMElement" class="headerlink" title="monitorEvents(DOMElement, [events]) / unmonitorEvents(DOMElement)"></a>monitorEvents(DOMElement, [events]) / unmonitorEvents(DOMElement)</h3><p>如果触发了这些设置事件中的任何一个，我们将在控制台中获取信息。直到你取消监控事件。</p>
+<p><img src="../../images/0_PJTUIgivpcMGnrRP_.png" alt="demo"></p>
+<h3 id="复制数据"><a href="#复制数据" class="headerlink" title="复制数据"></a>复制数据</h3><p>在对象上单击鼠标右键并按复制，或将其存储为全局元素。然后，您可以在控制台中操作存储的元素。</p>
+<p>控制台中的任何内容也可以使用复制copy(‘object-name’)。</p>
+<h3 id="控制台样式化"><a href="#控制台样式化" class="headerlink" title="控制台样式化"></a>控制台样式化</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">console.log(&apos;%c Truly hackers code!&apos;, &apos;background: #222; color: #bada55&apos;);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>%d or %i — 整数</li>
+<li>%f — 浮点型</li>
+<li>%o — 可展开的DOM元素</li>
+<li>%O — 可展开的js对象</li>
+<li>%c — 样式化输出</li>
+</ul>
+<h2 id="HTML-CSS"><a href="#HTML-CSS" class="headerlink" title="HTML/CSS"></a>HTML/CSS</h2><p>进入Elements选项卡的两种基本方法：</p>
+<ul>
+<li><p>鼠标右键单击任意元素 &gt; 审查元素</p>
+</li>
+<li><p>使用<code>ctrl + shift + i</code>打开DevTools并选择Elements选项卡</p>
+</li>
+</ul>
+<h3 id="选项卡的左侧"><a href="#选项卡的左侧" class="headerlink" title="选项卡的左侧"></a>选项卡的左侧</h3><p><img src="../../images/0_2ZIYZ7miEXl7iUUC_.png" alt="demo"></p>
+<p>首先，可以检查DOM树元素。要展开，请单击左侧的三角形。</p>
+<p>通过单击鼠标右键，我们打开一些其他选项：</p>
+<ul>
+<li><code>Add attribute</code> - 向所选元素添加新属性</li>
+<li><code>Edit attribute</code> - 编辑属性，仅在单击属性时可用</li>
+<li><code>Edit as HTML</code> - 通过选择此属性，您可以编辑整个元素; 也可用于复制要在其他地方使用的元素的一部分</li>
+</ul>
+<p>复制：</p>
+<ul>
+<li><code>Copy outerHTML</code> - 复制标记，包括标记本身和子元素</li>
+<li><code>Copy selector</code> - CSS选择器的副本（div&gt; span&gt; #id）</li>
+<li><code>Copy XPath</code> - XPath的副本// * [@ id =“answer11208745-20”] / div / div [3 ] /时间，更多进一步阅读</li>
+<li><code>Cut element</code> - 剪切元素</li>
+<li><code>Copy element</code> - 复制元素和子元素</li>
+<li><code>Hide element</code> - 通过添加display：none;（cmd + H / ctrl + H）</li>
+<li><code>Delete element</code> - 删除元素和子元素暂时隐藏元素，可以通过cmd + z反转</li>
+<li><code>Expand all</code> - 展开所有节点</li>
+<li><code>Collapse all</code> - 折叠所有节点</li>
+<li><code>:active</code> - 将元素设置为活动状态* </li>
+<li><code>:hover</code> - 设置元素处于悬停状态* </li>
+<li><code>:focus</code> - 设置元素处于焦点状态* </li>
+<li><code>:visited</code> - 设置元素处于访问状态* </li>
+<li><code>Scroll into view</code> - 使您立即转到网页上的选定元素</li>
+</ul>
+<p>断点：</p>
+<ul>
+<li>subtree modification - 在子树修改上设置断点** （这个在一些需要点击时间才能显示的情况下，如果：react-select的下拉框，是非常有用的）</li>
+<li>attribute modification - 在属性修改时设置断点** </li>
+<li>node removal**</li>
+</ul>
+<p>捕获节点截图：</p>
+<p>在审查元素中，单击选中节点，按<code>ctrl + shift + p</code>打开命令菜单，输入<code>node screenshot</code>并选中<code>Captrue node screenshot</code>，即可对节点截图</p>
+<h2 id="参考网址"><a href="#参考网址" class="headerlink" title="参考网址"></a>参考网址</h2><ul>
+<li><a href="https://blog.pragmatists.com/how-to-debug-front-end-elements-d97da4cbc3ea" target="_blank" rel="noopener">https://blog.pragmatists.com/how-to-debug-front-end-elements-d97da4cbc3ea</a></li>
+<li><a href="https://developers.google.com/web/tools/chrome-devtools/" target="_blank" rel="noopener">https://developers.google.com/web/tools/chrome-devtools/</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/javascript/" rel="tag"># javascript</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/21/css/css-transforms-3d/" rel="next" title="css-transforms-3d">
+                <i class="fa fa-chevron-left"></i> css-transforms-3d
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="liaoyf" />
+          <p class="site-author-name" itemprop="name">liaoyf</p>
+           
+              <p class="site-description motion-element" itemprop="description">加油！</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">42</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/liaoyongfu" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#控制台"><span class="nav-number">1.</span> <span class="nav-text">控制台</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#console-log-——-参考"><span class="nav-number">1.1.</span> <span class="nav-text">console.log —— 参考</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#console-log-——-对象属性排序"><span class="nav-number">1.2.</span> <span class="nav-text">console.log —— 对象属性排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#console-assert-expression-message"><span class="nav-number">1.3.</span> <span class="nav-text">console.assert(expression, message)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#console-count-label"><span class="nav-number">1.4.</span> <span class="nav-text">console.count(label)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#console-table"><span class="nav-number">1.5.</span> <span class="nav-text">console.table()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#console-group-console-groupEnd"><span class="nav-number">1.6.</span> <span class="nav-text">console.group() / console.groupEnd()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#console-trace"><span class="nav-number">1.7.</span> <span class="nav-text">console.trace()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0-4"><span class="nav-number">1.8.</span> <span class="nav-text">$_, $0 - $4</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#getEventListeners-object"><span class="nav-number">1.9.</span> <span class="nav-text">getEventListeners(object)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#monitorEvents-DOMElement-events-unmonitorEvents-DOMElement"><span class="nav-number">1.10.</span> <span class="nav-text">monitorEvents(DOMElement, [events]) / unmonitorEvents(DOMElement)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复制数据"><span class="nav-number">1.11.</span> <span class="nav-text">复制数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#控制台样式化"><span class="nav-number">1.12.</span> <span class="nav-text">控制台样式化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML-CSS"><span class="nav-number">2.</span> <span class="nav-text">HTML/CSS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#选项卡的左侧"><span class="nav-number">2.1.</span> <span class="nav-text">选项卡的左侧</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考网址"><span class="nav-number">3.</span> <span class="nav-text">参考网址</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">liaoyf</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("9LYFM8dS64BIEzTbmQtY4rvd-gzGzoHsz", "5aTlsc7dgozMlgNQQ6Ob7VBR");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
