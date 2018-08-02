@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="npm," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="主要温习下npm知识，这篇不会很详细介绍npm的使用，而是记下认为有用的知识点。">
+<meta name="keywords" content="npm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2018年学习计划（npm篇）">
+<meta property="og:url" content="https://liaoyongfu.github.io/2018/08/02/javascript/2018年学习计划（npm篇）/index.html">
+<meta property="og:site_name" content="liaoyf的博客">
+<meta property="og:description" content="主要温习下npm知识，这篇不会很详细介绍npm的使用，而是记下认为有用的知识点。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://liaoyongfu.github.io/2018/08/02/images/semvertable.png">
+<meta property="og:updated_time" content="2018-08-02T06:59:06.094Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2018年学习计划（npm篇）">
+<meta name="twitter:description" content="主要温习下npm知识，这篇不会很详细介绍npm的使用，而是记下认为有用的知识点。">
+<meta name="twitter:image" content="https://liaoyongfu.github.io/2018/08/02/images/semvertable.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://liaoyongfu.github.io/2018/08/02/javascript/2018年学习计划（npm篇）/"/>
+
+
+
+
+
+  <title>2018年学习计划（npm篇） | liaoyf的博客</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?9de8fd632ad583c841a2a4fa8c3f5bc4";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">liaoyf的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一分耕耘一分收获</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2018/08/02/javascript/2018年学习计划（npm篇）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liaoyf">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="liaoyf的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">2018年学习计划（npm篇）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-02T00:00:00+08:00">
+                2018-08-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/08/02/javascript/2018年学习计划（npm篇）/" class="leancloud_visitors" data-flag-title="2018年学习计划（npm篇）">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>主要温习下npm知识，这篇不会很详细介绍npm的使用，而是记下认为有用的知识点。</p>
+<a id="more"></a>
+<h2 id="package-json"><a href="#package-json" class="headerlink" title="package.json"></a>package.json</h2><ul>
+<li><p>name: </p>
+<ul>
+<li>全部小写</li>
+<li>单个单词，不能有空格</li>
+<li>允许使用连字符和下划线</li>
+</ul>
+</li>
+<li>bugs: issue地址</li>
+</ul>
+<h2 id="指定依赖类型"><a href="#指定依赖类型" class="headerlink" title="指定依赖类型"></a>指定依赖类型</h2><p>安装到生成依赖：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install &lt;package_name&gt; [--save-prod]</span><br></pre></td></tr></table></figure>
+<p>安装到开发依赖：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install &lt;package_name&gt; --save-dev</span><br></pre></td></tr></table></figure>
+<h2 id="更新和检查更新"><a href="#更新和检查更新" class="headerlink" title="更新和检查更新"></a>更新和检查更新</h2><p>更新依赖：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm update</span><br></pre></td></tr></table></figure>
+<p>检查过期包：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm outdated</span><br></pre></td></tr></table></figure>
+<h2 id="更新包版本"><a href="#更新包版本" class="headerlink" title="更新包版本"></a>更新包版本</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm version &lt;update_type&gt;</span><br></pre></td></tr></table></figure>
+<p>update_type见下图。</p>
+<h2 id="语义化版本"><a href="#语义化版本" class="headerlink" title="语义化版本"></a>语义化版本</h2><p>当你的项目要分享给其他人时，你应该从<code>1.0.0</code>版本开始（尽管有些项目没有遵循这一点）。</p>
+<h3 id="针对开发者"><a href="#针对开发者" class="headerlink" title="针对开发者"></a>针对开发者</h3><p><img src="../../images/semvertable.png" alt="update_type"></p>
+<ul>
+<li>初次发布：1.0.0</li>
+<li>修复bug等其他修改：1.0.1</li>
+<li>增加不影响旧版本使用的功能时：1.1.0</li>
+<li>增加不向下兼容的功能时：2.0.0</li>
+</ul>
+<blockquote>
+<p>当升级版本号，下级的版本号要置为0</p>
+</blockquote>
+<h3 id="针对使用者"><a href="#针对使用者" class="headerlink" title="针对使用者"></a>针对使用者</h3><ul>
+<li>Patch releases: 1.0 or 1.0.x or ~1.0.4</li>
+<li>Minor releases: 1 or 1.x or ^1.0.4</li>
+<li>Major releases: * or x</li>
+</ul>
+<blockquote>
+<p>比如我们项目依赖jquery版本<code>^1.0.4</code>，当我们<code>npm update</code>时，将会升级次要版本（Minor）到最新。</p>
+</blockquote>
+<h2 id="标签（dist-tag）"><a href="#标签（dist-tag）" class="headerlink" title="标签（dist-tag）"></a>标签（dist-tag）</h2><p>标签是对语义化版本的补充，使用它们来组织和标记不同版本的包。除了比semver编号更具人性可读性之外，标签还允许发布者更有效地分发他们的包。</p>
+<h3 id="打标签"><a href="#打标签" class="headerlink" title="打标签"></a>打标签</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm dist-tag add &lt;pkg&gt;@&lt;version&gt; [&lt;tag&gt;]</span><br></pre></td></tr></table></figure>
+<h3 id="发布标签"><a href="#发布标签" class="headerlink" title="发布标签"></a>发布标签</h3><p>默认地，当我们运行<code>npm publish</code>时将会自动打上<code>latest</code>标签，如果你要发布其他名称的标签，比如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm publish --tag beta</span><br></pre></td></tr></table></figure>
+<h3 id="安装标签"><a href="#安装标签" class="headerlink" title="安装标签"></a>安装标签</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install somepkg@beta</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>因为dist-tag与semver共享相同的名称空间，所以请避免使用可能导致冲突的标记名称。最佳做法是避免使用以数字或字母“v”开头的标签。</p>
+</blockquote>
+<h2 id="理解包和模块之间的关系"><a href="#理解包和模块之间的关系" class="headerlink" title="理解包和模块之间的关系"></a>理解包和模块之间的关系</h2><p>Node.js和npm具有非常具体的包和模块定义，很容易混淆。我们将在这里讨论这些定义，使它们区别开来，并解释为什么某些默认文件以它们的方式命名。</p>
+<h3 id="概要"><a href="#概要" class="headerlink" title="概要"></a>概要</h3><ul>
+<li>一个<strong><em>包</em></strong>是指被<code>package.json</code>描述的文件或目录。</li>
+<li>一个<strong><em>模块</em></strong>是指可以被Node.js通过<code>require</code>加载的一些文件或目录。</li>
+</ul>
+<h3 id="什么是包"><a href="#什么是包" class="headerlink" title="什么是包"></a>什么是包</h3><ul>
+<li>a) 包含package.json文件描述的程序的文件夹。</li>
+<li>b) A gzipped tarball containing (a).</li>
+<li>c) A url that resolves to (b).</li>
+<li>d) A <name>@<version> that is published on the registry with (c).</version></name></li>
+<li>e) A <name>@<tag> that points to (d).</tag></name></li>
+<li>f) A <name> that has a latest tag satisfying (e).</name></li>
+<li>g) A git url that, when cloned, results in (a).</li>
+</ul>
+<h3 id="什么是模块"><a href="#什么是模块" class="headerlink" title="什么是模块"></a>什么是模块</h3><ul>
+<li>package.json包含main字段的文件的文件夹。</li>
+<li>包含index.js文件的文件夹。</li>
+<li>一个JavaScript文件。</li>
+</ul>
+<h3 id="大多数npm包都是模块"><a href="#大多数npm包都是模块" class="headerlink" title="大多数npm包都是模块"></a>大多数npm包都是模块</h3><p>通常，加载Node.js程序中使用的npm包require，使它们成为模块。但是，并不要求npm包是一个模块！</p>
+<p>某些包（例如cli包）仅包含可执行的命令行界面，并且不提供main在Node.js程序中使用的字段。这些包不是模块。</p>
+<p>几乎所有的npm软件包都包含很多模块（因为它们加载的每个文件 require()都是一个模块）。</p>
+<p>例如，如果您创建了一个文件，node_modules/foo.js然后有一个程序var f = require(‘foo.js’)，它将加载该模块。但是，foo.js在这种情况下，它不是“包”，因为它没有package.json。</p>
+<h2 id="npm-audit"><a href="#npm-audit" class="headerlink" title="npm audit"></a>npm audit</h2><p>npm audit 是 npm 6 新增的一个命令，可以允许开发人员分析复杂的代码并查明特定的漏洞。在刚刚发布的 npm 6.1.0 版本中，开发团队对该命令进行了完善。现在可使用 npm audit fix 子命令自动修复检测到的漏洞，而不必再自己进行跟踪和修复。</p>
+<p>新版本针对 npm audit 还包括以下改进：</p>
+<p>npm audit –json —— 新的子命令，用于以 JSON 格式打印报告</p>
+<p>npm install 摘要输出中将包含审计软件包的数量</p>
+<p><a href="mailto:npm-audit-report@1.2.1" target="_blank" rel="noopener">npm-audit-report@1.2.1</a> —— 对审计安装和输出格式进行了大幅调整，新格式更加紧凑，更符合 CLI 视觉风格，同时仍然提供所需的重要信息。</p>
+<p>此外，npm 6.1.0 同样扩展了 npm init 命令的功能，新增对 git 包的支持，即 npm init <name>。</name></p>
+<h2 id="故障排除"><a href="#故障排除" class="headerlink" title="故障排除"></a>故障排除</h2><ul>
+<li>更新node版本</li>
+<li>更新npm版本</li>
+<li>清除缓存：npm cache clean –force</li>
+<li>window上权限错误：<code>Error: ENOENT, stat &#39;C:\Users\&lt;user&gt;\AppData\Roaming\npm&#39;</code>： 解决方法是确保C:\Users\<user>\AppData\Roaming\npm存在并且可以使用普通用户帐户写入。</user></li>
+</ul>
+<blockquote>
+<p>参考网址：<a href="https://docs.npmjs.com/troubleshooting/common-errors" target="_blank" rel="noopener">https://docs.npmjs.com/troubleshooting/common-errors</a></p>
+</blockquote>
+<h2 id="npm配置"><a href="#npm配置" class="headerlink" title="npm配置"></a>npm配置</h2><p>npm从以下来源获取配置，按优先级顺序：</p>
+<h3 id="命令行"><a href="#命令行" class="headerlink" title="命令行"></a>命令行</h3><p><code>--foo bar</code>将会设置配置项foo值为bar，如果不传值，则设为true；<code>--flag1 --flag2 -- bar</code>中flag1和flag2将被设为true，bar将作为命令行参数。</p>
+<h3 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h3><p>以<code>npm_config_/NPM_CONFIG_</code>开头的环境变量将会设置为配置项，如：<code>npm_config_foo=bar</code>，将设置配置项foo的值为bar，没有給值的将设为true。</p>
+<h3 id="npmrc文件"><a href="#npmrc文件" class="headerlink" title="npmrc文件"></a>npmrc文件</h3><p>这四个相关文件是：</p>
+<ul>
+<li>当前项目下的配置文件（/path/to/my/project/.npmrc）</li>
+<li>当前用户下的配置文件（默认是$HOME/.npmrc）</li>
+<li>全局下的配置文件（默认是$PREFIX/etc/npmrc）</li>
+<li>npm的内置配置文件（/path/to/npm/npmrc）</li>
+</ul>
+<h3 id="查看npm当前配置"><a href="#查看npm当前配置" class="headerlink" title="查看npm当前配置"></a>查看npm当前配置</h3><p>运行<code>npm config ls -l</code>以查看npm内部的一组配置参数，如果未指定其他任何配置参数，则为默认值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br></pre></td><td class="code"><pre><span class="line">; cli configs</span><br><span class="line">long = true</span><br><span class="line">metrics-registry = &quot;http://192.168.0.62:7001/&quot;</span><br><span class="line">scope = &quot;&quot;</span><br><span class="line">user-agent = &quot;npm/5.5.1 node/v8.9.1 win32 x64&quot;</span><br><span class="line"></span><br><span class="line">; userconfig C:\Users\Administrator\.npmrc</span><br><span class="line">//192.168.0.62:7001/:always-auth = false</span><br><span class="line">//192.168.0.62:7001/:email = &quot;liaoyf@sunsharing.com.cn&quot;</span><br><span class="line">//192.168.0.62:7001/:username = &quot;liaoyf&quot;</span><br><span class="line">prefix = &quot;D:\\nodejs&quot;</span><br><span class="line">registry = &quot;http://192.168.0.62:7001/&quot;</span><br><span class="line">strict-ssl = false</span><br><span class="line"></span><br><span class="line">; globalconfig D:\nodejs\etc\npmrc</span><br><span class="line">msvs_version = &quot;2015&quot;</span><br><span class="line">python = &quot;C:\\Users\\Administrator\\.windows-build-tools\\python27\\python.exe&quot;</span><br><span class="line"></span><br><span class="line">; builtin config undefined</span><br><span class="line">; prefix = &quot;C:\\Users\\Administrator\\AppData\\Roaming\\npm&quot; (overridden)</span><br><span class="line"></span><br><span class="line">; default values</span><br><span class="line">access = null</span><br><span class="line">allow-same-version = false</span><br><span class="line">also = null</span><br><span class="line">always-auth = false</span><br><span class="line">auth-type = &quot;legacy&quot;</span><br><span class="line">bin-links = true</span><br><span class="line">browser = null</span><br><span class="line">ca = null</span><br><span class="line">cache = &quot;C:\\Users\\Administrator\\AppData\\Roaming\\npm-cache&quot;</span><br><span class="line">cache-lock-retries = 10</span><br><span class="line">cache-lock-stale = 60000</span><br><span class="line">cache-lock-wait = 10000</span><br><span class="line">cache-max = null</span><br><span class="line">cache-min = 10</span><br><span class="line">cafile = undefined</span><br><span class="line">cert = null</span><br><span class="line">cidr = null</span><br><span class="line">color = true</span><br><span class="line">commit-hooks = true</span><br><span class="line">depth = null</span><br><span class="line">description = true</span><br><span class="line">dev = false</span><br><span class="line">dry-run = false</span><br><span class="line">editor = &quot;notepad.exe&quot;</span><br><span class="line">engine-strict = false</span><br><span class="line">fetch-retries = 2</span><br><span class="line">fetch-retry-factor = 10</span><br><span class="line">fetch-retry-maxtimeout = 60000</span><br><span class="line">fetch-retry-mintimeout = 10000</span><br><span class="line">force = false</span><br><span class="line">git = &quot;git&quot;</span><br><span class="line">git-tag-version = true</span><br><span class="line">global = false</span><br><span class="line">global-style = false</span><br><span class="line">globalconfig = &quot;D:\\nodejs\\etc\\npmrc&quot;</span><br><span class="line">globalignorefile = &quot;D:\\nodejs\\etc\\npmignore&quot;</span><br><span class="line">group = 0</span><br><span class="line">ham-it-up = false</span><br><span class="line">heading = &quot;npm&quot;</span><br><span class="line">https-proxy = null</span><br><span class="line">if-present = false</span><br><span class="line">ignore-prepublish = false</span><br><span class="line">ignore-scripts = false</span><br><span class="line">init-author-email = &quot;&quot;</span><br><span class="line">init-author-name = &quot;&quot;</span><br><span class="line">init-author-url = &quot;&quot;</span><br><span class="line">init-license = &quot;ISC&quot;</span><br><span class="line">init-module = &quot;C:\\Users\\Administrator\\.npm-init.js&quot;</span><br><span class="line">init-version = &quot;1.0.0&quot;</span><br><span class="line">json = false</span><br><span class="line">key = null</span><br><span class="line">legacy-bundling = false</span><br><span class="line">link = false</span><br><span class="line">local-address = undefined</span><br><span class="line">loglevel = &quot;notice&quot;</span><br><span class="line">logs-max = 10</span><br><span class="line">; long = false (overridden)</span><br><span class="line">maxsockets = 50</span><br><span class="line">message = &quot;%s&quot;</span><br><span class="line">; metrics-registry = null (overridden)</span><br><span class="line">node-version = &quot;8.9.1&quot;</span><br><span class="line">offline = false</span><br><span class="line">onload-script = null</span><br><span class="line">only = null</span><br><span class="line">optional = true</span><br><span class="line">otp = 0</span><br><span class="line">package-lock = true</span><br><span class="line">parseable = false</span><br><span class="line">prefer-offline = false</span><br><span class="line">prefer-online = false</span><br><span class="line">prefix = &quot;D:\\nodejs&quot;</span><br><span class="line">production = false</span><br><span class="line">progress = true</span><br><span class="line">proxy = null</span><br><span class="line">read-only = false</span><br><span class="line">rebuild-bundle = true</span><br><span class="line">; registry = &quot;https://registry.npmjs.org/&quot; (overridden)</span><br><span class="line">rollback = true</span><br><span class="line">save = true</span><br><span class="line">save-bundle = false</span><br><span class="line">save-dev = false</span><br><span class="line">save-exact = false</span><br><span class="line">save-optional = false</span><br><span class="line">save-prefix = &quot;^&quot;</span><br><span class="line">save-prod = false</span><br><span class="line">scope = &quot;&quot;</span><br><span class="line">script-shell = null</span><br><span class="line">scripts-prepend-node-path = &quot;warn-only&quot;</span><br><span class="line">searchexclude = null</span><br><span class="line">searchlimit = 20</span><br><span class="line">searchopts = &quot;&quot;</span><br><span class="line">searchstaleness = 900</span><br><span class="line">send-metrics = false</span><br><span class="line">shell = &quot;C:\\Windows\\system32\\cmd.exe&quot;</span><br><span class="line">shrinkwrap = true</span><br><span class="line">sign-git-tag = false</span><br><span class="line">sso-poll-frequency = 500</span><br><span class="line">sso-type = &quot;oauth&quot;</span><br><span class="line">; strict-ssl = true (overridden)</span><br><span class="line">tag = &quot;latest&quot;</span><br><span class="line">tag-version-prefix = &quot;v&quot;</span><br><span class="line">timing = false</span><br><span class="line">tmp = &quot;C:\\Users\\ADMINI~1\\AppData\\Local\\Temp&quot;</span><br><span class="line">umask = 0</span><br><span class="line">unicode = false</span><br><span class="line">unsafe-perm = true</span><br><span class="line">usage = false</span><br><span class="line">user = 0</span><br><span class="line">; user-agent = &quot;npm/&#123;npm-version&#125; node/&#123;node-version&#125; &#123;platform&#125; &#123;arch&#125;&quot; (overridden)</span><br><span class="line">userconfig = &quot;C:\\Users\\Administrator\\.npmrc&quot;</span><br><span class="line">version = false</span><br><span class="line">versions = false</span><br><span class="line">viewer = &quot;browser&quot;</span><br></pre></td></tr></table></figure>
+<h3 id="查询简短语句"><a href="#查询简短语句" class="headerlink" title="查询简短语句"></a>查询简短语句</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">-v: --version</span><br><span class="line">-h, -?, --help, -H: --usage</span><br><span class="line">-s, --silent: --loglevel silent</span><br><span class="line">-q, --quiet: --loglevel warn</span><br><span class="line">-d: --loglevel info</span><br><span class="line">-dd, --verbose: --loglevel verbose</span><br><span class="line">-ddd: --loglevel silly</span><br><span class="line">-g: --global</span><br><span class="line">-C: --prefix</span><br><span class="line">-l: --long</span><br><span class="line">-m: --message</span><br><span class="line">-p, --porcelain: --parseable</span><br><span class="line">-reg: --registry</span><br><span class="line">-f: --force</span><br><span class="line">-desc: --description</span><br><span class="line">-S: --save</span><br><span class="line">-P: --save-prod</span><br><span class="line">-D: --save-dev</span><br><span class="line">-O: --save-optional</span><br><span class="line">-B: --save-bundle</span><br><span class="line">-E: --save-exact</span><br><span class="line">-y: --yes</span><br><span class="line">-n: --yes false</span><br><span class="line">ll and la commands: ls --long</span><br></pre></td></tr></table></figure>
+<h3 id="当前包的配置"><a href="#当前包的配置" class="headerlink" title="当前包的配置"></a>当前包的配置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// package.json</span><br><span class="line">&#123; &quot;name&quot; : &quot;foo&quot;</span><br><span class="line">, &quot;config&quot; : &#123; &quot;port&quot; : &quot;8080&quot; &#125;</span><br><span class="line">, &quot;scripts&quot; : &#123; &quot;start&quot; : &quot;node server.js&quot; &#125; &#125;</span><br><span class="line"></span><br><span class="line">// server.js</span><br><span class="line">http.createServer(...).listen(process.env.npm_package_config_port)</span><br><span class="line"></span><br><span class="line">// cmd</span><br><span class="line">npm config set foo:port 80</span><br></pre></td></tr></table></figure>
+<h3 id="测试您的-npmignore或files配置是否有效"><a href="#测试您的-npmignore或files配置是否有效" class="headerlink" title="测试您的.npmignore或files配置是否有效"></a>测试您的.npmignore或files配置是否有效</h3><p>如果要在发布时仔细检查包中是否只包含您想要的文件，可以在npm pack本地运行命令，这将在工作目录中生成tarball，就像发布时一样。</p>
+<h3 id="链接包"><a href="#链接包" class="headerlink" title="链接包"></a>链接包</h3><p>npm link旨在安装开发包并实时查看更改，而无需继续重新安装。（当然，您需要重新链接或npm rebuild -g更新已编译的包。）</p>
+<h3 id="发布之前：确保您的包安装和工作"><a href="#发布之前：确保您的包安装和工作" class="headerlink" title="发布之前：确保您的包安装和工作"></a>发布之前：确保您的包安装和工作</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install . -g</span><br></pre></td></tr></table></figure>
+<p>那会告诉你它正在发挥作用。如果您只想创建指向工作目录的符号链接包，请执行以下操作：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm link</span><br></pre></td></tr></table></figure>
+<p>要测试本地安装，请进入其他文件夹，然后执行以下操作：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd ../some-other-folder</span><br><span class="line">npm install ../my-package</span><br></pre></td></tr></table></figure>
+<p>将其本地安装到该位置的node_modules文件夹中。</p>
+<h3 id="创建用户帐户"><a href="#创建用户帐户" class="headerlink" title="创建用户帐户"></a>创建用户帐户</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm adduser</span><br></pre></td></tr></table></figure>
+<p>然后根据提示进行。</p>
+<h2 id="Semver语义化包的版本"><a href="#Semver语义化包的版本" class="headerlink" title="Semver语义化包的版本"></a>Semver语义化包的版本</h2><p>安装：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save semver</span><br></pre></td></tr></table></figure>
+<p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">const semver = require(&apos;semver&apos;)</span><br><span class="line"> </span><br><span class="line">semver.valid(&apos;1.2.3&apos;) // &apos;1.2.3&apos;</span><br><span class="line">semver.valid(&apos;a.b.c&apos;) // null</span><br><span class="line">semver.clean(&apos;  =v1.2.3   &apos;) // &apos;1.2.3&apos;</span><br><span class="line">semver.satisfies(&apos;1.2.3&apos;, &apos;1.x || &gt;=2.5.0 || 5.0.0 - 7.2.3&apos;) // true</span><br><span class="line">semver.gt(&apos;1.2.3&apos;, &apos;9.8.7&apos;) // false</span><br><span class="line">semver.lt(&apos;1.2.3&apos;, &apos;9.8.7&apos;) // true</span><br><span class="line">semver.valid(semver.coerce(&apos;v2&apos;)) // &apos;2.0.0&apos;</span><br><span class="line">semver.valid(semver.coerce(&apos;42.6.7.9.3-alpha&apos;)) // &apos;42.6.7&apos;</span><br></pre></td></tr></table></figure>
+<h2 id="package-lock-json"><a href="#package-lock-json" class="headerlink" title="package-lock.json"></a>package-lock.json</h2><p>package-lock.json为npm修改node_modules树或的任何操作自动生成package.json。它描述了生成的确切树，以便后续安装能够生成相同的树，而不管中间依赖性更新。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/npm/" rel="tag"># npm</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/01/rollup/Rollup（入门学习）/" rel="next" title="Rollup（入门学习）">
+                <i class="fa fa-chevron-left"></i> Rollup（入门学习）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="liaoyf" />
+          <p class="site-author-name" itemprop="name">liaoyf</p>
+           
+              <p class="site-description motion-element" itemprop="description">加油！</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">44</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/liaoyongfu" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#package-json"><span class="nav-number">1.</span> <span class="nav-text">package.json</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指定依赖类型"><span class="nav-number">2.</span> <span class="nav-text">指定依赖类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更新和检查更新"><span class="nav-number">3.</span> <span class="nav-text">更新和检查更新</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更新包版本"><span class="nav-number">4.</span> <span class="nav-text">更新包版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#语义化版本"><span class="nav-number">5.</span> <span class="nav-text">语义化版本</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#针对开发者"><span class="nav-number">5.1.</span> <span class="nav-text">针对开发者</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#针对使用者"><span class="nav-number">5.2.</span> <span class="nav-text">针对使用者</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标签（dist-tag）"><span class="nav-number">6.</span> <span class="nav-text">标签（dist-tag）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#打标签"><span class="nav-number">6.1.</span> <span class="nav-text">打标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#发布标签"><span class="nav-number">6.2.</span> <span class="nav-text">发布标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装标签"><span class="nav-number">6.3.</span> <span class="nav-text">安装标签</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#理解包和模块之间的关系"><span class="nav-number">7.</span> <span class="nav-text">理解包和模块之间的关系</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概要"><span class="nav-number">7.1.</span> <span class="nav-text">概要</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是包"><span class="nav-number">7.2.</span> <span class="nav-text">什么是包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是模块"><span class="nav-number">7.3.</span> <span class="nav-text">什么是模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#大多数npm包都是模块"><span class="nav-number">7.4.</span> <span class="nav-text">大多数npm包都是模块</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#npm-audit"><span class="nav-number">8.</span> <span class="nav-text">npm audit</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#故障排除"><span class="nav-number">9.</span> <span class="nav-text">故障排除</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#npm配置"><span class="nav-number">10.</span> <span class="nav-text">npm配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#命令行"><span class="nav-number">10.1.</span> <span class="nav-text">命令行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#环境变量"><span class="nav-number">10.2.</span> <span class="nav-text">环境变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#npmrc文件"><span class="nav-number">10.3.</span> <span class="nav-text">npmrc文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看npm当前配置"><span class="nav-number">10.4.</span> <span class="nav-text">查看npm当前配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查询简短语句"><span class="nav-number">10.5.</span> <span class="nav-text">查询简短语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#当前包的配置"><span class="nav-number">10.6.</span> <span class="nav-text">当前包的配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试您的-npmignore或files配置是否有效"><span class="nav-number">10.7.</span> <span class="nav-text">测试您的.npmignore或files配置是否有效</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#链接包"><span class="nav-number">10.8.</span> <span class="nav-text">链接包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#发布之前：确保您的包安装和工作"><span class="nav-number">10.9.</span> <span class="nav-text">发布之前：确保您的包安装和工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建用户帐户"><span class="nav-number">10.10.</span> <span class="nav-text">创建用户帐户</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Semver语义化包的版本"><span class="nav-number">11.</span> <span class="nav-text">Semver语义化包的版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#package-lock-json"><span class="nav-number">12.</span> <span class="nav-text">package-lock.json</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">liaoyf</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("9LYFM8dS64BIEzTbmQtY4rvd-gzGzoHsz", "5aTlsc7dgozMlgNQQ6Ob7VBR");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
