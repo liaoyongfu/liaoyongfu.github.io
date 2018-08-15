@@ -317,6 +317,463 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2018/05/29/webpack/webpack学习——loose模式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liaoyf">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="liaoyf的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/29/webpack/webpack学习——loose模式/" itemprop="url">webpack学习——loose模式</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-29T11:54:51+08:00">
+                2018-05-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/05/29/webpack/webpack学习——loose模式/" class="leancloud_visitors" data-flag-title="webpack学习——loose模式">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>简要介绍Babel6的loose mode。</p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>babel的松散模式将ES6代码转换为不遵循ES6语义的ES5代码。</p>
+<h2 id="两种模式"><a href="#两种模式" class="headerlink" title="两种模式"></a>两种模式</h2><p>babel中的许多插件有两种模式：</p>
+<ul>
+<li><p>正常模式尽可能地遵循ECMAScript 6的语义。</p>
+</li>
+<li><p>松散模式产生更简单的ES5代码。</p>
+</li>
+</ul>
+<p>通常，建议不要使用松散模式。优点和缺点是：</p>
+<ul>
+<li><p>优点：生成的代码可能更快，并且与旧引擎兼容。它也趋于更清洁，更“ES5式”。</p>
+</li>
+<li><p>缺点：当你从ES6转换到ES6时，你可能会遇到问题。这很少是值得冒险的。</p>
+</li>
+</ul>
+<h3 id="打开松散模式"><a href="#打开松散模式" class="headerlink" title="打开松散模式"></a>打开松散模式</h3><p><a href="https://github.com/bkonkle/babel-preset-es2015-loose" target="_blank" rel="noopener">es2015-loose</a>预设是标准ES6预设的松散版本。它提供了一个概观如何打开某个插件的松散模式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">  plugins: [</span><br><span class="line">    ···</span><br><span class="line">    [require(&quot;babel-plugin-transform-es2015-classes&quot;), &#123;loose: true&#125;],</span><br><span class="line">    require(&quot;babel-plugin-transform-es2015-object-super&quot;),</span><br><span class="line">    ···</span><br><span class="line">  ]</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="示例：松散模式和正常模式输出区别"><a href="#示例：松散模式和正常模式输出区别" class="headerlink" title="示例：松散模式和正常模式输出区别"></a>示例：松散模式和正常模式输出区别</h2><p>让我们看看模式的区别如何影响到以下代码的输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">class Point &#123;</span><br><span class="line">    constructor(x, y) &#123;</span><br><span class="line">        this.x = x;</span><br><span class="line">        this.y = y;</span><br><span class="line">    &#125;</span><br><span class="line">    toString() &#123;</span><br><span class="line">        return `($&#123;this.x&#125;, $&#123;this.y&#125;)`;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="正常模式"><a href="#正常模式" class="headerlink" title="正常模式"></a>正常模式</h3><p>正常模式下，类的属性通过<code>Object.defineProperty</code>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">&quot;use strict&quot;;</span><br><span class="line"></span><br><span class="line">var _createClass = (function () &#123;</span><br><span class="line">    function defineProperties(target, props) &#123;</span><br><span class="line">        for (var i = 0; i &lt; props.length; i++) &#123;</span><br><span class="line">            var descriptor = props[i];</span><br><span class="line">            descriptor.enumerable = descriptor.enumerable || false;</span><br><span class="line">            descriptor.configurable = true;</span><br><span class="line">            if (&quot;value&quot; in descriptor) descriptor.writable = true;</span><br><span class="line">            Object.defineProperty(target, descriptor.key, descriptor); // (A)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return function (Constructor, protoProps, staticProps) &#123;</span><br><span class="line">        if (protoProps) defineProperties(Constructor.prototype, protoProps);</span><br><span class="line">        if (staticProps) defineProperties(Constructor, staticProps);</span><br><span class="line">        return Constructor;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line">function _classCallCheck(instance, Constructor) &#123;</span><br><span class="line">    if (!(instance instanceof Constructor)) &#123;</span><br><span class="line">        throw new TypeError(&quot;Cannot call a class as a function&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var Point = (function () &#123;</span><br><span class="line">    function Point(x, y) &#123;</span><br><span class="line">        _classCallCheck(this, Point);</span><br><span class="line"></span><br><span class="line">        this.x = x;</span><br><span class="line">        this.y = y;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    _createClass(Point, [&#123;</span><br><span class="line">        key: &quot;toString&quot;,</span><br><span class="line">        value: function toString() &#123;</span><br><span class="line">            return &quot;(&quot; + this.x + &quot;, &quot; + this.y + &quot;)&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;]);</span><br><span class="line"></span><br><span class="line">    return Point;</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+<h3 id="松散模式"><a href="#松散模式" class="headerlink" title="松散模式"></a>松散模式</h3><p>松散模式下，通过正常添加方法方式，更像es5写法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&quot;use strict&quot;;</span><br><span class="line"></span><br><span class="line">function _classCallCheck(instance, Constructor) &#123; ··· &#125;</span><br><span class="line"></span><br><span class="line">var Point = (function () &#123;</span><br><span class="line">    function Point(x, y) &#123;</span><br><span class="line">        _classCallCheck(this, Point);</span><br><span class="line"></span><br><span class="line">        this.x = x;</span><br><span class="line">        this.y = y;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Point.prototype.toString = function toString() &#123; // (A)</span><br><span class="line">        return &quot;(&quot; + this.x + &quot;, &quot; + this.y + &quot;)&quot;;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    return Point;</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2018/05/02/javascript/前端知识学习概要/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liaoyf">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="liaoyf的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/02/javascript/前端知识学习概要/" itemprop="url">前端知识学习概要</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-02T16:58:29+08:00">
+                2018-05-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/05/02/javascript/前端知识学习概要/" class="leancloud_visitors" data-flag-title="前端知识学习概要">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="了解web浏览器"><a href="#了解web浏览器" class="headerlink" title="了解web浏览器"></a>了解web浏览器</h2><ul>
+<li><p><a href="http://dbaron.org/talks/2012-03-11-sxsw/master.xhtml" target="_blank" rel="noopener">浏览器如何渲染页面</a></p>
+</li>
+<li><p><a href="https://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/" target="_blank" rel="noopener">浏览器的工作原理</a></p>
+</li>
+<li><p><a href="https://hacks.mozilla.org/2017/05/quantum-up-close-what-is-a-browser-engine/" target="_blank" rel="noopener">What is a browser engine?</a></p>
+</li>
+<li><p><a href="https://gist.github.com/paulirish/5d52fb081b3570c81e3a" target="_blank" rel="noopener">What forces layout / reflow </a></p>
+</li>
+<li><p><a href="http://frontendbabel.info/articles/webpage-rendering-101/" target="_blank" rel="noopener">What Every Frontend Developer Should Know About Webpage Rendering</a></p>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2018/04/16/javascript/逃离async、await地狱/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liaoyf">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="liaoyf的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/16/javascript/逃离async、await地狱/" itemprop="url">逃离async、await地狱</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-16T09:32:49+08:00">
+                2018-04-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/04/16/javascript/逃离async、await地狱/" class="leancloud_visitors" data-flag-title="逃离async、await地狱">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>async/await已经帮助我们逃离了回调函数的地狱，但是我们又陷入了async/await地狱。</p>
+<h2 id="什么是async-await地狱"><a href="#什么是async-await地狱" class="headerlink" title="什么是async/await地狱"></a>什么是async/await地狱</h2><p>当我们处理异步函数调用时，我们习惯在调用前添加一个await,然后一行接着一行，以同步的形式书写，但是这样就造成了我们的语句并不依赖前一个，你必须等待前一个语句的完成。</p>
+<h2 id="一个async-await地狱的示例"><a href="#一个async-await地狱的示例" class="headerlink" title="一个async/await地狱的示例"></a>一个async/await地狱的示例</h2><p>考虑你要订购pizza和drink，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">(async () =&gt; &#123;</span><br><span class="line">  const pizzaData = await getPizzaData()    // async call</span><br><span class="line">  const drinkData = await getDrinkData()    // async call</span><br><span class="line">  const chosenPizza = choosePizza()    // sync call</span><br><span class="line">  const chosenDrink = chooseDrink()    // sync call</span><br><span class="line">  await addPizzaToCart(chosenPizza)    // async call</span><br><span class="line">  await addDrinkToCart(chosenDrink)    // async call</span><br><span class="line">  orderItems()    // async call</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
+<p>表面上看代码没有问题，但是这却不是有好的实践，因为它没有实现并发。</p>
+<h3 id="解释"><a href="#解释" class="headerlink" title="解释"></a>解释</h3><p>我们已经使用<a href="https://developer.mozilla.org/en-US/docs/Glossary/IIFE" target="_blank" rel="noopener">IIFE</a>包装我们的代码，订购流程如下：</p>
+<ul>
+<li><p>获取pizza列表.</p>
+</li>
+<li><p>获取drink列表.</p>
+</li>
+<li><p>从pizza列表中选择商品.</p>
+</li>
+<li><p>从drink中选择商品.</p>
+</li>
+<li><p>添加pizza到购物车.</p>
+</li>
+<li><p>添加drink到购物车.</p>
+</li>
+<li><p>下单.</p>
+</li>
+</ul>
+<h3 id="那么，这样有什么问题吗？"><a href="#那么，这样有什么问题吗？" class="headerlink" title="那么，这样有什么问题吗？"></a>那么，这样有什么问题吗？</h3><p>就像之前说的，每句都是依赖上一句，这里并没有并发：pizza和drink应该可以并发运行的，pizza相关的工作和drink相关的工作可以并行进行，但涉及相关工作的各个步骤需要按顺序（逐个）进行。</p>
+<h3 id="另一个糟糕的示例"><a href="#另一个糟糕的示例" class="headerlink" title="另一个糟糕的示例"></a>另一个糟糕的示例</h3><p>此JavaScript代码段将获取购物车中的商品并发出订购请求。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">async function orderItems() &#123;</span><br><span class="line">  const items = await getCartItems()    // async call</span><br><span class="line">  const noOfItems = items.length</span><br><span class="line">  for(var i = 0; i &lt; noOfItems; i++) &#123;</span><br><span class="line">    await sendRequest(items[i])    // async call</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>每次循环我们都必须等待<code>sendRequest</code>的完成，但是，我们并不需要等待。我们希望尽快发送所有请求，然后我们可以等待所有请求完成。</p>
+<h2 id="怎么逃离async-await地狱"><a href="#怎么逃离async-await地狱" class="headerlink" title="怎么逃离async/await地狱"></a>怎么逃离async/await地狱</h2><h3 id="第一步：查找依赖于其他语句执行的语句"><a href="#第一步：查找依赖于其他语句执行的语句" class="headerlink" title="第一步：查找依赖于其他语句执行的语句"></a>第一步：查找依赖于其他语句执行的语句</h3><p>在我们的第一个例子中，我们选择了一个披萨和一杯饮料。我们的结论是，在选择比萨饼之前，我们需要有比萨饼的名单。在将比萨加入购物车之前，我们需要选择比萨饼。所以我们可以说这三个步骤取决于对方。在完成前一件事之前我们不能做一件事。但如果我们更广泛地来看，我们发现选择比萨不依赖于选择饮料，所以我们可以并行选择它们。这是机器可以做得比我们更好的一件事。因此我们发现了一些依赖于其他语句执行的语句，有些则没有。</p>
+<h3 id="第二步：把相关的操作独立进行封装"><a href="#第二步：把相关的操作独立进行封装" class="headerlink" title="第二步：把相关的操作独立进行封装"></a>第二步：把相关的操作独立进行封装</h3><p>我们可以封装<code>selectPizza()</code>和<code>selectDrink()</code>。</p>
+<h3 id="第三步：并发运行相关操作函数"><a href="#第三步：并发运行相关操作函数" class="headerlink" title="第三步：并发运行相关操作函数"></a>第三步：并发运行相关操作函数</h3><p>然后我们利用事件循环同时运行这些异步非阻塞函数。这样做的两种常见模式是return Promise和Promise.all方法。</p>
+<h2 id="让我们来解决示例中的问题"><a href="#让我们来解决示例中的问题" class="headerlink" title="让我们来解决示例中的问题"></a>让我们来解决示例中的问题</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">async function selectPizza() &#123;</span><br><span class="line">  const pizzaData = await getPizzaData()    // async call</span><br><span class="line">  const chosenPizza = choosePizza()    // sync call</span><br><span class="line">  await addPizzaToCart(chosenPizza)    // async call</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">async function selectDrink() &#123;</span><br><span class="line">  const drinkData = await getDrinkData()    // async call</span><br><span class="line">  const chosenDrink = chooseDrink()    // sync call</span><br><span class="line">  await addDrinkToCart(chosenDrink)    // async call</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">(async () =&gt; &#123;</span><br><span class="line">  const pizzaPromise = selectPizza()</span><br><span class="line">  const drinkPromise = selectDrink()</span><br><span class="line">  await pizzaPromise</span><br><span class="line">  await drinkPromise</span><br><span class="line">  orderItems()    // async call</span><br><span class="line">&#125;)()</span><br><span class="line"></span><br><span class="line">// Although I prefer it this way </span><br><span class="line"></span><br><span class="line">(async () =&gt; &#123;</span><br><span class="line">  Promise.all([selectPizza(), selectDrink()]).then(orderItems)   // async call</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
+<p>针对循环中<code>sendRequest</code>的等待问题，我们使用Promise.all来并发请求：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">async function orderItems() &#123;</span><br><span class="line">  const items = await getCartItems()    // async call</span><br><span class="line">  const noOfItems = items.length</span><br><span class="line">  const promises = []</span><br><span class="line">  for(var i = 0; i &lt; noOfItems; i++) &#123;</span><br><span class="line">    const orderPromise = sendRequest(items[i])    // async call</span><br><span class="line">    promises.push(orderPromise)    // sync call</span><br><span class="line">  &#125;</span><br><span class="line">  await Promise.all(promises)    // async call</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2018/04/06/javascript/javascript设计模式-面向对象/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1327,473 +1784,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2017/12/13/nodejs/使用node.js发送邮件/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="liaoyf">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="liaoyf的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/12/13/nodejs/使用node.js发送邮件/" itemprop="url">使用node.js发送邮件</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-13T15:20:57+08:00">
-                2017-12-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/12/13/nodejs/使用node.js发送邮件/" class="leancloud_visitors" data-flag-title="使用node.js发送邮件">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="使用nodemailler发送邮件"><a href="#使用nodemailler发送邮件" class="headerlink" title="使用nodemailler发送邮件"></a>使用nodemailler发送邮件</h2><p>这里我们以使用qq邮箱发送邮件为例。</p>
-<ol>
-<li>安装nodemailer</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install --save nodemailer</div></pre></td></tr></table></figure>
-<ol>
-<li>使用</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">var nodemailer = require(&apos;nodemailer&apos;);</div><div class="line"></div><div class="line">var mailTransport = nodemailer.createTransport(&#123;</div><div class="line">    host: &apos;smtp.qq.com&apos;,  //服务器地址</div><div class="line">    port: 465,  //端口</div><div class="line">    auth: &#123;</div><div class="line">      user: &apos;xxx@qq.com&apos;,</div><div class="line">      pass: &apos;授权码&apos;  //注：这里需要是授权码（在设置-&gt;账户-&gt;POP3/IMAP/SMTP/Exchange/CardDAV/CalDAV服务下“生成授权码”），而不是登录密码</div><div class="line">    &#125;</div><div class="line">  &#125;);</div><div class="line">  mailTransport.sendMail(&#123;</div><div class="line">    from: &apos;&quot;your name&quot; &lt;xxx@qq.com&gt;&apos;,</div><div class="line">    to: &apos;xxx@gmail.com&apos;,  //收件人地址</div><div class="line">    subject: &apos;测试邮件111&apos;,</div><div class="line">    text: &apos;测试内容哦11111！！！！！！！&apos;</div><div class="line">  &#125;, function(err)&#123;</div><div class="line">    if(err) console.error(&apos;发送失败:&apos;, err);</div><div class="line">    console.info(&apos;发送成功！&apos;);</div><div class="line">  &#125;)</div></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2017/11/01/react/React项目问题总结/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="liaoyf">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="liaoyf的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/01/react/React项目问题总结/" itemprop="url">React项目问题总结</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-01T10:17:10+08:00">
-                2017-11-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/11/01/react/React项目问题总结/" class="leancloud_visitors" data-flag-title="React项目问题总结">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="目前出现的问题"><a href="#目前出现的问题" class="headerlink" title="目前出现的问题"></a>目前出现的问题</h2><ol>
-<li><p>需要定义很多初始化state变量？</p>
-</li>
-<li><p>表单编辑后点取消，重新从后台拿数据如果是null的时候它不会自动更新state？</p>
-</li>
-<li><p>组件复用：未编写PropTypes，如果写了有时候返回的字段是null的，怎么写PropTypes？</p>
-</li>
-<li><p>组件复用：如果组件自己处理内部逻辑，那外面的组件如何拿到组件里面的数据？</p>
-</li>
-<li><p>页面需要记住类似查询状态，如何简单有效的实现？使用高阶组件实现？如何做到不冲突？</p>
-</li>
-<li><p>提示框太难用了？</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> *  * Created by liaoyf on 2017/11/1 0001.</div><div class="line"> */</div><div class="line">import React from &apos;react&apos;;</div><div class="line">import &apos;bootstrap&apos;;</div><div class="line">import &#123; render &#125; from &apos;react-dom&apos;;</div><div class="line">import v4 from &apos;uuid&apos;;</div><div class="line"></div><div class="line">class ModalTool&#123;</div><div class="line">    constructor(options)&#123;</div><div class="line">        this.options = &#123;</div><div class="line">            okText: &apos;确定&apos;,</div><div class="line">            cancelText: &apos;取消&apos;,</div><div class="line">            title: &apos;提示框&apos;,</div><div class="line">            okAutoClose: true,</div><div class="line">            cancelAutoClose: true,</div><div class="line">            bsStyle: null,</div><div class="line">            bsSize: &apos;&apos;,</div><div class="line">            subContent: &apos;&apos;,</div><div class="line">            customContent: &apos;&apos;,</div><div class="line">            closeBtn: true,</div><div class="line">            backdrop: true,</div><div class="line">            ...options</div><div class="line">        &#125;;</div><div class="line"></div><div class="line">        this.init();</div><div class="line">    &#125;</div><div class="line">    bindEvent()&#123;</div><div class="line">        let &#123; onOk, onCancel &#125; = this.options;</div><div class="line"></div><div class="line">        $(&apos;#&apos; + this.modalId + &apos; .btn-ok&apos;).unbind(&apos;click&apos;).on(&apos;click&apos;, function()&#123;</div><div class="line">            onOk &amp;&amp; onOk();</div><div class="line">        &#125;);</div><div class="line">        $(&apos;#&apos; + this.modalId + &apos; .btn-cancel&apos;).unbind(&apos;click&apos;).on(&apos;click&apos;, function()&#123;</div><div class="line">            onCancel &amp;&amp; onCancel();</div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line">    closeModal()&#123;</div><div class="line">        $(&apos;#&apos; + this.modalId ).modal(&apos;hide&apos;);</div><div class="line">    &#125;</div><div class="line">    init()&#123;</div><div class="line">        // $(&apos;.modalBox&apos;).remove();</div><div class="line">        $(&apos;.modal-backdrop&apos;).remove();</div><div class="line">        let &#123; title, content, okText, closeBtn, cancelText, okAutoClose, cancelAutoClose, bsStyle, bsSize, subContent, customContent, backdrop &#125; = this.options;</div><div class="line">        if(bsStyle)&#123;</div><div class="line">            content = (</div><div class="line">                &lt;dl className=&#123;`modal-state-show $&#123;bsStyle === &apos;warning&apos; ? &apos;state-error&apos; : bsStyle === &apos;success&apos; ? &apos;state-success&apos; : &apos;&apos;&#125;`&#125;&gt;</div><div class="line">                    &lt;dt className=&quot;state-ico&quot;&gt;&lt;i className=&quot;fa&quot;&gt;&lt;/i&gt;&lt;/dt&gt;</div><div class="line">                    &lt;dd className=&quot;state-text&quot;&gt;&#123;content&#125;&lt;/dd&gt;</div><div class="line">                    &#123;subContent &amp;&amp; &lt;dd className=&quot;state-info&quot;&gt;&#123;subContent&#125;&lt;/dd&gt;&#125;</div><div class="line">                    &#123;customContent &amp;&amp; &lt;dd&gt;&lt;p&gt;&#123;customContent&#125;&lt;/p&gt;&lt;/dd&gt;&#125;</div><div class="line">                &lt;/dl&gt;</div><div class="line">            );</div><div class="line">        &#125;else if(!React.isValidElement(content))&#123;</div><div class="line">            content = (</div><div class="line">                &lt;div className=&quot;text-vertical-wrap&quot;&gt;</div><div class="line">                    &lt;p className=&quot;text-center text-vertical&quot;&gt;&#123;content&#125;&lt;/p&gt;</div><div class="line">                &lt;/div&gt;</div><div class="line">            );</div><div class="line">        &#125;</div><div class="line">        let modalId = `modal_$&#123;v4.v4()&#125;`;</div><div class="line">        let html =</div><div class="line">            `</div><div class="line">&lt;div class=&quot;modal fade modalBox&quot; id=&quot;$&#123;modalId&#125;&quot; tabIndex=&quot;-1&quot; role=&quot;dialog&quot; aria-labelledby=&quot;myModalLabel&quot;&gt;</div><div class="line">    &lt;div class=&quot;$&#123;&apos;modal-dialog &apos; + (bsSize ? &apos;modal-&apos; + bsSize : (bsStyle ? &apos;modal-sm&apos; : &apos;&apos;))&#125;&quot; role=&quot;document&quot;&gt;</div><div class="line">        &lt;div class=&quot;modal-content&quot;&gt;</div><div class="line">            &lt;div class=&quot;modal-header&quot;&gt;</div><div class="line">                $&#123;closeBtn ? `&lt;button type=&quot;button&quot; class=&quot;close&quot; data-dismiss=&quot;modal&quot; aria-label=&quot;Close&quot;&gt;&lt;span aria-hidden=&quot;true&quot;&gt;&amp;times;&lt;/span&gt;&lt;/button&gt;` : &apos;&apos;&#125;</div><div class="line">                &lt;h4 class=&quot;modal-title&quot; id=&quot;myModalLabel&quot;&gt;$&#123;title&#125;&lt;/h4&gt;</div><div class="line">            &lt;/div&gt;</div><div class="line">            &lt;div class=&quot;body-inset modal-body&quot; id=&quot;modalBoxBody&quot;&gt;</div><div class="line">                </div><div class="line">            &lt;/div&gt;</div><div class="line">            &lt;div class=&quot;modal-footer&quot;&gt;</div><div class="line">                $&#123;okText ? `&lt;button type=&quot;button&quot; class=&quot;btn btn-primary btn-ok&quot; $&#123;okAutoClose &amp;&amp; `data-dismiss=&quot;modal&quot;`&#125;&gt;$&#123;okText&#125;&lt;/button&gt;` : &apos;&apos;&#125;</div><div class="line">                $&#123;cancelText ? `&lt;button type=&quot;button&quot; class=&quot;btn btn-default btn-cancel&quot; $&#123;cancelAutoClose &amp;&amp; `data-dismiss=&quot;modal&quot;`&#125;&gt;$&#123;cancelText&#125;&lt;/button&gt;` : &apos;&apos;&#125;</div><div class="line">            &lt;/div&gt;</div><div class="line">        &lt;/div&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">&lt;/div&gt;</div><div class="line">            `;</div><div class="line">        $(&apos;body&apos;).append(html);</div><div class="line">        this.modalId = modalId;</div><div class="line">        render(</div><div class="line">            content,</div><div class="line">            $(`#$&#123;modalId&#125; #modalBoxBody`)[0],</div><div class="line">            () =&gt; &#123;</div><div class="line">                $(`#$&#123;modalId&#125;`).modal(&#123;</div><div class="line">                    backdrop: backdrop</div><div class="line">                &#125;);</div><div class="line">                this.bindEvent();</div><div class="line">            &#125;</div><div class="line">        );</div><div class="line">        return $(`#$&#123;modalId&#125;`);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">export default ModalTool;</div></pre></td></tr></table></figure>
-</li>
-<li><p>需要封装常用的对象或数组操作工具方法</p>
-</li>
-<li><p>表单使用体验太差：需要编写一大推标签；需要手动编写value和onChange；表单校验需要改善</p>
-</li>
-<li><p>npm 包依赖如何做到同步更新？npm安装依赖包经常报错？npm打包太慢，启动太慢？打包后的文件不会自动加入svn版本控制？</p>
-<p> npm安装依赖包报：<br> <code>npm ERR! unlink</code>的错误，解决方法：</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">rm (-rf) node_modules</div><div class="line">rm package-lock.json yarn.lock</div><div class="line">npm cache clear --force</div><div class="line">npm i -g npm # 5.4.1, as for now</div><div class="line">npm install --no-optional</div></pre></td></tr></table></figure>
-<p> 最好打包时自动运行<code>npm update</code>操作：</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">//package.json</div><div class="line">&quot;script&quot;: &#123;</div><div class="line">    &quot;updater&quot;: &quot;npm update&quot;,</div><div class="line">    &quot;build&quot;: &quot;npm run updater&amp;&amp;webpack --env=prod --progress --profile --colors&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>如何做到公共thunk的合并？</p>
-</li>
-<li><p>front编译如何做到自动化？</p>
-</li>
-<li><p>process.env.NODE_ENV在编译后变成<code>I.env.NODE_ENV</code>？</p>
-</li>
-<li><p>如何require或import远程地址的文件？</p>
-</li>
-<li><p>脚手架运行时最好能判断当前的版本是不是最新的，如果不是就报错，这样能确保安装最新的脚手架？</p>
-</li>
-<li><p>热加载更新？</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">import Container from &apos;./router&apos;;</div><div class="line"></div><div class="line">const render = (Component) =&gt; &#123;</div><div class="line">    ReactDOM.render(</div><div class="line">        &lt;Component/&gt;,</div><div class="line">        document.getElementById(&apos;root&apos;)</div><div class="line">    )   </div><div class="line">&#125;;</div><div class="line"></div><div class="line">render(Container);</div><div class="line"></div><div class="line">if (module.hot) &#123;</div><div class="line">    module.hot.accept(&apos;./router.js&apos;, () =&gt; &#123;</div><div class="line">        const NextRootContainer = require(&apos;./router&apos;).default;</div><div class="line">        render(NextRootContainer);</div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>js生成sourcemap方便调试？</p>
-</li>
-<li><p>组件间的样式在打包后会被相互影响？</p>
-<p>使用<code>css module</code></p>
-</li>
-<li><p>如何解决ulynlist问题：basePath问题（貌似可以自己引）？</p>
-</li>
-<li><p>打包时如果output.publicPath为空字符串时会找不到字体图标的bug？</p>
-<p>配置：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    test: /\.scss$/,</div><div class="line">    use: ExtractTextPlugin.extract(&#123;</div><div class="line">        //主要是加这一句</div><div class="line">        publicPath: &apos;../&apos;,</div><div class="line">        fallback: &apos;style-loader&apos;,</div><div class="line">        use: [</div><div class="line">            &#123;</div><div class="line">                loader: &apos;css-loader?sourceMap&apos;</div><div class="line">            &#125;,</div><div class="line">            &#123;</div><div class="line">                loader: &apos;resolve-url-loader&apos;</div><div class="line">            &#125;,</div><div class="line">            &#123;</div><div class="line">                loader: &apos;sass-loader?sourceMap&apos;</div><div class="line">            &#125;</div><div class="line">        ]</div><div class="line">    &#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>样式想要抽成公用的，有两种方法：</p>
-<p>如果只想在入口引用一个，则必须写到entry中；<br>如果在多个文件中引用？</p>
-</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2017/10/31/react/React入门——简介/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="liaoyf">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="liaoyf的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/31/react/React入门——简介/" itemprop="url">React入门——简介</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-31T15:47:13+08:00">
-                2017-10-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/10/31/react/React入门——简介/" class="leancloud_visitors" data-flag-title="React入门——简介">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>一、什么是React？</p>
-<p>React是Facebook开源的一个用于构建用户界面的Javascript库，他不是一个框架，而是专注于MVC架构中的V，即视图。这使得React很容易和开发者已有的开发栈进行融合。React顺应了Web开发组件化的趋势。应用React时，你总是应该从UI出发抽象出不同的组件，然后像搭积木一样把它们拼装起来。</p>
-<p>二、React能做什么？</p>
-<p><img src="0006.png" alt="22"></p>
-<p>补充：桌面应用程序（NW.js和Electron.js）</p>
-<p>二、React全家桶 </p>
-<ul>
-<li>自身库： react.js、react-dom.js、add-ons</li>
-<li>语法：ES5/ES6、JSX</li>
-<li>构建工具：Fis3、webpack、babel</li>
-<li>状态管理：Redux、Flux、react-redux、Immutable</li>
-<li>路由：react-router、react-redux-router</li>
-<li>日志：redux-logger</li>
-<li>中间件：redux-thunk</li>
-<li>主题：react-bootstrap</li>
-<li>表单：redux-form</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1844,7 +1834,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">44</span>
+                <span class="site-state-item-count">47</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1857,7 +1847,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-count">20</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
