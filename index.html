@@ -317,6 +317,210 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2018/09/04/javascript/2018年学习计划（babel篇）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liaoyf">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="liaoyf的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/04/javascript/2018年学习计划（babel篇）/" itemprop="url">2018年学习计划（babel篇）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-04T00:00:00+08:00">
+                2018-09-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/09/04/javascript/2018年学习计划（babel篇）/" class="leancloud_visitors" data-flag-title="2018年学习计划（babel篇）">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>本篇基于最新版的babel@7。详细请查看官网：<a href="https://babeljs.io/docs/en" target="_blank" rel="noopener">https://babeljs.io/docs/en</a></p>
+<h2 id="使用指南"><a href="#使用指南" class="headerlink" title="使用指南"></a>使用指南</h2><ol>
+<li>安装必须的包：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yarn add @babel/core @babel/cli @babel/preset-env --dev</span><br><span class="line">yarn add @babel/polyfill</span><br></pre></td></tr></table></figure>
+<ol>
+<li>创建<code>babel.config.js</code>文件：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">const presets = [</span><br><span class="line">  [&quot;@babel/env&quot;, &#123;</span><br><span class="line">    targets: &#123;</span><br><span class="line">      edge: &quot;17&quot;,</span><br><span class="line">      firefox: &quot;60&quot;,</span><br><span class="line">      chrome: &quot;67&quot;,</span><br><span class="line">      safari: &quot;11.1&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    useBuiltIns: &quot;usage&quot;</span><br><span class="line">  &#125;]</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line">module.exports = &#123; presets &#125;;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>运行编译命令：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./node_modules/.bin/babel src --out-dir lib</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>当然也可以使用<code>npx babel</code>命令</p>
+</blockquote>
+<h2 id="polyfill"><a href="#polyfill" class="headerlink" title="polyfill"></a>polyfill</h2><p><code>@babel/polyfill</code>最新的选项<code>useBuiltIns</code>包括三个选项：</p>
+<ul>
+<li><p><code>false</code>：不为每个文件自动添加polyfill文件或者转换`import ‘@babel/polyfill’;</p>
+</li>
+<li><p><code>entry</code>：只会在入口引入<code>@babel/polyfll</code>将会自动转换成引用全部<code>core-js</code>模块；</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// In</span><br><span class="line">import &quot;@babel/polyfill&quot;;</span><br><span class="line"></span><br><span class="line">// Out</span><br><span class="line">require(&quot;core-js/modules/es6.array.copy-within&quot;);</span><br><span class="line">require(&quot;core-js/modules/es6.array.fill&quot;);</span><br><span class="line">require(&quot;core-js/modules/es6.array.find&quot;);</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>usage</code>：代码中不需要引入<code>@babel/polyfll</code>，它会自动引入需要的<code>core-js</code>模块：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// In</span><br><span class="line">new Promise(function (resolve) &#123;</span><br><span class="line">    setTimeout(function () &#123;</span><br><span class="line">      resolve();</span><br><span class="line">    &#125;, 2000);</span><br><span class="line">  &#125;);</span><br><span class="line">  </span><br><span class="line">// Out</span><br><span class="line">require(&quot;core-js/modules/es6.promise&quot;);</span><br><span class="line"></span><br><span class="line">new Promise(function (resolve) &#123;</span><br><span class="line">    setTimeout(function () &#123;</span><br><span class="line">      resolve();</span><br><span class="line">    &#125;, 2000);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="预设"><a href="#预设" class="headerlink" title="预设"></a>预设</h2><p>一下是比较常用的官方预设：</p>
+<ul>
+<li><p>@babel/preset-env</p>
+</li>
+<li><p>@babel/preset-flow</p>
+</li>
+<li><p>@babel/preset-react</p>
+</li>
+<li><p>@babel/preset-typescript</p>
+</li>
+</ul>
+<h2 id="babel-plugin-transform-runtime"><a href="#babel-plugin-transform-runtime" class="headerlink" title="@babel/plugin-transform-runtime"></a>@babel/plugin-transform-runtime</h2><ul>
+<li><p>当我们使用<code>gernerator/async</code>时自动引用<code>@babel/runtime/regenerator</code></p>
+</li>
+<li><p>当需要使用垫片方法时，自动引用<code>core-js</code>中的相对应方法</p>
+</li>
+<li><p>自动移除babel所需的一些帮助方法，使用<code>@babel/runtime/helpers</code>替代，以防多次引用</p>
+</li>
+</ul>
+<p>Babel 转译后的代码要实现源代码同样的功能需要借助一些帮助函数，例如，{ [name]: ‘JavaScript’ } 转译后的代码如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&apos;use strict&apos;;</span><br><span class="line">function _defineProperty(obj, key, value) &#123;</span><br><span class="line">  if (key in obj) &#123;</span><br><span class="line">    Object.defineProperty(obj, key, &#123;</span><br><span class="line">      value: value,</span><br><span class="line">      enumerable: true,</span><br><span class="line">      configurable: true,</span><br><span class="line">      writable: true</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125; else &#123;</span><br><span class="line">    obj[key] = value;</span><br><span class="line">  &#125;</span><br><span class="line">  return obj;</span><br><span class="line">&#125;</span><br><span class="line">var obj = _defineProperty(&#123;&#125;, &apos;name&apos;, &apos;JavaScript&apos;);</span><br></pre></td></tr></table></figure>
+<p>类似上面的帮助函数 _defineProperty 可能会重复出现在一些模块里，导致编译后的代码体积变大。Babel 为了解决这个问题，提供了单独的包 babel-runtime 供编译模块复用工具函数。</p>
+<p>启用插件 babel-plugin-transform-runtime 后，Babel 就会使用 babel-runtime 下的工具函数，转译代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&apos;use strict&apos;;</span><br><span class="line">// 之前的 _defineProperty 函数已经作为公共模块 `babel-runtime/helpers/defineProperty` 使用</span><br><span class="line">var _defineProperty2 = require(&apos;babel-runtime/helpers/defineProperty&apos;);</span><br><span class="line">var _defineProperty3 = _interopRequireDefault(_defineProperty2);</span><br><span class="line">function _interopRequireDefault(obj) &#123; return obj &amp;&amp; obj.__esModule ? obj : &#123; default: obj &#125;; &#125;</span><br><span class="line">var obj = (0, _defineProperty3.default)(&#123;&#125;, &apos;name&apos;, &apos;JavaScript&apos;);</span><br></pre></td></tr></table></figure>
+<p>除此之外，babel 还为源代码的非实例方法（Object.assign，实例方法是类似这样的 “foobar”.includes(“foo”)）和 babel-runtime/helps 下的工具函数自动引用了 polyfill。这样可以避免污染全局命名空间，非常适合于 JavaScript 库和工具包的实现。例如 const obj = {}, Object.assign(obj, { age: 30 }); 转译后的代码如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&apos;use strict&apos;;</span><br><span class="line">// 使用了 core-js 提供的 assign</span><br><span class="line">var _assign = require(&apos;babel-runtime/core-js/object/assign&apos;);</span><br><span class="line">var _assign2 = _interopRequireDefault(_assign);</span><br><span class="line">function _interopRequireDefault(obj) &#123; return obj &amp;&amp; obj.__esModule ? obj : &#123; default: obj &#125;; &#125;</span><br><span class="line">var obj = &#123;&#125;;</span><br><span class="line">(0, _assign2.default)(obj, &#123;</span><br><span class="line">  age: 30</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>思考：babel-runtime 为什么适合 JavaScript 库和工具包的实现？</p>
+<ul>
+<li><p>避免 babel 编译的工具函数在每个模块里重复出现，减小库和工具包的体积；</p>
+</li>
+<li><p>在没有使用 babel-runtime 之前，库和工具包一般不会直接引入 polyfill。否则像 Promise 这样的全局对象会污染全局命名空间，这就要求库的使用者自己提供 polyfill。这些 polyfill 一般在库和工具的使用说明中会提到，比如很多库都会有要求提供 es5 的 polyfill。在使用 <code>@babel/runtime</code> 后，库和工具只要在 package.json 中增加依赖 babel-runtime，交给 babel-runtime 去引入 polyfill 就行了；</p>
+</li>
+</ul>
+<p>总结：</p>
+<ul>
+<li><p>具体项目还是需要使用 babel-polyfill，只使用 babel-runtime 的话，实例方法不能正常工作（例如 “foobar”.includes(“foo”)）；</p>
+</li>
+<li><p>JavaScript 库和工具可以使用 babel-runtime，在实际项目中使用这些库和工具，需要该项目本身提供 polyfill；</p>
+</li>
+</ul>
+<h2 id="参考网址"><a href="#参考网址" class="headerlink" title="参考网址"></a>参考网址</h2><ul>
+<li><p><a href="https://survivejs.com/webpack/optimizing/minifying/" target="_blank" rel="noopener">https://survivejs.com/webpack/optimizing/minifying/</a></p>
+</li>
+<li><p><a href="http://2ality.com/2015/12/babel6-loose-mode.html" target="_blank" rel="noopener">http://2ality.com/2015/12/babel6-loose-mode.html</a></p>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2018/08/23/css/《svg精髓》学习笔记（路径）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1785,179 +1989,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2018/06/19/javascript/jest测试工具学习（入门篇）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="liaoyf">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="liaoyf的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/19/javascript/jest测试工具学习（入门篇）/" itemprop="url">jest测试工具学习（入门篇）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-19T11:33:50+08:00">
-                2018-06-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/06/19/javascript/jest测试工具学习（入门篇）/" class="leancloud_visitors" data-flag-title="jest测试工具学习（入门篇）">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="使用匹配器"><a href="#使用匹配器" class="headerlink" title="使用匹配器"></a>使用匹配器</h2><h3 id="普通匹配器"><a href="#普通匹配器" class="headerlink" title="普通匹配器"></a>普通匹配器</h3><ul>
-<li><p><code>toBe</code>：测试值的方法是看是否精确匹配，相反的匹配器是<code>.not.toBe</code>;</p>
-</li>
-<li><p><code>toEqual</code>: 递归检查对象或数组的每个字段</p>
-</li>
-</ul>
-<h3 id="Truthiness"><a href="#Truthiness" class="headerlink" title="Truthiness"></a>Truthiness</h3><ul>
-<li><p>toBeNull</p>
-</li>
-<li><p>toBeUndefined</p>
-</li>
-<li><p>toBeDefine</p>
-</li>
-<li><p>toBeTruthy: 匹配任何 if 语句为真</p>
-</li>
-<li><p>toBeFalsy: 匹配任何 if 语句为假</p>
-</li>
-</ul>
-<h3 id="数字"><a href="#数字" class="headerlink" title="数字"></a>数字</h3><p>大多数的比较数字有等价的匹配器。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">test(&apos;two plus two&apos;, () =&gt; &#123;</span><br><span class="line">  const value = 2 + 2;</span><br><span class="line">  expect(value).toBeGreaterThan(3);</span><br><span class="line">  expect(value).toBeGreaterOrEqual(3.5);</span><br><span class="line">  expect(value).toBeLessThan(5);</span><br><span class="line">  expect(value).toBeLessOrEqual(4.5);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>对于比较浮点数相等，使用 toBeCloseTo 而不是 toEqual，因为你不希望测试取决于一个小小的舍入误差。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">test(&apos;两个浮点数字相加&apos;, () =&gt; &#123;</span><br><span class="line">  const value = 0.1 + 0.2;</span><br><span class="line">  //expect(value).toBe(0.3);      这句会报错，因为浮点数有舍入误差</span><br><span class="line">  expect(value).toBeCloseTo(0.3); // 这句可以运行</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><p>您可以检查对具有<code>toMatch</code>正则表达式的字符串︰</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">test(&apos;there is no I in team&apos;, () =&gt; &#123;</span><br><span class="line">  expect(&apos;team&apos;).not.toMatch(/I/);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">test(&apos;but there is a &quot;stop&quot; in Christoph&apos;, () =&gt; &#123;</span><br><span class="line">  expect(&apos;Christoph&apos;).toMatch(/stop/);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><p>你可以检查数组是否包含特定子项使用 toContain︰</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">const shoppingList = [</span><br><span class="line">  &apos;diapers&apos;,</span><br><span class="line">  &apos;kleenex&apos;,</span><br><span class="line">  &apos;trash bags&apos;,</span><br><span class="line">  &apos;paper towels&apos;,</span><br><span class="line">  &apos;beer&apos;,</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line">test(&apos;购物清单（shopping list）里面有啤酒（beer）&apos;, () =&gt; &#123;</span><br><span class="line">  expect(shoppingList).toContain(&apos;beer&apos;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<h3 id="例外"><a href="#例外" class="headerlink" title="例外"></a>例外</h3><p>如果你想要测试的特定函数抛出一个错误，在它调用时，使用 toThrow。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">function compileAndroidCode() &#123;</span><br><span class="line">  throw new ConfigError(&apos;you are using the wrong JDK&apos;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test(&apos;compiling android goes as expected&apos;, () =&gt; &#123;</span><br><span class="line">  expect(compileAndroidCode).toThrow();</span><br><span class="line">  expect(compileAndroidCode).toThrow(ConfigError);</span><br><span class="line"></span><br><span class="line">  // You can also use the exact error message or a regexp</span><br><span class="line">  expect(compileAndroidCode).toThrow(&apos;you are using the wrong JDK&apos;);</span><br><span class="line">  expect(compileAndroidCode).toThrow(/JDK/);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<h2 id="测试异步代码"><a href="#测试异步代码" class="headerlink" title="测试异步代码"></a>测试异步代码</h2><h3 id="回调"><a href="#回调" class="headerlink" title="回调"></a>回调</h3><p>使用单个参数调用 done，而不是将测试放在一个空参数的函数。 Jest会等done回调函数执行结束后，结束测试。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">test(&apos;the data is peanut butter&apos;, done =&gt; &#123;</span><br><span class="line">  function callback(data) &#123;</span><br><span class="line">    expect(data).toBe(&apos;peanut butter&apos;);</span><br><span class="line">    done();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  fetchData(callback);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>如果 done()永远不会调用，这个测试将失败，这也是你所希望发生的。</p>
-<h3 id="Promises"><a href="#Promises" class="headerlink" title="Promises"></a>Promises</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">test(&apos;the data is peanut butter&apos;, () =&gt; &#123;</span><br><span class="line">  expect.assertions(1);</span><br><span class="line">  return fetchData().then(data =&gt; &#123;</span><br><span class="line">    expect(data).toBe(&apos;peanut butter&apos;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>一定要返回 Promise - 如果你省略 return 语句，您的测试将在 fetchData 完成之前完成。如果你想要 Promise 被拒绝，使用 .catch 方法。 请确保添加 expect.assertions 来验证一定数量的断言被调用。 否则一个fulfilled态的 Promise 不会让测试失败︰</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">test(&apos;the fetch fails with an error&apos;, () =&gt; &#123;</span><br><span class="line">  expect.assertions(1);</span><br><span class="line">  return fetchData().catch(e =&gt; expect(e).toMatch(&apos;error&apos;));</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<h3 id="resolves-rejects"><a href="#resolves-rejects" class="headerlink" title=".resolves / .rejects"></a>.resolves / .rejects</h3><p>您还可以使用 .resolves 匹配器在您期望的声明，Jest 会等待这一 Promise 来解决。如果 Promise 被拒绝，则测试将自动失败。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">test(&apos;the data is peanut butter&apos;, () =&gt; &#123;</span><br><span class="line">  expect.assertions(1);</span><br><span class="line">  return expect(fetchData()).resolves.toBe(&apos;peanut butter&apos;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>如果你想要 Promise 被拒绝，使用 .catch 方法。 它参照工程 .resolves 匹配器。 如果 Promise 被拒绝，则测试将自动失败。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">test(&apos;the fetch fails with an error&apos;, () =&gt; &#123;</span><br><span class="line">  expect.assertions(1);</span><br><span class="line">  return expect(fetchData()).rejects.toMatch(&apos;error&apos;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<h3 id="Async-Await"><a href="#Async-Await" class="headerlink" title="Async/Await"></a>Async/Await</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">test(&apos;the data is peanut butter&apos;, async () =&gt; &#123;</span><br><span class="line">  expect.assertions(1);</span><br><span class="line">  await expect(fetchData()).resolves.toBe(&apos;peanut butter&apos;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">test(&apos;the fetch fails with an error&apos;, async () =&gt; &#123;</span><br><span class="line">  expect.assertions(1);</span><br><span class="line">  await expect(fetchData()).rejects.toMatch(&apos;error&apos;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/06/19/javascript/jest测试工具学习（入门篇）/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2008,7 +2039,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">48</span>
+                <span class="site-state-item-count">49</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

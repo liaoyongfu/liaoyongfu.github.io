@@ -317,6 +317,201 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2017/08/02/webpack/webpack学习06——怎么写loader/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liaoyf">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="liaoyf的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/02/webpack/webpack学习06——怎么写loader/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-02T11:44:45+08:00">
+                2017-08-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/08/02/webpack/webpack学习06——怎么写loader/" class="leancloud_visitors" data-flag-title="">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="webpack学习06——怎么写loader"><a href="#webpack学习06——怎么写loader" class="headerlink" title="webpack学习06——怎么写loader"></a>webpack学习06——怎么写loader</h1><p>一个loader是一个node模块，导出一个函数。这个函数当资源被转换时会执行，这个loader有一个入参：待转换资源名称。可以在loader中通过<code>this</code>访问上下文。</p>
+<p>一个同步的loader可以仅仅返回一个值。在其他情况下，loader可以通过<code>this.callback(err, values)</code>返回多个值。</p>
+<p>一个loader被期望返回一个或两个值，第一个值返回字符串或buffer类型的javascript代码，第二个返回sourceMap。</p>
+<p>在复杂的情况下，当多个loader链接时，仅仅只要最后一个loader返回资源文件，仅仅第一个loader期望返回一个或两个值（javascript代码或buffer）。</p>
+<p>Example:</p>
+<pre><code>module.exports = function(source){
+    return source;
+};
+</code></pre><p>//</p>
+<pre><code>// Identity loader with SourceMap support
+module.exports = function(source, map) {
+  this.callback(null, source, map);
+};
+</code></pre><h2 id="指南"><a href="#指南" class="headerlink" title="指南"></a>指南</h2><p>（按优先顺序排序，第一个应该得到最高优先级）</p>
+<h3 id="只做一个单一的任务"><a href="#只做一个单一的任务" class="headerlink" title="只做一个单一的任务"></a>只做一个单一的任务</h3><p>loader可以被链接，他们不应该转换为javascript代码，如果他们不需要的话。<br>例如：从模板中通过查询参数渲染html，我会编写一个从源代码中编译的loader，执行他并返回一个包含包含html的字符串，这是不好的。而是我应该编写装载程序在这个用例中的每一个任务，并将它们全部应用（流水线）：</p>
+<ul>
+<li>jade-loader: Convert template to a module that exports a function.</li>
+<li>apply-loader: Takes a function exporting module and returns raw result by applying      query parameters.</li>
+<li>html-loader: Takes HTML and exports a string exporting module.</li>
+</ul>
+<h3 id="generate-modules-that-are-modular"><a href="#generate-modules-that-are-modular" class="headerlink" title="generate modules that are modular"></a>generate modules that are modular</h3><p>加载程序生成模块应尊重相同的设计原则，如正常模块。例子：这是一个糟糕的设计：（不模块化，全局状态，…）</p>
+<pre><code>require(&quot;any-template-language-loader!./xyz.atl&quot;);
+
+var html = anyTemplateLanguage.render(&quot;xyz&quot;);
+</code></pre><h3 id="标志本身缓存如果可能的话"><a href="#标志本身缓存如果可能的话" class="headerlink" title="标志本身缓存如果可能的话"></a>标志本身缓存如果可能的话</h3><p>大多数装载机是可缓存的，所以他们应该标志本身作为缓存。只要在loader中调用<code>cacheable</code>。</p>
+<pre><code>//Cacheable identity loader
+module.exports = function(source){
+    this.cacheable();
+    return source();
+};
+</code></pre><h3 id="not-keep-state-between-runs-and-modules"><a href="#not-keep-state-between-runs-and-modules" class="headerlink" title="not keep state between runs and modules"></a>not keep state between runs and modules</h3><p>一个加载程序应该独立于编译的其他模块（由装载程序发布的这些模块的期望）。一个程序应该独立于以前的编译的模块。</p>
+<h3 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h3><p>如果loader需要依赖第三方资源（如从系统中读取文件），他们必须要写清楚，此信息用于无效的缓存装载机和编译在观看模式。</p>
+<pre><code>// Loader adding a header
+var path = require(&quot;path&quot;);
+module.exports = function(source) {
+    this.cacheable();
+    var callback = this.async();
+    var headerPath = path.resolve(&quot;header.js&quot;);
+    this.addDependency(headerPath);
+    fs.readFile(headerPath, &quot;utf-8&quot;, function(err, header) {
+        if(err) return callback(err);
+        callback(null, header + &quot;\n&quot; + source);
+    });
+};
+</code></pre><h3 id="解决依赖关系"><a href="#解决依赖关系" class="headerlink" title="解决依赖关系"></a>解决依赖关系</h3><p>一些语言有自己的解决依赖图式，例如css的<code>@import</code>和<code>url(...)</code>。这些必须被模块系统解决。</p>
+<p>有两个方法可以做到：</p>
+<ul>
+<li>把他们转换成<code>require</code>；</li>
+<li>使用<code>this.resolve</code>解析路径；</li>
+</ul>
+<p>例子1：css-loader把依赖转换成require其他样式文件。<br>例子2：less-loader不转换为require，因为因为所有的less文件需要编译一次跟踪变量和混合，因此，less-loader扩展less编译器一个自定义的路径解决方法，该自定义逻辑使用this.resolve解决模块的系统配置文件（走样，自定义模块目录，等）。<br>If the language only accept relative urls (like css: url(file) always means ./file), there is the ~-convention to specify references to modules:</p>
+<pre><code>url(file) -&gt; require(&quot;./file&quot;)
+url(~module) -&gt; require(&quot;module&quot;)
+</code></pre><h3 id="抽离公共代码"><a href="#抽离公共代码" class="headerlink" title="抽离公共代码"></a>抽离公共代码</h3><p>don’t generate much code that is common in every module processed by that loader. Create a (runtime) file in the loader and generate a require to that common code.</p>
+<h3 id="不应嵌入绝对路径"><a href="#不应嵌入绝对路径" class="headerlink" title="不应嵌入绝对路径"></a>不应嵌入绝对路径</h3><p>don’t put absolute paths in to the module code. They break hashing when the root for the project is moved. There is a method <code>stringifyRequest</code> in loader-utils which converts an absolute path to an relative one.</p>
+<p>Example:</p>
+<pre><code>var loaderUtils = require(&quot;loader-utils&quot;);
+return &quot;var runtime = require(&quot; +
+  loaderUtils.stringifyRequest(this, &quot;!&quot; + require.resolve(&quot;module/runtime&quot;)) +
+  &quot;);&quot;;
+</code></pre><h3 id="use-a-library-as-peerDependencies-when-they-wrap-it"><a href="#use-a-library-as-peerDependencies-when-they-wrap-it" class="headerlink" title="use a library as peerDependencies when they wrap it"></a>use a library as peerDependencies when they wrap it</h3><p>using a peerDependency allows the application developer to specify the exact version in package.json if desired. The dependency should be relatively open to allow updating the library without needing to publish a new loader version.</p>
+<pre><code>&quot;peerDependencies&quot;: {
+    &quot;library&quot;: &quot;^1.3.5&quot;
+}
+</code></pre><h3 id="programmable-objects-as-query-option"><a href="#programmable-objects-as-query-option" class="headerlink" title="programmable objects as query-option"></a>programmable objects as query-option</h3><p>there are situations where your loader requires programmable objects with functions which cannot stringified as query-string. The less-loader, for example, provides the possibility to specify LESS-plugins. In these cases, a loader is allowed to extend webpack’s options-object to retrieve that specific option. In order to avoid name collisions, however, it is important that the option is namespaced under the loader’s camelCased npm-name.</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2017/08/02/webpack/webpack学习05——长期缓存/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1718,7 +1913,7 @@ h1{
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">48</span>
+                <span class="site-state-item-count">49</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
