@@ -317,6 +317,294 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2017/08/02/webpack/webpack遇到的坑/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liaoyf">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="liaoyf的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/02/webpack/webpack遇到的坑/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-02T11:44:45+08:00">
+                2017-08-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/08/02/webpack/webpack遇到的坑/" class="leancloud_visitors" data-flag-title="">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="webpack的坑"><a href="#webpack的坑" class="headerlink" title="webpack的坑"></a>webpack的坑</h1><hr>
+<ol>
+<li><p>引用jQuery插件时会报”jQuery is not defined”，解决方法：</p>
+<p> <strong>(1). Prefer unminified CommonJS/AMD over dist</strong></p>
+<p> Most modules link the dist version in the main field of their package.json. While this is useful for most developers, for webpack it is better to alias the src version because this way webpack is able to optimize dependencies better (e.g. when using the DedupePlugin).</p>
+<pre><code>// webpack.config.js
+module.exports = {
+    ...
+    resolve: {
+        alias: {
+            jquery: &quot;jquery/src/jquery&quot;
+        }
+    }
+};
+
+However, in most cases the dist version works just fine as well.
+</code></pre><p> <strong>(2). Use the ProvidePlugin to inject implicit globals</strong></p>
+<p> Most legacy modules rely on the presence of specific globals, like jQuery plugins do on $ or jQuery. In this scenario you can configure webpack, to prepend var $ = require(“jquery”) everytime it encounters the global $ identifier.</p>
+<pre><code>var webpack = require(&quot;webpack&quot;);
+    ...
+    plugins: [
+        new webpack.ProvidePlugin({
+            $: &quot;jquery&quot;,
+            jQuery: &quot;jquery&quot;
+        })
+    ]
+</code></pre><p> <strong>(3). Use the imports-loader to configure this</strong></p>
+<p> Some legacy modules rely on this being the window object. This becomes a problem when the module is executed in a CommonJS context where this equals module.exports. In this case you can override this with the imports-loader.</p>
+<p> Run <code>npm i imports-loader --save-dev</code> and then</p>
+<pre><code>module: {
+    loaders: [
+        {
+            test: /[\/\\]node_modules[\/\\]some-module[\/\\]index\.js$/,
+            loader: &quot;imports?this=&gt;window&quot;
+        }
+    ]
+}
+</code></pre><p> The imports-loader can also be used to manually inject variables of all kinds. But most of the time the ProvidePlugin is more useful when it comes to implicit globals.</p>
+<p> <strong>(4). Use the imports-loader to disable AMD</strong></p>
+<p> There are modules that support different module styles, like AMD, CommonJS and legacy. However, most of the time they first check for define and then use some quirky code to export properties. In these cases, it could help to force the CommonJS path by setting define = false.</p>
+<pre><code>module: {
+    loaders: [
+        {
+            test: /[\/\\]node_modules[\/\\]some-module[\/\\]index\.js$/,
+            loader: &quot;imports?define=&gt;false&quot;
+        }
+    ]
+}
+</code></pre><p> <strong>(5). Use the script-loader to globally import scripts</strong></p>
+<p> If you don’t care about global variables and just want legacy scripts to work, you can also use the script-loader. It executes the module in a global context, just as if you had included them via the <code>&lt;script&gt;</code> tag.</p>
+<p> <strong>(6). Use noParse to include large dists</strong></p>
+<p> When there is no AMD/CommonJS version of the module and you want to include the dist, you can flag this module as noParse. Then webpack will just include the module without parsing it, which can be used to improve the build time. This means that any feature requiring the AST, like the ProvidePlugin, will not work.</p>
+<pre><code>module: {
+    noParse: [
+        /[\/\\]node_modules[\/\\]angular[\/\\]angular\.js$/
+    ]
+}
+</code></pre></li>
+<li><p>常见的loader</p>
+<pre><code>{
+        test: /\.js/,
+        loader: &quot;babel-loader&quot;,
+        query: {
+            &quot;presets&quot;: [&quot;es2015&quot;, &apos;stage-0&apos;],
+            plugins: []
+        },
+        exclude: /(node_modules)/
+    },
+    {
+        test: /\.css$/,
+        //注意：此处不能有autoprefix-loader
+        loader: ExtractText.extract(&apos;style-loader&apos;, &apos;css-loader&apos;)
+    },
+    {
+        test: /\.(png|gif|jpg|jpeg)$/,
+        loader: &quot;url?name=img/[hash:8].[ext]&quot;
+    },
+    {
+        test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
+        loader: &apos;url?name=font/[name].[ext]&amp;limit=10000&amp;minetype=application/font-woff&apos;
+    },
+    {
+        test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
+        loader: &apos;url?name=font/[name].[ext]&amp;limit=10&amp;minetype=application/font-woff&apos;
+    },
+    {
+        test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+        loader: &apos;url?name=font/[name].[ext]&amp;limit=10&amp;minetype=application/octet-stream&apos;
+    },
+    {
+        test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+        loader: &apos;file&apos;
+    },
+    {
+        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+        loader: &apos;url?limit=10&amp;minetype=image/svg+xml&apos;
+    }
+</code></pre></li>
+<li><p>样式的loader</p>
+<pre><code>(1)style-loader|css-loader is the way to do it just with css
+(2)style-loader|css-loader|postcss-loader is the way to post-process css
+(3)style-loader|css-loader|less-loader is the way to do it if you want to use less
+(4)style-loader|css-loader|postcss-loader|less-loader is the way to post-process the compiled less (css)
+</code></pre></li>
+<li><p>ES6引用<code>art-template</code>,报错：<code>Module not found: Error: Cannot resolve module &#39;fs&#39;</code>，解决方法：</p>
+<pre><code>//webpack.config.js
+module.exports={
+    node: {
+        fs: &quot;empty&quot;
+    }
+};
+</code></pre><p> <a href="https://github.com/pugjs/pug-loader/issues/8" target="_blank" rel="noopener">参考链接</a></p>
+</li>
+<li><p>webpack开发时打包第三方库都比较大，可以通过配置<code>alias</code>指向压缩版本：</p>
+<pre><code>resolve: {
+    alias: {
+        modernizr$: path.resolve(__dirname, &quot;./.modernizrrc&quot;),
+        bootstrap: path.join(__dirname, &quot;./node_modules/bootstrap/dist/js/bootstrap.min.js&quot;),
+        bootstrapCss: path.join(__dirname, &quot;./node_modules/bootstrap/dist/css/bootstrap.min.css&quot;),
+        fontAwesomeCss: path.join(__dirname, &quot;./node_modules/font-awesome/css/font-awesome.min.css&quot;)
+    }
+    }
+</code></pre></li>
+<li><p>引用第三方插件如：<code>ulynlist</code>，需要配置别名：</p>
+<pre><code>alias: {
+    &apos;ulynlist.table&apos;: path.join(__dirname, &apos;./src/sslib/ulynlist/ulynlist.table.js&apos;),
+    &apos;ulynlist.pager&apos;: path.join(__dirname, &apos;./src/sslib/ulynlist/ulynlist.pager.js&apos;),
+    artTemplate: path.join(__dirname, &apos;./node_modules/art-template&apos;)
+}
+</code></pre></li>
+<li><p>import样式文件页面会有闪烁现象，这是可以通过<code>extract-text-webpack-plugin</code>抽取样式文件，就不会有这个问题了</p>
+</li>
+<li>使用ES6 + webpack + angular教程<a href="http://angular-tips.com/blog/2015/06/using-angular-1-dot-x-with-es6-and-webpack/" target="_blank" rel="noopener">参考链接</a></li>
+<li><p>合并jquery和第三方插件时，外面是读取不到<code>$</code>和<code>jQuery</code>的，所以我们可以通过<code>expose-loader</code>把<code>jQuery</code>对象导出到全局:</p>
+<p> You can either do this when you require it:</p>
+<pre><code>require(&quot;expose?$!jquery&quot;);
+</code></pre><p> or you can do this in your config:</p>
+<pre><code>loaders: [
+    { test: require.resolve(&apos;jquery&apos;), loader: &apos;expose?jQuery!expose?$&apos; }
+]
+</code></pre><p> 相同的道理，如果插件里有this，则我们可以通过<code>imports-loader</code>把this当成window处理：</p>
+<pre><code>{ 
+    test: require.resolve(&apos;respond.js&apos;), 
+    loader: &apos;imports?this=&gt;window&apos; 
+}
+</code></pre></li>
+<li><p>使用第三方插件，如果其没有判断commonjs这一层，则我们可以配合exports-loader和imports-loader使用，如eos3还有eos服务，eos3需要导出eos对象，eos服务的js需要导入eos这个对象：</p>
+<pre><code>import &apos;exports?eos!./lib/eos3/eos3&apos;;
+//这里define设为false，防止组件判断为AMD模块
+import &apos;imports?define=&gt;false,this=&gt;window!./lib/auth/dmService&apos;;
+</code></pre></li>
+<li><p>webpack-dev-server默认是localhost访问，不能通过ip访问，我们可以配置如下：</p>
+<p>webpack-dev-server –host 0.0.0.0</p>
+</li>
+<li><p>大项目打包时经常内存溢出：</p>
+</li>
+</ol>
+<p>修改打包命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node  --max_old_space_size=4096 ./node_modules/webpack/bin/webpack.js --env=prod --progress --profile --colors</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2017/08/02/webpack/webpack学习06——怎么写loader/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1913,7 +2201,7 @@ h1{
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">49</span>
+                <span class="site-state-item-count">50</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1926,7 +2214,7 @@ h1{
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-count">21</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

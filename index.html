@@ -317,6 +317,164 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2018/09/05/nodejs/koa2学习：路由/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liaoyf">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="liaoyf的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/05/nodejs/koa2学习：路由/" itemprop="url">koa2学习：路由</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-05T00:00:00+08:00">
+                2018-09-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/09/05/nodejs/koa2学习：路由/" class="leancloud_visitors" data-flag-title="koa2学习：路由">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>参考网址：<a href="https://chenshenhai.github.io/koa2-note/" target="_blank" rel="noopener">https://chenshenhai.github.io/koa2-note/</a></p>
+<h2 id="原生koa2路由"><a href="#原生koa2路由" class="headerlink" title="原生koa2路由"></a>原生koa2路由</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">const Koa = require(&apos;koa&apos;);</span><br><span class="line">const app = new Koa();</span><br><span class="line">const fs = require(&apos;fs&apos;);</span><br><span class="line"></span><br><span class="line">async function route(url) &#123;</span><br><span class="line">    let view = &apos;404.html&apos;;</span><br><span class="line">    switch (url) &#123;</span><br><span class="line">        case &apos;/&apos;:</span><br><span class="line">            view = &apos;index.html&apos;;</span><br><span class="line">            break;</span><br><span class="line">        case &apos;/index&apos;:</span><br><span class="line">            view = &apos;index.html&apos;;</span><br><span class="line">            break;</span><br><span class="line">        case &apos;/todo&apos;:</span><br><span class="line">            view = &apos;todo.html&apos;;</span><br><span class="line">            break;</span><br><span class="line">        case &apos;/404&apos;:</span><br><span class="line">            view = &apos;404.html&apos;;</span><br><span class="line">            break;</span><br><span class="line">        default:</span><br><span class="line">            break;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return await render(view);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">async function render(page) &#123;</span><br><span class="line">    return new Promise((resolve, reject) =&gt; &#123;</span><br><span class="line">        fs.readFile(`./views/$&#123;page&#125;`, &apos;utf8&apos;, (err, data) =&gt; &#123;</span><br><span class="line">            if (err) &#123;</span><br><span class="line">                reject(err);</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                resolve(data);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">app.use(async (ctx) =&gt; &#123;</span><br><span class="line">    const &#123;url&#125; = ctx.request;</span><br><span class="line">    ctx.body = await route(url);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.listen(3000);</span><br><span class="line">console.log(&apos;[demo] start-quick is starting at port 3000&apos;);</span><br></pre></td></tr></table></figure>
+<p>这里<code>fs.readFile(..., &#39;utf8&#39;, ...)</code>第二个参数是文件编码，如果不指定默认为<code>raw buffer</code>，刷新页面会变成下载。</p>
+<h2 id="koa-router中间件"><a href="#koa-router中间件" class="headerlink" title="koa-router中间件"></a>koa-router中间件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">const Router = require(&apos;koa-router&apos;);</span><br><span class="line"></span><br><span class="line">// 主页路由</span><br><span class="line">let home = new Router();</span><br><span class="line"></span><br><span class="line">home.get(&apos;/&apos;, async(ctx) =&gt; &#123;</span><br><span class="line">    ctx.body = `</span><br><span class="line">    &lt;ul&gt;</span><br><span class="line">      &lt;li&gt;&lt;a href=&quot;/page/helloworld&quot;&gt;/page/helloworld&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">      &lt;li&gt;&lt;a href=&quot;/page/404&quot;&gt;/page/404&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">    &lt;/ul&gt;</span><br><span class="line">  `;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">// 子页路由</span><br><span class="line">let page = new Router();</span><br><span class="line"></span><br><span class="line">page.get(&apos;/404&apos;, async(ctx) =&gt; &#123;</span><br><span class="line">    ctx.body = &apos;404 page&apos;;</span><br><span class="line">&#125;).get(&apos;/helloworld&apos;, async(ctx) =&gt; &#123;</span><br><span class="line">    ctx.body = &apos;helloworld page&apos;;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">// 主路由</span><br><span class="line">let router = new Router();</span><br><span class="line">router.use(&apos;/&apos;, home.routes(), home.allowedMethods());</span><br><span class="line">router.use(&apos;/page&apos;, page.routes(), page.allowedMethods());</span><br><span class="line"></span><br><span class="line">app.use(router.routes()).use(router.allowedMethods());</span><br></pre></td></tr></table></figure>
+<p>官方文档：<a href="https://github.com/alexmingoia/koa-router" target="_blank" rel="noopener">https://github.com/alexmingoia/koa-router</a></p>
+<h2 id="获取请求参数"><a href="#获取请求参数" class="headerlink" title="获取请求参数"></a>获取请求参数</h2><h3 id="GET请求参数获取"><a href="#GET请求参数获取" class="headerlink" title="GET请求参数获取"></a>GET请求参数获取</h3><p>在koa中，获取GET请求数据源头是koa中request对象中的query方法或querystring方法，query返回是格式化好的参数对象，querystring返回的是请求字符串，由于ctx对request的API有直接引用的方式，所以获取GET请求数据有两个途径。</p>
+<h3 id="POST请求参数获取"><a href="#POST请求参数获取" class="headerlink" title="POST请求参数获取"></a>POST请求参数获取</h3><p>对于POST请求的处理，koa2没有封装获取参数的方法，需要通过解析上下文context中的原生node.js请求对象req，将POST表单数据解析成query string（例如：a=1&amp;b=2&amp;c=3），再将query string 解析成JSON格式（例如：{“a”:”1”, “b”:”2”, “c”:”3”}）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">function parsePostData(ctx) &#123;</span><br><span class="line">    return new Promise((resolve, reject) =&gt; &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            let postdata = &apos;&apos;;</span><br><span class="line">            ctx.req.addListener(&apos;data&apos;, function (data) &#123;</span><br><span class="line">                postdata += data;</span><br><span class="line">            &#125;);</span><br><span class="line">            ctx.req.addListener(&apos;end&apos;, function () &#123;</span><br><span class="line">                let parseData = parseQueryStr(postdata);</span><br><span class="line"></span><br><span class="line">                resolve(parseData);</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;catch(err)&#123;</span><br><span class="line">            reject(err);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 将POST请求参数字符串解析成JSON</span><br><span class="line">function parseQueryStr(queryStr) &#123;</span><br><span class="line">    let queryData = &#123;&#125;</span><br><span class="line">    let queryStrList = queryStr.split(&apos;&amp;&apos;)</span><br><span class="line">    for (let [index, queryStr] of queryStrList.entries()) &#123;</span><br><span class="line">        let itemList = queryStr.split(&apos;=&apos;)</span><br><span class="line">        queryData[itemList[0]] = decodeURIComponent(itemList[1])</span><br><span class="line">    &#125;</span><br><span class="line">    return queryData</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">app.use(async (ctx) =&gt; &#123;</span><br><span class="line">    if (ctx.url === &apos;/&apos; &amp;&amp; ctx.method === &apos;GET&apos;) &#123;</span><br><span class="line">        ctx.body = `</span><br><span class="line">          &lt;h1&gt;koa2 request post demo&lt;/h1&gt;</span><br><span class="line">          &lt;form method=&quot;POST&quot; action=&quot;/&quot;&gt;</span><br><span class="line">            &lt;p&gt;userName&lt;/p&gt;</span><br><span class="line">            &lt;input name=&quot;userName&quot; /&gt;&lt;br/&gt;</span><br><span class="line">            &lt;p&gt;nickName&lt;/p&gt;</span><br><span class="line">            &lt;input name=&quot;nickName&quot; /&gt;&lt;br/&gt;</span><br><span class="line">            &lt;p&gt;email&lt;/p&gt;</span><br><span class="line">            &lt;input name=&quot;email&quot; /&gt;&lt;br/&gt;</span><br><span class="line">            &lt;button type=&quot;submit&quot;&gt;submit&lt;/button&gt;</span><br><span class="line">          &lt;/form&gt;</span><br><span class="line">        `;</span><br><span class="line">    &#125; else if (ctx.url === &apos;/&apos; &amp;&amp; ctx.method === &apos;POST&apos;) &#123;</span><br><span class="line">        ctx.body = await parsePostData(ctx);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        // 其他请求显示404</span><br><span class="line">        ctx.body = &apos;&lt;h1&gt;404！！！ o(╯□╰)o&lt;/h1&gt;&apos;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="koa-bodyparser中间件"><a href="#koa-bodyparser中间件" class="headerlink" title="koa-bodyparser中间件"></a>koa-bodyparser中间件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">var Koa = require(&apos;koa&apos;);</span><br><span class="line">var bodyParser = require(&apos;koa-bodyparser&apos;);</span><br><span class="line"></span><br><span class="line">var app = new Koa();</span><br><span class="line">app.use(bodyParser());</span><br><span class="line"></span><br><span class="line">app.use(async ctx =&gt; &#123;</span><br><span class="line">  // the parsed body will store in ctx.request.body</span><br><span class="line">  // if nothing was parsed, body will be an empty object &#123;&#125;</span><br><span class="line">  ctx.body = ctx.request.body;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="静态资源加载"><a href="#静态资源加载" class="headerlink" title="静态资源加载"></a>静态资源加载</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">const serve = require(&apos;koa-static&apos;);</span><br><span class="line">const Koa = require(&apos;koa&apos;);</span><br><span class="line">const app = new Koa();</span><br><span class="line"></span><br><span class="line">// $ GET /package.json</span><br><span class="line">app.use(serve(&apos;.&apos;));</span><br><span class="line"></span><br><span class="line">// $ GET /hello.txt</span><br><span class="line">app.use(serve(&apos;test/fixtures&apos;));</span><br><span class="line"></span><br><span class="line">// or use absolute paths</span><br><span class="line">app.use(serve(__dirname + &apos;/test/fixtures&apos;));</span><br><span class="line"></span><br><span class="line">app.listen(3000);</span><br><span class="line"></span><br><span class="line">console.log(&apos;listening on port 3000&apos;);</span><br></pre></td></tr></table></figure>
+<h2 id="session操作"><a href="#session操作" class="headerlink" title="session操作"></a>session操作</h2><p>koa2原生功能只提供了cookie的操作，但是没有提供session操作。session就只用自己实现或者通过第三方中间件实现。在koa2中实现session的方案有一下几种</p>
+<ul>
+<li>如果session数据量很小，可以直接存在内存中</li>
+<li>如果session数据量很大，则需要存储介质存放session数据</li>
+</ul>
+<p>数据库存储方案：</p>
+<ul>
+<li><p>将session存放在MySQL数据库中</p>
+<p>  需要用到中间件：</p>
+<ul>
+<li>koa-session-minimal 适用于koa2 的session中间件，提供存储介质的读写接口 。</li>
+<li>koa-mysql-session 为koa-session-minimal中间件提供MySQL数据库的session数据读写操作。</li>
+<li>将sessionId和对于的数据存到数据库</li>
+</ul>
+</li>
+<li>将数据库的存储的sessionId存到页面的cookie中</li>
+<li>根据cookie的sessionId去获取对于的session信息</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2018/09/04/javascript/2018年学习计划（babel篇）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1779,216 +1937,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2018/06/20/react-native/react-native版本0.55搭建/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="liaoyf">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="liaoyf的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/20/react-native/react-native版本0.55搭建/" itemprop="url">react-native版本0.55搭建</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-20T00:00:00+08:00">
-                2018-06-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/06/20/react-native/react-native版本0.55搭建/" class="leancloud_visitors" data-flag-title="react-native版本0.55搭建">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="react-native开发流程"><a href="#react-native开发流程" class="headerlink" title="react-native开发流程"></a>react-native开发流程</h2><h3 id="create-react-native-app方式"><a href="#create-react-native-app方式" class="headerlink" title="create-react-native-app方式"></a>create-react-native-app方式</h3><p>使用此方式无需安装编译器、xcode或者Android Studio等。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">npm install -g create-react-nateive-app</span><br><span class="line">create-react-native-app AwesomeProject</span><br><span class="line">cd AwesomeProject</span><br><span class="line">npm start</span><br></pre></td></tr></table></figure>
-<p>启动后，控制台会输出一个二维码，接下来，你需要使用手机安装<code>Expo</code>应用程序，然后使用二维码登录即可在访问，如果你修改代码，应该也会热更新。</p>
-<h3 id="用native-code构建"><a href="#用native-code构建" class="headerlink" title="用native code构建"></a>用native code构建</h3><p>在IOS上，需要安装一些必须软件：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">brew install node</span><br><span class="line">brew install watchman</span><br><span class="line">npm install -g react-native-cli</span><br><span class="line">react-native init AwesomeProject</span><br><span class="line">cd AwesomeProject</span><br><span class="line">react-native run-ios</span><br></pre></td></tr></table></figure>
-<p>使用<code>Command + R</code>刷新。</p>
-<blockquote>
-<p>注意：Xcode版本必须要<code>&gt;=8</code></p>
-</blockquote>
-<h2 id="react-native-run-ios报错"><a href="#react-native-run-ios报错" class="headerlink" title="react-native run-ios报错"></a><code>react-native run-ios</code>报错</h2><p>报错如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">An error was encountered processing the command (domain=NSPOSIXErrorDomain, code=2):</span><br><span class="line">Failed to install the requested application</span><br><span class="line">An application bundle was not found at the provided path.</span><br><span class="line">Provide a valid path to the desired application bundle.</span><br><span class="line">Print: Entry, &quot;:CFBundleIdentifier&quot;, Does Not Exist</span><br><span class="line">/development/misc/react/AwesomeProject/node_modules/promise/lib/done.js:10</span><br><span class="line">      throw err;</span><br><span class="line">      ^</span><br><span class="line"></span><br><span class="line">Error: Command failed: /usr/libexec/PlistBuddy -c Print:CFBundleIdentifier build/Build/Products/Debug-iphonesimulator/AwesomeProject.app/Info.plist</span><br><span class="line">Print: Entry, &quot;:CFBundleIdentifier&quot;, Does Not Exist</span><br></pre></td></tr></table></figure>
-<p>泪崩。。。试用遍了网上大多数的解决方法均不行，浪费了好多宝贵时间，后来发现是xcode的版本问题，0.55版本要求xcode的版本要<code>&gt;= 8</code>。</p>
-<p>所以要更新xcode版本即可解决，记得更新完后重新<code>react-native init</code>项目。</p>
-<h2 id="结合antd-mobile使用"><a href="#结合antd-mobile使用" class="headerlink" title="结合antd-mobile使用"></a>结合<code>antd-mobile</code>使用</h2><p>安装antd-mobile-rn:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add antd-mobile-rn</span><br></pre></td></tr></table></figure>
-<p>使用：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">import React, &#123; Component &#125; from &apos;react&apos;;</span><br><span class="line">import &#123; AppRegistry &#125; from &apos;react-native&apos;;</span><br><span class="line">import Button from &apos;antd-mobile-rn/lib/button&apos;;</span><br><span class="line"></span><br><span class="line">class HelloWorldApp extends Component &#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    return &lt;Button&gt;Start&lt;/Button&gt;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">AppRegistry.registerComponent(&apos;HelloWorldApp&apos;, () =&gt; HelloWorldApp);</span><br></pre></td></tr></table></figure>
-<p>更多坑请<a href="https://liaoyongfu.github.io/2017/12/21/react-native/react-native%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91/">点击查看</a></p>
-<h2 id="调用原生模块"><a href="#调用原生模块" class="headerlink" title="调用原生模块"></a>调用原生模块</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import &#123; NativeModules &#125; from &apos;react-native&apos;;</span><br><span class="line">var CalendarManager = NativeModules.CalendarManager;</span><br><span class="line">CalendarManager.addEvent(&apos;Birthday Party&apos;, &apos;4 Privet Drive, Surrey&apos;);</span><br></pre></td></tr></table></figure>
-<p>详细介绍请<a href="https://facebook.github.io/react-native/docs/native-modules-ios.html" target="_blank" rel="noopener">点击查看</a></p>
-<h2 id="开发后安装问题"><a href="#开发后安装问题" class="headerlink" title="开发后安装问题"></a>开发后安装问题</h2><p>在真机上测试iOS应用需要一台Mac电脑，同时还需要注册一个Apple ID。如果你需要把应用发布到App Store，那么你还需要去苹果开发者网站购买一个开发者账户（在自己手机上测试则不用）</p>
-<h3 id="在真机上访问开发服务器（packager）"><a href="#在真机上访问开发服务器（packager）" class="headerlink" title="在真机上访问开发服务器（packager）"></a>在真机上访问开发服务器（packager）</h3><p>你可以在真机上访问开发服务器以快速测试和迭代。首先需要确保设备已使用usb连接至电脑，同时和电脑处在同一wifi网络内，然后在Xcode中选择你的设备作为编译目标（左上角运行按钮的右边），然后点击运行按钮即可。<br>如果你需要在真机上启用调试功能，则需要打开RCTWebSocketExecutor.m文件，然后将其中的”localhost”改为你的电脑的IP地址，最后启用开发者菜单中的”Debug JS Remotely”选项。</p>
-<p>开发步骤：</p>
-<ol>
-<li><p>使用xcode打开项目</p>
-</li>
-<li><p>使用USB链接手机，并和电脑处于统一wifi信号下</p>
-</li>
-<li><p>选择右上角为你的手机，然后点击三角形运行</p>
-</li>
-<li><p>输入电脑登录密码，之后软件会安装在你的手机上</p>
-</li>
-<li><p>由于软件不被信任，所以要在<code>通用-&gt;设备管理-&gt;点击信任</code></p>
-</li>
-</ol>
-<blockquote>
-<p>提示：摇晃设备就可以打开开发者菜单。</p>
-</blockquote>
-<h3 id="发布应用"><a href="#发布应用" class="headerlink" title="发布应用"></a>发布应用</h3><p>当你使用React Native做好一个漂亮的应用之后，一定跃跃欲试想要在App Store上发布了吧。发布的流程和其他iOS原生应用完全一样，除了以下一些注意事项。<br>在App Store上发布应用首先需要编译一个“发布版本”(release)的应用。具体的做法是在Xcode中选择Product -&gt; Scheme -&gt; Edit Scheme (cmd + &lt;)，然后选择Run选项卡，将Build Configuration设置为release。 Release版本的应用会自动禁用开发者菜单，同时也会将js文件和静态图片打包压缩后内置到包中，这样应用可以在本地读取而无需访问开发服务器（同时这样一来你也无法再调试，需要调试请将Buiid Configuration再改为debug）。<br>由于发布版本已经内置了js文件，因而也无法再通过开发服务器来实时更新。面向用户的热更新，请使用专门的热更新服务。<br>编译完成后，你就可以打包提交到TestFlight进行内测，或是提交到App Store进行发布。相关流程较为复杂，不熟悉原生应用发布流程的同学请自行搜索学习。</p>
-<h3 id="App-Transport-Security"><a href="#App-Transport-Security" class="headerlink" title="App Transport Security"></a>App Transport Security</h3><p>App Transport Security(简称ATS)是iOS 9中新增的一项安全特性。在默认设置下，只允许HTTPS的请求，而所有HTTP的请求都会被拒绝。详情可参考<a href="https://segmentfault.com/a/1190000002933776" target="_blank" rel="noopener">这篇帖子</a>。</p>
-<h2 id="使用react-native开发的可行性"><a href="#使用react-native开发的可行性" class="headerlink" title="使用react-native开发的可行性"></a>使用react-native开发的可行性</h2><p>根据Airbnb提供，具体参考：<a href="https://zhuanlan.zhihu.com/p/38288285?utm_source=com.alibaba.android.rimet&amp;utm_medium=social：" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/38288285?utm_source=com.alibaba.android.rimet&amp;utm_medium=social：</a></p>
-<h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ul>
-<li>跨平台 （只有 0.2% 的平台特定代码）</li>
-<li>统一的设计语言，同时还能为不同平台提供不同设计</li>
-<li>React 的 scale 很好，生命周期比原生简单，声明式很好</li>
-<li>迭代速度快（主要是 hot reloading 很快）</li>
-<li>大量基础设施的投入值得（网络、国际化、复杂动画、设备信息、用户信息等等都是通过一个桥把原生 api 暴露给 RN 的。）</li>
-<li>同时他们在这里也指出：他们并不相信在一个已有 app 上集成 RN 是一件简单事儿，必须要大量且持续地投入基础设施才行（说好的「满意的地方」呢）</li>
-<li>性能 （尽管大家都担心但是其实基本没有问题）</li>
-<li>不过首次渲染比较慢，导致不适合用作启动屏、deeplink，也增加了可交互时间（TTI），另外掉帧不好 debug（说好的「满意的地方」呢）</li>
-<li>Redux（好用，虽然废话太多）</li>
-<li>背后是原生，一些曾经不确定能不能做的功能（Shared element transitions、动画库 Lottie、网络层、核心基础设施）发现都能做</li>
-<li>静态分析（eslint，prettier，一些性能检测）</li>
-<li>动画</li>
-<li>JS/React 的开源生态</li>
-<li>Flexbox （via Yoga）</li>
-<li>有时候可以加上 Web 跨三端</li>
-</ul>
-<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><ul>
-<li>RN 太不成熟</li>
-<li>需要 fork RN</li>
-<li>JS 不行 （JS 没有类型不 scale，flow 不好用，TS 不好集成到 babel 和 metro）</li>
-<li>不好重构（JS 没有类型无法静态分析，重构引起的错误不能在编译时被捕捉到）</li>
-<li>咳，用我 FB 的新编译到 JS 语言大 ReasonML 啊……静态强类型 + 类型推断 + 自带不可变数据结构 + JS 友好语法 + 官方 React 支持，绝对 scale（咳扯远了</li>
-<li>JSCore 在 iOS / Android 上不一致 （Android 上是 RN 自己 bundle 的），很难 debug 这种坑</li>
-<li>RN 的开源库质量不行（因为太少人能精通所有平台了）</li>
-<li>做功能时要回去搞基础设施（因为有的基础设施可能还没暴露给 RN）</li>
-<li>奔溃监控（业内没方案，只能自己搞）</li>
-<li>原生桥太难写，另外 JS 的类型太难预料（和强类型语言 interop 时）<br>-RN 运行时的初始化太慢</li>
-<li>首次渲染时间慢（需要从 主线程 -&gt; JS -&gt; Yoga -&gt; 主线程）</li>
-<li>应用体积</li>
-<li>64 位 （因为 RN 不兼容的 issue 导致他们至今没法在 android 发布 64 位应用）</li>
-<li>手势（iOS 和 Android 的手势不好统一，虽然他们搞了 react-native-gesture-handler）</li>
-<li>长列表</li>
-<li>升级 RN 有的时候非常麻烦</li>
-<li>Accessibility （RN 的有 bug，又要 fork）</li>
-<li>稀奇古怪的奔溃</li>
-<li>安卓上的应用实例序列化问题</li>
-</ul>
-<h3 id="个人观点"><a href="#个人观点" class="headerlink" title="个人观点"></a>个人观点</h3><p>如果不需要开发那种非常复杂的功能，react-native社区提供的第三方库基本能满足开发需求；</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2039,7 +1987,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">49</span>
+                <span class="site-state-item-count">50</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2052,7 +2000,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-count">21</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
