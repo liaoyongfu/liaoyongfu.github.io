@@ -317,6 +317,176 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2018/06/21/css/css-transforms-3d/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liaoyf">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="liaoyf的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/21/css/css-transforms-3d/" itemprop="url">css-transforms-3d</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-21T09:38:21+08:00">
+                2018-06-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/06/21/css/css-transforms-3d/" class="leancloud_visitors" data-flag-title="css-transforms-3d">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="浏览器支持情况"><a href="#浏览器支持情况" class="headerlink" title="浏览器支持情况"></a>浏览器支持情况</h2><h3 id="2D-Transforms"><a href="#2D-Transforms" class="headerlink" title="2D Transforms"></a>2D Transforms</h3><p>Chrome    Safari    Firefox    Opera    IE    Android    iOS<br>Any        3.1+      3.5+      10.5+    9+    4.1+      At least 4</p>
+<h3 id="3D-Transforms"><a href="#3D-Transforms" class="headerlink" title="3D Transforms"></a>3D Transforms</h3><p>Chrome    Safari    Firefox    Opera    IE    Android    iOS<br>10+        4+        12+        none    10+    4.1+      5+</p>
+<h2 id="2D-Transforms-1"><a href="#2D-Transforms-1" class="headerlink" title="2D Transforms"></a>2D Transforms</h2><ul>
+<li><p>scale(): 缩放元素，包括：<code>font-size</code>,<code>padding</code>,<code>height</code>,<code>width</code>。它还提供<code>scaleX</code>和<code>scaleY</code>速记函数。</p>
+</li>
+<li><p>skewX() and skewY(): 元素向左或者向右倾斜，这个没有<code>skew</code>函数。</p>
+</li>
+<li><p>translate(): 位移元素</p>
+</li>
+<li><p>rotate(): 顺时针翻转元素</p>
+</li>
+<li><p>matrix(): 矩阵，这个函数可能不是专门用手写的，但将所有转换合并为一个。</p>
+</li>
+<li><p>perspective(): 不会影响元素本身，但会影响后代元素3D变换的变换，从而使它们都具有一致的深度透视图。</p>
+</li>
+</ul>
+<h2 id="3D-Transforms-1"><a href="#3D-Transforms-1" class="headerlink" title="3D Transforms"></a>3D Transforms</h2><h3 id="Perspective"><a href="#Perspective" class="headerlink" title="Perspective"></a>Perspective</h3><p>要激活3D空间，元素必须要有透视。可以有两种方式使用：使用<code>transform: perspective(600px)</code>或者<code>perspective: 600px</code>。</p>
+<p>perspective决定3D效果的强度的值。把它看作从观察者到物体的距离。值越大，距离越远，视觉效果越不强烈。perspective: 2000px;产生微妙的3D效果，就像我们通过双筒望远镜从远处观看物体一样。perspective: 100px;产生巨大的3D效果，就像一只看到巨大物体的小昆虫。</p>
+<p>可以在子元素上使用perspective或者父级元素，但是，当用于多个元素时，转换后的元素不会按预期排列。如果跨不同位置的元素使用相同的变换，则每个元素都有自己的视点。为了解决这个问题，请使用perspective父元素的属性，以便每个孩子可以共享相同的3D空间。参考<a href="https://desandro.github.io/3dtransforms/examples/perspective-02-children.html" target="_blank" rel="noopener">https://desandro.github.io/3dtransforms/examples/perspective-02-children.html</a></p>
+<p></p><p data-height="265" data-theme-id="0" data-slug-hash="xjGKMW" data-default-tab="css,result" data-user="liaoyf" data-embed-version="2" data-pen-title="css-3d-transforms-perspective" class="codepen">See the Pen <a href="https://codepen.io/liaoyf/pen/xjGKMW/" target="_blank" rel="noopener">css-3d-transforms-perspective</a> by liaoyf (<a href="https://codepen.io/liaoyf" target="_blank" rel="noopener">@liaoyf</a>) on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</p><p></p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+<p>默认情况下，3D空间的视点位于中心。你可以用perspective-origin属性来改变视点的位置。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">perspective-origin: 25% 75%;</span><br></pre></td></tr></table></figure>
+<h3 id="3D-Transform-functions"><a href="#3D-Transform-functions" class="headerlink" title="3D Transform functions"></a>3D Transform functions</h3><ul>
+<li>rotateX( angle )</li>
+<li>rotateY( angle )</li>
+<li>rotateZ( angle )</li>
+<li>translateZ( tz )</li>
+<li>scaleZ( sz )</li>
+</ul>
+<p>还有几个速记变换函数需要所有三个维度的值：</p>
+<ul>
+<li>translate3d( tx, ty, tz )</li>
+<li>scale3d( sx, sy, sz )</li>
+<li>rotate3d( rx, ry, rz, angle )</li>
+</ul>
+<blockquote>
+<p>这些foo3d()转换函数还具有在Safari中触发硬件加速的好处，如果您正在编写适用于iOS或Safari的生产准备CSS，请务必使用这些foo3d()函数以获得最佳的渲染性能。</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2018/06/20/react-native/react-native版本0.55搭建/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1736,160 +1906,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2018/03/27/react/React遇到的坑/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="liaoyf">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="liaoyf的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/27/react/React遇到的坑/" itemprop="url">React遇到的坑.md</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-27T20:55:47+08:00">
-                2018-03-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/03/27/react/React遇到的坑/" class="leancloud_visitors" data-flag-title="React遇到的坑.md">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="webpack编译后，代码中判断子组件名称功能失效。"><a href="#webpack编译后，代码中判断子组件名称功能失效。" class="headerlink" title="webpack编译后，代码中判断子组件名称功能失效。"></a>webpack编译后，代码中判断子组件名称功能失效。</h2><p>因为压缩后函数名称混淆，所以不能通过<code>typeof child.type === &#39;function&#39; &amp;&amp; child.type.name === &#39;FormControl&#39;</code>，而是应该通过<code>child.type === FormControl</code></p>
-<h2 id="当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。"><a href="#当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。" class="headerlink" title="当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。"></a>当input框输入值时输入框自动被失去了焦点，原因是在render函数里又用了render。</h2><p> 参考网址：<a href="https://stackoverflow.com/questions/25385578/nested-react-input-element-loses-focus-on-typing" target="_blank" rel="noopener">https://stackoverflow.com/questions/25385578/nested-react-input-element-loses-focus-on-typing</a></p>
-<h2 id="input值不会随着属性改变而改变"><a href="#input值不会随着属性改变而改变" class="headerlink" title="input值不会随着属性改变而改变"></a>input值不会随着属性改变而改变</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;Parent&gt;</span><br><span class="line">    &lt;Child inputVal=&#123;this.state.inputVal&#125;/&gt;</span><br><span class="line">&lt;/Parent&gt;</span><br></pre></td></tr></table></figure>
-<p>当<code>Child</code>组件的<code>value</code>为<code>null</code>后input的值不会更改。所以一般要判断是否存在<code>null</code>值：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;FormControl value=&#123;this.props.inputVal || &apos;&apos;&#125;/&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="UglifyJs编辑后有些arguments无效"><a href="#UglifyJs编辑后有些arguments无效" class="headerlink" title="UglifyJs编辑后有些arguments无效"></a>UglifyJs编辑后有些arguments无效</h2><p>升级uglifyjs-webpack-plugin和uglify-js：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&quot;uglify-js&quot;: &quot;^3.1.6&quot;,</span><br><span class="line">&quot;uglifyjs-webpack-plugin&quot;: &quot;^1.0.1&quot;,</span><br></pre></td></tr></table></figure>
-<h2 id="上传文件不能上传同一张图片"><a href="#上传文件不能上传同一张图片" class="headerlink" title="上传文件不能上传同一张图片"></a>上传文件不能上传同一张图片</h2><p>在上传完成后，设置<code>$(&#39;input&#39;).val(&#39;&#39;)</code>即可。</p>
-<h2 id="react中ref传递给页面组件时失效"><a href="#react中ref传递给页面组件时失效" class="headerlink" title="react中ref传递给页面组件时失效"></a>react中<code>ref</code>传递给页面组件时失效</h2><p>比如如下代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">let Component = require(`./$&#123;item.componentName&#125;/index.js`).default;</span><br><span class="line">return &lt;Component ref=&#123;c =&gt; this.a = c&#125; key=&#123;i&#125; &#123;...props&#125; updateCzsj=&#123;updateCzsj&#125;/&gt;;</span><br></pre></td></tr></table></figure>
-<p>这时，使用<code>ref</code>是无效的，这时因为包装了<code>withRouter</code>导致ref失效，应该使用<code>wrappedComponentRef</code>，获取时使用如下语句获取：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">this.a</span><br></pre></td></tr></table></figure>
-<h2 id="在react组件中引入样式文件导致echarts宽度计算失败的bug"><a href="#在react组件中引入样式文件导致echarts宽度计算失败的bug" class="headerlink" title="在react组件中引入样式文件导致echarts宽度计算失败的bug"></a>在react组件中引入样式文件导致echarts宽度计算失败的bug</h2><p>比如下面：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;div className=&quot;box&quot;&gt;</span><br><span class="line">    &lt;div className=&quot;left&quot;&gt;</span><br><span class="line">        &lt;Echart ...&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;div className=&quot;right&quot;&gt;</span><br><span class="line">        &lt;Echart ...&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
-<p><code>box</code>中的<code>left</code>、<code>right</code>各占<code>50%</code>（样式写在样式文件内），这时候渲染echarts的时候，因为样式文件还未生效，所以Echarts读取的<code>left</code>和<code>right</code>宽度是<code>100%</code>的。</p>
-<p><strong><em>这个是为什么呢？</em></strong></p>
-<h2 id="修改react子组件"><a href="#修改react子组件" class="headerlink" title="修改react子组件"></a>修改react子组件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">return React.Children.map(this.props.children, child =&gt; &#123;</span><br><span class="line">    if (!child) return child;</span><br><span class="line">    if (typeof child.type === &apos;function&apos; &amp;&amp; child.type.name === &apos;Tr&apos;) &#123;</span><br><span class="line">        // 这边要修改children属性而不是直接返回它的children</span><br><span class="line">        return React.cloneElement(child, &#123;</span><br><span class="line">            children: (</span><br><span class="line">                React.Children.map(child.props.children, subChild =&gt; &#123;</span><br><span class="line">                    if (typeof subChild.type === &apos;function&apos; &amp;&amp; subChild.type.name === &apos;Label&apos;) &#123;</span><br><span class="line">                        return React.cloneElement(subChild, &#123;</span><br><span class="line">                            required: true</span><br><span class="line">                        &#125;)</span><br><span class="line">                    &#125; else if (typeof subChild.type === &apos;function&apos; &amp;&amp; subChild.type.name === &apos;Content&apos;) &#123;</span><br><span class="line">                        return React.cloneElement(subChild, &#123;</span><br><span class="line">                            children: [...subChild.props.children, textTip],</span><br><span class="line">                            validationState: validationState</span><br><span class="line">                        &#125;)</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;)</span><br><span class="line">            )</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        return child;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<h2 id="使用react-css-modules后的问题"><a href="#使用react-css-modules后的问题" class="headerlink" title="使用react-css-modules后的问题"></a>使用react-css-modules后的问题</h2><p>使用react-css-modules后会导致antd的Picker不能滑动选择（setState会一直触发componentWillReceiveProps）。所以改成<code>babel-plugin-react-css-modules</code>，配置如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">plugins: [</span><br><span class="line">    [</span><br><span class="line">        &apos;react-css-modules&apos;, &#123;</span><br><span class="line">            exclude: &apos;node_modules&apos;,</span><br><span class="line">            filetypes: &#123;</span><br><span class="line">                &apos;.scss&apos;: &#123;</span><br><span class="line">                    syntax: &apos;postcss-scss&apos;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            handleMissingStyleName: &apos;ignore&apos;,</span><br><span class="line">            // 这个必须和css-loader配置的名称一致，不然会导致生成的类名不相对应</span><br><span class="line">            generateScopedName: &apos;[local]___[hash:base64:5]&apos;</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1935,7 +1956,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-count">51</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

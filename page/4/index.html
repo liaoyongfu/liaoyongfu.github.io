@@ -317,6 +317,156 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2017/09/29/react/React 16新增功能/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liaoyf">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="liaoyf的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/09/29/react/React 16新增功能/" itemprop="url">React 16新增功能</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-29T15:19:23+08:00">
+                2017-09-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/09/29/react/React 16新增功能/" class="leancloud_visitors" data-flag-title="React 16新增功能">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="官网介绍"><a href="#官网介绍" class="headerlink" title="官网介绍"></a>官网介绍</h2><p><a href="https://facebook.github.io/react/blog/2017/09/26/react-v16.0.html" target="_blank" rel="external">https://facebook.github.io/react/blog/2017/09/26/react-v16.0.html</a></p>
+<h2 id="render函数不必在包一层元素"><a href="#render函数不必在包一层元素" class="headerlink" title="render函数不必在包一层元素"></a>render函数不必在包一层元素</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">render() &#123;</div><div class="line">  // No need to wrap list items in an extra element!</div><div class="line">  return [</div><div class="line">    // Don&apos;t forget the keys :)</div><div class="line">    &lt;li key=&quot;A&quot;&gt;First item&lt;/li&gt;,</div><div class="line">    &lt;li key=&quot;B&quot;&gt;Second item&lt;/li&gt;,</div><div class="line">    &lt;li key=&quot;C&quot;&gt;Third item&lt;/li&gt;,</div><div class="line">  ];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="更好的错误处理"><a href="#更好的错误处理" class="headerlink" title="更好的错误处理"></a>更好的错误处理</h2><p>以前的版本，如果子组件有报错整个组件本身直接不渲染，而现在可以通过<code>componentDidCatch</code>捕获错误信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">class ErrorBoundary extends React.Component &#123;</div><div class="line">    constructor(props) &#123;</div><div class="line">        super(props);</div><div class="line">        this.state = &#123; error: null, errorInfo: null &#125;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    componentDidCatch(error, errorInfo) &#123;</div><div class="line">        // Catch errors in any components below and re-render with error message</div><div class="line">        this.setState(&#123;</div><div class="line">            error: error,</div><div class="line">            errorInfo: errorInfo</div><div class="line">        &#125;)</div><div class="line">        // You can also log error messages to an error reporting service here</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    render() &#123;</div><div class="line">        if (this.state.errorInfo) &#123;</div><div class="line">            // Error path</div><div class="line">            return (</div><div class="line">                &lt;div&gt;</div><div class="line">                    &lt;h2&gt;Something went wrong.&lt;/h2&gt;</div><div class="line">                    &lt;details style=&#123;&#123; whiteSpace: &apos;pre-wrap&apos; &#125;&#125;&gt;</div><div class="line">                        &#123;this.state.error &amp;&amp; this.state.error.toString()&#125;</div><div class="line">                        &lt;br /&gt;</div><div class="line">                        &#123;this.state.errorInfo.componentStack&#125;</div><div class="line">                    &lt;/details&gt;</div><div class="line">                &lt;/div&gt;</div><div class="line">            );</div><div class="line">        &#125;</div><div class="line">        // Normally, just render children</div><div class="line">        return this.props.children;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Portals"><a href="#Portals" class="headerlink" title="Portals"></a>Portals</h2><p>现在可以通过<code>React.createPortal(&lt;SomeComponent/&gt;, document.getElementById(&#39;root&#39;))</code>的形式在react应用容器之外修改或增加DOM：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">render() &#123;</div><div class="line">  // React does *not* create a new div. It renders the children into `domNode`.</div><div class="line">  // `domNode` is any valid DOM node, regardless of its location in the DOM.</div><div class="line">  return ReactDOM.createPortal(</div><div class="line">    this.props.children,</div><div class="line">    domNode,</div><div class="line">  );</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这样对于像要创建模态框就很容易了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line">class Overlay extends React.Component&#123;</div><div class="line">    constructor()&#123;</div><div class="line">        super();</div><div class="line"></div><div class="line">        this.overlayContainer = document.createElement(&apos;div&apos;);</div><div class="line">        document.body.appendChild(this.overlayContainer);</div><div class="line">    &#125;</div><div class="line">    componentWillUnmount()&#123;</div><div class="line">        document.body.removeChild(this.overlayContainer);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    render()&#123;</div><div class="line">        return ReactDOM.createPortal(</div><div class="line">            &lt;div className=&quot;overlay&quot; style=&#123;&#123;position: &apos;absolute&apos;, top: 0, right: 0, bottom: 0, left: 0, background: &apos;rgba(0,0,0, 0.5)&apos;, color: &apos;#fff&apos;&#125;&#125;&gt;</div><div class="line">                &#123;this.props.children&#125;</div><div class="line">            &lt;/div&gt;,</div><div class="line">            this.overlayContainer</div><div class="line">        )</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Demo extends React.Component&#123;</div><div class="line">    constructor()&#123;</div><div class="line">        super();</div><div class="line"></div><div class="line">        this.state = &#123;</div><div class="line">            overlayActive: true</div><div class="line">        &#125;;</div><div class="line">    &#125;</div><div class="line">    render()&#123;</div><div class="line">        return (</div><div class="line">            &lt;div&gt;</div><div class="line">                &lt;button type=&quot;button&quot; onClick=&#123;() =&gt; this.setState(&#123;</div><div class="line">                    user: null</div><div class="line">                &#125;)&#125;&gt;Update&lt;/button&gt;</div><div class="line">                &#123;this.state.overlayActive &amp;&amp; (</div><div class="line">                    &lt;Overlay onClose=&#123;() =&gt; this.setState(&#123;overlayActive: false&#125;)&#125;&gt;</div><div class="line">                        hello modal!!!</div><div class="line">                        &lt;button type=&quot;button&quot; onClick=&#123;() =&gt; this.setState(&#123;overlayActive: false&#125;)&#125;&gt;Close&lt;/button&gt;</div><div class="line">                    &lt;/Overlay&gt;</div><div class="line">                )&#125;</div><div class="line">            &lt;/div&gt;</div><div class="line">        );</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="更好的服务端渲染"><a href="#更好的服务端渲染" class="headerlink" title="更好的服务端渲染"></a>更好的服务端渲染</h2><p>省略。。。</p>
+<h2 id="支持自定义DOM属性"><a href="#支持自定义DOM属性" class="headerlink" title="支持自定义DOM属性"></a>支持自定义DOM属性</h2><p>以前是直接忽视无法识别的属性，而现在是直接渲染给DOM，这也直接节省了很多代码。</p>
+<p>具体参考：<a href="https://facebook.github.io/react/blog/2017/09/08/dom-attributes-in-react-16.html" target="_blank" rel="external">https://facebook.github.io/react/blog/2017/09/08/dom-attributes-in-react-16.html</a></p>
+<h2 id="文件减少"><a href="#文件减少" class="headerlink" title="文件减少"></a>文件减少</h2><ul>
+<li><p>react is 5.3 kb (2.2 kb gzipped), down from 20.7 kb (6.9 kb gzipped).</p>
+</li>
+<li><p>react-dom is 103.7 kb (32.6 kb gzipped), down from 141 kb (42.9 kb gzipped).</p>
+</li>
+<li><p>react + react-dom is 109 kb (34.8 kb gzipped), down from 161.7 kb (49.8 kb gzipped).</p>
+</li>
+</ul>
+<h2 id="MIT协议"><a href="#MIT协议" class="headerlink" title="MIT协议"></a>MIT协议</h2><p>妥协了…</p>
+<h2 id="新的核心架构Fiber"><a href="#新的核心架构Fiber" class="headerlink" title="新的核心架构Fiber"></a>新的核心架构Fiber</h2>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2017/09/29/react-native/react-native中FlatList的使用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1693,241 +1843,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2017/08/02/webpack/迁移到webpack2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="liaoyf">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="liaoyf的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/02/webpack/迁移到webpack2/" itemprop="url">未命名</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-02T11:44:45+08:00">
-                2017-08-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/08/02/webpack/迁移到webpack2/" class="leancloud_visitors" data-flag-title="">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="迁移到webpack2"><a href="#迁移到webpack2" class="headerlink" title="迁移到webpack2"></a>迁移到webpack2</h1><p>Webpack is on the verge of having its latest major version released, and it’s expected to drop very soon. However, the main thing holding the release back is documentation, and the code is mostly written. I recently took the time to update our work project from Webpack 1 to 2, and thought I’d document the steps taken for anyone else who wants to make the move.</p>
-<p>You can also check out <a href="https://webpack.js.org" target="_blank" rel="external">the migration guide on the Webpack documentation</a>.</p>
-<p><strong>Install the webpack2</strong></p>
-<p>The first thing to do is install the latest version. Because it’s not a stable release, you have to specify the exact beta version you’d like. At the time of writing it’s 2.1.0-beta.25:</p>
-<pre><code>npm install --save-dev webpack@2.1.0-beta.25
-</code></pre><p>If you’re using any other Webpack plugins, be aware that they might need updating. For example, the Extract Text Plugin has a v2 in beta also:</p>
-<pre><code>npm install --save-dev extract-text-webpack-plugin@2.0.0-beta.4
-</code></pre><p><strong>module.loaders =&gt; module.rules</strong></p>
-<p>This is not a breaking change because module.loaders will continue to be supported, but in the future it will be deprecated in favour of module.rules. This is just an easy renaming step.</p>
-<pre><code>// before
-modules: {
-  loaders: {...}
-}
-
-// after
-modules: {
-  rules: {...}
-}
-</code></pre><p><strong>resolve.modulesDirectories =&gt; resolve.modules</strong></p>
-<p>Another renaming step, the resolve options have been renamed:</p>
-<pre><code>// before
-resolve: {
-  modulesDirectories: [...],
-}
-
-// after
-resolve: {
-  modules: [...],
-}
-</code></pre><p><strong>No webpack.optimize.OccurenceOrderPlugin</strong></p>
-<p>It’s now included by default, so there is no need to have this in our config.</p>
-<p><strong>Configuring loaders</strong></p>
-<p>At work we’re using postcss and postcss-loader to load our CSS through Webpack. The loader used to expect a top level postcss key in the Webpack config. As of Webpack 2 this is no longer allowed; we can instead define an options key when we configure the loader. This replaces the query option from Webpack 1. Any plugin that looked for top level configuration will have to be swapped to this style.</p>
-<pre><code>// before, in Webpack top level
-postcss: {
-  plugins: ...
-}
-
-// after
-module: {
-  rules: [{
-    test: /\.scss$/,
-    use: [
-      {
-        loader: &apos;postcss-loader&apos;,
-        options: {
-          plugins: ...
-        }
-      },
-      &apos;sass-loader&apos;
-    ]
-  }]
-}
-</code></pre><p><strong>ExtractTextPlugin changes</strong></p>
-<p>The above change to loader configuration also makes it way easier to configure multiple loaders; previously it would only be possible to pass an array of loaders in string form to some plugins, such as ExtractTextPlugin:</p>
-<pre><code>// Webpack 1
-ExtractTextPlugin.extract(
-  &apos;style-loader&apos;,
-  &apos;css-loader!postcss-loader!sass-loader&apos;
-);
-</code></pre><p>This quickly got very hard to work with if you had to pass options:</p>
-<pre><code>// Webpack 1
-ExtractTextPlugin.extract(
-  &apos;style-loader&apos;,
-  &apos;css-loader?modules-true!postcss-loader!sass-loader&apos;
-);
-</code></pre><p>But now Webpack 2 can deal with arrays of objects to configure loaders. We can replace the above with:</p>
-<pre><code>// Webpack 2
-var loaders = [
-  {
-    loader: &apos;css-loader&apos;,
-    options: {
-      modules: true
-    }
-  },
-  {
-    loader: &apos;postcss-loader&apos;
-  },
-  {
-    loader: &apos;sass-loader&apos;
-  }
-]
-</code></pre><p>Whereas in Webpack 1 we used the key query for configuring loaders, we now use options. ExtractTextPlugin can now take this array, rather than only allowing the string form:</p>
-<pre><code>// Webpack 2
-ExtractTextPlugin.extract({
-  fallbackLoader: &apos;style-loader&apos;,
-  loader: loaders,
-})
-</code></pre><p><strong>Stop Babel from compiling ES2015 modules</strong></p>
-<p>Webpack 1 wasn’t able to parse ES2015 modules, so Babel would convert them into CommonJS. Webpack 2 can parse ES2015 modules, and is able to eliminate dead code based on which modules are used, so it’s recommended that you tell Babel not to convert modules into CommonJS. You can do this by changing your .babelrc:</p>
-<pre><code>// before
-&quot;presets&quot;: [&quot;es2015&quot;]
-
-// after
-&quot;presets&quot;: [
-  [&quot;es2015&quot;, { &quot;modules&quot;: false }]
-]
-</code></pre><p>We’ve seen a good file size saving by doing this, and hopefully this will continue to improve in the future!</p>
-<p><strong>Fin</strong></p>
-<p>Webpack 2 offers better performance, improved bundling and a much nicer experience when configuring it. Given that the code is so stable, despite its beta status, I highly recommend giving it a go on your projects when you can.</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1973,7 +1893,7 @@ ExtractTextPlugin.extract({
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-count">51</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

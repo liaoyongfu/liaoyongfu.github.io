@@ -94,17 +94,16 @@
 
 
 
-<meta name="description" content="webpack学习02——代码分割定义一个代码分割点commonjs: require.ensurerequire.ensure(dependencies, callback) example: //require.ensure仅仅加载而不执行模块 require.ensure([&amp;quot;module-a&amp;quot;, &amp;quot;module-b&amp;quot;], function(requi">
-<meta property="og:type" content="article">
+<meta name="description" content="加油！">
+<meta property="og:type" content="website">
 <meta property="og:title" content="liaoyf的博客">
-<meta property="og:url" content="https://liaoyongfu.github.io/2017/08/02/webpack/webpack学习02——代码分割/index.html">
+<meta property="og:url" content="https://liaoyongfu.github.io/page/6/index.html">
 <meta property="og:site_name" content="liaoyf的博客">
-<meta property="og:description" content="webpack学习02——代码分割定义一个代码分割点commonjs: require.ensurerequire.ensure(dependencies, callback) example: //require.ensure仅仅加载而不执行模块 require.ensure([&amp;quot;module-a&amp;quot;, &amp;quot;module-b&amp;quot;], function(requi">
+<meta property="og:description" content="加油！">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2016-12-05T11:57:04.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="liaoyf的博客">
-<meta name="twitter:description" content="webpack学习02——代码分割定义一个代码分割点commonjs: require.ensurerequire.ensure(dependencies, callback) example: //require.ensure仅仅加载而不执行模块 require.ensure([&amp;quot;module-a&amp;quot;, &amp;quot;module-b&amp;quot;], function(requi">
+<meta name="twitter:description" content="加油！">
 
 
 
@@ -133,13 +132,13 @@
 
 
 
-  <link rel="canonical" href="https://liaoyongfu.github.io/2017/08/02/webpack/webpack学习02——代码分割/"/>
+  <link rel="canonical" href="https://liaoyongfu.github.io/page/6/"/>
 
 
 
 
 
-  <title> | liaoyf的博客</title>
+  <title>liaoyf的博客</title>
   
 
 
@@ -174,7 +173,9 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail ">
+  <div class="container sidebar-position-left 
+   page-home 
+ ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -301,9 +302,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-
-  <div id="posts" class="posts-expand">
+  <section id="posts" class="posts-expand">
     
+      
 
   
 
@@ -316,7 +317,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2017/08/02/webpack/webpack学习02——代码分割/">
+    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2016/08/02/angular2/遇到的问题/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="liaoyf">
@@ -333,7 +334,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline"></h1>
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/08/02/angular2/遇到的问题/" itemprop="url">angular2遇到的问题.md</a></h1>
         
 
         <div class="post-meta">
@@ -345,8 +348,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-02T11:44:45+08:00">
-                2017-08-02
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-02T14:38:52+08:00">
+                2016-08-02
               </time>
             
 
@@ -363,7 +366,7 @@
 
           
           
-             <span id="/2017/08/02/webpack/webpack学习02——代码分割/" class="leancloud_visitors" data-flag-title="">
+             <span id="/2016/08/02/angular2/遇到的问题/" class="leancloud_visitors" data-flag-title="angular2遇到的问题.md">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -394,76 +397,45 @@
       
 
       
-        <h1 id="webpack学习02——代码分割"><a href="#webpack学习02——代码分割" class="headerlink" title="webpack学习02——代码分割"></a>webpack学习02——代码分割</h1><h2 id="定义一个代码分割点"><a href="#定义一个代码分割点" class="headerlink" title="定义一个代码分割点"></a>定义一个代码分割点</h2><h3 id="commonjs-require-ensure"><a href="#commonjs-require-ensure" class="headerlink" title="commonjs: require.ensure"></a>commonjs: <code>require.ensure</code></h3><pre><code>require.ensure(dependencies, callback)
-</code></pre><p>example:</p>
-<pre><code>//require.ensure仅仅加载而不执行模块
-require.ensure([&quot;module-a&quot;, &quot;module-b&quot;], function(require) {
-    var a = require(&quot;module-a&quot;);
-    // ...
-});
-</code></pre><h3 id="AMD-require"><a href="#AMD-require" class="headerlink" title="AMD: require"></a>AMD: <code>require</code></h3><pre><code>require(dependencies, callback)
-</code></pre><p>example:</p>
-<pre><code>//AMD的require加载并会执行模块
-require([&quot;module-a&quot;, &quot;module-b&quot;], function(a, b) {
-    // ...
-});
-</code></pre><h3 id="ES6模块"><a href="#ES6模块" class="headerlink" title="ES6模块"></a>ES6模块</h3><p><strong>webpack1是不支持原生es6模块的，可以通过babal转换</strong></p>
-<h2 id="块的内容"><a href="#块的内容" class="headerlink" title="块的内容"></a>块的内容</h2><p>所有分隔的文件会成为一个块，这个块是由其依赖递归加进去的。</p>
-<h2 id="块压缩"><a href="#块压缩" class="headerlink" title="块压缩"></a>块压缩</h2><p>如果两个块包含同一个模块，他们会被合并成一个。这可能造成块有相同的父级。<br>如果一个模块在一个块的所有父级中是可获取的，这个模块将会在这个块中删除。<br>如果一个块包含另一个块的所有模块，则存储这个块，它实现多个块。</p>
-<h2 id="块加载"><a href="#块加载" class="headerlink" title="块加载"></a>块加载</h2><p>根据配置<code>target</code>目标，将将块加载的运行时逻辑添加到包中。例如：<code>web</code>目标块通过jsonp加载。只有一个块被加载一次，并行请求被合并成一个。运行时检查加载的块是否完成多个块。</p>
-<h2 id="块的类型"><a href="#块的类型" class="headerlink" title="块的类型"></a>块的类型</h2><h3 id="入口块"><a href="#入口块" class="headerlink" title="入口块"></a>入口块</h3><p>一个入口块包含了请求时加载的模块。如果这个块包含模块<code>0</code>则加载并执行它，如果没有，它等待有请求模块<code>0</code>的块。</p>
-<h3 id="正常块"><a href="#正常块" class="headerlink" title="正常块"></a>正常块</h3><p>一个正常的块不会在运行时加载，它仅仅包含一些模块，这个结构依赖于块加载算法，例如：如果目标是jsonp，则这些模块会包含一个jsonp回调函数，这个块当然还包含它负责的一些块id列表。</p>
-<h3 id="初始化块（非入口）"><a href="#初始化块（非入口）" class="headerlink" title="初始化块（非入口）"></a>初始化块（非入口）</h3><p>一个初始化块是一个正常的块，不同的仅仅是压缩工具视它更重要，因为它计算向初始加载时间（像入口块），这个块类型可以结合<code>CommonsChunkPlugin</code>发生。</p>
-<h3 id="分隔app和vendor代码"><a href="#分隔app和vendor代码" class="headerlink" title="分隔app和vendor代码"></a>分隔app和vendor代码</h3><pre><code>var webpack = require(&quot;webpack&quot;);
-
-module.exports = {
-  entry: {
-    app: &quot;./app.js&quot;,
-    vendor: [&quot;jquery&quot;, &quot;underscore&quot;, ...],
-  },
-  output: {
-    filename: &quot;bundle.js&quot;
-  },
-  plugins: [
-    new webpack.optimize.CommonsChunkPlugin(/* chunkName= */&quot;vendor&quot;, /* filename= */&quot;vendor.bundle.js&quot;)
-  ]
-};
-</code></pre><p>vendor块将会从移除所有在app块中的模块，使得bundle块仅仅包含你的代码而不包含其依赖。</p>
-<pre><code>&lt;script src=&quot;vendor.bundle.js&quot;&gt;&lt;/script&gt;
-&lt;script src=&quot;bundle.js&quot;&gt;&lt;/script&gt;
-</code></pre><h3 id="多入口块"><a href="#多入口块" class="headerlink" title="多入口块"></a>多入口块</h3><h4 id="加载多入口"><a href="#加载多入口" class="headerlink" title="加载多入口"></a>加载多入口</h4><p>通过<code>CommonsChukPlugin</code>运行时被移动到公共块，入口文件变成初始化块。只有当初始块可以被加载时，其他入口块才可以被加载。</p>
-<pre><code>var webpack = require(&quot;webpack&quot;);
-module.exports = {
-    entry: { a: &quot;./a&quot;, b: &quot;./b&quot; },
-    output: { filename: &quot;[name].js&quot; },
-    plugins: [ new webpack.optimize.CommonsChunkPlugin(&quot;init.js&quot;) ]
+        
+          
+            <ol>
+<li><p>在组件时<code>moduleId: module.id</code>时，报<code>Cannot find name &#39;module&#39;</code>?</p>
+<p> 解决方法：</p>
+<p> You need to install node ambientDependencies. Typings.json</p>
+<pre><code>&quot;ambientDependencies&quot;: {
+    &quot;node&quot;: &quot;github:DefinitelyTyped/DefinitelyTyped/node/node.d.ts#138ad74b9e8e6c08af7633964962835add4c91e2&quot;
 }
+</code></pre><p> Another way can use typings manager to install node definition file globally:</p>
+<pre><code>typings install dt~node --global --save
+</code></pre><p> Then your typings.json file will look like this:</p>
+<pre><code>&quot;globalDependencies&quot;: {
+      &quot;node&quot;: &quot;registry:dt/node#6.0.0+20160608110640&quot;
+}
+</code></pre><p> If you use Typescript 2^ just use the following command:</p>
+<pre><code>npm install @types/node --global --save
+</code></pre><p> Or install it within the project:</p>
+<pre><code>npm install @types/node --save
+</code></pre><p> and then add a reference to it from your bootstrap:</p>
+<pre><code>///&lt;reference path=&quot;../../node_modules/@types/node/index.d.ts&quot; /&gt;
+</code></pre></li>
+<li><p>而后出现<code>Url.match is not a function</code>?</p>
+<p> 解决方法：</p>
+</li>
+<li><p>报错：<code>Property &#39;find&#39; does not exist on type &#39;Hero[]&#39;.</code>?</p>
+<p> 解决方法：在<code>typings.json</code>中配置如下代码</p>
+<pre><code>{
+      &quot;globalDependencies&quot;: {
+        &quot;core-js&quot;: &quot;registry:dt/core-js#0.0.0+20160725163759&quot;,
+        &quot;jasmine&quot;: &quot;registry:dt/jasmine#2.2.0+20160621224255&quot;,
+           &quot;node&quot;: &quot;registry:dt/node#6.0.0+20160909174046&quot;
+      }
+}
+</code></pre></li>
+</ol>
 
-&lt;script src=&quot;init.js&quot;&gt;&lt;/script&gt;
-&lt;script src=&quot;a.js&quot;&gt;&lt;/script&gt;
-&lt;script src=&quot;b.js&quot;&gt;&lt;/script&gt;
-</code></pre><h3 id="公共块"><a href="#公共块" class="headerlink" title="公共块"></a>公共块</h3><p><code>CommonsChunkPlugin</code>可以移动发生在多个入口的模块到一个新的块（公共块），运行时也移动到公共块，这意味着旧的入口块已经变成初始化块。</p>
-<h3 id="压缩优化插件"><a href="#压缩优化插件" class="headerlink" title="压缩优化插件"></a>压缩优化插件</h3><ul>
-<li>LimitChunkCountPlugin</li>
-<li>MinChunkSizePlugin</li>
-<li>AggressiveMergingPlugin</li>
-</ul>
-<h3 id="命名块"><a href="#命名块" class="headerlink" title="命名块"></a>命名块</h3><p>The require.ensure function accepts an additional 3rd parameter. This must be a string. If two split point pass the same string they use the same chunk.</p>
-<h4 id="require-include"><a href="#require-include" class="headerlink" title="require.include"></a>require.include</h4><pre><code>require.include(request)
-</code></pre><p>require.include is a webpack specific function that adds a module to the current chunk, but doesn’t evaluate it (The statement is removed from the bundle).</p>
-<p>Example:</p>
-<pre><code>require.ensure([&quot;./file&quot;], function(require) {
-  require(&quot;./file2&quot;);
-});
-
-// is equal to
-
-require.ensure([], function(require) {
-  require.include(&quot;./file&quot;);
-  require(&quot;./file2&quot;);
-});
-</code></pre><p>require.include can be useful if a module is in multiple child chunks. A require.include in the parent would include the module and the instances of the modules in the child chunks would disappear.</p>
-
+          
+        
       
     </div>
     
@@ -480,32 +452,12 @@ require.ensure([], function(require) {
       
 
       
-      
+
       
 
       
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2017/08/02/webpack/webpack学习01——简介/" rel="next" title="">
-                <i class="fa fa-chevron-left"></i> 
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/08/02/webpack/webpack学习03——样式/" rel="prev" title="">
-                 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
       
-
-      
+        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -515,11 +467,14 @@ require.ensure([], function(require) {
   </article>
 
 
+    
+  </section>
 
-    <div class="post-spread">
-      
-    </div>
-  </div>
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span>
+  </nav>
+
 
 
           </div>
@@ -527,10 +482,6 @@ require.ensure([], function(require) {
 
 
           
-  <div class="comments" id="comments">
-    
-  </div>
-
 
         </div>
         
@@ -551,17 +502,8 @@ require.ensure([], function(require) {
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.jpg"
@@ -627,22 +569,6 @@ require.ensure([], function(require) {
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#webpack学习02——代码分割"><span class="nav-number">1.</span> <span class="nav-text">webpack学习02——代码分割</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#定义一个代码分割点"><span class="nav-number">1.1.</span> <span class="nav-text">定义一个代码分割点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#commonjs-require-ensure"><span class="nav-number">1.1.1.</span> <span class="nav-text">commonjs: require.ensure</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AMD-require"><span class="nav-number">1.1.2.</span> <span class="nav-text">AMD: require</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ES6模块"><span class="nav-number">1.1.3.</span> <span class="nav-text">ES6模块</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#块的内容"><span class="nav-number">1.2.</span> <span class="nav-text">块的内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#块压缩"><span class="nav-number">1.3.</span> <span class="nav-text">块压缩</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#块加载"><span class="nav-number">1.4.</span> <span class="nav-text">块加载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#块的类型"><span class="nav-number">1.5.</span> <span class="nav-text">块的类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#入口块"><span class="nav-number">1.5.1.</span> <span class="nav-text">入口块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正常块"><span class="nav-number">1.5.2.</span> <span class="nav-text">正常块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#初始化块（非入口）"><span class="nav-number">1.5.3.</span> <span class="nav-text">初始化块（非入口）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分隔app和vendor代码"><span class="nav-number">1.5.4.</span> <span class="nav-text">分隔app和vendor代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多入口块"><span class="nav-number">1.5.5.</span> <span class="nav-text">多入口块</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#加载多入口"><span class="nav-number">1.5.5.1.</span> <span class="nav-text">加载多入口</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#公共块"><span class="nav-number">1.5.6.</span> <span class="nav-text">公共块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#压缩优化插件"><span class="nav-number">1.5.7.</span> <span class="nav-text">压缩优化插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命名块"><span class="nav-number">1.5.8.</span> <span class="nav-text">命名块</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#require-include"><span class="nav-number">1.5.8.1.</span> <span class="nav-text">require.include</span></a></li></ol></li></ol></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -763,10 +689,10 @@ require.ensure([], function(require) {
 
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
 <script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
 
-
+  
 
   
 
