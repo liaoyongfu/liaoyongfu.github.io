@@ -474,6 +474,9 @@
 </blockquote>
 <p>在webstrom中，需要开启eslint配置项：</p>
 <p><img src="../../images/demo-eslint.jpg" alt="demo"></p>
+<blockquote>
+<p>这里的<code>Eslint Packge</code>一定要选项目的中的eslint哦！</p>
+</blockquote>
 <p>之后试一下<code>ctrl + E</code>看能不能自动修改代码，如果不行，<strong><em>请点击<code>File -&gt; Invalidate Caches / Restart</code>重启webstrom即可</em></strong>。</p>
 <h2 id="禁用规则"><a href="#禁用规则" class="headerlink" title="禁用规则"></a>禁用规则</h2><p>可以在你的文件中使用以下格式的块注释来临时禁止规则出现警告：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/* eslint-disable */</span><br><span class="line"></span><br><span class="line">alert(&apos;foo&apos;);</span><br><span class="line"></span><br><span class="line">/* eslint-enable */</span><br></pre></td></tr></table></figure>
@@ -491,7 +494,7 @@
 <h2 id="命令行"><a href="#命令行" class="headerlink" title="命令行"></a>命令行</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eslint [options] [file|dir|glob]*</span><br></pre></td></tr></table></figure>
 <p>比如：<code>eslint --ext .jsx,.js lib/</code>将检测lib目录下以jsx或js结尾的文件。</p>
 <p><code>eslint --ext .jsx,.js --fix lib/</code>将检测并尽可能地修复lib目录下以jsx或js结尾的文件，剩下的未修复的问题才会输出。</p>
-<h2 id="配合Prettier使用"><a href="#配合Prettier使用" class="headerlink" title="配合Prettier使用"></a>配合Prettier使用</h2><p>^_^配合prettier使你的代码更简介！</p>
+<h2 id="配合Prettier使用"><a href="#配合Prettier使用" class="headerlink" title="配合Prettier使用"></a>配合Prettier使用</h2><p>^_^配合prettier使你的代码更简洁！</p>
 <p><code>eslint-plugin-prettier</code>导出的<code>recommanded</code>配置打开了<code>eslint-plugin-prettier</code>和<code>eslint-config-prettier</code>，所以你只要把它加进去即可：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;extends&quot;: [&quot;plugin:prettier/recommended&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>当然别忘了安装依赖：</p>
