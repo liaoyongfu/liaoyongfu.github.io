@@ -1753,7 +1753,87 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm bugs axios</span><br></pre></td></tr></table></figure>
 <p>另外，如果你只是想检查模块的 git 仓库，请输入：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm repo axios</span><br></pre></td></tr></table></figure>
-<p>参考网址：<a href="https://yarn.bootcss.com/docs/" target="_blank" rel="noopener">https://yarn.bootcss.com/docs/</a></p>
+<h2 id="几个感觉有用的yarn命令"><a href="#几个感觉有用的yarn命令" class="headerlink" title="几个感觉有用的yarn命令"></a>几个感觉有用的yarn命令</h2><ul>
+<li>yarn add <package> -D/–dev</package></li>
+</ul>
+<p>安装到<code>devDependencies</code>依赖中</p>
+<ul>
+<li>yarn add <package></package></li>
+</ul>
+<p>安装到<code>dependencies</code>依赖中</p>
+<ul>
+<li>yarn add <package> -E/–exact</package></li>
+</ul>
+<p>安装包的精确版本，默认是安装包的主要版本里的最新版本。 比如说， yarn add <a href="mailto:foo@1.2.3" target="_blank" rel="noopener">foo@1.2.3</a> 会接受 1.9.1 版，但是 yarn add <a href="mailto:foo@1.2.3" target="_blank" rel="noopener">foo@1.2.3</a> –exact 只会接受 1.2.3 版。</p>
+<ul>
+<li>yarn cache dir</li>
+</ul>
+<p>显示yarn缓存的目录，我电脑默认：C:\Users\Administrator\AppData\Local\Yarn\Cache\v2</p>
+<blockquote>
+<p>通过<code>yarn config set cache-folder &lt;path&gt;</code>改变缓存目录，不然放在C盘太占空间了。通过<code>yarn cache clean</code>清空掉。</p>
+</blockquote>
+<h3 id="检测包完整性"><a href="#检测包完整性" class="headerlink" title="检测包完整性"></a>检测包完整性</h3><ul>
+<li>yarn check</li>
+</ul>
+<p>验证当前项目 package.json 里的依赖版本和 yarn 的 lock 文件是否匹配。</p>
+<ul>
+<li>yarn check –integrity</li>
+</ul>
+<p>验证当前项目 package.json 里包内容的版本和 hash 值是否与 yarn 的 lock 文件一致。 这有助于验证包依赖没有更改。</p>
+<ul>
+<li>yarn check –verify-tree</li>
+</ul>
+<p>检查<code>node_modules</code>下的<code>dependencies</code>依赖包是否存在和版本是否正确。</p>
+<p>假设一个项目：package.json中依赖<code>bootstrap3.x</code>版本，假设：</p>
+<ul>
+<li><p>更改<code>package.json</code>中bootstrap版本改成<code>4.x</code>，分别运行以上三句命令：</p>
+<ul>
+<li><p><code>yarn check</code>: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">error Lockfile does not contain pattern: &quot;bootstrap@4.x&quot;</span><br><span class="line">error &quot;bootstrap&quot; is wrong version: expected &quot;4.1.3&quot;, got &quot;3.3.7&quot;</span><br><span class="line">error Found 2 errors.</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code>- `yarn check --integrity`:
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">error Lockfile does not contain pattern: &quot;bootstrap@4.x&quot;</span><br><span class="line">error Found 1 errors.</span><br></pre></td></tr></table></figure>
+
+
+- `yarn check --verify-tree`:
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">error &quot;bootstrap&quot; is wrong version: expected &quot;4.x&quot;, got &quot;3.3.7&quot;</span><br><span class="line">error Found 1 errors.</span><br></pre></td></tr></table></figure>
+
+
+如上结果，可以看出`--integrity`主要是判断`package.json`是否被手动改坏掉了，`--verify-tree`用于判断`node_modules`下是否已经根据`package.json`更新了版本。
+
+&gt; 个人感觉：应该可以在项目启动或打包前运行`yarn check --verify-tree`，因为这个速度比较快；在多人合作开发中可以告知其他开发者要手动运行`yarn`更新依赖版本了。
+</code></pre><ul>
+<li>yarn create <starter-kit-package> [<args>]</args></starter-kit-package></li>
+</ul>
+<p>从一些以<code>create-*</code>开头的脚手架生成项目。比如：<code>yarn create react-app my-app</code>相当于<code>yarn global add create-react-app &amp;&amp; create-react-app my-app</code>。</p>
+<ul>
+<li>yarn help <command></li>
+</ul>
+<p>查看命令帮助</p>
+<ul>
+<li>yarn info <package> [<field>]</field></package></li>
+</ul>
+<p>查看某个包的描述。<code>yarn info &lt;package&gt; version</code>查看某个包的所有可用版本。</p>
+<ul>
+<li>yarn install –flat</li>
+</ul>
+<p>仅为某一个包安装一个确定版本，如果有不同版本依赖将会让你选择。它将会在在<code>package.json</code>文件增加<code>resolutions</code>字段。</p>
+<ul>
+<li>yarn outdated [package…]</li>
+</ul>
+<p>列出一个或多个程序包依赖项的版本信息。</p>
+<ul>
+<li>yarn upgrade [package]… –latest|-L [–caret | –tilde | –exact] [–pattern]</li>
+</ul>
+<p><code>--latest</code>标识升级到最新版本。通过<code>--caret</code>、或<code>--tilde</code>指定使用什么类型的版本。比如：<code>yarn upgrade --latest --caret</code>升级<code>boostrap: &#39;3.x&#39;</code>到<code>bootstrap: ^4.1.3</code>。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="https://yarn.bootcss.com/docs/" target="_blank" rel="noopener">https://yarn.bootcss.com/docs/</a></li>
+</ul>
 
           
         
