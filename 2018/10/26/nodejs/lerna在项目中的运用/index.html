@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="npm,lerna," />
 
 
 
@@ -94,16 +94,18 @@
 
 
 
-<meta name="description" content="加油！">
-<meta property="og:type" content="website">
-<meta property="og:title" content="liaoyf的博客">
-<meta property="og:url" content="https://liaoyongfu.github.io/archives/2018/07/index.html">
+<meta name="description" content="背景公司自己编写的库越来越多，而且之间的关联性比较强，如果某个包升级了版本，其他包也得相对应升级，这样非常的繁琐。 什么是 monorepo 和 multirepo在讲lerna之前，我们要先了解一下两个不同的代码管理组织方式 monorepo 和 multirepo：  monorepo：把所有的相关项目放在同一个仓库下，有点类似yarn workspaces  multirepo：每个子项目拥">
+<meta name="keywords" content="npm,lerna">
+<meta property="og:type" content="article">
+<meta property="og:title" content="lerna在项目中的运用">
+<meta property="og:url" content="https://liaoyongfu.github.io/2018/10/26/nodejs/lerna在项目中的运用/index.html">
 <meta property="og:site_name" content="liaoyf的博客">
-<meta property="og:description" content="加油！">
+<meta property="og:description" content="背景公司自己编写的库越来越多，而且之间的关联性比较强，如果某个包升级了版本，其他包也得相对应升级，这样非常的繁琐。 什么是 monorepo 和 multirepo在讲lerna之前，我们要先了解一下两个不同的代码管理组织方式 monorepo 和 multirepo：  monorepo：把所有的相关项目放在同一个仓库下，有点类似yarn workspaces  multirepo：每个子项目拥">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-10-30T03:32:58.160Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="liaoyf的博客">
-<meta name="twitter:description" content="加油！">
+<meta name="twitter:title" content="lerna在项目中的运用">
+<meta name="twitter:description" content="背景公司自己编写的库越来越多，而且之间的关联性比较强，如果某个包升级了版本，其他包也得相对应升级，这样非常的繁琐。 什么是 monorepo 和 multirepo在讲lerna之前，我们要先了解一下两个不同的代码管理组织方式 monorepo 和 multirepo：  monorepo：把所有的相关项目放在同一个仓库下，有点类似yarn workspaces  multirepo：每个子项目拥">
 
 
 
@@ -132,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="https://liaoyongfu.github.io/archives/2018/07/"/>
+  <link rel="canonical" href="https://liaoyongfu.github.io/2018/10/26/nodejs/lerna在项目中的运用/"/>
 
 
 
 
 
-  <title>归档 | liaoyf的博客</title>
+  <title>lerna在项目中的运用 | liaoyf的博客</title>
   
 
 
@@ -173,7 +175,7 @@
     
   
 
-  <div class="container sidebar-position-left  page-archive  ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -301,73 +303,206 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
-
-      <span class="archive-page-counter">
-        
-        
-         
-          
-        好! 目前共计 53 篇日志。 继续努力。
-      </span>
-
-      
-
-        
-        
-        
-
-        
-          
-          <div class="collection-title">
-            <h2 class="archive-year motion-element" id="archive-year-2018">2018</h2>
-          </div>
-        
-        
-
-        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2018/10/26/nodejs/lerna在项目中的运用/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liaoyf">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="liaoyf的博客">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/07/25/javascript/前端调试技巧/" itemprop="url">
-              
-                <span itemprop="name">前端调试技巧</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">lerna在项目中的运用</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-07-25T20:32:56+08:00"
-              content="2018-07-25" >
-          07-25
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-26T00:00:00+08:00">
+                2018-10-26
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
 
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/10/26/nodejs/lerna在项目中的运用/" class="leancloud_visitors" data-flag-title="lerna在项目中的运用">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
+      
 
+      
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>公司自己编写的库越来越多，而且之间的关联性比较强，如果某个包升级了版本，其他包也得相对应升级，这样非常的繁琐。</p>
+<h2 id="什么是-monorepo-和-multirepo"><a href="#什么是-monorepo-和-multirepo" class="headerlink" title="什么是 monorepo 和 multirepo"></a>什么是 monorepo 和 multirepo</h2><p>在讲lerna之前，我们要先了解一下两个不同的代码管理组织方式 monorepo 和 multirepo：</p>
+<ul>
+<li><p><code>monorepo</code>：把所有的相关项目放在同一个仓库下，有点类似<code>yarn workspaces</code></p>
+</li>
+<li><p><code>multirepo</code>：每个子项目拥有自己的 repo</p>
+</li>
+</ul>
+<h2 id="什么是lerna"><a href="#什么是lerna" class="headerlink" title="什么是lerna"></a>什么是lerna</h2><p><a href="https://github.com/lerna/lerna" target="_blank" rel="noopener">lerna</a>是一个管理多个javascript包的工具。它属于<code>monorepo</code>类型，当你的项目有相关联时最好使用<code>monorepo</code>方式进行管理。</p>
+<h2 id="以一个简单的示例进行说明"><a href="#以一个简单的示例进行说明" class="headerlink" title="以一个简单的示例进行说明"></a>以一个简单的示例进行说明</h2><p>新建一个<code>testLerna</code>项目：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npx lerna init</span><br></pre></td></tr></table></figure>
+<p>初始化一个lerna命令，生成以下目录结构：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">testLerna/</span><br><span class="line">    packages/</span><br><span class="line">    lerna.json</span><br><span class="line">    package.json</span><br></pre></td></tr></table></figure>
+<p><code>pcakges</code>目录主要放置包，<code>lerna.json</code>为配置文件。</p>
+<h2 id="两种模式"><a href="#两种模式" class="headerlink" title="两种模式"></a>两种模式</h2><ul>
+<li>Fixed/Locked 模式 (默认)</li>
+</ul>
+<p>通过在<code>lerna.json</code>中指定<code>version</code>，当你运行<code>lerna publish</code>时，如果其中某一个包至上次发布以来有更新，则将会更新<code>version</code>。</p>
+<p>这个模式是babel目前使用的模式，当你想把所有包关联在一起的时候可以考虑使用这种模式，需要注意的是，当其中某个包升级了大版本之后，其他的每个包都会自动升级大版本。</p>
+<ul>
+<li>Independent mode</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lerna init --independent</span><br></pre></td></tr></table></figure>
+<p>独立模式允许您更具体地更新每个包的版本，并对一组组件有意义。跟<a href="https://github.com/semantic-release/semantic-release" target="_blank" rel="noopener">semantic-release</a>等工具配合使用会更好。</p>
+<blockquote>
+<p>已经有结合使用的<a href="https://github.com/atlassian/lerna-semantic-release" target="_blank" rel="noopener">示例</a></p>
+</blockquote>
+<h2 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h2><p>假设以下项目：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">packages</span><br><span class="line">    shareui</span><br><span class="line">    shareui-html</span><br><span class="line">    shareui-font</span><br></pre></td></tr></table></figure>
+<p>shareui依赖shareui-html，shareui-html依赖shareui-font，可以命令添加：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ lerna add shareui-html --scope=shareui</span><br><span class="line">$ lerna add shareui-font --scope=shareui-html</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>前提是要关联git，修改registry到公司私库</p>
+</blockquote>
+<p>git提交到暂存区域，之后通过<code>lerna publish</code>发布：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ lerna publish</span><br></pre></td></tr></table></figure>
+<p>以下情况需要考虑：</p>
+<ul>
+<li><p>shareui-font升级了，相对应的shareui-html和shareui也要升级？</p>
+<p>  运行<code>lerna bootstrap</code>升级对应依赖</p>
+</li>
+</ul>
+<h2 id="参考网址"><a href="#参考网址" class="headerlink" title="参考网址"></a>参考网址</h2><ul>
+<li><a href="https://github.com/lerna/lerna" target="_blank" rel="noopener">https://github.com/lerna/lerna</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/33858131" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/33858131</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/35237759" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/35237759</a></li>
+</ul>
+
+      
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/npm/" rel="tag"># npm</a>
+          
+            <a href="/tags/lerna/" rel="tag"># lerna</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/11/javascript/2018年学习计划（eslint篇）/" rel="next" title="2018年学习计划（eslint篇）">
+                <i class="fa fa-chevron-left"></i> 2018年学习计划（eslint篇）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -375,6 +510,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -395,8 +534,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.jpg"
@@ -462,6 +610,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是-monorepo-和-multirepo"><span class="nav-number">2.</span> <span class="nav-text">什么是 monorepo 和 multirepo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是lerna"><span class="nav-number">3.</span> <span class="nav-text">什么是lerna</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#以一个简单的示例进行说明"><span class="nav-number">4.</span> <span class="nav-text">以一个简单的示例进行说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#两种模式"><span class="nav-number">5.</span> <span class="nav-text">两种模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#发布"><span class="nav-number">6.</span> <span class="nav-text">发布</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考网址"><span class="nav-number">7.</span> <span class="nav-text">参考网址</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -582,11 +746,9 @@
 
 
   
-  
-    <script type="text/javascript" id="motion.page.archive">
-      $('.archive-year').velocity('transition.slideLeftIn');
-    </script>
-  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
 
 
   
