@@ -105,7 +105,7 @@
 <meta property="og:image" content="https://liaoyongfu.github.io/2018/11/01/images/1_ZSFHnq9iMHIApVLcgwczPQ.png">
 <meta property="og:image" content="https://liaoyongfu.github.io/2018/11/01/images/javascript引擎.png">
 <meta property="og:image" content="https://liaoyongfu.github.io/2018/11/01/images/3259161542-575018ce29d44_articlex.png">
-<meta property="og:updated_time" content="2018-11-01T07:12:27.499Z">
+<meta property="og:updated_time" content="2018-11-01T07:19:22.537Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2018年学习计划（js原理篇）">
 <meta name="twitter:description" content="Javascript是单线程单一并发语言，这意味着它可以一次处理一个任务或一次处理一段代码。它有一个单独的调用堆栈，它与堆之类的其他部分一起构成了Javascript并发模型（在V8内部实现）。我们首先来看看这些术语：  下面是我总结的一张图片：  这里我展开讲，如果需要详细了解请参阅下面参考网址。 下面以一道面试题展开： 12345678910111213function Foo() &amp;#123">
@@ -459,6 +459,7 @@
 <h2 id="事件循环"><a href="#事件循环" class="headerlink" title="事件循环"></a>事件循环</h2><p>事件循环是指主线程重复从消息队列中取消息、执行的过程。如果遇到同步函数，直接压入调用栈，如果异步代码，则委托给事件队列，然后继续运行代码，当异步处理返回时压入事件队列，主线程在执行完当前循环中的所有代码后，就会到消息队列取出这条消息，并执行它：</p>
 <p><img src="../../images/3259161542-575018ce29d44_articlex.png" alt="demo"></p>
 <h2 id="参考网址"><a href="#参考网址" class="headerlink" title="参考网址"></a>参考网址</h2><ul>
+<li><a href="https://tylermcginnis.com/javascript-visualizer/?code=function%20Foo%28%29%20%7B%0A%20%20%20%20getName%20%3D%20function%20%28%29%20%7B%20alert%20%281%29%3B%20%7D%3B%0A%20%20%20%20return%20this%3B%0A%7D%0AFoo.getName%20%3D%20function%20%28%29%20%7B%20alert%20%282%29%3B%7D%3B%0AFoo.prototype.getName%20%3D%20function%20%28%29%20%7B%20alert%20%283%29%3B%7D%3B%0Avar%20getName%20%3D%20function%20%28%29%20%7B%20alert%20%284%29%3B%7D%3B%0Afunction%20getName%28%29%20%7B%20alert%20%285%29%3B%7D%0A%0A%2F%2F%E8%AF%B7%E5%86%99%E5%87%BA%E4%BB%A5%E4%B8%8B%E8%BE%93%E5%87%BA%E7%BB%93%E6%9E%9C%EF%BC%9A%0AgetName%28%29%3B%0AFoo%28%29.getName%28%29%3B%0AgetName%28%29%3B" target="_blank" rel="noopener">https://tylermcginnis.com/javascript-visualizer/?code=function%20Foo%28%29%20%7B%0A%20%20%20%20getName%20%3D%20function%20%28%29%20%7B%20alert%20%281%29%3B%20%7D%3B%0A%20%20%20%20return%20this%3B%0A%7D%0AFoo.getName%20%3D%20function%20%28%29%20%7B%20alert%20%282%29%3B%7D%3B%0AFoo.prototype.getName%20%3D%20function%20%28%29%20%7B%20alert%20%283%29%3B%7D%3B%0Avar%20getName%20%3D%20function%20%28%29%20%7B%20alert%20%284%29%3B%7D%3B%0Afunction%20getName%28%29%20%7B%20alert%20%285%29%3B%7D%0A%0A%2F%2F%E8%AF%B7%E5%86%99%E5%87%BA%E4%BB%A5%E4%B8%8B%E8%BE%93%E5%87%BA%E7%BB%93%E6%9E%9C%EF%BC%9A%0AgetName%28%29%3B%0AFoo%28%29.getName%28%29%3B%0AgetName%28%29%3B</a></li>
 <li><a href="https://mp.weixin.qq.com/s/QljMmVPJ8k7eYB2ynV03LQ" target="_blank" rel="noopener">https://mp.weixin.qq.com/s/QljMmVPJ8k7eYB2ynV03LQ</a></li>
 <li><a href="https://medium.com/@gaurav.pandvia/understanding-javascript-function-executions-tasks-event-loop-call-stack-more-part-1-5683dea1f5ec" target="_blank" rel="noopener">https://medium.com/@gaurav.pandvia/understanding-javascript-function-executions-tasks-event-loop-call-stack-more-part-1-5683dea1f5ec</a></li>
 <li><a href="https://www.valentinog.com/blog/js-execution-context-call-stack/" target="_blank" rel="noopener">https://www.valentinog.com/blog/js-execution-context-call-stack/</a></li>
