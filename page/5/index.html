@@ -317,7 +317,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2017/08/02/react/React要手动绑定方法的原因/">
+    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2017/08/02/javascript/ES6的坑/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="liaoyf">
@@ -336,7 +336,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/08/02/react/React要手动绑定方法的原因/" itemprop="url">React要手动绑定方法的原因</a></h1>
+                <a class="post-title-link" href="/2017/08/02/javascript/ES6的坑/" itemprop="url">ES6的坑</a></h1>
         
 
         <div class="post-meta">
@@ -348,7 +348,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-02T14:09:44+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-02T14:31:15+08:00">
                 2017-08-02
               </time>
             
@@ -366,7 +366,7 @@
 
           
           
-             <span id="/2017/08/02/react/React要手动绑定方法的原因/" class="leancloud_visitors" data-flag-title="React要手动绑定方法的原因">
+             <span id="/2017/08/02/javascript/ES6的坑/" class="leancloud_visitors" data-flag-title="ES6的坑">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -398,26 +398,55 @@
 
       
         
-          <h2 id="我们从javascript开始吧"><a href="#我们从javascript开始吧" class="headerlink" title="我们从javascript开始吧"></a>我们从javascript开始吧</h2><p>在js中，函数的上下文是指函数调用的时候，而不是定义的时候。</p>
-<p>有以下四中调用函数的模式：</p>
-<ul>
-<li><p>函数调用模式</p>
+          
+            <ol>
+<li><p>IE8下用babel转换会报错：</p>
+<p> function _interopRequireDefault(obj) { return obj &amp;&amp; obj.__esModule ? obj : { default: obj }; }</p>
+<p> 解决方法：</p>
+<pre><code>$ npm install --save-dev babel-plugin-transform-es2015-modules-simple-commonjs
+</code></pre><p> 配置：</p>
+<pre><code>//webpack.config.js
+&quot;plugins&quot;: [&quot;transform-es2015-modules-simple-commonjs&quot;]
+</code></pre></li>
+<li><p>ES6 + angular1 + webpack，遇到controller文件里的constructor运行2次？</p>
+<p> 那是因为声明了2次<code>controller</code>，在配置中配了<code>app.controller(&#39;MyController&#39;)</code>，然后又在页面中使用了<code>ng-controller</code>，导致运行了2次，坑爹~</p>
 </li>
-<li><p>方法调用模式</p>
+<li><p>Babel转ES5后IE8下的兼容性解决方法。</p>
 </li>
-<li><p>构造函数调用模式</p>
-</li>
-<li><p>应用调用模式</p>
-</li>
-</ul>
-<p>所有这些使用的模式都不同地定义函数上下文。接下来我们看看各种模式的区别。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/08/02/react/React要手动绑定方法的原因/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+</ol>
+<p>1)webpack配置文件，增加插件transform-es3-property-literals和transform-es3-member-expression-literals</p>
+<pre><code>const webpackdevConfig = {
+  entry: entry,
+  output: {
+    path: path.join(__dirname, &apos;dist/js&apos;),
+    filename: &apos;[name].js&apos;,
+    publicPath: &apos;/static/&apos;
+  },
+  plugins: [
+    new webpack.NoErrorsPlugin(),
+  ],
+  module: {
+    loaders: [
+      {
+        test: /\.js$/, loader: [&apos;babel&apos;], include: [path.join(new_dir, &apos;src&apos;)],
+        query:{
+          &quot;presets&quot;: [&quot;es2015&quot;, &quot;stage-0&quot;],
+          &quot;plugins&quot; : [
+            &quot;transform-es3-property-literals&quot;,
+            &quot;transform-es3-member-expression-literals&quot;,
+          ]
+        }
+      },
+      {test: /\.scss$/, loaders: [&apos;style&apos;, &apos;css&apos;, &apos;sass&apos;], include: path.join(new_dir, &apos;src/style&apos;)},
+      {test: /\.(jpg|png)$/, loader: &apos;url-loader?limit=8192&apos;, include: path.join(new_dir, &apos;src/img&apos;)}
+    ]
+  }
+}
+</code></pre><p>2)模块导出不能使用 export default ，改为export { xxx }</p>
+<p>3)模块引入使用 import  { } from ‘xxx’</p>
+<p>4)引入es5-shim.min.js和es5-sham.min.js</p>
+
+          
         
       
     </div>
@@ -549,6 +578,153 @@
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/08/02/react/react获取父组件或子组件属性/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2017/08/02/react/React要手动绑定方法的原因/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liaoyf">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="liaoyf的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/02/react/React要手动绑定方法的原因/" itemprop="url">React要手动绑定方法的原因</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-02T14:09:44+08:00">
+                2017-08-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/08/02/react/React要手动绑定方法的原因/" class="leancloud_visitors" data-flag-title="React要手动绑定方法的原因">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="我们从javascript开始吧"><a href="#我们从javascript开始吧" class="headerlink" title="我们从javascript开始吧"></a>我们从javascript开始吧</h2><p>在js中，函数的上下文是指函数调用的时候，而不是定义的时候。</p>
+<p>有以下四中调用函数的模式：</p>
+<ul>
+<li><p>函数调用模式</p>
+</li>
+<li><p>方法调用模式</p>
+</li>
+<li><p>构造函数调用模式</p>
+</li>
+<li><p>应用调用模式</p>
+</li>
+</ul>
+<p>所有这些使用的模式都不同地定义函数上下文。接下来我们看看各种模式的区别。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/02/react/React要手动绑定方法的原因/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -2001,224 +2177,6 @@ require.ensure([], function(require) {
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2017/08/02/webpack/webpack学习01——简介/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="liaoyf">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="liaoyf的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/02/webpack/webpack学习01——简介/" itemprop="url">未命名</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-02T11:44:45+08:00">
-                2017-08-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/08/02/webpack/webpack学习01——简介/" class="leancloud_visitors" data-flag-title="">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="webpack学习01——简介"><a href="#webpack学习01——简介" class="headerlink" title="webpack学习01——简介"></a>webpack学习01——简介</h1><hr>
-<p>webpack是一个模块打包工具，</p>
-<ul>
-<li>webpack特性：<ul>
-<li>插件：webpack有大量的插件，大多数的功能是使用这个接口的内部插件，这使得webpack很很大的<strong>灵活性</strong>;</li>
-<li>性能：webpack使用异步I/O和多级缓存机制，使得webpack有更快的速度，而且编辑速度超快；</li>
-<li>加载器(loaders)：webpack通过定义loaders预处理文件，这允许你打包<strong>任何资源</strong>而不仅仅是javascript，你也可以自己写适合自己的加载器;</li>
-<li>模块化：webpack支持AMD和CommonJs模块化规范，它能够聪明地分析你的代码，甚至有一个评估引擎来评估简单的表达式，这个允许你<strong>支持大多数现存模块化规范</strong></li>
-<li>代码分割：webpack允许你把代码分割成不同的块<code>thunk</code>，块是按需加载的，这个可以减少初始加载所发费的时间。</li>
-<li>代码压缩：webpack可以压缩你的代码，它当然也支持通过哈希缓存；</li>
-<li>开发工具：WebPACK支持调试简单sourceurls和sourcemaps。还可以通过<code>development middleware</code>和<code>development server</code>实现<strong>自动刷新</strong>功能;</li>
-<li>多个目标：webpack的首要目标是<code>web</code>，但是它也支持在WebWorkers、Node.js中使用；</li>
-</ul>
-</li>
-<li>加载器：<ul>
-<li>转换文件；</li>
-<li>加载器可以通过管道被链接，最后一个加载器则返回javascript，其他的加载器则可以返回任意的格式代码；</li>
-<li>加载器可以是同步或异步的；</li>
-<li>加载器在<code>Node.js</code>环境中运行，所以你可以做任何你想要的事情；</li>
-<li>加载器支持查询参数；</li>
-<li>加载器可以在配置中绑定到扩展名或正则表达式的监听；</li>
-<li>加载器可以被发布到<code>npm</code>上或从<code>npm</code>中安装下来；</li>
-<li>Normal modules can export a loader in addition to the normal main via package.json loader.</li>
-<li>加载器可以访问配置；</li>
-<li>插件可以向加载器提供更多的特性和功能；</li>
-<li>加载器可以调用额外的任意文件；</li>
-<li>。。。</li>
-</ul>
-</li>
-<li><p>加载器解决方案</p>
-<p>  加载器类似模块，一个加载器导出一个兼容于Node的javascript函数，一般情况下，你通过<code>npm</code>管理你的加载器，当然你也可以作为文件在你的项目中使用</p>
-<ul>
-<li>引用加载器：加载器一般以<code>xxx-loader</code>命名，<code>xxx</code>是其名字，例如：<code>json-loader</code>；</li>
-<li>你可以通过全名<code>xxx-loader</code>或者短名<code>xxx</code>来使用加载器；</li>
-<li>加载器的命名惯例和优先顺序是由<code>resolveLoader.moduleTemplates</code>配置决定的；</li>
-<li><p>加载器的命名惯例一些情况下是很有用的，特别是在<code>require()</code>里面引用加载器的时候；</p>
-<p>加载器的使用情况：</p>
-</li>
-<li><p>在<code>require()</code>语句内；</p>
-<pre><code>//使用文件loader.js来转换file.txt文件
-require(&apos;./loader!./dir/file.txt&apos;);
-
-//使用jade-loader，如果配置文件中已经有绑定到此文件的加载器，他们仍然会运行的
-require(&apos;jade!./template.jade&apos;);
-
-//由less-loader-&gt;css-loader-&gt;style-loader转换顺序，由于有前缀`!`，所以如果在配置文件中已经
-//有绑定到此文件的加载器，他们将不会运行
-require(&apos;!style!css!less!bootstrap/less/bootstrap.less&apos;);    
-</code></pre></li>
-<li><p>在配置文件中配置；（推荐这种方式）</p>
-<pre><code>{
-    module: {
-        loaders: [
-            {test: /\.jade$/, loader: &apos;jade&apos;},
-            {test: /\.css$/, loader: &apos;style!css&apos;},
-            {test: /\.css$/, loaders: [&apos;style&apos;, &apos;css&apos;]}
-        ]
-    }
-}        
-</code></pre></li>
-<li><p>在<code>CLI</code>命令行中配置；</p>
-<pre><code>webpack --module-bind jade --module-bind &apos;css=style!css&apos;
-</code></pre></li>
-</ul>
-</li>
-<li><p>加载器的查询参数</p>
-<p>  可以在加载器后面加上<code>?</code>添加多个查询参数，例如：<code>url-loader?mimetype=image/png</code>.大多数的加载器支持正常的格式<code>?key=value&amp;key2=value2</code>和JSON对象格式<code>?{key: &quot;value&quot;, key2: &quot;value2&quot;}</code></p>
-<ul>
-<li><p>在<code>require()</code>语句中：</p>
-<pre><code>require(&apos;url-loader?mimetype=image/png!./file.png&apos;);
-</code></pre></li>
-<li><p>在配置中：</p>
-<pre><code>{test: /\.png$/, loader: &apos;url-loader?mimetype=image/png&apos;}
-</code></pre><p>  或者</p>
-<pre><code>{
-    test: /\.png$/,
-    loader: &apos;url-loader&apos;,
-    query: {
-        mimetype: &apos;image/png&apos;
-    }
-}
-</code></pre></li>
-<li><p>在CLI中：</p>
-<pre><code>webpack --module-bind &quot;png=url-loader?mimetype=image/png&quot;
-</code></pre></li>
-</ul>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2269,7 +2227,7 @@ require(&apos;!style!css!less!bootstrap/less/bootstrap.less&apos;);
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">53</span>
+                <span class="site-state-item-count">54</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
