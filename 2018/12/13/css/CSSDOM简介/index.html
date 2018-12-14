@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="css," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="什么是CSSOM CSS对象模型是一组允许从JavaScript处理CSS的API。它很像DOM，但对于CSS而不是HTML。它允许用户动态地读取和修改CSS样式。  通过element.style获取和设置内联样式使用JavaScript操作或访问CSS属性和值的最基本方法是通过元素的style属性进行操作： 123document.body.style.background = &amp;apos;l">
+<meta name="keywords" content="css">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSSDOM简介">
+<meta property="og:url" content="https://liaoyongfu.github.io/2018/12/13/css/CSSDOM简介/index.html">
+<meta property="og:site_name" content="liaoyf的博客">
+<meta property="og:description" content="什么是CSSOM CSS对象模型是一组允许从JavaScript处理CSS的API。它很像DOM，但对于CSS而不是HTML。它允许用户动态地读取和修改CSS样式。  通过element.style获取和设置内联样式使用JavaScript操作或访问CSS属性和值的最基本方法是通过元素的style属性进行操作： 123document.body.style.background = &amp;apos;l">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-12-14T01:12:09.810Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSSDOM简介">
+<meta name="twitter:description" content="什么是CSSOM CSS对象模型是一组允许从JavaScript处理CSS的API。它很像DOM，但对于CSS而不是HTML。它允许用户动态地读取和修改CSS样式。  通过element.style获取和设置内联样式使用JavaScript操作或访问CSS属性和值的最基本方法是通过元素的style属性进行操作： 123document.body.style.background = &amp;apos;l">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://liaoyongfu.github.io/2018/12/13/css/CSSDOM简介/"/>
+
+
+
+
+
+  <title>CSSDOM简介 | liaoyf的博客</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?9de8fd632ad583c841a2a4fa8c3f5bc4";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">liaoyf的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一分耕耘一分收获</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://liaoyongfu.github.io/2018/12/13/css/CSSDOM简介/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liaoyf">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="liaoyf的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">CSSDOM简介</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-13T17:39:57+08:00">
+                2018-12-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/12/13/css/CSSDOM简介/" class="leancloud_visitors" data-flag-title="CSSDOM简介">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="什么是CSSOM"><a href="#什么是CSSOM" class="headerlink" title="什么是CSSOM"></a>什么是CSSOM</h2><blockquote>
+<p>CSS对象模型是一组允许从JavaScript处理CSS的API。它很像DOM，但对于CSS而不是HTML。它允许用户动态地读取和修改CSS样式。</p>
+</blockquote>
+<h2 id="通过element-style获取和设置内联样式"><a href="#通过element-style获取和设置内联样式" class="headerlink" title="通过element.style获取和设置内联样式"></a>通过element.style获取和设置内联样式</h2><p>使用JavaScript操作或访问CSS属性和值的最基本方法是通过元素的<code>style</code>属性进行操作：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">document.body.style.background = &apos;lightblue&apos;;</span><br><span class="line">document.body.style.width = &apos;888px&apos;;</span><br><span class="line">document.body.style.cssFloat = &apos;left&apos;;</span><br></pre></td></tr></table></figure>
+<p>这是使用JavaScript操作或获取CSS属性和值的简单方法。但是style以这种方式使用属性需要注意：<strong><em>这只适用于元素的内联样式</em></strong>。</p>
+<p>如果元素没有定义内联样式，即时有一个外部样式文件，获取不存在的样式属性时将得不到任何东西：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">console.log(document.body.cssFloat) // &quot;&quot;</span><br></pre></td></tr></table></figure>
+<p>这显然有一些显着的局限性，所以让我们看一些使用JavaScript阅读和操作样式的更有用的技术。</p>
+<h2 id="获取计算样式"><a href="#获取计算样式" class="headerlink" title="获取计算样式"></a>获取计算样式</h2><p>可以使用以下<code>window.getComputedStyle()</code>方法读取元素上任何CSS属性的计算CSS值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">widnow.getComputedStyle(document.body).background</span><br><span class="line">// &quot;rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box&quot;</span><br><span class="line">getComputedStyle(document.body).width</span><br><span class="line">// &quot;134px&quot;</span><br></pre></td></tr></table></figure>
+<p>计算属性将会得到最终的样式结果，包括浏览器默认的样式，这可能会得到太多东西了，(⊙o⊙)…！</p>
+<p>有几种不同的方法可以使用<code>window.getComputedStyle()</code>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// dot notation, same as above</span><br><span class="line">window.getComputedStyle(el).backgroundColor;</span><br><span class="line"></span><br><span class="line">// square bracket notation</span><br><span class="line">window.getComputedStyle(el)[&apos;background-color&apos;];</span><br><span class="line"></span><br><span class="line">// using getPropertyValue()</span><br><span class="line">window.getComputedStyle(el).getPropertyValue(&apos;background-color&apos;);</span><br></pre></td></tr></table></figure>
+<h2 id="获取伪元素的计算样式"><a href="#获取伪元素的计算样式" class="headerlink" title="获取伪元素的计算样式"></a>获取伪元素的计算样式</h2><p>一个鲜为人知的小问题<code>window.getComputedStyle()</code>是，它允许您检索伪元素的样式信息。你会经常看到这样的<code>window.getComputedStyle()</code>声明：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">window.getComputedStyle(document.body, &quot;:before&quot;).width;</span><br></pre></td></tr></table></figure>
+<p>第二个可选参数允许我指定我正在访问伪元素的计算CSS。</p>
+<h2 id="CSSStyleDeclaration"><a href="#CSSStyleDeclaration" class="headerlink" title="CSSStyleDeclaration"></a>CSSStyleDeclaration</h2><p>不管是通过<code>style</code>还是<code>window.getComputedStyle</code>，它返回的都是<code>CSSStyleDeclaration</code>对象，后者是只读的。</p>
+<h2 id="setProperty-getPropertyValue-和-item"><a href="#setProperty-getPropertyValue-和-item" class="headerlink" title="setProperty(), getPropertyValue() 和 item()"></a>setProperty(), getPropertyValue() 和 item()</h2><p>考虑如下代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">let box = document.querySelector(&apos;.box&apos;);</span><br><span class="line"></span><br><span class="line">box.style.setProperty(&apos;color&apos;, &apos;orange&apos;);</span><br><span class="line">box.style.setProperty(&apos;font-family&apos;, &apos;Georgia, serif&apos;);</span><br><span class="line">op.innerHTML = box.style.getPropertyValue(&apos;color&apos;);</span><br><span class="line">op2.innerHTML = `$&#123;box.style.item(0)&#125;, $&#123;box.style.item(1)&#125;`;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><code>setProperty(css属性名，css属性值)</code></p>
+</li>
+<li><p><code>getPropertyValue(css属性名)</code></p>
+</li>
+<li><p><code>item(index)</code>：上图<code>item(0)</code>为<code>color</code>、<code>item(1)</code>为<code>font-family</code>，<code>item(2)</code>如果没有的话返回””</p>
+</li>
+</ul>
+<h2 id="removeProperty"><a href="#removeProperty" class="headerlink" title="removeProperty()"></a>removeProperty()</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">box.style.setProperty(&apos;font-size&apos;, &apos;1.5em&apos;);</span><br><span class="line">box.style.item(0) // &quot;font-size&quot;</span><br><span class="line"></span><br><span class="line">document.body.style.removeProperty(&apos;font-size&apos;);</span><br><span class="line">document.body.style.item(0); // &quot;&quot;</span><br></pre></td></tr></table></figure>
+<h2 id="获取和设置属性的优先级"><a href="#获取和设置属性的优先级" class="headerlink" title="获取和设置属性的优先级"></a>获取和设置属性的优先级</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">box.style.setProperty(&apos;font-family&apos;, &apos;Georgia, serif&apos;, &apos;important&apos;);</span><br><span class="line">box.style.setProperty(&apos;font-size&apos;, &apos;1.5em&apos;);</span><br><span class="line"></span><br><span class="line">box.style.getPropertyPriority(&apos;font-family&apos;); // important</span><br><span class="line">op2.innerHTML = box.style.getPropertyPriority(&apos;font-size&apos;); // &quot;&quot;</span><br></pre></td></tr></table></figure>
+<p>当<code>setProperty</code>增加第三个参数<code>important</code>时，<code>font-family</code>将会有<code>!important</code>权重。</p>
+<p>我要强调的是，这些方法可以与已经直接放在HTML元素style属性上的任何内联样式一起使用。所以，如果我有以下HTML：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;box&quot; style=&quot;border: solid 1px red !important;&quot;&gt;</span><br></pre></td></tr></table></figure>
+<p>其他子属性也将会有<code>!important</code>权重。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// These all return &quot;important&quot;</span><br><span class="line">box.style.getPropertyPriority(&apos;border&apos;));</span><br><span class="line">box.style.getPropertyPriority(&apos;border-top-width&apos;));</span><br><span class="line">box.style.getPropertyPriority(&apos;border-bottom-width&apos;));</span><br><span class="line">box.style.getPropertyPriority(&apos;border-color&apos;));</span><br><span class="line">box.style.getPropertyPriority(&apos;border-style&apos;));</span><br></pre></td></tr></table></figure>
+<h2 id="CSSStyleSheet接口"><a href="#CSSStyleSheet接口" class="headerlink" title="CSSStyleSheet接口"></a>CSSStyleSheet接口</h2><p>从样式表访问信息的最简单方法是使用<code>document</code>开放的<code>styleSheets</code>属性，例如，下面的行使用该length属性来查看当前页面具有多少样式表：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">document.styleSheets.length; // 1</span><br></pre></td></tr></table></figure>
+<p>我可以使用从零开始的索引来引用任何文档的样式表：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">document.styleSheets[0];</span><br></pre></td></tr></table></figure>
+<p>它将返回<code>CSSStyleSheet</code>对象，里面最有用的是<code>cssRules</code>属性，此属性提供该样式表中包含的所有CSS规则（包括声明块，规则，​​媒体规则等）的列表。在下面的部分，我们将详细介绍该API的操作。</p>
+<blockquote>
+<p>cssRules（CSSRuleList） -&gt; (CSSStyleRule) -&gt; type, cssText, selectorText, style(CSSStyleDeclaration),…</p>
+</blockquote>
+<h2 id="使用样式表对象"><a href="#使用样式表对象" class="headerlink" title="使用样式表对象"></a>使用样式表对象</h2><p>下面使用样式表对象遍历选择器：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">let myRules = document.styleSheets[0].cssRules,</span><br><span class="line">    p = document.querySelector(&apos;p&apos;);</span><br><span class="line"></span><br><span class="line">for (i of myRules) &#123;</span><br><span class="line">  if (i.type === 1) &#123;</span><br><span class="line">    p.innerHTML += `&lt;c​ode&gt;$&#123;i.selectorText&#125;&lt;/c​ode&gt;&lt;br&gt;`;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意：cssRules是对象。</p>
+<p><code>type</code>类型：</p>
+<ul>
+<li><code>1</code>: STYLE_RULE</li>
+<li><code>3</code>: IMPORT_RULE</li>
+<li><code>4</code>: MEDIA_RULE</li>
+<li><code>5</code>: KEYFRAMES_RULE</li>
+</ul>
+<blockquote>
+<p>完整类型请参考：<a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSRule#Type_constants" target="_blank" rel="noopener">https://developer.mozilla.org/en-US/docs/Web/API/CSSRule#Type_constants</a></p>
+</blockquote>
+<p>其中<code>selectorText</code>是可写属性，所以我们可以动态修改：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">for (i of myRules) &#123;</span><br><span class="line">    if (i.type === 1) &#123;</span><br><span class="line">      if (i.selectorText === &apos;a:hover&apos;) &#123;</span><br><span class="line">        i.selectorText = &apos;a:hover, a:active&apos;;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="使用CSSOM访问-media规则"><a href="#使用CSSOM访问-media规则" class="headerlink" title="使用CSSOM访问@media规则"></a>使用CSSOM访问@media规则</h2><p>假如有如下属性：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@media (max-width: 800px) &#123;</span><br><span class="line">  body &#123;</span><br><span class="line">    line-height: 1.2;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  .component &#123;</span><br><span class="line">    float: none;</span><br><span class="line">    margin: 0;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以通过<code>conditionText</code>获取：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">let myRules = document.styleSheets[0].cssRules,</span><br><span class="line">    p = document.querySelector(&apos;.output&apos;);</span><br><span class="line"></span><br><span class="line">for (i of myRules) &#123;</span><br><span class="line">  if (i.type === 4) &#123;</span><br><span class="line">    p.innerHTML += `&lt;c​ode&gt;$&#123;i.conditionText&#125;&lt;/c​ode&gt;&lt;br&gt;`;</span><br><span class="line">    // (max-width: 800px) </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="使用CSSOM访问-keyframes规则"><a href="#使用CSSOM访问-keyframes规则" class="headerlink" title="使用CSSOM访问@keyframes规则"></a>使用CSSOM访问@keyframes规则</h2><p>假如有如下属性：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@keyframes exampleAnimation &#123;</span><br><span class="line">  from &#123;</span><br><span class="line">    color: blue;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  20% &#123;</span><br><span class="line">    color: orange;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  to &#123;</span><br><span class="line">    color: green;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以通过<code>keyText</code>获取：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">for (i of myRules) &#123;</span><br><span class="line">  if (i.type === 7) &#123;</span><br><span class="line">    for (j of i.cssRules) &#123;</span><br><span class="line">     p.innerHTML += `&lt;code&gt;$&#123;j.keyText&#125;&lt;/code&gt;&lt;br&gt;`;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 0% 20% 100%</span><br></pre></td></tr></table></figure>
+<p>您会注意到我的原始CSS使用from并to作为第一个和最后一个关键帧，但keyText属性计算这些0%和100%。keyText也可以设置值。在我的示例样式表中，我可以像这样硬编码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// Read the current value (0%)</span><br><span class="line">document.styleSheets[0].cssRules[6].cssRules[0].keyText;</span><br><span class="line"></span><br><span class="line">// Change the value to 10%</span><br><span class="line">document.styleSheets[0].cssRules[6].cssRules[0].keyText = &apos;10%&apos;</span><br><span class="line"></span><br><span class="line">// Read the new value (10%)</span><br><span class="line">document.styleSheets[0].cssRules[6].cssRules[0].keyText;</span><br></pre></td></tr></table></figure>
+<p>访问@keyframes规则时可用的另一个属性是name：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">let myRules = document.styleSheets[0].cssRules,</span><br><span class="line">    p = document.querySelector(&apos;.output&apos;);</span><br><span class="line"></span><br><span class="line">for (i of myRules) &#123;</span><br><span class="line">  if (i.type === 7) &#123;</span><br><span class="line">    p.innerHTML += `&lt;c​ode&gt;$&#123;i.name&#125;&lt;/c​ode&gt;&lt;br&gt;`;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// exampleAnimation</span><br></pre></td></tr></table></figure>
+<p>我在这里要提到的最后一件事是能够获取单个关键帧内的特定样式。这是一些带有演示的示例代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">let myRules = document.styleSheets[0].cssRules,</span><br><span class="line">    p = document.querySelector(&apos;.output&apos;);</span><br><span class="line"></span><br><span class="line">for (i of myRules) &#123;</span><br><span class="line">  if (i.type === 7) &#123;</span><br><span class="line">    for (j of i.cssRules) &#123;</span><br><span class="line">      p.innerHTML += `&lt;c​ode&gt;$&#123;j.style.color&#125;&lt;/c​ode&gt;&lt;br&gt;`;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="增加或删除CSSDeclarations规则"><a href="#增加或删除CSSDeclarations规则" class="headerlink" title="增加或删除CSSDeclarations规则"></a>增加或删除CSSDeclarations规则</h2><p>通过<code>insertRule()</code>增加规则：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let myStylesheet = document.styleSheets[0];</span><br><span class="line">console.log(myStylesheet.cssRules.length); // 8</span><br><span class="line"></span><br><span class="line">document.styleSheets[0].insertRule(&apos;article &#123; line-height: 1.5; font-size: 1.5em; &#125;&apos;, myStylesheet.cssRules.length);</span><br><span class="line">console.log(document.styleSheets[0].cssRules.length); // 9</span><br></pre></td></tr></table></figure>
+<p><code>insertRule()</code>第一个参数是样式字符串，第二个参数是表示您希望插入规则的位置或索引。如果未包括此项，则默认为0（意味着规则将插入规则集合的开头）。如果索引恰好大于rules对象的长度，则会抛出错误。</p>
+<p>通过<code>deleteRule()</code>删除规则：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let myStylesheet = document.styleSheets[0];</span><br><span class="line">console.log(myStylesheet.cssRules.length); // 8</span><br><span class="line"></span><br><span class="line">myStylesheet.deleteRule(3);</span><br><span class="line">console.log(myStylesheet.cssRules.length); // 7</span><br></pre></td></tr></table></figure>
+<p>该方法接受一个参数，该参数表示我要删除的规则的索引，参数传入的索引值必须小于cssRules对象的长度，否则将引发错误。</p>
+<h2 id="重新访问CSSStyleDeclaration-API"><a href="#重新访问CSSStyleDeclaration-API" class="headerlink" title="重新访问CSSStyleDeclaration API"></a>重新访问CSSStyleDeclaration API</h2><p>记住，<code>CSSRule</code>下的<code>style</code>属性返回<code>CSSStyleDeclaration</code>属性：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">// Grab the style rules for the body and main elements</span><br><span class="line">let myBodyRule = document.styleSheets[0].cssRules[1].style,</span><br><span class="line">    myMainRule = document.styleSheets[0].cssRules[2].style;</span><br><span class="line"></span><br><span class="line">// Set the bg color on the body</span><br><span class="line">myBodyRule.setProperty(&apos;background-color&apos;, &apos;peachpuff&apos;);</span><br><span class="line"></span><br><span class="line">// Get the font size of the body</span><br><span class="line">myBodyRule.getPropertyValue(&apos;font-size&apos;);</span><br><span class="line"></span><br><span class="line">// Get the 5th item in the body&apos;s style rule</span><br><span class="line">myBodyRule.item(5);</span><br><span class="line"></span><br><span class="line">// Log the current length of the body style rule (8)</span><br><span class="line">myBodyRule.length;</span><br><span class="line"></span><br><span class="line">// Remove the line height</span><br><span class="line">myBodyRule.removeProperty(&apos;line-height&apos;);</span><br><span class="line"></span><br><span class="line">// log the length again (7)</span><br><span class="line">myBodyRule.length;</span><br><span class="line"></span><br><span class="line">// Check priority of font-family (empty string)</span><br><span class="line">myBodyRule.getPropertyPriority(&apos;font-family&apos;);</span><br><span class="line"></span><br><span class="line">// Check priority of margin in the &quot;main&quot; style rule (!important)</span><br><span class="line">myMainRule.getPropertyPriority(&apos;margin&apos;);</span><br></pre></td></tr></table></figure>
+<h2 id="CSSDOM的未来？"><a href="#CSSDOM的未来？" class="headerlink" title="CSSDOM的未来？"></a>CSSDOM的未来？</h2><p>在我在本文中考虑过的所有内容之后，我不得不打破这样的消息，即有一天我们所知道的CSSOM可能已经过时了。</p>
+<p>这是因为称为CSS Typed OM的东西，它是Houdini项目的一部分。虽然有些人已经注意到新的Typed OM与目前的CSSOM相比更加冗长，但Eric Bidelman在本文中概述的好处包括：</p>
+<ul>
+<li>更少的错误</li>
+<li>算术运算和单位转换</li>
+<li>更好的性能</li>
+<li>错误处理</li>
+<li>CSS属性名称始终是字符串</li>
+</ul>
+<p>有关这些功能的完整详细信息和语法的一瞥，请务必查看<a href="https://developers.google.com/web/updates/2018/03/cssom" target="_blank" rel="noopener">完整的文章</a>。</p>
+<p>在撰写本文时，<a href="https://drafts.css-houdini.org/css-typed-om/" target="_blank" rel="noopener">CSS Typed OM</a>仅在Chrome中受支持。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/css/" rel="tag"># css</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/01/javascript/2018年学习计划（js原理篇）/" rel="next" title="2018年学习计划（js原理篇）">
+                <i class="fa fa-chevron-left"></i> 2018年学习计划（js原理篇）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="liaoyf" />
+          <p class="site-author-name" itemprop="name">liaoyf</p>
+           
+              <p class="site-description motion-element" itemprop="description">加油！</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">55</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/liaoyongfu" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是CSSOM"><span class="nav-number">1.</span> <span class="nav-text">什么是CSSOM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过element-style获取和设置内联样式"><span class="nav-number">2.</span> <span class="nav-text">通过element.style获取和设置内联样式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取计算样式"><span class="nav-number">3.</span> <span class="nav-text">获取计算样式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取伪元素的计算样式"><span class="nav-number">4.</span> <span class="nav-text">获取伪元素的计算样式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSSStyleDeclaration"><span class="nav-number">5.</span> <span class="nav-text">CSSStyleDeclaration</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#setProperty-getPropertyValue-和-item"><span class="nav-number">6.</span> <span class="nav-text">setProperty(), getPropertyValue() 和 item()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#removeProperty"><span class="nav-number">7.</span> <span class="nav-text">removeProperty()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取和设置属性的优先级"><span class="nav-number">8.</span> <span class="nav-text">获取和设置属性的优先级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSSStyleSheet接口"><span class="nav-number">9.</span> <span class="nav-text">CSSStyleSheet接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用样式表对象"><span class="nav-number">10.</span> <span class="nav-text">使用样式表对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用CSSOM访问-media规则"><span class="nav-number">11.</span> <span class="nav-text">使用CSSOM访问@media规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用CSSOM访问-keyframes规则"><span class="nav-number">12.</span> <span class="nav-text">使用CSSOM访问@keyframes规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#增加或删除CSSDeclarations规则"><span class="nav-number">13.</span> <span class="nav-text">增加或删除CSSDeclarations规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重新访问CSSStyleDeclaration-API"><span class="nav-number">14.</span> <span class="nav-text">重新访问CSSStyleDeclaration API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSSDOM的未来？"><span class="nav-number">15.</span> <span class="nav-text">CSSDOM的未来？</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">liaoyf</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("9LYFM8dS64BIEzTbmQtY4rvd-gzGzoHsz", "5aTlsc7dgozMlgNQQ6Ob7VBR");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -104,7 +104,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://liaoyongfu.github.io/2018/10/11/images/eslint1.jpg">
 <meta property="og:image" content="https://liaoyongfu.github.io/2018/10/11/images/demo-eslint.jpg">
-<meta property="og:updated_time" content="2018-10-11T09:00:52.168Z">
+<meta property="og:updated_time" content="2018-11-23T09:15:55.130Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2018年学习计划（eslint篇）">
 <meta name="twitter:description" content="概述ESLint 是在 ECMAScript/JavaScript 代码中识别和报告模式匹配的工具，它的目标是保证代码的一致性和避免错误。在许多方面，它和 JSLint、JSHint 相似，除了少数的例外：  ESLint 使用 Espree 解析 JavaScript。 ESLint 使用 AST 去分析代码中的模式 ESLint 是完全插件化的。每一个规则都是一个插件并且你可以在运行时添加更多">
@@ -419,6 +419,9 @@
 <h2 id="plugins"><a href="#plugins" class="headerlink" title="plugins"></a>plugins</h2><p>这里指定插件，插件名一般为 eslint-plugin-xxx，这里可以缩写为 xxx，插件提供了除 eslint 规定之外额外的规则。</p>
 <p>plugin 与 extend 的区别：extend 提供的是 eslint 现有规则的一系列预设而 plugin 则提供了除预设之外的自定义规则，当你在 eslint 的规则里找不到合适的的时候就可以借用插件来实现了</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&quot;plugins&quot;: [</span><br><span class="line">    // 这里安装了 eslint-plugin-import</span><br><span class="line">    &quot;import&quot;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>plugins只提供rules不会设置eslint配置，所以最好在extends中使用会更好点</p>
+</blockquote>
 <h2 id="rules"><a href="#rules" class="headerlink" title="rules"></a>rules</h2><p>在<code>.eslintrc.js</code>中会存在<code>rules</code>规则配置。第一个值是错误级别，可以使用以下值之一：</p>
 <ul>
 <li><code>off</code>或<code>0</code>：关闭规则</li>
@@ -630,7 +633,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">54</span>
+                <span class="site-state-item-count">55</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
